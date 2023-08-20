@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<style>
+  /* Importar la fuente Montserrat */
+  @import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
+
+  ion-card-title {
+    font-family: 'Tilt Prism', cursive;
+    font-size: 80px;
+    display: flex;
+    justify-content: center;
+
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    /* Alineación horizontal al centro */
+    align-items: center;
+    /* Alineación vertical al centro */
+    height: 95vh;
+    /* Opcional: ajusta la altura del contenedor al 100% del viewport */
+  }
+
+  /*este es el fondo*/
+  ion-content {
+    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
+  }
+</style>
+
+<ion-content class="fondo" [fullscreen]="true">
+  <div class="container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Recuperar Contraseña</ion-card-title>
+      </ion-card-header>
+      <br>
+      <ion-card-content>
+        <form id="registration-form">
+          <!--Aqui tendriamos que mostrar la pregunta de seguridad que el usuario registro-->
+          <ion-item>Pregunta de seguridad: </ion-item>
+          <ion-item>
+            <ion-label position="floating">Respuesta</ion-label>
+            <ion-input type="text" name="respuesta" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Nueva contraseña:</ion-label>
+            <ion-input type="nContrasena" name="nContrasena" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Repetir contraseña:</ion-label>
+            <ion-input type="rContrasena" name="rContrasena" required></ion-input>
+          </ion-item>
+
+          <ion-button expand="full" type="submit">Confirmar</ion-button>
+        </form>
+        </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

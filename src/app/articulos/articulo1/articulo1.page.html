@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>articulo1</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<style>
+  .img-container {
+    width: 250px;
+    height: 250px;
+    display: block;
+    text-align: center;
+
+  }
+
+  ion-card {
+    width: 250px;
+    justify-content: center;
+  }
+</style>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-img class="img-container"
+      src="https://w7.pngwing.com/pngs/440/569/png-transparent-smartwatch-subscriber-identity-module-android-touchscreen-smart-watches-gadget-electronics-watch-accessory.png">
+    </ion-img>
+    <ion-card-header>
+      <ion-card-title>Nombre del Artículo</ion-card-title>
+      <ion-card-subtitle>Categoría</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>es un reloj que se puede hablar a traves de el xd...</p>
+      <p>Precio: $25.00</p>
+      <ion-button expand="full" color="primary">Agregar al Carrito</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

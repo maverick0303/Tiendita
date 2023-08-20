@@ -11,6 +11,30 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'inicio-sesion',
+    loadChildren: () => import('./inicio/inicio-sesion/inicio-sesion.module').then( m => m.InicioSesionPageModule)
+  },
+  {
+    path: 'registro',
+    loadChildren: () => import('./inicio/registro/registro.module').then( m => m.RegistroPageModule)
+  },
+  {
+    path: 'recuperar-contrasena',
+    loadChildren: () => import('./inicio/recuperar-contrasena/recuperar-contrasena.module').then( m => m.RecuperarContrasenaPageModule)
+  },
+  {
+    path: 'articulo1',
+    loadChildren: () => import('./articulos/articulo1/articulo1.module').then( m => m.Articulo1PageModule)
+  },
+  {
+    path: 'inicio',
+    loadChildren: () => import('./tienda/inicio/inicio.module').then( m => m.InicioPageModule)
+  },
+  {
+    path: 'datos-personales',
+    loadChildren: () => import('./usuario/datos-personales/datos-personales.module').then( m => m.DatosPersonalesPageModule)
+  },
 ];
 
 @NgModule({

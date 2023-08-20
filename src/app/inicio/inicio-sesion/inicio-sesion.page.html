@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>inicio de sesion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<style>
+  .circulo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    /* Hace un círculo perfecto */
+    border: 5px solid white;
+    /* Agrega un borde blanco */
+    background-color: gray;
+    /* Color de fondo del círculo */
+    display: flex;
+    justify-content: center;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+  }
+
+  .imagen-circular {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 50%;
+    /* Mantiene la imagen en forma de círculo */
+  }
+  </style>
+
+  <ion-content [fullscreen]="true">
+<!--ESTO ES DE LA IMAGEN EN EL CIRCULO
+  <div class="circulo">
+    <img class="imagen-circular"
+      src="https://w7.pngwing.com/pngs/741/68/png-transparent-user-computer-icons-user-miscellaneous-cdr-rectangle-thumbnail.png"
+      alt="NO HAY">
+  </div>-->
+  <!--titulo-->
+  <ion-title style=" font-size: 50px; text-align: center;">INICIO DE SESION:</ion-title>
+  <!--correo-->
+  <ion-list style="align-content: center; width: fit-content;">
+    <ion-label>Correo electrónico:</ion-label>
+    <ion-input type="email"  placeholder="juanito.perez@gmail.com"></ion-input>
+  </ion-list>
+  <!--contraseña-->
+  <ion-list style=" width: fit-content; align-content: center; justify-content: center;">
+    <ion-label position="floating">Contraseña:</ion-label>
+    <ion-input type="password" placeholder="**************************"></ion-input><br>
+    <h1>¿Aun no tiene una cuenta?</h1><a [routerLink]="['/registro']">Registrese</a><br>
+    <ion-button color="tertiary"  [routerLink]="['/inicio']" >iniciar sesión</ion-button>
+  </ion-list>
+</ion-content>

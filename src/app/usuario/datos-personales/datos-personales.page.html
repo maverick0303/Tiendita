@@ -1,0 +1,77 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<style>
+  /* Importar la fuente Montserrat */
+  @import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
+
+  ion-card-title {
+    font-family: 'Tilt Prism', cursive;
+    font-size: 80px;
+    display: flex;
+    justify-content: center;
+
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    /* Alineación horizontal al centro */
+    align-items: center;
+    /* Alineación vertical al centro */
+    height: 150vh;
+    /* Opcional: ajusta la altura del contenedor al 100% del viewport */
+  }
+
+  /*este es el fondo*/
+  ion-content {
+    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
+  }
+</style>
+
+<ion-content class="fondo" [fullscreen]="true">
+  <div class="container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Datos personales</ion-card-title>
+      </ion-card-header>
+      <br>
+      <ion-card-content>
+        <form id="registration-form">
+
+          <ion-item>
+            <ion-label position="floating">Nombre de usuario</ion-label>
+            <ion-input type="text" name="nombre" required></ion-input>
+          </ion-item>
+          <!--El required es para que solo se pueda ver y no cambiar el campo que ya esta escrito-->
+          <ion-item>
+            <ion-label position="floating">Correo electrónico</ion-label>
+            <ion-input type="email" name="email" required readonly class="readonly-input"></ion-input>
+          </ion-item>
+          
+
+          <ion-item>
+            <ion-label position="floating" onlyread >Ingrese su Rut</ion-label>
+            <ion-input type="text" name="rut" required readonly class="readonly-input"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating" onlyread >Edad</ion-label>
+            <ion-input type="text" name="edad" required readonly class="readonly-input"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Nombre de otra persona para retiro</ion-label>
+            <ion-input type="text" name="2rPersona" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Nombre de otra persona para retiro(Opcional)</ion-label>
+            <ion-input type="text" name="3rPersona" required></ion-input>
+          </ion-item>
+  
+        </form>
+        </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
