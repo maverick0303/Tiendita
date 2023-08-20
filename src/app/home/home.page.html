@@ -1,20 +1,42 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<style>
+  /* Importar la fuente Montserrat */
+  @import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
+ion-card-title {
+  font-family: 'Tilt Prism', cursive;
+  font-size: 80px;
+  display: flex;
+  justify-content: center;  
+  
+}
+.container {
+  display: flex;
+  justify-content: center; /* Alineación horizontal al centro */
+  align-items: center; /* Alineación vertical al centro */
+  height: 70vh; /* Opcional: ajusta la altura del contenedor al 100% del viewport */
+}
+/*este es el fondo*/
+ion-content{
+  --background:url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
+}
+</style>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content class="fondo" [fullscreen]="true">
+  
+  <div class="container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>TimeTech <br>Audible</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button  [routerLink]="['/inicio-sesion']"> Inicio de sesión </ion-button>
+        <ion-button color="tertiary"  [routerLink]="['/registro']" >Registro</ion-button>
+      </ion-card-content>
+    </ion-card>
   </div>
+
+ 
+  
 </ion-content>
