@@ -38,13 +38,13 @@
       <br>
       <ion-card-content>
         <form id="registration-form">
-          <ion-row >
+          <ion-row>
             <ion-col size="6">
-              <ion-card size="3">
+              <ion-card size="4">
                 <ion-img src="assets/apple1.jpg" alt="Producto"></ion-img>
                 <ion-card-header>
                   <ion-card-title>Apple watch</ion-card-title>
-                  <p class="card-text">Precio: $23.000</p>
+                  <p class="card-text">Precio: $100.000</p>
                   <!--Botones para la cantidad de los productos-->
                   <ion-button shape="round" color="success">+</ion-button>
                   <ion-button shape="round" color="success">-</ion-button>
@@ -55,10 +55,11 @@
                 </ion-card-content>
               </ion-card>
             </ion-col>
-            
+
             <ion-col size="6">
-              <ion-card size="3">
+              <ion-card size="4">
                 <ion-img src="assets/s1.jpg" alt="Producto"></ion-img>
+                <br>
                 <ion-card-header>
                   <ion-card-title>Samsung watch</ion-card-title>
                   <p class="card-text">Precio: $85.000</p>
@@ -73,7 +74,7 @@
             </ion-col>
           </ion-row>
 
-          <br>
+
           <ion-card>
             <ion-item>
               <ion-label position="floating">Seleccione sucursal de retiro</ion-label>
@@ -95,9 +96,52 @@
             </ion-item>
           </ion-card>
 
+          <br>
           <ion-card>
-            <h1>Total: $25.000</h1>
+            <ion-card-header>
+              <ion-card-title>Total: $25.000</ion-card-title>
+            </ion-card-header>
           </ion-card>
+
+          <ion-row>
+            <ion-col size="12">
+              <ion-card size="6">
+                <ion-card-content>
+                  <ion-list>
+                    <ion-radio-group name="paymentMethod" value="credit">
+                      <ion-item>
+                        <ion-label>Tarjeta de crédito</ion-label>
+                        <ion-radio value="credit" checked></ion-radio>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label>Tarjeta de debito</ion-label>
+                        <ion-radio value="debit" checked></ion-radio>
+                      </ion-item>
+                    </ion-radio-group>
+                  </ion-list>
+                  <ion-item>
+                    <ion-label position="floating">Nombre del Titular</ion-label>
+                    <ion-input type="text" name="nombreT" required></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label position="floating">Numero de la tarjeta</ion-label>
+                    <ion-input type="text"placeholder="xxxx-xxxx-xxxx-xxxx" name="nombre" required></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label position="floating">Fecha de caducidad</ion-label>
+                    <ion-input type="text"placeholder="xx/xx" name="fechaC" required></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label position="floating">CVV</ion-label>
+                    <ion-input type="text"placeholder="xxx" name="ccv" required></ion-input>
+                  </ion-item>
+
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+
+
 
 
           <ion-button expand="full" type="submit">Comprar</ion-button>
