@@ -1,0 +1,85 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<style>
+  /* Importar la fuente Montserrat */
+  @import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
+
+  ion-card-title {
+    font-family: 'Tilt Prism', cursive;
+    font-size: 35px;
+    display: flex;
+    justify-content: center;
+
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    /* Alineación horizontal al centro */
+    align-items: center;
+    /* Alineación vertical al centro */
+    height: 150vh;
+    /* Opcional: ajusta la altura del contenedor al 100% del viewport */
+  }
+
+  /*este es el fondo*/
+  ion-content {
+    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
+  }
+</style>
+
+<ion-content class="fondo" [fullscreen]="true">
+  <div class="container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>¡Carrito de compras!</ion-card-title>
+      </ion-card-header>
+      <br>
+      <ion-card-content>
+        <form id="registration-form">
+
+          <ion-card>
+            <ion-img class="img-container"
+              src="https://w7.pngwing.com/pngs/440/569/png-transparent-smartwatch-subscriber-identity-module-android-touchscreen-smart-watches-gadget-electronics-watch-accessory.png"></ion-img>
+            <ion-card-header>
+              <ion-card-title>Reloj inteligente</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <h2>Precio: $25.000</h2>
+            </ion-card-content>
+          </ion-card>
+
+          <br>
+          <ion-card>
+            <ion-item>
+              <ion-label position="floating">Seleccione sucursal de retiro</ion-label>
+              <ion-select>
+                <ion-select-option>Sucursal paseo Ahumada 232</ion-select-option>
+                <ion-select-option>Sucursal Providencia #843, piso 2, local 24</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+
+            <ion-item>
+              <ion-label position="floating">¿Quien retirara el producto?</ion-label>
+              <ion-select>
+                <ion-select-option>Juan Perez</ion-select-option>
+                <ion-select-option>Mauricio Perez</ion-select-option>
+                <ion-select-option>Otro </ion-select-option>
+                <ion-input type="text" name="pRetiro" required></ion-input>
+              </ion-select>
+            </ion-item>
+          </ion-card>
+
+          <ion-card>
+            <h1>Total: $25.000</h1>
+          </ion-card>
+          
+
+          <ion-button expand="full" type="submit">Comprar</ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

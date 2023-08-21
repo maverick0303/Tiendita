@@ -34,7 +34,12 @@ const routes: Routes = [
   {
     path: 'datos-personales',
     loadChildren: () => import('./usuario/datos-personales/datos-personales.module').then( m => m.DatosPersonalesPageModule)
+  },  {
+    path: 'carrito',
+    loadChildren: () => import('./tienda/carrito/carrito.module').then( m => m.CarritoPageModule)
   },
+
+
 ];
 
 @NgModule({
