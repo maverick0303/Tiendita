@@ -13,30 +13,31 @@ const routes: Routes = [
   },
   {
     path: 'inicio-sesion',
-    loadChildren: () => import('./inicio/inicio-sesion/inicio-sesion.module').then( m => m.InicioSesionPageModule)
+    loadChildren: () => import('./pages/inicio-sesion/inicio-sesion.module').then( m => m.InicioSesionPageModule)
   },
   {
     path: 'registro',
-    loadChildren: () => import('./inicio/registro/registro.module').then( m => m.RegistroPageModule)
+    loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   },
   {
-    path: 'recuperar-contrasena',
-    loadChildren: () => import('./inicio/recuperar-contrasena/recuperar-contrasena.module').then( m => m.RecuperarContrasenaPageModule)
+    path: 'carrito',
+    loadChildren: () => import('./pages/carrito/carrito.module').then( m => m.CarritoPageModule)
+  },
+  {
+    path: 'tienda',
+    loadChildren: () => import('./pages/tienda/tienda.module').then( m => m.TiendaPageModule)
   },
   {
     path: 'articulo1',
-    loadChildren: () => import('./articulos/articulo1/articulo1.module').then( m => m.Articulo1PageModule)
-  },
-  {
-    path: 'inicio',
-    loadChildren: () => import('./tienda/inicio/inicio.module').then( m => m.InicioPageModule)
+    loadChildren: () => import('./pages/articulo1/articulo1.module').then( m => m.Articulo1PageModule)
   },
   {
     path: 'datos-personales',
-    loadChildren: () => import('./usuario/datos-personales/datos-personales.module').then( m => m.DatosPersonalesPageModule)
-  },  {
-    path: 'carrito',
-    loadChildren: () => import('./tienda/carrito/carrito.module').then( m => m.CarritoPageModule)
+    loadChildren: () => import('./pages/datos-personales/datos-personales.module').then( m => m.DatosPersonalesPageModule)
+  },
+  {
+    path: 'recuperar-clave',
+    loadChildren: () => import('./pages/recuperar-clave/recuperar-clave.module').then( m => m.RecuperarClavePageModule)
   },
 
 
