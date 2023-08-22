@@ -12,7 +12,7 @@
 
   .ion-card-content {
     font-family: 'arial', cursive;
-    font-size: 50px;
+    font-size: 30px;
     display: flex;
     justify-content: center;
 
@@ -84,7 +84,7 @@
       <ion-card-header>
         <ion-card-title>Inicio de sesión</ion-card-title>
       </ion-card-header>
-      <ion-card-content class="ion-card-content">
+      <ion-card-content >
         <form id="registration-form">
           <!--Aqui tendriamos que mostrar la pregunta de seguridad que el usuario registro-->
           <ion-item>
@@ -97,10 +97,10 @@
             <ion-input type="password" placeholder="********************" required></ion-input>
           </ion-item>
 
-          <p1 [routerLink]="['/registro']">¿Aún no tiene una cuenta? Registrate aquí</p1>
-          <br><br>
           <br>
           <ion-button expand="full" [routerLink]="['/tienda']" type="submit">Iniciar sesión</ion-button>
+          
+          <p1 [routerLink]="['/registro']">¿Aún no tiene una cuenta? Registrate aquí</p1>
         </form>
       </ion-card-content>
 
