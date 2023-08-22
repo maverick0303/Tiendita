@@ -1,6 +1,27 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>inicio</ion-title>
+  <ion-toolbar size="80px">
+    <ion-icon name="person-circle-sharp" size="large" id="popover-button"></ion-icon>
+    <ion-popover trigger="popover-button" [dismissOnSelect]="true">
+      <ng-template>
+        <ion-content>
+          <ion-list>
+            <ion-item [button]="true" [detail]="false">Option 1</ion-item>
+            <ion-item [button]="true" [detail]="false">Option 2</ion-item>
+            <ion-item [button]="true" id="nested-trigger">More options...</ion-item>
+
+            <ion-popover trigger="nested-trigger" [dismissOnSelect]="true" side="end">
+              <ng-template>
+                <ion-content>
+                  <ion-list>
+                    <ion-item [button]="true" [detail]="false">Nested option</ion-item>
+                  </ion-list>
+                </ion-content>
+              </ng-template>
+            </ion-popover>
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
   </ion-toolbar>
 </ion-header>
 
@@ -9,8 +30,7 @@
     width: 250px;
     height: 250px;
     display: block;
-    text-align: center;
-
+    text-align: center;   
   }
 
   ion-card {
@@ -21,62 +41,6 @@
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense"></ion-header>
-  <ion-row>
-    <ion-card>
-      <ion-img class="img-container"
-        src="https://w7.pngwing.com/pngs/440/569/png-transparent-smartwatch-subscriber-identity-module-android-touchscreen-smart-watches-gadget-electronics-watch-accessory.png"></ion-img>
-      <ion-card-header>
-        <ion-card-title>Reloj inteligente</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Precio: $25.00</p>
-        <ion-button expand="full" color="primary" [routerLink]="['/articulo1']">Visualizar</ion-button>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-img class="img-container"
-        src="https://w7.pngwing.com/pngs/440/569/png-transparent-smartwatch-subscriber-identity-module-android-touchscreen-smart-watches-gadget-electronics-watch-accessory.png"></ion-img>
-      <ion-card-header>
-        <ion-card-title>Reloj inteligente</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Precio: $25.00</p>
-        <ion-button expand="full" color="primary" [routerLink]="['/articulo1']">Visualizar</ion-button>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-img class="img-container"
-        src="https://w7.pngwing.com/pngs/440/569/png-transparent-smartwatch-subscriber-identity-module-android-touchscreen-smart-watches-gadget-electronics-watch-accessory.png"></ion-img>
-      <ion-card-header>
-        <ion-card-title>Reloj inteligente</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Precio: $25.00</p>
-        <ion-button expand="full" color="primary" [routerLink]="['/articulo1']">Visualizar</ion-button>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-img class="img-container"
-        src="https://w7.pngwing.com/pngs/440/569/png-transparent-smartwatch-subscriber-identity-module-android-touchscreen-smart-watches-gadget-electronics-watch-accessory.png"></ion-img>
-      <ion-card-header>
-        <ion-card-title>Reloj inteligente</ion-card-title>
-      </ion-card-header>
 
-      <ion-card-content>
-        <p>Precio: $25.00</p>
-        <ion-button expand="full" color="primary" [routerLink]="['/articulo1']">Visualizar</ion-button>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-img class="img-container"
-        src="https://w7.pngwing.com/pngs/440/569/png-transparent-smartwatch-subscriber-identity-module-android-touchscreen-smart-watches-gadget-electronics-watch-accessory.png"></ion-img>
-      <ion-card-header>
-        <ion-card-title>Reloj inteligente</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Precio: $25.00</p>
-        <ion-button expand="full" color="primary" [routerLink]="['/articulo1']">Visualizar</ion-button>
-      </ion-card-content>
-    </ion-card>
-  </ion-row>
+
 </ion-content>
