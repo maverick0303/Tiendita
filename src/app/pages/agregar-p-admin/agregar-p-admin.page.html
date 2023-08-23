@@ -72,8 +72,13 @@
 
           <ion-item>
             <ion-label position="floating">Precio:</ion-label>
-            <ion-input type="number" name="precio" min="0"></ion-input>
+            <ion-input type="number" name="precioP" min="1" required [(ngModel)] ="precioPValue"
+            #precioPModel="ngModel" ></ion-input>
           </ion-item>
+          <div class="error-message" *ngIf="precioPModel.invalid && (precioPModel.dirty || precioPModel.touched)">
+            <p *ngIf="precioPModel.errors?.['required']">El precio del producto es obligatorio.</p>
+            <p *ngIf="precioPModel.errors?.['min']">El precio minimo es de $1.000</p>
+          </div>
           
 
           <ion-item>
@@ -91,8 +96,15 @@
           <ion-item>
             <ion-label position="floating">Imagen(es) del producto</ion-label>
             <br>
-            <ion-input type="file" name="imagen" required></ion-input>
+            <ion-input type="file" name="imagenP" required [(ngModel)]="imagenPValue"
+            #imagenPModel="ngModel"></ion-input>
           </ion-item>
+          <div class="error-message" *ngIf="imagenPModel.invalid && (imagenPModel.dirty ||imagenPModel.touched)">
+            <p *ngIf="imagenPModel.errors?.['required']">La foto del producto es obligatorio.</p>
+          </div>
+
+          <ion-button expand="full" [routerLink]="['/menu-admin']" type="submit" [disabled]="!nombrePModel.valid || !descripcionPModel.valid || !precioPModel.valid ||!imagenPModel.valid ">Guardar</ion-button>
+
 
 
         </form>

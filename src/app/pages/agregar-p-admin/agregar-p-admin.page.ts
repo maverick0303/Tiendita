@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class AgregarPAdminPage implements OnInit {
   nombrePValue: string = '';
   descripcionPValue: string = '';
-  precioPValue: number = 0;
+  precioPValue: number = 1;
+  imagenPValue: File | undefined;
 
   constructor() { }
 
