@@ -55,9 +55,26 @@ const routes: Routes = [
   {
     path: 'agregar-p-admin',
     loadChildren: () => import('./pages/agregar-p-admin/agregar-p-admin.module').then( m => m.AgregarPAdminPageModule)
-  },  {
+  },
+  {
     path: 'editar-p-admin',
     loadChildren: () => import('./pages/editar-p-admin/editar-p-admin.module').then( m => m.EditarPAdminPageModule)
+  },
+  {
+    path: 'relojdig',
+    loadChildren: () => import('./pages/relojdig/relojdig.module').then( m => m.RelojdigPageModule)
+  },
+  {
+    path: 'relojsma',
+    loadChildren: () => import('./pages/relojsma/relojsma.module').then( m => m.RelojsmaPageModule)
+  },
+  {
+    path: 'audiina',
+    loadChildren: () => import('./pages/audiina/audiina.module').then( m => m.AudiinaPageModule)
+  },
+  {
+    path: 'audigamer',
+    loadChildren: () => import('./pages/audigamer/audigamer.module').then( m => m.AudigamerPageModule)
   },
 
 

@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PaginaerrorPageRoutingModule } from './paginaerror-routing.module';
+import { RelojdigPageRoutingModule } from './relojdig-routing.module';
 
-import { PaginaerrorPage } from './paginaerror.page';
+import { RelojdigPage } from './relojdig.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PaginaerrorPageRoutingModule
+    RelojdigPageRoutingModule
   ],
-  declarations: [PaginaerrorPage]
+  declarations: [RelojdigPage]
 })
-export class PaginaerrorPageModule {}
+export class RelojdigPageModule {}
