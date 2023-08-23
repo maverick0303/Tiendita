@@ -1,0 +1,38 @@
+  ion-img {
+      width: 250px;
+      height: 250px;
+  }
+
+  ion-card {
+      width: fit-content;
+      height: max-content;
+  }
+
+  ion-grid {
+      ion-row {
+          display: flex;
+          justify-content: center;
+          /* Centrar horizontalmente */
+          margin: 0 auto;
+          /* Margen superior e inferior igual a 0 y margen lateral automático para centrar en el medio */
+
+          ion-card {
+              margin: 10px;
+              /* Margen entre las tarjetas */
+              max-width: 300px;
+              /* Ancho máximo de las tarjetas */
+
+              ion-img.img-container {
+                  max-width: 100%;
+                  /* Asegurarse de que la imagen no exceda el ancho de la tarjeta */
+                  height: auto;
+                  /* Mantener la proporción de aspecto */
+              }
+          }
+      }
+  }
+  ion-searchbar{
+    width: 250px;
+    text-align: left;
+  }
+  

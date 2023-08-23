@@ -40,12 +40,18 @@ const routes: Routes = [
     loadChildren: () => import('./pages/recuperar-clave/recuperar-clave.module').then( m => m.RecuperarClavePageModule)
   },
   {
-    path: '**',
-    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
-  },  {
     path: 'menu-admin',
     loadChildren: () => import('./pages/menu-admin/menu-admin.module').then( m => m.MenuAdminPageModule)
   },
+  {
+    path: 'reloj-ana',
+    loadChildren: () => import('./pages/reloj-ana/reloj-ana.module').then( m => m.RelojAnaPageModule)
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./pages/paginaerror/paginaerror.module').then( m => m.PaginaerrorPageModule)
+  },
+
 
 
 

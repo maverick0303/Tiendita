@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NotFoundPage } from './not-found.page';
+import { RelojAnaPage } from './reloj-ana.page';
 
-describe('NotFoundPage', () => {
-  let component: NotFoundPage;
-  let fixture: ComponentFixture<NotFoundPage>;
+describe('RelojAnaPage', () => {
+  let component: RelojAnaPage;
+  let fixture: ComponentFixture<RelojAnaPage>;
 
   beforeEach(async(() => {
-    fixture = TestBed.createComponent(NotFoundPage);
+    fixture = TestBed.createComponent(RelojAnaPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

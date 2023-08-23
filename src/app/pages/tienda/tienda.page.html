@@ -1,13 +1,25 @@
 <ion-header [translucent]="true">
-  <ion-toolbar size="80px">
-    <ion-icon name="person-circle-sharp" size="large" id="popover-button"></ion-icon>
+  <ion-toolbar>
+    <!--Menu de la busqueda-->
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <!--El buscador-->
+    <ion-searchbar slot="end" animated="true" placeholder="Buscar"></ion-searchbar>
+    <!--este es el menu del usuario-->
+    <ion-chip id="popover-button" slot="end" size="90px">
+      <ion-avatar>
+        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <ion-label>Cuenta</ion-label>
+    </ion-chip>
     <ion-popover trigger="popover-button" [dismissOnSelect]="true">
       <ng-template>
         <ion-content>
           <ion-list>
-            <ion-item [button]="true" [detail]="false">Option 1</ion-item>
-            <ion-item [button]="true" [detail]="false">Option 2</ion-item>
-            <ion-item [button]="true" id="nested-trigger">More options...</ion-item>
+            <ion-item [button]="true" [detail]="false" [routerLink]="['/datos-personales']">Perfil</ion-item>
+            <ion-item [button]="true" [detail]="false" [routerLink]="['/']">Mis compras</ion-item>
+            <ion-item [button]="true" [detail]="false" [routerLink]="['/home']">Cerrar Sesión</ion-item>
 
             <ion-popover trigger="nested-trigger" [dismissOnSelect]="true" side="end">
               <ng-template>
@@ -24,23 +36,38 @@
     </ion-popover>
   </ion-toolbar>
 </ion-header>
+<!--#############################################PRODUCTOS################################################-->
 
-<style>
-  .img-container {
-    width: 250px;
-    height: 250px;
-    display: block;
-    text-align: center;   
-  }
-
-  ion-card {
-    width: 250px;
-    justify-content: center;
-  }
-</style>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense"></ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <a href="/src/app/pages/articulo1/articulo1.page.html">
+        <ion-card>
+          <ion-img class="img-container" src="assets/s1.jpg"></ion-img>
+          <ion-card-header>
+            <ion-card-title>Reloj inteligente</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Precio: $25.00</p>
+            <ion-button expand="full" color="primary" [routerLink]="['/articulo1']">Visualizar</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </a>
+      <ion-card>
+        <ion-img class="img-container"
+          src="https://w7.pngwing.com/pngs/440/569/png-transparent-smartwatch-subscriber-identity-module-android-touchscreen-smart-watches-gadget-electronics-watch-accessory.png"></ion-img>
+        <ion-card-header>
+          <ion-card-title>Reloj inteligente</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Precio: $25.00</p>
+          <ion-button expand="full" color="primary" [routerLink]="['/articulo1']">Visualizar</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
 
 
 </ion-content>

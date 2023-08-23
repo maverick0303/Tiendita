@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { NotFoundPageRoutingModule } from './not-found-routing.module';
+import { RelojAnaPageRoutingModule } from './reloj-ana-routing.module';
 
-import { NotFoundPage } from './not-found.page';
+import { RelojAnaPage } from './reloj-ana.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NotFoundPageRoutingModule
+    RelojAnaPageRoutingModule
   ],
-  declarations: [NotFoundPage]
+  declarations: [RelojAnaPage]
 })
-export class NotFoundPageModule {}
+export class RelojAnaPageModule {}
