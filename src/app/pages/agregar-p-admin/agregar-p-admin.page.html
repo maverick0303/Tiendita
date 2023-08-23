@@ -44,30 +44,47 @@
             <ion-input type="text" name="id" required readonly class="readonly-input"></ion-input>
           </ion-item>
           <!--El required es para que solo se pueda ver y no cambiar el campo que ya esta escrito-->
+          <!--Validación para nombre del producto-->
           <ion-item>
             <ion-label position="floating">Nombre para el producto: </ion-label>
-            <ion-input type="text" name="nombreP"  ></ion-input>
+            <ion-input type="text" name="nombreP" minlength="3" maxlength="15" required [(ngModel)]="nombrePValue"
+              #nombrePModel="ngModel">
+            </ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="nombrePModel.invalid && (nombrePModel.dirty || nombrePModel.touched)">
+            <p *ngIf="nombrePModel.errors?.['required']">El nombre del producto es obligatorio.</p>
+            <p *ngIf="nombrePModel.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</p>
+            <p *ngIf="nombrePModel.errors?.['maxlength']">El nombre no debe exceder los 15 caracteres.</p>
+          </div>
+
+
+          <ion-item>
+            <ion-label position="floating" onlyread>Descripción del producto</ion-label>
+            <ion-input type="text" name="descripcionP" minlength="3" maxlength="50" required [(ngModel)]="descripcionPValue"
+            #descripcionPModel="ngModel">
+          </ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="descripcionPModel.invalid && (descripcionPModel.dirty || descripcionPModel.touched)">
+            <p *ngIf="descripcionPModel.errors?.['required']">La descripcion del producto es obligatorio.</p>
+            <p *ngIf="descripcionPModel.errors?.['minlength']">La descripcion debe tener al menos 3 caracteres.</p>
+            <p *ngIf="descripcionPModel.errors?.['maxlength']">La descripcion no debe exceder los 15 caracteres.</p>
+          </div>
+
+          <ion-item>
+            <ion-label position="floating">Precio:</ion-label>
+            <ion-input type="number" name="precio" min="0"></ion-input>
           </ion-item>
           
 
           <ion-item>
-            <ion-label position="floating" onlyread >Descripción del producto</ion-label>
-            <ion-input type="text" name="descripcion" ></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="floating" onlyread >Precio:</ion-label>
-            <ion-input type="text" name="precio" ></ion-input>
-          </ion-item>
-
-          <ion-item>
             <ion-label position="floating">Categoria para el producto</ion-label>
-            <ion-select>
+            <ion-select required >
               <ion-select-option>Reloj digital</ion-select-option>
               <ion-select-option>Reloj analógico</ion-select-option>
               <ion-select-option>Audifono bluetooth</ion-select-option>
               <ion-select-option>Audifono gamer</ion-select-option>
               <ion-select-option>Audifonos deportivos</ion-select-option>
+
             </ion-select>
           </ion-item>
 
@@ -76,10 +93,10 @@
             <br>
             <ion-input type="file" name="imagen" required></ion-input>
           </ion-item>
-          
-  
+
+
         </form>
-        </ion-card-content>
+      </ion-card-content>
     </ion-card>
   </div>
 </ion-content>
