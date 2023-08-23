@@ -47,10 +47,7 @@ const routes: Routes = [
     path: 'reloj-ana',
     loadChildren: () => import('./pages/reloj-ana/reloj-ana.module').then( m => m.RelojAnaPageModule)
   },
-  {
-    path: '**',
-    loadChildren: () => import('./pages/paginaerror/paginaerror.module').then( m => m.PaginaerrorPageModule)
-  },
+
   {
     path: 'productoadmin',
     loadChildren: () => import('./pages/productoadmin/productoadmin.module').then( m => m.ProductoadminPageModule)
@@ -58,11 +55,11 @@ const routes: Routes = [
   {
     path: 'agregar-p-admin',
     loadChildren: () => import('./pages/agregar-p-admin/agregar-p-admin.module').then( m => m.AgregarPAdminPageModule)
+  },  {
+    path: 'editar-p-admin',
+    loadChildren: () => import('./pages/editar-p-admin/editar-p-admin.module').then( m => m.EditarPAdminPageModule)
   },
-  {
-    path: 'editar-padmin',
-    loadChildren: () => import('./pages/editar-padmin/editar-padmin.module').then( m => m.EditarPadminPageModule)
-  },
+
 
 
 

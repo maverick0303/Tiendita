@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { EditarPadminPageRoutingModule } from './editar-padmin-routing.module';
+import { EditarPAdminPageRoutingModule } from './editar-p-admin-routing.module';
 
-import { EditarPadminPage } from './editar-padmin.page';
+import { EditarPAdminPage } from './editar-p-admin.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EditarPadminPageRoutingModule
+    EditarPAdminPageRoutingModule
   ],
-  declarations: [EditarPadminPage]
+  declarations: [EditarPAdminPage]
 })
-export class EditarPadminPageModule {}
+export class EditarPAdminPageModule {}

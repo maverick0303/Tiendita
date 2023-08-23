@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { EditarPadminPage } from './editar-padmin.page';
+import { EditarPAdminPage } from './editar-p-admin.page';
 
-describe('EditarPadminPage', () => {
-  let component: EditarPadminPage;
-  let fixture: ComponentFixture<EditarPadminPage>;
+describe('EditarPAdminPage', () => {
+  let component: EditarPAdminPage;
+  let fixture: ComponentFixture<EditarPAdminPage>;
 
   beforeEach(async(() => {
-    fixture = TestBed.createComponent(EditarPadminPage);
+    fixture = TestBed.createComponent(EditarPAdminPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
