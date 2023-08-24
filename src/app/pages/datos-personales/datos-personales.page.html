@@ -40,8 +40,12 @@
         <form id="registration-form">
 
           <ion-item>
-            <ion-label position="floating">Nombre de usuario</ion-label>
-            <ion-input type="text" name="nombre" required></ion-input>
+            <ion-label position="floating">Nombre:</ion-label>
+            <ion-input type="text" name="nombre" required (keydown)="onKeyDown($event)"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Apellido:</ion-label>
+            <ion-input type="text" name="apellido" required (keydown)="onKeyDown($event)"></ion-input>
           </ion-item>
           <!--El required es para que solo se pueda ver y no cambiar el campo que ya esta escrito-->
           <ion-item>
@@ -56,19 +60,21 @@
           </ion-item>
 
           <ion-item>
-            <ion-label position="floating" onlyread >Edad</ion-label>
-            <ion-input type="text" name="edad" required readonly class="readonly-input"></ion-input>
+            <ion-label position="floating">Nombre de otra persona para retiro </ion-label>
+            <ion-input type="text" name="segPersona" minlength="3" maxlength="15"  [(ngModel)]="segPersonaValue"
+              #segPersonaModel="ngModel">
+            </ion-input>
           </ion-item>
-
-          <ion-item>
-            <ion-label position="floating">Nombre de otra persona para retiro</ion-label>
-            <ion-input type="text" name="2rPersona" required></ion-input>
-          </ion-item>
+          <div class="error-message" *ngIf="segPersonaModel.invalid && (segPersonaModel.dirty || segPersonaModel.touched)">
+            <p *ngIf="segPersonaModel.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</p>
+            <p *ngIf="segPersonaModel.errors?.['maxlength']">El nombre no debe exceder los 15 caracteres.</p>
+          </div>
 
           <ion-item>
             <ion-label position="floating">Nombre de otra persona para retiro(Opcional)</ion-label>
-            <ion-input type="text" name="3rPersona" required></ion-input>
+            <ion-input type="text" name="3rPersona" required ></ion-input>
           </ion-item>
+          <ion-button expand="full" type="submit">Guardar cambios</ion-button>
   
         </form>
         </ion-card-content>
