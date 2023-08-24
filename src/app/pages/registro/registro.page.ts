@@ -41,24 +41,20 @@ export class RegistroPage implements OnInit {
 
   onKeyDown(event: KeyboardEvent) {
   const caretPosition = (<HTMLInputElement>event.target).selectionStart;
-  const currentValue = (<HTMLInputElement>event.target).value;
 
-if (event.key === ' ' || (caretPosition === 0 && event.key === '-') || (caretPosition === 6 && event.key !== '.' && event.key !== 'Backspace') ||
-   (caretPosition === 2 && event.key !== '.' && event.key !== 'Backspace') || (caretPosition === 10 && event.key !== '-' && event.key !== 'Backspace')) {
+
+if (event.key === ' ' || (caretPosition === 0 && event.key === '-') ||
+ (caretPosition === 6 && event.key !== '.' && event.key !== 'Backspace') ||
+  (caretPosition === 2 && event.key !== '.' && event.key !== 'Backspace') ||
+  (caretPosition === 10 && event.key !== '-' && event.key !== 'Backspace')|| 
+  
+  //ARREGLAR ESTOOOOOOOOO
+  (caretPosition === 11 && event.key === '0-9') || 
+  (caretPosition === 11 && event.key !== 'k')) {
     event.preventDefault();
   }
 
-  if (caretPosition !== null) {
-    if (caretPosition < 10) {
-      if (!/^\d$/.test(event.key) && event.key !== '-' && event.key !== '.' && event.key !== 'Backspace') {
-        event.preventDefault();
-      }
-    } else if (caretPosition === currentValue.length - 1) {
-      if (!/^[\dkK.]$/.test(event.key) && event.key !== 'Backspace') {
-        event.preventDefault();
-      }
-    }
-  }
+  
 }
 
   
