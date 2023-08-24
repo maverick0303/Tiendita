@@ -33,77 +33,39 @@
     --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
   }
 
-  .circulo {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    /* Hace un círculo perfecto */
-    border: 5px solid white;
-    /* Agrega un borde blanco */
-    background-color: gray;
-    /* Color de fondo del círculo */
-    display: flex;
-    justify-content: center;
-    /* Centra horizontalmente */
-    align-items: center;
-    /* Centra verticalmente */
-  }
-
-  .imagen-circular {
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 50%;
-    /* Mantiene la imagen en forma de círculo */
-  }
 </style>
 
 <ion-content [fullscreen]="true">
-  <!--ESTO ES DE LA IMAGEN EN EL CIRCULO
-  <div class="circulo">
-    <img class="imagen-circular"
-      src="https://w7.pngwing.com/pngs/741/68/png-transparent-user-computer-icons-user-miscellaneous-cdr-rectangle-thumbnail.png"
-      alt="NO HAY">
-  </div>
-  titulo
-  <ion-title style=" font-size: 50px; text-align: center;">INICIO DE SESION:</ion-title>
-  correo
-  <ion-list style="align-content: center; width: fit-content;">
-    <ion-label>Correo electrónico:</ion-label>
-    <ion-input type="email"  placeholder="juanito.perez@gmail.com"></ion-input>
-  </ion-list>
-  contraseña
-  <ion-list style=" width: fit-content; align-content: center; justify-content: center;">
-    <ion-label position="floating">Contraseña:</ion-label>
-    <ion-input type="password" placeholder="**************************"></ion-input><br>
-    <h1>¿Aun no tiene una cuenta?</h1><a [routerLink]="['/registro']">Registrese</a><br>
-    <ion-button color="tertiary"  [routerLink]="['/tienda']" >iniciar sesión</ion-button>
-  </ion-list>-->
-
   <div class="container">
     <ion-card class="ion-text-center">
       <ion-card-header>
         <ion-card-title>Inicio de sesión</ion-card-title>
       </ion-card-header>
-      <ion-card-content >
-        <form id="registration-form">
-          <!--Aqui tendriamos que mostrar la pregunta de seguridad que el usuario registro-->
+      <ion-card-content>
+        <form id="registration-form" (ngSubmit)="onLogin()">
           <ion-item>
             <ion-label position="floating">Correo electrónico:</ion-label>
-            <ion-input type="email" placeholder="juanito.perez@gmail.com" required></ion-input>
+            <ion-input type="email" placeholder="juanito.perez@gmail.com" required
+                       [(ngModel)]="email" name="email" #emailInput="ngModel"
+                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></ion-input>
           </ion-item>
+          <ion-note *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
+            Ingresa un correo electrónico válido y no lo dejes vacío.
+          </ion-note>
 
-          <ion-item style="align-content: center; width: fit-content;">
+          <ion-item>
             <ion-label position="floating">Contraseña:</ion-label>
-            <ion-input type="password" placeholder="********************" required></ion-input>
+            <ion-input type="password" placeholder="********************" required [(ngModel)]="password" name="password"
+            #passwordInput="ngModel" minlength="3" maxlength="15"
+            pattern="^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*]).{3,15}$"></ion-input>
           </ion-item>
 
           <br>
-          <ion-button expand="full" [routerLink]="['/tienda']" type="submit">Iniciar sesión</ion-button>
-          
-          <p1 [routerLink]="['/registro']">¿Aún no tiene una cuenta? Registrate aquí</p1>
+          <ion-button expand="full" [disabled]="!emailInput.valid || !passwordInput.valid" type="submit">Iniciar sesión</ion-button>
+
+          <p1 [routerLink]="['/registro']">¿Aún no tienes una cuenta? Regístrate aquí</p1>
         </form>
       </ion-card-content>
-
     </ion-card>
   </div>
 </ion-content>
