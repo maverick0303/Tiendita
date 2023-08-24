@@ -1,0 +1,70 @@
+ion-img {
+    width: 250px;
+    height: 250px;
+}
+
+ion-card {
+    width: fit-content;
+    height: max-content;
+}
+
+ion-grid {
+    ion-row {
+        display: flex;
+        justify-content: center;
+        /* Centrar horizontalmente */
+        margin: 0 auto;
+        /* Margen superior e inferior igual a 0 y margen lateral automático para centrar en el medio */
+
+        ion-card {
+            margin: 10px;
+            /* Margen entre las tarjetas */
+            max-width: 300px;
+            /* Ancho máximo de las tarjetas */
+
+            ion-img.img-container {
+                max-width: 100%;
+                /* Asegurarse de que la imagen no exceda el ancho de la tarjeta */
+                height: auto;
+                /* Mantener la proporción de aspecto */
+            }
+        }
+    }
+}
+
+ion-searchbar {
+    width: 250px;
+    text-align: left;
+}
+
+//titulos
+
+@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Tilt+Prism&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+
+
+
+p {
+    color: white;
+    font-size: 20px;
+    text-align: left;
+    font-family: 'ADLaM Display', cursive;
+}
+
+ion-card-title {
+    text-align: center;
+    font-family: 'DM Serif Display', serif;
+}
+ion-title{
+    font-family: 'DM Serif Display', serif;
+    font-size: 60px;
+    text-align: center;
+    margin: 5px;
+}
+@media(width:423px){
+    ion-title{
+        font-size: 40px;
+    }
+    
+
+}
