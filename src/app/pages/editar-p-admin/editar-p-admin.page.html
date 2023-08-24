@@ -81,7 +81,7 @@
 
           <ion-item>
             <ion-label position="floating">Categoria para el producto</ion-label>
-            <ion-select>
+            <ion-select required name="categoriaP" [(ngModel)]="categoriaPValue" #categoriaPModel="ngModel">
               <ion-select-option>Reloj digital</ion-select-option>
               <ion-select-option>Reloj analógico</ion-select-option>
               <ion-select-option>Audifono bluetooth</ion-select-option>
@@ -89,6 +89,10 @@
               <ion-select-option>Audifonos deportivos</ion-select-option>
             </ion-select>
           </ion-item>
+          <div class="error-message"
+            *ngIf="categoriaPModel.invalid && (categoriaPModel.dirty || categoriaPModel.touched)">
+            <p *ngIf="categoriaPModel.errors?.['required']">La categoría del producto es obligatoria.</p>
+          </div>
 
           <ion-item>
             <ion-label position="floating">Imagen(es) del producto</ion-label>
@@ -101,7 +105,7 @@
           </div>
           
           <ion-button expand="full" [routerLink]="['/menu-admin']" type="submit" [disabled]=
-          "!nombrePModel.valid || !descripcionPModel.valid || !precioPModel.valid ||!imagenPModel.valid ">
+          "!nombrePModel.valid || !descripcionPModel.valid || !precioPModel.valid  || !categoriaPModel.valid ||!imagenPModel.valid ">
           Guardar</ion-button>
   
         </form>

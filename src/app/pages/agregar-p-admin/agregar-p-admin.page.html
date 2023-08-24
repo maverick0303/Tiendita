@@ -60,11 +60,12 @@
 
           <ion-item>
             <ion-label position="floating" onlyread>Descripción del producto</ion-label>
-            <ion-input type="text" name="descripcionP" minlength="3" maxlength="50" required [(ngModel)]="descripcionPValue"
-            #descripcionPModel="ngModel">
-          </ion-input>
+            <ion-input type="text" name="descripcionP" minlength="3" maxlength="50" required
+              [(ngModel)]="descripcionPValue" #descripcionPModel="ngModel">
+            </ion-input>
           </ion-item>
-          <div class="error-message" *ngIf="descripcionPModel.invalid && (descripcionPModel.dirty || descripcionPModel.touched)">
+          <div class="error-message"
+            *ngIf="descripcionPModel.invalid && (descripcionPModel.dirty || descripcionPModel.touched)">
             <p *ngIf="descripcionPModel.errors?.['required']">La descripcion del producto es obligatorio.</p>
             <p *ngIf="descripcionPModel.errors?.['minlength']">La descripcion debe tener al menos 3 caracteres.</p>
             <p *ngIf="descripcionPModel.errors?.['maxlength']">La descripcion no debe exceder los 15 caracteres.</p>
@@ -72,38 +73,43 @@
 
           <ion-item>
             <ion-label position="floating">Precio:</ion-label>
-            <ion-input type="number" name="precioP" min="1" required [(ngModel)] ="precioPValue"
-            #precioPModel="ngModel" ></ion-input>
+            <ion-input type="number" name="precioP" min="1" required [(ngModel)]="precioPValue"
+              #precioPModel="ngModel"></ion-input>
           </ion-item>
           <div class="error-message" *ngIf="precioPModel.invalid && (precioPModel.dirty || precioPModel.touched)">
             <p *ngIf="precioPModel.errors?.['required']">El precio del producto es obligatorio.</p>
             <p *ngIf="precioPModel.errors?.['min']">El precio minimo es de $1.000</p>
           </div>
-          
+
 
           <ion-item>
             <ion-label position="floating">Categoria para el producto</ion-label>
-            <ion-select required >
+            <ion-select required name="categoriaP" [(ngModel)]="categoriaPValue" #categoriaPModel="ngModel">
               <ion-select-option>Reloj digital</ion-select-option>
               <ion-select-option>Reloj analógico</ion-select-option>
               <ion-select-option>Audifono bluetooth</ion-select-option>
               <ion-select-option>Audifono gamer</ion-select-option>
               <ion-select-option>Audifonos deportivos</ion-select-option>
-
             </ion-select>
           </ion-item>
+          <div class="error-message"
+            *ngIf="categoriaPModel.invalid && (categoriaPModel.dirty || categoriaPModel.touched)">
+            <p *ngIf="categoriaPModel.errors?.['required']">La categoría del producto es obligatoria.</p>
+          </div>
+
 
           <ion-item>
             <ion-label position="floating">Imagen(es) del producto</ion-label>
             <br>
             <ion-input type="file" name="imagenP" required [(ngModel)]="imagenPValue"
-            #imagenPModel="ngModel"></ion-input>
+              #imagenPModel="ngModel"></ion-input>
           </ion-item>
           <div class="error-message" *ngIf="imagenPModel.invalid && (imagenPModel.dirty ||imagenPModel.touched)">
             <p *ngIf="imagenPModel.errors?.['required']">La foto del producto es obligatorio.</p>
           </div>
 
-          <ion-button expand="full" [routerLink]="['/menu-admin']" type="submit" [disabled]="!nombrePModel.valid || !descripcionPModel.valid || !precioPModel.valid ||!imagenPModel.valid ">Guardar</ion-button>
+          <ion-button expand="full" [routerLink]="['/menu-admin']" type="submit"
+            [disabled]="!nombrePModel.valid || !descripcionPModel.valid || !precioPModel.valid || !categoriaPModel.valid || !imagenPModel.valid  ">Guardar</ion-button>
 
 
 

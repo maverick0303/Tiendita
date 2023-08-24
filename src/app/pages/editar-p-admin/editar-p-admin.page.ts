@@ -10,6 +10,8 @@ export class EditarPAdminPage implements OnInit {
   descripcionPValue: string = '';
   precioPValue: number = 1;
   imagenPValue: File | undefined;
+  categoriaPValue: string = '';
+  
   constructor() { }
 
   ngOnInit() {
