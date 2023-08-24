@@ -41,43 +41,55 @@
 
           <ion-item>
             <ion-label position="floating">Nombre:</ion-label>
-            <ion-input type="text" name="nombre" required (keydown)="onKeyDown($event)"></ion-input>
+            <ion-input type="text" name="nombre" minlength="3" maxlength="15" required (keydown)="onKeyDown($event)"
+              [(ngModel)]="nombreValue" #nombreModel="ngModel">
+            </ion-input>
           </ion-item>
+          <div class="error-message" *ngIf="nombreModel.invalid && (nombreModel.dirty || nombreModel.touched)">
+            <p *ngIf="nombreModel.errors?.['required']">El nombre es obligatorio</p>
+            <p *ngIf="nombreModel.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</p>
+            <p *ngIf="nombreModel.errors?.['maxlength']">El nombre no debe exceder los 15 caracteres.</p>
+          </div>
+
           <ion-item>
             <ion-label position="floating">Apellido:</ion-label>
-            <ion-input type="text" name="apellido" required (keydown)="onKeyDown($event)"></ion-input>
+            <ion-input type="text" name="apellido" minlength="3" maxlength="15" required (keydown)="onKeyDown($event)"
+              [(ngModel)]="apellidoValue" #apellidoModel="ngModel"></ion-input>
           </ion-item>
+          <div class="error-message" *ngIf="apellidoModel.invalid && (apellidoModel.dirty || apellidoModel.touched)">
+            <p *ngIf="apellidoModel.errors?.['required']">El nombre es obligatorio</p>
+            <p *ngIf="apellidoModel.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</p>
+            <p *ngIf="apellidoModel.errors?.['maxlength']">El nombre no debe exceder los 15 caracteres.</p>
+          </div>
           <!--El required es para que solo se pueda ver y no cambiar el campo que ya esta escrito-->
           <ion-item>
             <ion-label position="floating">Correo electrónico</ion-label>
             <ion-input type="email" name="email" required readonly class="readonly-input"></ion-input>
           </ion-item>
-          
+
 
           <ion-item>
-            <ion-label position="floating" onlyread >Ingrese su Rut</ion-label>
+            <ion-label position="floating" onlyread>Ingrese su Rut</ion-label>
             <ion-input type="text" name="rut" required readonly class="readonly-input"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Nombre de otra persona para retiro </ion-label>
-            <ion-input type="text" name="segPersona" minlength="3" maxlength="15"  [(ngModel)]="segPersonaValue"
+            <ion-input type="text" name="segPersona" minlength="3" maxlength="15" [(ngModel)]="segPersonaValue"
               #segPersonaModel="ngModel">
             </ion-input>
           </ion-item>
-          <div class="error-message" *ngIf="segPersonaModel.invalid && (segPersonaModel.dirty || segPersonaModel.touched)">
+          <div class="error-message"
+            *ngIf="segPersonaModel.invalid && (segPersonaModel.dirty || segPersonaModel.touched)">
             <p *ngIf="segPersonaModel.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</p>
             <p *ngIf="segPersonaModel.errors?.['maxlength']">El nombre no debe exceder los 15 caracteres.</p>
           </div>
 
-          <ion-item>
-            <ion-label position="floating">Nombre de otra persona para retiro(Opcional)</ion-label>
-            <ion-input type="text" name="3rPersona" required ></ion-input>
-          </ion-item>
+          
           <ion-button expand="full" type="submit">Guardar cambios</ion-button>
-  
+
         </form>
-        </ion-card-content>
+      </ion-card-content>
     </ion-card>
   </div>
 </ion-content>

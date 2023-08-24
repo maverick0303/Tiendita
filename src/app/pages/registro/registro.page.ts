@@ -43,8 +43,8 @@ export class RegistroPage implements OnInit {
   const caretPosition = (<HTMLInputElement>event.target).selectionStart;
   const currentValue = (<HTMLInputElement>event.target).value;
 
-  if (event.key === ' ' || (caretPosition === 0 && event.key === '-') || (caretPosition === 6 && event.key !== '.') ||
-   (caretPosition === 2 && event.key !== '.') || (caretPosition === 10 && event.key !== '-') || (caretPosition === 12 && event.key !== 'kK0123456789')) {
+if (event.key === ' ' || (caretPosition === 0 && event.key === '-') || (caretPosition === 6 && event.key !== '.' && event.key !== 'Backspace') ||
+   (caretPosition === 2 && event.key !== '.' && event.key !== 'Backspace') || (caretPosition === 10 && event.key !== '-' && event.key !== 'Backspace')) {
     event.preventDefault();
   }
 

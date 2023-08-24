@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./datos-personales.page.scss'],
 })
 export class DatosPersonalesPage implements OnInit {
+  nombreValue: string = '';
+  apellidoValue: string = '';
   segPersonaValue: string = '';
 
   constructor() { }
