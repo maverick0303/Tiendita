@@ -4,10 +4,26 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">ag3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="card-container">
+    <ion-card class="custom-card">
+      <img src="assets/AUDIFONOS GAMERS/ag3.webp" alt="" class="card-image">
+      <ion-card-content class="card-content">
+        <ion-card-title class="titulo">Audifonos gamers rojos con negro</ion-card-title>
+        <br>
+        <p class="subti" style="font-size: 25px;">Precio: $30.000</p>
+        <br>
+        <p class="subti">Descripción:</p>
+        <p>Estos auriculares gamer rojos ofrecen un diseño 
+          llamativo y audaz. Con una apariencia elegante
+           resaltada por el color rojo, brindan un audio 
+           inmersivo, comodidad con almohadillas suaves y
+            ajuste ergonómico. Perfectos para jugadores que
+             buscan estilo y rendimiento en un solo paquete.</p>
+          <br>
+          <ion-button [routerLink]="['/carrito']">Agregar al carrito</ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

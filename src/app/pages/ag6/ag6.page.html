@@ -4,10 +4,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">ag6</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="card-container">
+    <ion-card class="custom-card">
+      <img src="assets/AUDIFONOS GAMERS/ag6.jpeg" alt="" class="card-image">
+      <ion-card-content class="card-content">
+        <ion-card-title class="titulo">Audifonos gamers verdes con negro</ion-card-title>
+        <br>
+        <p class="subti" style="font-size: 25px;">Precio: $43.000</p>
+        <br>
+        <p class="subti">Descripción:</p>
+        <p>Auriculares gamers en verde y negro que equilibran 
+          diseño llamativo con audio inmersivo. Comodidad asegurada
+           para sesiones prolongadas. Una elección que combina estilo
+            y rendimiento de manera única para los jugadores.</p>
+          <br>
+          <ion-button [routerLink]="['/carrito']">Agregar al carrito</ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

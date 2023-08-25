@@ -1,13 +1,28 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>rd5</ion-title>
+    <ion-title>r1</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">rd5</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="card-container">
+    <ion-card class="custom-card">
+      <img src="assets/digitales/rd5.jpg" alt="" class="card-image">
+      <ion-card-content class="card-content">
+        <ion-card-title class="titulo">Reloj Digital negro</ion-card-title>
+        <br>
+        <p class="subti" style="font-size: 25px;">Precio: $85.000</p>
+        <br>
+        <p class="subti">Descripción:</p>
+        <p>Reloj digital en negro, brinda 
+          una estética moderna y minimalista.
+           Ideal para quienes buscan simplicidad 
+           y funcionalidad en la visualización de 
+           la hora y otras características, manteniendo un estilo elegante.</p>
+        <br>
+        <ion-button [routerLink]="['/carrito']">Agregar al carrito</ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

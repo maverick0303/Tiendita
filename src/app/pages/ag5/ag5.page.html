@@ -4,10 +4,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">ag5</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="card-container">
+    <ion-card class="custom-card">
+      <img src="assets/AUDIFONOS GAMERS/ag5.jpeg" alt="" class="card-image">
+      <ion-card-content class="card-content">
+        <ion-card-title class="titulo">Audifonos gamers lila con blanco</ion-card-title>
+        <br>
+        <p class="subti" style="font-size: 25px;">Precio: $25.000</p>
+        <br>
+        <p class="subti">Descripción:</p>
+        <p>Auriculares gamers lila y blanco: diseño atractivo, audio inmersivo,
+           comodidad asegurada. Perfectos para quienes buscan rendimiento y estilo en un solo paquete.</p>
+          <br>
+          <ion-button [routerLink]="['/carrito']">Agregar al carrito</ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

@@ -4,10 +4,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">ag2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="card-container">
+    <ion-card class="custom-card">
+      <img src="assets/AUDIFONOS GAMERS/ag2.jpeg" alt="" class="card-image">
+      <ion-card-content class="card-content">
+        <ion-card-title class="titulo">Audifonos gamer multicolor</ion-card-title>
+        <br>
+        <p class="subti" style="font-size: 25px;">Precio: $60.000</p>
+        <br>
+        <p class="subti">Descripción:</p>
+        <p>Auriculares gamer con luces LED en los laterales para un estilo
+           moderno. Ofrecen audio de alta calidad, comodidad con almohadillas
+            acolchadas y diadema ajustable, y un micrófono claro para la comunicación
+             en el juego. Combinan rendimiento y estética para mejorar la experiencia de juego.</p>
+          <br>
+          <ion-button [routerLink]="['/carrito']">Agregar al carrito</ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

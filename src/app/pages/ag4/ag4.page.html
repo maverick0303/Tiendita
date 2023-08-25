@@ -4,10 +4,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">ag4</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="card-container">
+    <ion-card class="custom-card">
+      <img src="assets/AUDIFONOS GAMERS/ag4.jpeg" alt="" class="card-image">
+      <ion-card-content class="card-content">
+        <ion-card-title class="titulo">Audifonos gamers negro con naranja</ion-card-title>
+        <br>
+        <p class="subti" style="font-size: 25px;">Precio: $70.000</p>
+        <br>
+        <p class="subti">Descripción:</p>
+        <p>Auriculares gamer en negro con toques anaranjados 
+          que ofrecen sonido envolvente, comodidad ergonómica 
+          y estilo llamativo. Perfectos para jugadores que valoran
+           tanto el rendimiento como el diseño vibrante.</p>
+          <br>
+          <ion-button [routerLink]="['/carrito']">Agregar al carrito</ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

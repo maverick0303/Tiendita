@@ -4,10 +4,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">ai5</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="card-container">
+    <ion-card class="custom-card">
+      <img src="assets/AUDIFONOS BLUTU/a5.webp" alt="" class="card-image">
+      <ion-card-content class="card-content">
+        <ion-card-title class="titulo">Audifonos Bluetooth blancos</ion-card-title>
+        <br>
+        <p class="subti" style="font-size: 25px;">Precio: $75.000</p>
+        <br>
+        <p class="subti">Descripción:</p>
+        <p>Audífonos Bluetooth en elegante blanco,
+           brindan conectividad inalámbrica con un diseño
+            limpio y sofisticado. Perfectos para quienes
+             buscan una experiencia auditiva sin cables con un toque de estilo minimalista.</p>
+          <br>
+          <ion-button [routerLink]="['/carrito']">Agregar al carrito</ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

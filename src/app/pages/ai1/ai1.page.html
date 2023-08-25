@@ -4,10 +4,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">ai1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="card-container">
+    <ion-card class="custom-card">
+      <img src="assets/AUDIFONOS BLUTU/a1.jpg" alt="" class="card-image">
+      <ion-card-content class="card-content">
+        <ion-card-title class="titulo">Audífonos Bluetooth morados</ion-card-title>
+        <br>
+        <p class="subti" style="font-size: 25px;">Precio: $10.000</p>
+        <br>
+        <p class="subti">Descripción:</p>
+        <p>Audífonos Bluetooth en tono morado,
+           ofrecen conectividad sin cables con estilo.
+            Perfectos para quienes buscan comodidad y 
+            libertad en su experiencia auditiva..</p>
+          <br>
+          <ion-button [routerLink]="['/carrito']">Agregar al carrito</ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

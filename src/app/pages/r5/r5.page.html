@@ -4,10 +4,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">r5</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="card-container">
+    <ion-card class="custom-card">
+      <img src="assets/RELOJES ANALOGO/r5.jpg" alt="" class="card-image">
+      <ion-card-content class="card-content">
+        <ion-card-title class="titulo">Reloj Analógico amarillo fondo negro</ion-card-title>
+        <br>
+        <p class="subti" style="font-size: 25px;">Precio: $120.000</p>
+        <br>
+        <p class="subti">Descripción:</p>
+        <p>Reloj analógico en amarillo con fondo negro,
+           aporta un contraste audaz y llamativo. Perfecto
+            para quienes buscan un reloj que destaque con un
+             toque de color vibrante en su muñeca, sin dejar de ser elegante.</p>
+          <br>
+          <ion-button [routerLink]="['/carrito']">Agregar al carrito</ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
