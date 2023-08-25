@@ -7,6 +7,7 @@
 }
 
 .custom-card {
+    background: #222222;
     display: flex;
     align-items: center;
     width: 80%;
@@ -38,7 +39,7 @@
 
 p {
     color: white;
-    font-size: 18px;
+    font-size: 20px;
     text-align: left;
     font-family: 'ADLaM Display';
 }
@@ -86,5 +87,6 @@ p {
         font-size: 35px;
         text-align: left;
     }
+    
     
 }
