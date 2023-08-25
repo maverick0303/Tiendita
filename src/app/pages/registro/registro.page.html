@@ -41,7 +41,7 @@
           <!--Validacion Nombre-->
           <ion-item>
             <ion-label position="floating">Ingrese su nombre: </ion-label>
-            <ion-input type="text" name="nombreU" minlength="3" maxlength="15" required (keydown)="onKeyDown($event)" [(ngModel)]="nombreUValue"
+            <ion-input type="text" name="nombreU" minlength="3" maxlength="15" required  [(ngModel)]="nombreUValue"
               #nombreUModel="ngModel">
             </ion-input>
           </ion-item>
@@ -53,7 +53,7 @@
           <!--Validacion apellido-->
           <ion-item>
             <ion-label position="floating">Ingrese su apellido: </ion-label>
-            <ion-input type="text" name="apellidoU" minlength="3" maxlength="15" required (keydown)="onKeyDown($event)" [(ngModel)]="apellidoUValue"
+            <ion-input type="text" name="apellidoU" minlength="3" maxlength="15" required [(ngModel)]="apellidoUValue"
               #apellidoUModel="ngModel">
             </ion-input>
           </ion-item>
@@ -66,7 +66,7 @@
           <!--Validacion correo-->
           <ion-item>
             <ion-label position="floating">Correo electrónico:</ion-label>
-            <ion-input type="email" placeholder="juanito.perez@gmail.com" required (keydown)="onKeyDown($event)" [(ngModel)]="email" name="email"
+            <ion-input type="email" minlegth="3" maxlength="25" placeholder="juanito.perez@gmail.com" required (keydown)="onKeyDown($event)" [(ngModel)]="email" name="email"
               #emailInput="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></ion-input>
           </ion-item>
           <ion-note *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">

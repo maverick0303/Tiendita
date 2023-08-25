@@ -26,7 +26,7 @@ export class RegistroPage implements OnInit {
       console.log('Iniciar sesión con:', this.email, this.password);
     }
   }
-
+  //primera validación del rut
   validateRutU(rut: string): boolean {
     if (rut === "") {
       return false;
@@ -38,7 +38,7 @@ export class RegistroPage implements OnInit {
   validatePasswordMatch(): boolean {
     return this.password === this.confirmPassword;
   }
-
+  //Segunda validación del rut
   onKeyDown(event: KeyboardEvent) {
   const caretPosition = (<HTMLInputElement>event.target).selectionStart;
 
