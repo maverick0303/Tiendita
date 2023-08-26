@@ -1,6 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+//animaciones:
+import { FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+//clave:
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+//
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,8 +21,22 @@ import { InicioSesionPage } from './inicio-sesion.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    InicioSesionPageRoutingModule
+    InicioSesionPageRoutingModule,
+    //correo
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgIf,
+    //clave:
+    MatFormFieldModule,
+    MatInputModule, 
+    MatButtonModule, 
+    MatIconModule,
+
   ],
   declarations: [InicioSesionPage]
 })
-export class InicioSesionPageModule {}
+export class InicioSesionPageModule {
+}
+
