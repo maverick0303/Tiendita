@@ -11,7 +11,7 @@ import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angula
   styleUrls: ['./inicio-sesion.page.scss'],
 })
 export class InicioSesionPage {
-  hide = true;
+   hide = true;
   email = new FormControl('', [Validators.required, Validators.email]);
 
   getErrorMessage() {
