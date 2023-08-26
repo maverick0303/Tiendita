@@ -1,3 +1,39 @@
-ion-card{
+ion-card {
     background: #222222;
 }
+
+ion-card-title {
+    font-family: 'arial', cursive;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.ion-card-content {
+    font-family: 'arial', cursive;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    /* Alineación horizontal al centro */
+    align-items: center;
+    /* Alineación vertical al centro */
+    height: 95vh;
+    /* Opcional: ajusta la altura del contenedor al 100% del viewport */
+}
+
+/*este es el fondo*/
+ion-content {
+    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
+}
+
+
+  
+  
+

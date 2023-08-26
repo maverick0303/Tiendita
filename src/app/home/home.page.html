@@ -1,42 +1,30 @@
 <ion-header [translucent]="true">
 </ion-header>
 
-<style>
-  /* Importar la fuente Montserrat */
-  @import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
-ion-card-title {
-  font-family: 'Tilt Prism', cursive;
-  font-size: 80px;
-  display: flex;
-  justify-content: center;  
-  
-}
-.container {
-  display: flex;
-  justify-content: center; /* Alineación horizontal al centro */
-  align-items: center; /* Alineación vertical al centro */
-  height: 70vh; /* Opcional: ajusta la altura del contenedor al 100% del viewport */
-}
-/*este es el fondo*/
-ion-content{
-  --background:url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
-}
-</style>
 
-<ion-content class="fondo" [fullscreen]="true">
-  
-  <div class="container">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>TimeTech <br>Audible</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-button  [routerLink]="['/inicio-sesion']"> Inicio de sesión </ion-button>
-        <ion-button color="tertiary"  [routerLink]="['/registro']" >Registro</ion-button>
-      </ion-card-content>
-    </ion-card>
-  </div>
 
- 
-  
+<ion-content  [fullscreen]="true">
+
+  <ion-grid>
+    <ion-row>
+      <ion-card>
+        <br><br>
+        <ion-card-title style="text-align: center; margin: auto;">Bienvenido a </ion-card-title>
+        <br>
+        <img alt="les juro que aqui habia una foto" src="assets/fondo.png" />
+        <ion-card-header>
+          <!--AQUI IRAN LOS BOTONES-->
+          <button mat-raised-button color="primary" [routerLink]="['/registro']">Registrarse</button>
+          <br>
+          <button mat-raised-button color="primary" [routerLink]="['/inicio-sesion']">Iniciar sesión</button>
+          <br>
+        </ion-card-header>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+
 </ion-content>
