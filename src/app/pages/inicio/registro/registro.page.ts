@@ -26,7 +26,8 @@ export class RegistroPage implements OnInit {
       console.log('Iniciar sesión con:', this.email, this.password);
     }
   }
-  //primera validación del rut
+
+  // Primera validación del rut
   validateRutU(rut: string): boolean {
     if (rut === "") {
       return false;
@@ -38,25 +39,21 @@ export class RegistroPage implements OnInit {
   validatePasswordMatch(): boolean {
     return this.password === this.confirmPassword;
   }
-  //Segunda validación del rut
+
+  // Segunda validación del rut
   onKeyDown(event: KeyboardEvent) {
-  const caretPosition = (<HTMLInputElement>event.target).selectionStart;
+    const caretPosition = (<HTMLInputElement>event.target).selectionStart;
+    const inputChar = event.key;
 
-
-if (event.key === ' ' || (caretPosition === 0 && event.key === '-') ||
- (caretPosition === 6 && event.key !== '.' && event.key !== 'Backspace') ||
-  (caretPosition === 2 && event.key !== '.' && event.key !== 'Backspace') ||
-  (caretPosition === 10 && event.key !== '-' && event.key !== 'Backspace')|| 
-  
-  //ARREGLAR ESTOOOOOOOOO
-  (caretPosition === 11 && event.key === '0-9') || 
-  (caretPosition === 11 && event.key !== 'k')) {
-    event.preventDefault();
+    if (
+      inputChar === ' ' ||
+      (caretPosition === 0 && inputChar === '-') ||
+      (caretPosition === 6 && inputChar !== '.' && inputChar !== 'Backspace') ||
+      (caretPosition === 2 && inputChar !== '.' && inputChar !== 'Backspace') ||
+      (caretPosition === 10 && inputChar !== '-' && inputChar !== 'Backspace') ||
+      (caretPosition === 11 && !/^[\dkK0-9]$/.test(inputChar))
+    ) {
+      event.preventDefault();
+    }
   }
-
-  
-}
-
-  
-  
 }
