@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+//cosa del carrito:
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatBadgeModule} from '@angular/material/badge';
+//
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,8 +18,18 @@ import { CarritoPage } from './carrito.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CarritoPageRoutingModule
+    CarritoPageRoutingModule,
+    MatBadgeModule, 
+    MatButtonModule, 
+    MatIconModule
   ],
   declarations: [CarritoPage]
 })
-export class CarritoPageModule {}
+export class CarritoPageModule {
+  hidden = false;
+
+  toggleBadgeVisibility() {
+    this.hidden = !this.hidden;
+  }
+
+}

@@ -1,11 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <!--LOGO DEL CARRITO-->
+    <div class="demo-section" slot="end">
+      <mat-icon matBadge="0" matBadgeColor="primary" [routerLink]="['/carrito']"><ion-icon style="width: 30px; height: 30px; margin-right: 80px;" name="cart-outline"></ion-icon></mat-icon>
+    </div>
     <!--Menu de la busqueda-->
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <!--El buscador-->
-    <ion-searchbar slot="end" animated="true" placeholder="Buscar"></ion-searchbar>
+    <div class="search-container">
+      <ion-searchbar class="center-search" animated="true" placeholder="Buscar"></ion-searchbar>
+    </div>
     <!--este es el menu del usuario-->
     <ion-chip id="popover-button" slot="end" size="90px">
       <ion-avatar>
@@ -37,95 +43,27 @@
   </ion-toolbar>
 </ion-header>
 <!--#############################################PRODUCTOS################################################-->
-<style>
-  /* Importar la fuente Montserrat */
-  @import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
-
-  ion-card-title {
-    font-family: 'Tilt Prism', cursive;
-    font-size: 80px;
-    display: flex;
-    justify-content: center;
-
-  }
-
-  .container {
-    display: flex;
-    justify-content: center;
-    /* Alineación horizontal al centro */
-    align-items: center;
-    /* Alineación vertical al centro */
-    height: 150vh;
-    /* Opcional: ajusta la altura del contenedor al 100% del viewport */
-  }
-
-  /*este es el fondo*/
-  ion-content {
-    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
-  }
-</style>
 
 <ion-content class="fondo" [fullscreen]="true">
-  <div class="container">
-    <ion-card>
-      <ion-card-header>
+  <ion-grid>
+    <ion-row>
+      <ion-card>
         <ion-card-title>Datos personales</ion-card-title>
-      </ion-card-header>
-      <br>
-      <ion-card-content>
-        <form id="registration-form">
-
-          <ion-item>
-            <ion-label position="floating">Nombre:</ion-label>
-            <ion-input type="text" name="nombre" minlength="3" maxlength="15" required (keydown)="onKeyDown($event)"
-              [(ngModel)]="nombreValue" #nombreModel="ngModel">
-            </ion-input>
-          </ion-item>
-          <div class="error-message" *ngIf="nombreModel.invalid && (nombreModel.dirty || nombreModel.touched)">
-            <p *ngIf="nombreModel.errors?.['required']">El nombre es obligatorio</p>
-            <p *ngIf="nombreModel.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</p>
-            <p *ngIf="nombreModel.errors?.['maxlength']">El nombre no debe exceder los 15 caracteres.</p>
-          </div>
-
-          <ion-item>
-            <ion-label position="floating">Apellido:</ion-label>
-            <ion-input type="text" name="apellido" minlength="3" maxlength="15" required (keydown)="onKeyDown($event)"
-              [(ngModel)]="apellidoValue" #apellidoModel="ngModel"></ion-input>
-          </ion-item>
-          <div class="error-message" *ngIf="apellidoModel.invalid && (apellidoModel.dirty || apellidoModel.touched)">
-            <p *ngIf="apellidoModel.errors?.['required']">El nombre es obligatorio</p>
-            <p *ngIf="apellidoModel.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</p>
-            <p *ngIf="apellidoModel.errors?.['maxlength']">El nombre no debe exceder los 15 caracteres.</p>
-          </div>
-          <!--El required es para que solo se pueda ver y no cambiar el campo que ya esta escrito-->
-          <ion-item>
-            <ion-label position="floating">Correo electrónico</ion-label>
-            <ion-input type="email" name="email" required readonly class="readonly-input"></ion-input>
-          </ion-item>
-
-
-          <ion-item>
-            <ion-label position="floating" onlyread>Ingrese su Rut</ion-label>
-            <ion-input type="text" name="rut" required readonly class="readonly-input"></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="floating">Nombre de otra persona para retiro </ion-label>
-            <ion-input type="text" name="segPersona" minlength="3" maxlength="15" [(ngModel)]="segPersonaValue"
-              #segPersonaModel="ngModel">
-            </ion-input>
-          </ion-item>
-          <div class="error-message"
-            *ngIf="segPersonaModel.invalid && (segPersonaModel.dirty || segPersonaModel.touched)">
-            <p *ngIf="segPersonaModel.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</p>
-            <p *ngIf="segPersonaModel.errors?.['maxlength']">El nombre no debe exceder los 15 caracteres.</p>
-          </div>
-
-          
-          <ion-button expand="full" type="submit">Guardar cambios</ion-button>
-
-        </form>
-      </ion-card-content>
-    </ion-card>
-  </div>
+        <ion-card-content>
+          <ion-input label="Nombre:" type="text" label-placement="floating" fill="outline" placeholder="Mario Jose"></ion-input>
+          <br>
+          <ion-input label="Apellido:" type="text" label-placement="floating" fill="outline" placeholder="Castillo Lopez"></ion-input>
+          <br>
+          <ion-input label="Correo electrónico:" type="email" label-placement="floating" required readonly fill="outline" placeholder="profeponga7@gmail.com"></ion-input>
+          <br>
+          <ion-input label="Rut:" type="text" label-placement="floating" fill="outline" placeholder="26.098.098-2"></ion-input>
+          <br>
+          <ion-input label="Nombre de otra persona para retiro:" type="text" label-placement="floating" fill="outline" placeholder="Castillo Lopez"></ion-input>
+          <br>
+          <ion-button expand="50px" style="align-content: center;align-items: center;display: flex;" type="submit">Guardar cambios</ion-button>
+        </ion-card-content>
+      </ion-card>
+      
+    </ion-row>
+  </ion-grid>
 </ion-content>

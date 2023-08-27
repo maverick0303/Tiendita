@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+//cosa del carrito:
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatBadgeModule} from '@angular/material/badge';
+//
 import { IonicModule } from '@ionic/angular';
 
 import { Rs3PageRoutingModule } from './rs3-routing.module';
@@ -13,8 +17,17 @@ import { Rs3Page } from './rs3.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    Rs3PageRoutingModule
+    Rs3PageRoutingModule,
+    MatBadgeModule, 
+    MatButtonModule, 
+    MatIconModule,
   ],
   declarations: [Rs3Page]
 })
-export class Rs3PageModule {}
+export class Rs3PageModule {
+  hidden = false;
+  
+  toggleBadgeVisibility() {
+    this.hidden = !this.hidden;
+  }
+}

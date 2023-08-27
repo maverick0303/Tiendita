@@ -1,11 +1,18 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <!--LOGO DEL CARRITO-->
+    <div class="demo-section" slot="end">
+      <mat-icon matBadge="0" matBadgeColor="primary" [routerLink]="['/carrito']"><ion-icon
+          style="width: 30px; height: 30px; margin-right: 80px;" name="cart-outline"></ion-icon></mat-icon>
+    </div>
     <!--Menu de la busqueda-->
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <!--El buscador-->
-    <ion-searchbar slot="end" animated="true" placeholder="Buscar"></ion-searchbar>
+    <div class="search-container">
+      <ion-searchbar class="center-search" animated="true" placeholder="Buscar"></ion-searchbar>
+    </div>
     <!--este es el menu del usuario-->
     <ion-chip id="popover-button" slot="end" size="90px">
       <ion-avatar>
@@ -36,7 +43,8 @@
     </ion-popover>
   </ion-toolbar>
 </ion-header>
-<!--#############################################PRODUCTOS################################################-->
+<!--################################################PRODUCTOS########################################-->
+
 
 <ion-content class="ion-padding">
   <div class="card-container">
@@ -47,12 +55,12 @@
         <br>
         <p class="subti" style="font-size: 25px;">Precio: $70.000</p>
         <p class="subti">Descripción:</p>
-        <p>Auriculares gamer en negro con toques anaranjados 
-          que ofrecen sonido envolvente, comodidad ergonómica 
+        <p>Auriculares gamer en negro con toques anaranjados
+          que ofrecen sonido envolvente, comodidad ergonómica
           y estilo llamativo. Perfectos para jugadores que valoran
-           tanto el rendimiento como el diseño vibrante.</p>
-          <br>
-          <ion-button [routerLink]="['/carrito']">Agregar al carrito</ion-button>
+          tanto el rendimiento como el diseño vibrante.</p>
+        <br>
+        <ion-button [routerLink]="['/carrito']">Agregar al carrito</ion-button>
 
       </ion-card-content>
     </ion-card>

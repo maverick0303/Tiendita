@@ -39,11 +39,6 @@ const routes: Routes = [
     path: 'reloj-ana',
     loadChildren: () => import('./pages/categoria/reloj-ana/reloj-ana.module').then( m => m.RelojAnaPageModule)
   },
-
-  {
-    path: 'productoadmin',
-    loadChildren: () => import('./pages/productoadmin/productoadmin.module').then( m => m.ProductoadminPageModule)
-  },
   {
     path: 'agregar-p-admin',
     loadChildren: () => import('./pages/admin/agregar-p-admin/agregar-p-admin.module').then( m => m.AgregarPAdminPageModule)

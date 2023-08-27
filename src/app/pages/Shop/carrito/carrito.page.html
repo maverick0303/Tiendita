@@ -1,11 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <!--LOGO DEL CARRITO-->
+    <div class="demo-section" slot="end">
+      <mat-icon matBadge="0" matBadgeColor="primary" [routerLink]="['/carrito']"><ion-icon style="width: 30px; height: 30px; margin-right: 80px;" name="cart-outline"></ion-icon></mat-icon>
+    </div>
     <!--Menu de la busqueda-->
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <!--El buscador-->
-    <ion-searchbar slot="end" animated="true" placeholder="Buscar"></ion-searchbar>
+    <div class="search-container">
+      <ion-searchbar class="center-search" animated="true" placeholder="Buscar"></ion-searchbar>
+    </div>
     <!--este es el menu del usuario-->
     <ion-chip id="popover-button" slot="end" size="90px">
       <ion-avatar>
@@ -38,34 +44,6 @@
 </ion-header>
 <!--#############################################PRODUCTOS################################################-->
 
-<style>
-  /* Importar la fuente Montserrat */
-  @import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
-
-  ion-card-title {
-    font-family: 'Tilt Prism', cursive;
-    font-size: 35px;
-    display: flex;
-    justify-content: center;
-
-  }
-
-  .container {
-    display: flex;
-    justify-content: center;
-    /* Alineación horizontal al centro */
-    align-items: center;
-    /* Alineación vertical al centro */
-    height: 150vh;
-    /* Opcional: ajusta la altura del contenedor al 100% del viewport */
-  }
-
-  /*este es el fondo*/
-  ion-content {
-    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
-  }
-</style>
-
 <ion-content class="fondo" [fullscreen]="true">
   <div class="container">
     <ion-card>
@@ -74,116 +52,66 @@
       </ion-card-header>
       <br>
       <ion-card-content>
-        <form id="registration-form">
-          <ion-row>
-            <ion-col size="6">
-              <ion-card size="4">
-                <ion-img src="assets/apple1.jpg" alt="Producto"></ion-img>
-                <ion-card-header>
-                  <ion-card-title>Apple watch</ion-card-title>
-                  <p class="card-text">Precio: $100.000</p>
-                  <!--Botones para la cantidad de los productos-->
-                  <ion-button shape="round" color="success">+</ion-button>
-                  <ion-button shape="round" color="success">-</ion-button>
-                  <ion-input type="" required readonly class="readonly-input" value="Cantidad:1"></ion-input>
-                </ion-card-header>
-                <ion-card-content>
-                  <ion-button color="danger">Eliminar</ion-button>
-                </ion-card-content>
-              </ion-card>
-            </ion-col>
+        <ion-row>
+          <ion-col size="6">
+            <ion-card size="4">
+              <ion-img src="assets/apple1.jpg" alt="Producto"></ion-img>
+              <ion-card-header>
+                <ion-card-title>Apple watch</ion-card-title>
+                <p class="card-text">Precio: $100.000</p>
+                <!--Botones para la cantidad de los productos-->
+                <ion-button shape="round" color="success">+</ion-button>
+                <ion-button shape="round" color="success">-</ion-button>
+                <ion-input type="" required readonly class="readonly-input" value="Cantidad:1"></ion-input>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-button color="danger">Eliminar</ion-button>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
 
-            <ion-col size="6">
-              <ion-card size="4">
-                <ion-img src="assets/s1.jpg" alt="Producto"></ion-img>
-                <br>
-                <ion-card-header>
-                  <ion-card-title>Samsung watch</ion-card-title>
-                  <p class="card-text">Precio: $85.000</p>
-                  <ion-button shape="round" color="success">+</ion-button>
-                  <ion-button shape="round" color="success">-</ion-button>
-                  <ion-input type="" required readonly class="readonly-input" value="Cantidad:1"></ion-input>
-                </ion-card-header>
-                <ion-card-content>
-                  <ion-button color="danger">Eliminar</ion-button>
-                </ion-card-content>
-              </ion-card>
-            </ion-col>
-          </ion-row>
-
-
-          <ion-card>
-            <ion-item>
-              <ion-label position="floating">Seleccione sucursal de retiro</ion-label>
-              <ion-select>
-                <ion-select-option>Sucursal paseo Ahumada 232</ion-select-option>
-                <ion-select-option>Sucursal Providencia #843, piso 2, local 24</ion-select-option>
-              </ion-select>
-            </ion-item>
+          <ion-col size="6">
+            <ion-card size="4">
+              <ion-img src="assets/s1.jpg" alt="Producto"></ion-img>
+              <br>
+              <ion-card-header>
+                <ion-card-title>Samsung watch</ion-card-title>
+                <p class="card-text">Precio: $85.000</p>
+                <ion-button shape="round" color="success">+</ion-button>
+                <ion-button shape="round" color="success">-</ion-button>
+                <ion-input type="" required readonly class="readonly-input" value="Cantidad:1"></ion-input>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-button color="danger">Eliminar</ion-button>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
 
 
-            <ion-item>
-              <ion-label position="floating">¿Quien retirara el producto?</ion-label>
-              <ion-select>
-                <ion-select-option>Juan Perez</ion-select-option>
-                <ion-select-option>Mauricio Perez</ion-select-option>
-                <ion-select-option>Otro </ion-select-option>
-                <ion-input type="text" name="pRetiro" required></ion-input>
-              </ion-select>
-            </ion-item>
-          </ion-card>
-
-          <br>
-          <ion-card>
-            <ion-card-header>
-              <ion-card-title>Total: $25.000</ion-card-title>
-            </ion-card-header>
-          </ion-card>
-
-          <ion-row>
-            <ion-col size="12">
-              <ion-card size="6">
-                <ion-card-content>
-                  <ion-list>
-                    <ion-radio-group name="paymentMethod" value="credit">
-                      <ion-item>
-                        <ion-label>Tarjeta de crédito</ion-label>
-                        <ion-radio value="credit" checked></ion-radio>
-                      </ion-item>
-                      <ion-item>
-                        <ion-label>Tarjeta de debito</ion-label>
-                        <ion-radio value="debit" checked></ion-radio>
-                      </ion-item>
-                    </ion-radio-group>
-                  </ion-list>
-                  <ion-item>
-                    <ion-label position="floating">Nombre del Titular</ion-label>
-                    <ion-input type="text" name="nombreT" required></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label position="floating">Numero de la tarjeta</ion-label>
-                    <ion-input type="text"placeholder="xxxx-xxxx-xxxx-xxxx" name="nombre" required></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label position="floating">Fecha de caducidad</ion-label>
-                    <ion-input type="text"placeholder="xx/xx" name="fechaC" required></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label position="floating">CVV</ion-label>
-                    <ion-input type="text"placeholder="xxx" name="ccv" required></ion-input>
-                  </ion-item>
-
-                </ion-card-content>
-              </ion-card>
-            </ion-col>
-          </ion-row>
+        <ion-card>
+          <ion-item>
+            <ion-label position="floating">Seleccione sucursal de retiro</ion-label>
+            <ion-select>
+              <ion-select-option>Sucursal paseo Ahumada 232</ion-select-option>
+              <ion-select-option>Sucursal Providencia #843, piso 2, local 24</ion-select-option>
+            </ion-select>
+          </ion-item>
 
 
-
-
-          <ion-button expand="full" type="submit">Comprar</ion-button>
-        </form>
+          <ion-item>
+            <ion-label position="floating">¿Quien retirara el producto?</ion-label>
+            <ion-select>
+              <ion-select-option>Juan Perez</ion-select-option>
+              <ion-select-option>Mauricio Perez</ion-select-option>
+              <ion-select-option>Otro </ion-select-option>
+              <ion-input type="text" name="pRetiro" required></ion-input>
+            </ion-select>
+          </ion-item>
+        </ion-card>
       </ion-card-content>
+      <br>
     </ion-card>
   </div>
+
 </ion-content>

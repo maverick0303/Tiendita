@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+//cosa del carrito:
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatBadgeModule} from '@angular/material/badge';
+//
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,8 +18,17 @@ import { AgregarPAdminPage } from './agregar-p-admin.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    AgregarPAdminPageRoutingModule
+    AgregarPAdminPageRoutingModule,
+    MatBadgeModule, 
+    MatButtonModule, 
+    MatIconModule,
   ],
   declarations: [AgregarPAdminPage]
 })
-export class AgregarPAdminPageModule {}
+export class AgregarPAdminPageModule {
+  hidden = false;
+
+  toggleBadgeVisibility() {
+    this.hidden = !this.hidden;
+  }
+}
