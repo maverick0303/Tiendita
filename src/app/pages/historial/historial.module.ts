@@ -6,31 +6,27 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
 //
-
 import { IonicModule } from '@ionic/angular';
 
-import { TiendaPageRoutingModule } from './tienda-routing.module';
+import { HistorialPageRoutingModule } from './historial-routing.module';
 
-import { TiendaPage } from './tienda.page';
-
-
+import { HistorialPage } from './historial.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TiendaPageRoutingModule,
+    HistorialPageRoutingModule,
     MatBadgeModule, 
     MatButtonModule, 
     MatIconModule,
-    
   ],
-  declarations: [TiendaPage]
+  declarations: [HistorialPage]
 })
-export class TiendaPageModule {
+export class HistorialPageModule {
   hidden = false;
-
+  
   toggleBadgeVisibility() {
     this.hidden = !this.hidden;
   }
