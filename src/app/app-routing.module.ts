@@ -36,10 +36,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/inicio/recuperar-clave/recuperar-clave.module').then( m => m.RecuperarClavePageModule)
   },
   {
-    path: 'menu-admin',
-    loadChildren: () => import('./pages/menu-admin/menu-admin.module').then( m => m.MenuAdminPageModule)
-  },
-  {
     path: 'reloj-ana',
     loadChildren: () => import('./pages/categoria/reloj-ana/reloj-ana.module').then( m => m.RelojAnaPageModule)
   },
@@ -73,10 +69,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/categoria/audigamer/audigamer.module').then( m => m.AudigamerPageModule)
   },
   {
-    path: 'ag1',
-    loadChildren: () => import('./pages/productos/ag1/ag1.module').then( m => m.Ag1PageModule)
-  },
-  {
     path: 'ag3',
     loadChildren: () => import('./pages/productos/ag3/ag3.module').then( m => m.Ag3PageModule)
   },
@@ -93,21 +85,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/productos/ai1/ai1.module').then( m => m.Ai1PageModule)
   },
   {
-    path: 'ai2',
-    loadChildren: () => import('./pages/productos/ai2/ai2.module').then( m => m.Ai2PageModule)
-  },
-  {
-    path: 'ai3',
-    loadChildren: () => import('./pages/productos/ai3/ai3.module').then( m => m.Ai3PageModule)
-  },
-  {
     path: 'ai4',
     loadChildren: () => import('./pages/productos/ai4/ai4.module').then( m => m.Ai4PageModule)
   },
-  {
-    path: 'ai5',
-    loadChildren: () => import('./pages/productos/ai5/ai5.module').then( m => m.Ai5PageModule)
-  },
+
   {
     path: 'ai6',
     loadChildren: () => import('./pages/productos/ai6/ai6.module').then( m => m.Ai6PageModule)
@@ -115,10 +96,6 @@ const routes: Routes = [
   {
     path: 'rd2',
     loadChildren: () => import('./pages/productos/rd2/rd2.module').then( m => m.Rd2PageModule)
-  },
-  {
-    path: 'rd4',
-    loadChildren: () => import('./pages/productos/rd4/rd4.module').then( m => m.Rd4PageModule)
   },
   {
     path: 'rd5',
@@ -141,39 +118,19 @@ const routes: Routes = [
     loadChildren: () => import('./pages/productos/r5/r5.module').then( m => m.R5PageModule)
   },
   {
-    path: 'r6',
-    loadChildren: () => import('./pages/productos/r6/r6.module').then( m => m.R6PageModule)
-  },
-  {
     path: 'rs1',
     loadChildren: () => import('./pages/productos/rs1/rs1.module').then( m => m.Rs1PageModule)
   },
-  {
-    path: 'rs2',
-    loadChildren: () => import('./pages/productos/rs2/rs2.module').then( m => m.Rs2PageModule)
-  },
+
   {
     path: 'rs3',
     loadChildren: () => import('./pages/productos/rs3/rs3.module').then( m => m.Rs3PageModule)
   },
-  {
-    path: 'rs4',
-    loadChildren: () => import('./pages/productos/rs4/rs4.module').then( m => m.Rs4PageModule)
-  },
+
   {
     path: 'rs5',
     loadChildren: () => import('./pages/productos/rs5/rs5.module').then( m => m.Rs5PageModule)
   },
-  {
-    path: 'rs6',
-    loadChildren: () => import('./pages/productos/rs6/rs6.module').then( m => m.Rs6PageModule)
-  },
-
-
-
-
-
-
 
 ];
 

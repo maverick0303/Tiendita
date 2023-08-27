@@ -1,6 +1,6 @@
 ion-img {
-    width: 250px;
-    height: 250px;
+    width: 255px;
+    height: 255px;
 }
 
 ion-card {
@@ -52,12 +52,14 @@ p {
 }
 
 ion-card-title {
+    font-size: 60px;
+    margin: 5px;
     text-align: center;
     font-family: 'DM Serif Display', serif;
 }
-ion-title{
+.ion-title{
     font-family: 'DM Serif Display', serif;
-    font-size: 60px;
+    font-size: 25px;
     text-align: center;
     margin: 5px;
 }
@@ -67,4 +69,7 @@ ion-title{
     }
     
 
+}
+ion-content {
+    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
 }

@@ -1,13 +1,62 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>rs5</ion-title>
+    <!--Menu de la busqueda-->
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <!--El buscador-->
+    <ion-searchbar slot="end" animated="true" placeholder="Buscar"></ion-searchbar>
+    <!--este es el menu del usuario-->
+    <ion-chip id="popover-button" slot="end" size="90px">
+      <ion-avatar>
+        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <ion-label>Cuenta</ion-label>
+    </ion-chip>
+    <ion-popover trigger="popover-button" [dismissOnSelect]="true">
+      <ng-template>
+        <ion-content>
+          <ion-list>
+            <ion-item [button]="true" [detail]="false" [routerLink]="['/datos-personales']">Perfil</ion-item>
+            <ion-item [button]="true" [detail]="false" [routerLink]="['/']">Mis compras</ion-item>
+            <ion-item [button]="true" [detail]="false" [routerLink]="['/home']">Cerrar Sesión</ion-item>
+
+            <ion-popover trigger="nested-trigger" [dismissOnSelect]="true" side="end">
+              <ng-template>
+                <ion-content>
+                  <ion-list>
+                    <ion-item [button]="true" [detail]="false">Nested option</ion-item>
+                  </ion-list>
+                </ion-content>
+              </ng-template>
+            </ion-popover>
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
   </ion-toolbar>
 </ion-header>
+<!--#############################################PRODUCTOS################################################-->
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">rs5</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="card-container">
+    <ion-card class="custom-card">
+      <img src="assets/SMARTWATCH/rs3.jpeg" alt="" class="card-image">
+      <ion-card-content class="card-content">
+        <ion-card-title class="titulo"> Reloj Smartwatch morado</ion-card-title>
+        <br>
+        <p class="subti" style="font-size: 25px;">Precio: $360.000</p>
+        <p class="subti">Descripción:</p>
+        <p>El Reloj Smartwatch Morado fusiona
+          moda y funcionalidad. Con pantalla
+          táctil, se conecta a tu teléfono
+          para notificaciones y monitoreo
+          de salud. Su distintivo color
+          morado y opciones de personalización
+          lo convierten en un accesorio elegante y útil.</p>
+        <ion-button [routerLink]="['/carrito']">Agregar al carrito</ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

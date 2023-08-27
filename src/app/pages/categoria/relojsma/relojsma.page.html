@@ -38,76 +38,49 @@
 </ion-header>
 <!--#############################################PRODUCTOS################################################-->
 <ion-content [fullscreen]="true">
-  
+
   <ion-grid>
-    <ion-title>Relojes Smartwatch</ion-title>
+    <ion-card-title>Relojes Smartwatch</ion-card-title>
     <!--PRIMER PRODUCTO-->
     <ion-row>
-      <ion-card>
-        <ion-img src="assets/SMARTWATCH/rs2.jpeg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Reloj Smartwatch<br>negro</ion-card-title>
-          <ion-card-content>
-            <p>$22.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
+      <p [routerLink]="['/rs1']">
+        <ion-card>
+          <ion-img src="assets/SMARTWATCH/rs1.webp" alt="aqui habia una imagen"></ion-img>
+          <ion-card-header>
+            <ion-card-title class="ion-title">Reloj Smartwatch<br>Azul</ion-card-title>
+            <ion-card-content>
+              <p>$139.000</p>
+            </ion-card-content>
+          </ion-card-header>
+        </ion-card>
+      </p>
       <!--SEGUNDO PRODUCTO-->
-      <ion-card>
-        <ion-img src="assets/SMARTWATCH/rs4.jpeg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Reloj Smartwatch<br>blanco</ion-card-title>
-          <ion-card-content>
-            <p>$105.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
+      <p [routerLink]="['/rs3']">
+        <ion-card>
+          <ion-img src="assets/SMARTWATCH/rs2.jpeg" alt="aqui habia una imagen"></ion-img>
+          <ion-card-header>
+            <ion-card-title class="ion-title">Reloj Smartwatch<br>anaranjado</ion-card-title>
+            <ion-card-content>
+              <p>$240.000</p>
+            </ion-card-content>
+          </ion-card-header>
+        </ion-card>
+      </p>
       <!--TERCER PRODUCTO-->
-      <ion-card>
-        <ion-img src="assets/SMARTWATCH/rs4.webp" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Reloj Smartwatch<br>Azul</ion-card-title>
-          <ion-card-content>
-            <p>$50.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
+      <p [routerLink]="['/rs5']">
+        <ion-card>
+          <ion-img src="assets/SMARTWATCH/rs3.jpeg" alt="aqui habia una imagen"></ion-img>
+          <ion-card-header>
+            <ion-card-title class="ion-title">Reloj Smartwatch<br>morado</ion-card-title>
+            <ion-card-content>
+              <p>$360.000</p>
+            </ion-card-content>
+          </ion-card-header>
+        </ion-card>
+      </p>
     </ion-row>
   </ion-grid>
 
-  <!--############################################SEGUNDA FILA###########################################-->
-  <ion-grid>
-    <!--PRIMER PRODUCTO-->
-    <ion-row>
-      <ion-card>
-        <ion-img src="assets/SMARTWATCH/rs5.jpeg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Reloj Smartwatch<br>anaranjado</ion-card-title>
-          <ion-card-content>
-            <p>$75.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
-      <!--SEGUNDO PRODUCTO-->
-      <ion-card>
-        <ion-img src="assets/SMARTWATCH/rs6.jpeg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Reloj Smartwatch<br>morado</ion-card-title>
-          <ion-card-content>
-            <p>$35.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
-      <!--TERCER PRODUCTO-->
-      <ion-card>
-        <ion-img src="assets/SMARTWATCH/rs6.webp" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Reloj Smartwatch<br>Gris</ion-card-title>
-          <ion-card-content>
-            <p>$55.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
-    </ion-row>
-  </ion-grid>
+
+
 </ion-content>

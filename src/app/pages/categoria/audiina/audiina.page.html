@@ -38,76 +38,47 @@
 </ion-header>
 <!--#############################################PRODUCTOS################################################-->
 <ion-content [fullscreen]="true">
-  
+
   <ion-grid>
-    <ion-title>Audifonos Inalámbricos</ion-title>
+    <ion-card-title>Audifonos Inalámbricos</ion-card-title>
     <!--PRIMER PRODUCTO-->
     <ion-row>
-      <ion-card>
-        <ion-img src="assets/AUDIFONOS BLUTU/a1.jpg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Audifonos Bluetooth<br>morados</ion-card-title>
-          <ion-card-content>
-            <p>$22.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
+      <p [routerLink]="['/ai1']">
+        <ion-card>
+          <ion-img src="assets/AUDIFONOS BLUTU/a1.jpg" alt="aqui habia una imagen"></ion-img>
+          <ion-card-header>
+            <ion-card-title class="ion-title">Audifonos Bluetooth<br>morados</ion-card-title>
+            <ion-card-content>
+              <p>$39.990</p>
+            </ion-card-content>
+          </ion-card-header>
+        </ion-card>
+      </p>
       <!--SEGUNDO PRODUCTO-->
-      <ion-card>
-        <ion-img src="assets/AUDIFONOS BLUTU/a2.jpg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Audifonos Bluetooth<br>negros</ion-card-title>
-          <ion-card-content>
-            <p>$105.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
+      <p [routerLink]="['/ai4']">
+        <ion-card>
+          <ion-img src="assets/AUDIFONOS BLUTU/a4.jpg" alt="aqui habia una imagen"></ion-img>
+          <ion-card-header>
+            <ion-card-title class="ion-title">Audifonos Bluetooth<br>azules</ion-card-title>
+            <ion-card-content>
+              <p>$42.000</p>
+            </ion-card-content>
+          </ion-card-header>
+        </ion-card>
+      </p>
       <!--TERCER PRODUCTO-->
-      <ion-card>
-        <ion-img src="assets/AUDIFONOS BLUTU/a3.webp" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Audifonos Bluetooth<br>rojos</ion-card-title>
-          <ion-card-content>
-            <p>$50.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
+      <p [routerLink]="['/ai6']">
+        <ion-card>
+          <ion-img src="assets/AUDIFONOS BLUTU/a6.jpg" alt="aqui habia una imagen"></ion-img>
+          <ion-card-header>
+            <ion-card-title class="ion-title">Audifonos Bluetooth<br>verdes</ion-card-title>
+            <ion-card-content>
+              <p>$269.000</p>
+            </ion-card-content>
+          </ion-card-header>
+        </ion-card>
+      </p>
     </ion-row>
   </ion-grid>
 
-  <!--############################################SEGUNDA FILA###########################################-->
-  <ion-grid>
-    <!--PRIMER PRODUCTO-->
-    <ion-row>
-      <ion-card>
-        <ion-img src="assets/AUDIFONOS BLUTU/a4.jpg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Audifonos Bluetooth<br>azules</ion-card-title>
-          <ion-card-content>
-            <p>$75.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
-      <!--SEGUNDO PRODUCTO-->
-      <ion-card>
-        <ion-img src="assets/AUDIFONOS BLUTU/a5.webp" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Audifonos Bluetooth<br>blancos</ion-card-title>
-          <ion-card-content>
-            <p>$35.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
-      <!--TERCER PRODUCTO-->
-      <ion-card>
-        <ion-img src="assets/AUDIFONOS BLUTU/a6.jpg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Audifonos Bluetooth<br>verdes</ion-card-title>
-          <ion-card-content>
-            <p>$55.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
-    </ion-row>
-  </ion-grid>
 </ion-content>

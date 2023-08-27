@@ -38,76 +38,46 @@
 </ion-header>
 <!--#############################################PRODUCTOS################################################-->
 <ion-content [fullscreen]="true">
-  
-  <ion-grid>
-    <ion-title>Audifonos Gamers</ion-title>
-    <!--PRIMER PRODUCTO-->
-    <ion-row>
-      <ion-card>
-        <ion-img src="assets/AUDIFONOS GAMERS/ag1.webp" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Audifonos gamers<br>estampado militar</ion-card-title>
-          <ion-card-content>
-            <p>$22.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
-      <!--SEGUNDO PRODUCTO-->
-      <ion-card>
-        <ion-img src="assets/AUDIFONOS GAMERS/ag2.jpeg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Audifonos gamers<br>multicolorido</ion-card-title>
-          <ion-card-content>
-            <p>$105.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
-      <!--TERCER PRODUCTO-->
-      <ion-card>
-        <ion-img src="assets/AUDIFONOS GAMERS/ag3.webp" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Audifonos gamers<br>rojos con negro</ion-card-title>
-          <ion-card-content>
-            <p>$50.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
-    </ion-row>
-  </ion-grid>
 
-  <!--############################################SEGUNDA FILA###########################################-->
   <ion-grid>
+    <ion-card-title>Audifonos Gamers</ion-card-title>
     <!--PRIMER PRODUCTO-->
     <ion-row>
-      <ion-card>
-        <ion-img src="assets/AUDIFONOS GAMERS/ag4.jpeg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Audifonos gamers<br>negro con anaranjado</ion-card-title>
-          <ion-card-content>
-            <p>$75.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
-      <!--SEGUNDO PRODUCTO-->
-      <ion-card>
-        <ion-img src="assets/AUDIFONOS GAMERS/ag5.jpeg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Audifonos gamers<br>lila con blanco</ion-card-title>
-          <ion-card-content>
-            <p>$35.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
+      <p [routerLink]="['/ag3']">
+        <ion-card>
+          <ion-img src="assets/AUDIFONOS GAMERS/ag3.webp" alt="aqui habia una imagen"></ion-img>
+          <ion-card-header>
+            <ion-card-title class="ion-title">Audifonos gamers<br>rojos con negro</ion-card-title>
+            <ion-card-content>
+              <p>$50.000</p>
+            </ion-card-content>
+          </ion-card-header>
+        </ion-card>
+      </p>
+      <!--SEGUNDA PRODUCTO-->
+      <p [routerLink]="['/ag4']">
+        <ion-card>
+          <ion-img src="assets/AUDIFONOS GAMERS/ag4.jpeg" alt="aqui habia una imagen"></ion-img>
+          <ion-card-header>
+            <ion-card-title class="ion-title">Audifonos gamers<br>negro con naranja</ion-card-title>
+            <ion-card-content>
+              <p>$44.000</p>
+            </ion-card-content>
+          </ion-card-header>
+        </ion-card>
+      </p>
       <!--TERCER PRODUCTO-->
-      <ion-card>
-        <ion-img src="assets/AUDIFONOS GAMERS/ag6.jpeg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Audifonos gamers<br>verdes con negro</ion-card-title>
-          <ion-card-content>
-            <p>$55.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
+      <p [routerLink]="['/ag5']">
+        <ion-card>
+          <ion-img src="assets/AUDIFONOS GAMERS/ag5.jpeg" alt="aqui habia una imagen"></ion-img>
+          <ion-card-header>
+            <ion-card-title class="ion-title">Audifonos gamers<br>lila con blanco</ion-card-title>
+            <ion-card-content>
+              <p>$139.000</p>
+            </ion-card-content>
+          </ion-card-header>
+        </ion-card>
+      </p>
     </ion-row>
   </ion-grid>
 </ion-content>

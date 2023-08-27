@@ -40,74 +40,44 @@
 <ion-content [fullscreen]="true">
   
   <ion-grid>
-    <ion-title>Relojes Analógicos</ion-title>
+    <ion-card-title>Relojes Analógicos</ion-card-title>
     <!--PRIMER PRODUCTO-->
     <ion-row>
-      <ion-card>
-        <ion-img src="assets/RELOJES ANALOGO/r1.jpeg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Reloj Analógico azul <br> metálico</ion-card-title>
-          <ion-card-content>
-            <p>$22.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
-      <!--SEGUNDO PRODUCTO-->
-      <ion-card>
-        <ion-img src="assets/RELOJES ANALOGO/r2.jpeg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Reloj Analógico azul <br> con toques verdes</ion-card-title>
-          <ion-card-content>
-            <p>$105.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
-      <!--TERCER PRODUCTO-->
+    <p [routerLink]="['/r3']">
       <ion-card>
         <ion-img src="assets/RELOJES ANALOGO/r3.webp" alt="aqui habia una imagen"></ion-img>
         <ion-card-header>
-          <ion-card-title>Reloj Analógico Negro <br>con toques azules</ion-card-title>
+          <ion-card-title class="ion-title">Reloj Analógico<br>negro con azules</ion-card-title>
           <ion-card-content>
-            <p>$50.000</p>
+            <p>$119.000</p>
           </ion-card-content>
         </ion-card-header>
       </ion-card>
-    </ion-row>
-  </ion-grid>
-
-  <!--############################################SEGUNDA FILA###########################################-->
-  <ion-grid>
-    <!--PRIMER PRODUCTO-->
-    <ion-row>
+    </p>
+      <!--SEGUNDO PRODUCTO-->
+      <p [routerLink]="['/r4']">
       <ion-card>
         <ion-img src="assets/RELOJES ANALOGO/r4.jpeg" alt="aqui habia una imagen"></ion-img>
         <ion-card-header>
-          <ion-card-title>Reloj Analógico negro <br> fondo azul</ion-card-title>
+          <ion-card-title class="ion-title">Reloj Analógico  <br>negro fondo azul</ion-card-title>
           <ion-card-content>
-            <p>$75.000</p>
+            <p>$194.990</p>
           </ion-card-content>
         </ion-card-header>
       </ion-card>
-      <!--SEGUNDO PRODUCTO-->
+    </p>
+      <!--TERCER PRODUCTO-->
+      <p [routerLink]="['/r5']">
       <ion-card>
         <ion-img src="assets/RELOJES ANALOGO/r5.jpg" alt="aqui habia una imagen"></ion-img>
         <ion-card-header>
-          <ion-card-title>Reloj Analógico amarillo <br> fondo negro</ion-card-title>
+          <ion-card-title class="ion-title">Reloj Analógico <br>amarillo con negro</ion-card-title>
           <ion-card-content>
-            <p>$35.000</p>
+            <p>$289.000</p>
           </ion-card-content>
         </ion-card-header>
       </ion-card>
-      <!--TERCER PRODUCTO-->
-      <ion-card>
-        <ion-img src="assets/RELOJES ANALOGO/r6.jpg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Reloj Analógico cafe <br> fondo azul</ion-card-title>
-          <ion-card-content>
-            <p>$55.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
+    </p>
     </ion-row>
   </ion-grid>
 </ion-content>

@@ -7,13 +7,14 @@
 }
 
 .custom-card {
+    background: #222222;
     display: flex;
     align-items: center;
     width: 80%;
 }
 
 .card-image {
-    width: 150%;
+    width: 125%;
     /* Aumenta aún más el ancho de la imagen */
     max-width: 500px;
     object-fit: cover;
@@ -50,7 +51,7 @@ p {
 
 .titulo{
     font-family: 'DM Serif Display', serif;
-    font-size: 60px;
+    font-size: 55px;
     text-align: left;
     margin: 5px;
 }
@@ -83,8 +84,17 @@ p {
         object-fit: cover;
     }
     .titulo{
-        font-size: 35px;
+        font-size: 25px;
         text-align: left;
     }
+    p{
+        font-size: 15px;
+    }
+    .subti{
+        font-size: 15px;
+    }
     
+}
+ion-content {
+    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
 }

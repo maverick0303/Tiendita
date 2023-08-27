@@ -38,76 +38,47 @@
 </ion-header>
 <!--#############################################PRODUCTOS################################################-->
 <ion-content [fullscreen]="true">
-  
+
   <ion-grid>
-    <ion-title>Relojes Digitales</ion-title>
-    <!--PRIMER PRODUCTO-->
+    <ion-card-title>Relojes Digitales</ion-card-title>
+
     <ion-row>
-      <ion-card>
-        <ion-img src="assets/digitales/rd1.jpeg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Reloj Digital <br> verde</ion-card-title>
-          <ion-card-content>
-            <p>$22.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
-      <!--SEGUNDO PRODUCTO-->
+      <!--PRIMER PRODUCTO-->
+      <p [routerLink]="['/rd2']">
       <ion-card>
         <ion-img src="assets/digitales/rd2.jpeg" alt="aqui habia una imagen"></ion-img>
         <ion-card-header>
-          <ion-card-title>Reloj Digital<br>negro con borde azul</ion-card-title>
+          <ion-card-title class="ion-title">Reloj Digital negro<br> con borde azul</ion-card-title>
           <ion-card-content>
-            <p>$105.000</p>
+            <p>$61.990</p>
           </ion-card-content>
         </ion-card-header>
       </ion-card>
-      <!--TERCER PRODUCTO-->
-      <ion-card>
-        <ion-img src="assets/digitales/rd3.jpeg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Reloj Digital<br>negro</ion-card-title>
-          <ion-card-content>
-            <p>$50.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
-    </ion-row>
-  </ion-grid>
-
-  <!--############################################SEGUNDA FILA###########################################-->
-  <ion-grid>
-    <!--PRIMER PRODUCTO-->
-    <ion-row>
-      <ion-card>
-        <ion-img src="assets/digitales/rd4.jpeg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title>Reloj Digital<br>rosado</ion-card-title>
-          <ion-card-content>
-            <p>$75.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
+    </p>
       <!--SEGUNDO PRODUCTO-->
+      <p [routerLink]="['/rd5']">
       <ion-card>
         <ion-img src="assets/digitales/rd5.jpg" alt="aqui habia una imagen"></ion-img>
         <ion-card-header>
-          <ion-card-title>Reloj Digital<br>negro</ion-card-title>
+          <ion-card-title class="ion-title">Reloj Digital<br>negro</ion-card-title>
           <ion-card-content>
-            <p>$35.000</p>
+            <p>$54.000</p>
           </ion-card-content>
         </ion-card-header>
       </ion-card>
+    </p>
       <!--TERCER PRODUCTO-->
+      <p [routerLink]="['/rd6']">
       <ion-card>
-        <ion-img src="assets/digitales/rd6.jpg" alt="aqui habia una imagen"></ion-img>
+        <ion-img src="assets/digitales/rd6.jpeg" alt="aqui habia una imagen"></ion-img>
         <ion-card-header>
-          <ion-card-title>Reloj Digital<br>negro con azul</ion-card-title>
+          <ion-card-title class="ion-title">Reloj Digital<br>blanco</ion-card-title>
           <ion-card-content>
-            <p>$55.000</p>
+            <p>$194.550</p>
           </ion-card-content>
         </ion-card-header>
       </ion-card>
+    </p>
     </ion-row>
   </ion-grid>
 </ion-content>
