@@ -20,6 +20,13 @@ export class RegistroPage implements OnInit {
   ngOnInit() {
   }
 
+  //FUNCIÓN PARA QUE NO SE PUEDAN HACER ESPACIOS
+  onKeyDowns(event: KeyboardEvent) {
+    if (event.key === ' ') {
+      event.preventDefault(); 
+    }
+  }
+  //LOGICA DEL INICIO DE SESIÓN
   onLogin() {
     if (this.email && this.password) {
       // Lógica para el inicio de sesión
@@ -34,10 +41,6 @@ export class RegistroPage implements OnInit {
     } else {
       return /^\d{1,2}\.\d{3}\.\d{3}-[\dkK]$/.test(rut);
     }
-  }
-
-  validatePasswordMatch(): boolean {
-    return this.password === this.confirmPassword;
   }
 
   // Segunda validación del rut
@@ -59,20 +62,16 @@ export class RegistroPage implements OnInit {
       (caretPosition === 9 && !/^\d$/.test(inputNumber) && inputNumber !== 'Backspace') ||
       (caretPosition === 10 && inputNumber !== '-' && inputNumber !== 'Backspace') ||
       (caretPosition === 11 && !/^[\dkK0-9]$/.test(inputNumber) && inputNumber !== 'Backspace')
-
-
-      
     ) {
       event.preventDefault();
     }
   }
   
-  
-  
-  //NO SE PUEDE HACER ESPACIOS EN NOMBRE Y APELLIDO
-  onKeyDowns(event: KeyboardEvent) {
-    if (event.key === ' ') {
-      event.preventDefault(); 
-    }
+  validatePasswordMatch(): boolean {
+    return this.password === this.confirmPassword;
   }
+  
+  
+  
+  
 }
