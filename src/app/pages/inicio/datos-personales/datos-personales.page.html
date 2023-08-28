@@ -2,7 +2,8 @@
   <ion-toolbar>
     <!--LOGO DEL CARRITO-->
     <div class="demo-section" slot="end">
-      <mat-icon matBadge="0" matBadgeColor="primary" [routerLink]="['/carrito']"><ion-icon style="width: 30px; height: 30px; margin-right: 80px;" name="cart-outline"></ion-icon></mat-icon>
+      <mat-icon matBadge="0" matBadgeColor="primary" [routerLink]="['/carrito']"><ion-icon
+          style="width: 30px; height: 30px; margin-right: 80px;" name="cart-outline"></ion-icon></mat-icon>
     </div>
     <!--Menu de la busqueda-->
     <ion-buttons slot="start">
@@ -48,22 +49,55 @@
   <ion-grid>
     <ion-row>
       <ion-card>
-        <ion-card-title>Datos personales</ion-card-title>
-        <ion-card-content>
-          <ion-input label="Nombre:" type="text" label-placement="floating" fill="outline" placeholder="Mario Jose"></ion-input>
-          <br>
-          <ion-input label="Apellido:" type="text" label-placement="floating" fill="outline" placeholder="Castillo Lopez"></ion-input>
-          <br>
-          <ion-input label="Correo electrónico:" type="email" label-placement="floating" required readonly fill="outline" placeholder="profeponga7@gmail.com"></ion-input>
-          <br>
-          <ion-input label="Rut:" type="text" label-placement="floating" fill="outline" placeholder="26.098.098-2"></ion-input>
-          <br>
-          <ion-input label="Nombre de otra persona para retiro:" type="text" label-placement="floating" fill="outline" placeholder="Castillo Lopez"></ion-input>
-          <br>
-          <ion-button expand="50px" style="align-content: center;align-items: center;display: flex;" type="submit">Guardar cambios</ion-button>
-        </ion-card-content>
+        <form id="registration-form">
+          <ion-card-title>Datos personales</ion-card-title>
+          <ion-card-content>
+            
+            <div class="input-row">
+              <ion-input label="Nombre:" type="text" name="nombre" minlength="3" maxlength="15" required
+                (keydown)="onKeyDown($event)" [(ngModel)]="nombreValue" #nombreModel="ngModel"
+                label-placement="floating" fill="outline" placeholder="Mario Jose">
+              </ion-input>
+              <div class="error-message" *ngIf="nombreModel.invalid && (nombreModel.dirty || nombreModel.touched)">
+                <p *ngIf="nombreModel.errors?.['required']">El nombre es obligatorio</p>
+                <p *ngIf="nombreModel.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</p>
+                <p *ngIf="nombreModel.errors?.['maxlength']">El nombre no debe exceder los 15 caracteres.</p>
+              </div>
+            </div>
+            <br>
+            <ion-input label="Apellido:" type="text" name="apellido" minlength="3" maxlength="15" required
+              (keydown)="onKeyDown($event)" [(ngModel)]="apellidoValue" #apellidoModel="ngModel"
+              label-placement="floating" fill="outline" placeholder="Mario Jose">
+            </ion-input>
+            <div class="error-message" *ngIf="apellidoModel.invalid && (apellidoModel.dirty || apellidoModel.touched)">
+              <p *ngIf="apellidoModel.errors?.['required']">El nombre es obligatorio</p>
+              <p *ngIf="apellidoModel.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</p>
+              <p *ngIf="apellidoModel.errors?.['maxlength']">El nombre no debe exceder los 15 caracteres.</p>
+            </div>
+            <br>
+
+            <ion-input label="Correo electrónico:" type="email" label-placement="floating" required readonly
+              fill="outline" placeholder="profeponga7@gmail.com"></ion-input>
+            <br>
+            <ion-input label="Rut:" type="text" label-placement="floating" fill="outline" required readonly
+              placeholder="26.098.098-2"></ion-input>
+            <br>
+            <ion-input label="Nombre de otra persona para retiro::" type="text" name="segPersona" minlength="3"
+              maxlength="15" (keydown)="onKeyDown($event)" [(ngModel)]="segPersonaValue" #segPersonaModel="ngModel"
+              label-placement="floating" fill="outline" placeholder="Mario Jose">
+            </ion-input>
+            <div class="error-message"
+              *ngIf="segPersonaModel.invalid && (segPersonaModel.dirty || segPersonaModel.touched)">
+              <p *ngIf="segPersonaModel.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</p>
+              <p *ngIf="segPersonaModel.errors?.['maxlength']">El nombre no debe exceder los 15 caracteres.</p>
+            </div>
+            <br>
+            <ion-button expand="50px" style="align-content: center;align-items: center;display: flex;"
+              type="submit">Guardar cambios</ion-button>
+          </ion-card-content>
+        </form>
       </ion-card>
-      
+
     </ion-row>
   </ion-grid>
 </ion-content>

@@ -16,10 +16,10 @@ export class InicioSesionPage {
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
-      return 'You must enter a value';
+      return 'Debes ingresar un email:)';
     }
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+    return this.email.hasError('email') ? 'No es un email valido' : '';
   }
 
 
