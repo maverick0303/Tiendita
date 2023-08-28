@@ -11,6 +11,7 @@ import { IonicModule } from '@ionic/angular';
 import { HistorialPageRoutingModule } from './historial-routing.module';
 
 import { HistorialPage } from './historial.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { HistorialPage } from './historial.page';
     HistorialPageRoutingModule,
     MatBadgeModule, 
     MatButtonModule, 
-    MatIconModule,
+    MatIconModule,ComponentsModule
   ],
   declarations: [HistorialPage]
 })

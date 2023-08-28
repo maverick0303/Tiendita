@@ -11,6 +11,7 @@ import { IonicModule } from '@ionic/angular';
 import { RelojdigPageRoutingModule } from './relojdig-routing.module';
 
 import { RelojdigPage } from './relojdig.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { RelojdigPage } from './relojdig.page';
     RelojdigPageRoutingModule,
     MatBadgeModule, 
     MatButtonModule, 
-    MatIconModule,
+    MatIconModule,ComponentsModule
   ],
   declarations: [RelojdigPage]
 })

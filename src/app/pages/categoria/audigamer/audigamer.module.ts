@@ -12,6 +12,7 @@ import { IonicModule } from '@ionic/angular';
 import { AudigamerPageRoutingModule } from './audigamer-routing.module';
 
 import { AudigamerPage } from './audigamer.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { AudigamerPage } from './audigamer.page';
     AudigamerPageRoutingModule,
     MatBadgeModule, 
     MatButtonModule, 
-    MatIconModule,
+    MatIconModule,ComponentsModule
   ],
   declarations: [AudigamerPage]
 })

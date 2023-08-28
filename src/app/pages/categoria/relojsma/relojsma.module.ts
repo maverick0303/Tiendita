@@ -11,6 +11,7 @@ import { IonicModule } from '@ionic/angular';
 import { RelojsmaPageRoutingModule } from './relojsma-routing.module';
 
 import { RelojsmaPage } from './relojsma.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { RelojsmaPage } from './relojsma.page';
     RelojsmaPageRoutingModule,
     MatBadgeModule, 
     MatButtonModule, 
-    MatIconModule,
+    MatIconModule,ComponentsModule
   ],
   declarations: [RelojsmaPage]
 })

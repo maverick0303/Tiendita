@@ -12,6 +12,7 @@ import { IonicModule } from '@ionic/angular';
 import { AgregarPAdminPageRoutingModule } from './agregar-p-admin-routing.module';
 
 import { AgregarPAdminPage } from './agregar-p-admin.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { AgregarPAdminPage } from './agregar-p-admin.page';
     MatBadgeModule, 
     MatButtonModule, 
     MatIconModule,
+    ComponentsModule
   ],
   declarations: [AgregarPAdminPage]
 })

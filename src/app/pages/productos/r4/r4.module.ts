@@ -11,6 +11,7 @@ import { IonicModule } from '@ionic/angular';
 import { R4PageRoutingModule } from './r4-routing.module';
 
 import { R4Page } from './r4.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { R4Page } from './r4.page';
     R4PageRoutingModule,
     MatBadgeModule, 
     MatButtonModule, 
-    MatIconModule,
+    MatIconModule,ComponentsModule
   ],
   declarations: [R4Page]
 })

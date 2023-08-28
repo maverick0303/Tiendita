@@ -11,6 +11,7 @@ import { IonicModule } from '@ionic/angular';
 import { Rs5PageRoutingModule } from './rs5-routing.module';
 
 import { Rs5Page } from './rs5.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { Rs5Page } from './rs5.page';
     Rs5PageRoutingModule,
     MatBadgeModule, 
     MatButtonModule, 
-    MatIconModule,
+    MatIconModule,ComponentsModule
   ],
   declarations: [Rs5Page]
 })

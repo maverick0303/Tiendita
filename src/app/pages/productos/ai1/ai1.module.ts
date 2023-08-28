@@ -11,6 +11,7 @@ import { IonicModule } from '@ionic/angular';
 import { Ai1PageRoutingModule } from './ai1-routing.module';
 
 import { Ai1Page } from './ai1.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { Ai1Page } from './ai1.page';
     Ai1PageRoutingModule,
     MatBadgeModule, 
     MatButtonModule, 
-    MatIconModule,
+    MatIconModule,ComponentsModule
   ],
   declarations: [Ai1Page]
 })

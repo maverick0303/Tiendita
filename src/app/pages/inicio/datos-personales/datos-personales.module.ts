@@ -12,6 +12,7 @@ import { IonicModule } from '@ionic/angular';
 import { DatosPersonalesPageRoutingModule } from './datos-personales-routing.module';
 
 import { DatosPersonalesPage } from './datos-personales.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { DatosPersonalesPage } from './datos-personales.page';
     DatosPersonalesPageRoutingModule,
     MatBadgeModule, 
     MatButtonModule, 
-    MatIconModule,
+    MatIconModule,ComponentsModule
   ],
   declarations: [DatosPersonalesPage]
 })

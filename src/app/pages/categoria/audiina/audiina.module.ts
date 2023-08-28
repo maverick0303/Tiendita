@@ -11,6 +11,7 @@ import { IonicModule } from '@ionic/angular';
 import { AudiinaPageRoutingModule } from './audiina-routing.module';
 
 import { AudiinaPage } from './audiina.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { AudiinaPage } from './audiina.page';
     MatBadgeModule, 
     MatButtonModule, 
     MatIconModule,
+    ComponentsModule
   ],
   declarations: [AudiinaPage]
 })

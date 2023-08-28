@@ -12,6 +12,7 @@ import { IonicModule } from '@ionic/angular';
 import { TiendaPageRoutingModule } from './tienda-routing.module';
 
 import { TiendaPage } from './tienda.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 
 
@@ -24,6 +25,7 @@ import { TiendaPage } from './tienda.page';
     MatBadgeModule, 
     MatButtonModule, 
     MatIconModule,
+    ComponentsModule
     
   ],
   declarations: [TiendaPage]

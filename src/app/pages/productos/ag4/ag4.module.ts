@@ -11,6 +11,7 @@ import { IonicModule } from '@ionic/angular';
 import { Ag4PageRoutingModule } from './ag4-routing.module';
 
 import { Ag4Page } from './ag4.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { Ag4Page } from './ag4.page';
     Ag4PageRoutingModule,
     MatBadgeModule, 
     MatButtonModule, 
-    MatIconModule,
+    MatIconModule,ComponentsModule
   ],
   declarations: [Ag4Page]
 })

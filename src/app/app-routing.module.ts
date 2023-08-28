@@ -125,9 +125,10 @@ const routes: Routes = [
   {
     path: 'rs5',
     loadChildren: () => import('./pages/productos/rs5/rs5.module').then( m => m.Rs5PageModule)
-  },  {
+  },
+  {
     path: 'historial',
-    loadChildren: () => import('./pages/historial/historial.module').then( m => m.HistorialPageModule)
+    loadChildren: () => import('./pages/Shop/historial/historial.module').then( m => m.HistorialPageModule)
   },
 
 

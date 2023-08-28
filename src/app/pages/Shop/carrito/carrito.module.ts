@@ -12,6 +12,7 @@ import { IonicModule } from '@ionic/angular';
 import { CarritoPageRoutingModule } from './carrito-routing.module';
 
 import { CarritoPage } from './carrito.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { CarritoPage } from './carrito.page';
     CarritoPageRoutingModule,
     MatBadgeModule, 
     MatButtonModule, 
-    MatIconModule
+    MatIconModule,
+    ComponentsModule
   ],
   declarations: [CarritoPage]
 })

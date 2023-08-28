@@ -11,6 +11,7 @@ import { IonicModule } from '@ionic/angular';
 import { RelojAnaPageRoutingModule } from './reloj-ana-routing.module';
 
 import { RelojAnaPage } from './reloj-ana.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { RelojAnaPage } from './reloj-ana.page';
     RelojAnaPageRoutingModule,
     MatBadgeModule, 
     MatButtonModule, 
-    MatIconModule,
+    MatIconModule,ComponentsModule
   ],
   declarations: [RelojAnaPage]
 })

@@ -1,46 +1,6 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <!--LOGO DEL CARRITO-->
-    <div class="demo-section" slot="end">
-      <mat-icon matBadge="0" matBadgeColor="primary" [routerLink]="['/carrito']"><ion-icon style="width: 30px; height: 30px; margin-right: 80px;" name="cart-outline"></ion-icon></mat-icon>
-    </div>
-    <!--Menu de la busqueda-->
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <!--El buscador-->
-    <div class="search-container">
-      <ion-searchbar class="center-search" animated="true" placeholder="Buscar"></ion-searchbar>
-    </div>
-    <!--este es el menu del usuario-->
-    <ion-chip id="popover-button" slot="end" size="90px">
-      <ion-avatar>
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-      <ion-label>Cuenta</ion-label>
-    </ion-chip>
-    <ion-popover trigger="popover-button" [dismissOnSelect]="true">
-      <ng-template>
-        <ion-content>
-          <ion-list>
-            <ion-item [button]="true" [detail]="false" [routerLink]="['/datos-personales']">Perfil</ion-item>
-            <ion-item [button]="true" [detail]="false" [routerLink]="['/']">Mis compras</ion-item>
-            <ion-item [button]="true" [detail]="false" [routerLink]="['/home']">Cerrar Sesión</ion-item>
-
-            <ion-popover trigger="nested-trigger" [dismissOnSelect]="true" side="end">
-              <ng-template>
-                <ion-content>
-                  <ion-list>
-                    <ion-item [button]="true" [detail]="false">Nested option</ion-item>
-                  </ion-list>
-                </ion-content>
-              </ng-template>
-            </ion-popover>
-          </ion-list>
-        </ion-content>
-      </ng-template>
-    </ion-popover>
-  </ion-toolbar>
+  <app-componente1></app-componente1>
+</ion-header>
 <!--################################################PRODUCTOS########################################-->
 <ion-content [fullscreen]="true">
   
