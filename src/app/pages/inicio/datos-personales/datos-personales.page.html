@@ -56,7 +56,7 @@
             <div class="input-row">
               <ion-input label="Nombre:" type="text" name="nombre" minlength="3" maxlength="15" required
                 (keydown)="onKeyDown($event)" [(ngModel)]="nombreValue" #nombreModel="ngModel"
-                label-placement="floating" fill="outline" placeholder="Mario Jose">
+                label-placement="floating" fill="outline" placeholder="Mario">
               </ion-input>
               <div class="error-message" *ngIf="nombreModel.invalid && (nombreModel.dirty || nombreModel.touched)">
                 <p *ngIf="nombreModel.errors?.['required']">El nombre es obligatorio</p>
@@ -67,7 +67,7 @@
             <br>
             <ion-input label="Apellido:" type="text" name="apellido" minlength="3" maxlength="15" required
               (keydown)="onKeyDown($event)" [(ngModel)]="apellidoValue" #apellidoModel="ngModel"
-              label-placement="floating" fill="outline" placeholder="Mario Jose">
+              label-placement="floating" fill="outline" placeholder="Espinoza">
             </ion-input>
             <div class="error-message" *ngIf="apellidoModel.invalid && (apellidoModel.dirty || apellidoModel.touched)">
               <p *ngIf="apellidoModel.errors?.['required']">El nombre es obligatorio</p>

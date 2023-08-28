@@ -43,17 +43,36 @@ export class RegistroPage implements OnInit {
   // Segunda validación del rut
   onKeyDown(event: KeyboardEvent) {
     const caretPosition = (<HTMLInputElement>event.target).selectionStart;
-    const inputChar = event.key;
-
+    const inputNumber = event.key;
+  
     if (
-      inputChar === ' ' ||
-      (caretPosition === 0 && inputChar === '-') ||
-      (caretPosition === 6 && inputChar !== '.' && inputChar !== 'Backspace') ||
-      (caretPosition === 2 && inputChar !== '.' && inputChar !== 'Backspace') ||
-      (caretPosition === 10 && inputChar !== '-' && inputChar !== 'Backspace') ||
-      (caretPosition === 11 && !/^[\dkK0-9]$/.test(inputChar))
+      inputNumber === ' ' ||
+      (caretPosition === 0 && !/^\d$/.test(inputNumber) && inputNumber !== 'Backspace') ||
+      (caretPosition === 1 && !/^\d$/.test(inputNumber) && inputNumber !== 'Backspace') ||
+      (caretPosition === 2 && inputNumber !== '.' && inputNumber !== 'Backspace') ||
+      (caretPosition === 3 && !/^\d$/.test(inputNumber) && inputNumber !== 'Backspace') ||
+      (caretPosition === 4 && !/^\d$/.test(inputNumber) && inputNumber !== 'Backspace') ||
+      (caretPosition === 5 && !/^\d$/.test(inputNumber) && inputNumber !== 'Backspace') ||
+      (caretPosition === 6 && inputNumber !== '.' && inputNumber !== 'Backspace') ||
+      (caretPosition === 7 && !/^\d$/.test(inputNumber) && inputNumber !== 'Backspace') ||
+      (caretPosition === 8 && !/^\d$/.test(inputNumber) && inputNumber !== 'Backspace') ||
+      (caretPosition === 9 && !/^\d$/.test(inputNumber) && inputNumber !== 'Backspace') ||
+      (caretPosition === 10 && inputNumber !== '-' && inputNumber !== 'Backspace') ||
+      (caretPosition === 11 && !/^[\dkK0-9]$/.test(inputNumber) && inputNumber !== 'Backspace')
+
+
+      
     ) {
       event.preventDefault();
+    }
+  }
+  
+  
+  
+  //NO SE PUEDE HACER ESPACIOS EN NOMBRE Y APELLIDO
+  onKeyDowns(event: KeyboardEvent) {
+    if (event.key === ' ') {
+      event.preventDefault(); 
     }
   }
 }

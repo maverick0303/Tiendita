@@ -10,8 +10,9 @@
             <ion-card-title>Registro:</ion-card-title><br>
             <div class="input-row">
               <!--NOMBRE-->
-              <ion-input label="Nombre:" type="text" label-placement="floating" fill="outline" placeholder="Mario Jose"
-                name="nombreU" minlength="3" maxlength="15" required [(ngModel)]="nombreUValue" #nombreUModel="ngModel">
+              <ion-input label="Nombre:" type="text" label-placement="floating" fill="outline" placeholder="Mario"
+                name="nombreU" minlength="3" maxlength="15" required [(ngModel)]="nombreUValue" #nombreUModel="ngModel"
+                 (keydown)="onKeyDowns($event)">
               </ion-input>
               <!--VALIDACION-->
               <div class="error-message" *ngIf="nombreUModel.invalid && (nombreUModel.dirty || nombreUModel.touched)">
@@ -20,11 +21,12 @@
                 <p *ngIf="nombreUModel.errors?.['maxlength']">El nombre no debe exceder los 15 caracteres.</p>
               </div>
             </div>
+            
             <!--APELLIDO-->
             <div class="input-row">
               <ion-input label="Apellido:" type="text" label-placement="floating" fill="outline"
-                placeholder="Castillo Lopez" name="apellidoU" minlength="3" maxlength="15" required
-                [(ngModel)]="apellidoUValue" #apellidoUModel="ngModel"></ion-input>
+                placeholder="Castillo" name="apellidoU" minlength="3" maxlength="15" required
+                [(ngModel)]="apellidoUValue" #apellidoUModel="ngModel" (keydown)="onKeyDowns($event)"></ion-input>
             </div>
             <!--VALIDACION-->
             <div class="error-message"
@@ -33,15 +35,17 @@
               <p *ngIf="apellidoUModel.errors?.['minlength']">El apellido debe tener al menos 3 caracteres.</p>
               <p *ngIf="apellidoUModel.errors?.['maxlength']">El apellido no debe exceder los 15 caracteres.</p>
             </div>
+
             <!--RUT-->
             <ion-input label="Rut:" type="text" label-placement="floating" fill="outline" placeholder="28.999.777-8"
-              name="rutU" minlength="11" maxlength="12" required (keydown)="onKeyDown($event)" [(ngModel)]="rutUValue"
+              name="rutU" minlength="11" maxlength="12" required (keydown)="onKeyDown($event)"  [(ngModel)]="rutUValue"
               #rutUInput="ngModel"></ion-input>
             <!--VALIDACION-->
             <div class="error-message" *ngIf="rutUInput.invalid && (rutUInput.dirty || rutUInput.touched)">
               <p *ngIf="rutUInput.errors?.['required']">Debe ingresar un RUT.</p>
-              <p *ngIf="!validateRutU(rutUValue)">El formato del RUT ingresado no es correcto o el RUT no es válido.</p>
+              <p *ngIf="!validateRutU(rutUValue)">El formato del RUT ingresado no es correcto</p>
             </div>
+
             <!--CORREO-->
             <div class="input-row">
               <ion-input label="Correo electrónico:" type="email" label-placement="floating" fill="outline"
