@@ -1,6 +1,6 @@
 ion-card {
-    
-    width: 750px;
+    height: 350px;
+    width: 500px;
     background: #222222;
 }
 
@@ -30,6 +30,7 @@ ion-card-title {
     /* Opcional: ajusta la altura del contenedor al 100% del viewport */
 }
 
+
 /*este es el fondo*/
 ion-content {
     --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
@@ -53,7 +54,10 @@ ion-content {
     display: none;
   }
   
- //
+
+
+
+
  
   
 

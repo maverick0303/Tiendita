@@ -4,22 +4,21 @@
 
 
 <ion-content [fullscreen]="true">
-  <!--
-  VISTA DEL ADMIN
-  <ion-grid class="ion-grid">
+  
+  <!--VISTA DEL ADMIN-->
+  <ion-grid class="ion-grid" *ngIf="rol == 2" >
     <ion-row class="ion-row">
       <ion-card class="ion-card">
         <div>
           <ion-card-title>Bienvenido Administrador</ion-card-title>
           <ion-card-subtitle>¿Que desea hacer?</ion-card-subtitle>
           <br>
-          <ion-button expand="full" [routerLink]="['/productoadmin']" type="submit">Agregar productos</ion-button>
-          <ion-button expand="full" [routerLink]="['/tienda']" type="submit">Ver usuarios</ion-button>
-
+          <ion-button expand="full" [routerLink]="['/agregar-p-admin']" >Agregar productos</ion-button>
+          <ion-button expand="full" [routerLink]="['./tienda']" type="submit">Ver usuarios</ion-button>
         </div>
       </ion-card>
     </ion-row>
-  </ion-grid>-->
+  </ion-grid>
   <!--VISTA DEL USUARIO-->
 
   <ion-grid>

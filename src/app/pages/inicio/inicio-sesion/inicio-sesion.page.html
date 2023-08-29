@@ -13,23 +13,23 @@
         <div class="example-container">
           <mat-form-field>
             <mat-label>Ingresa tu correo:</mat-label>
-            <input matInput placeholder="pat@example.com" [formControl]="email" required>
+            <input matInput placeholder="pat@example.com" [formControl]="email" required name="gmail" [(ngModel)]="gmail">
             <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
         </div>
         <div class="example-container">
           <mat-form-field>
             <mat-label>Ingresa tu contraseña:</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" placeholder="*********">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="*********" name="password" [(ngModel)]="password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
           </mat-form-field>
         </div>
-        <ion-button [routerLink]="['/tienda']"  expand="full" [disabled]="!email.valid" 
-          type="submit">Iniciar sesión</ion-button>
-
-          <p1 [routerLink]="['/registro']">¿Aún no tienes una cuenta? Regístrate aquí</p1>
+        <ion-button (click)="inicio_sesion()">Iniciar sesión</ion-button>
+        <br>
+        <p1 [routerLink]="['/registro']">¿Aún no tienes una cuenta? Regístrate aquí</p1>
 
       </ion-card-content>
     </ion-card>
