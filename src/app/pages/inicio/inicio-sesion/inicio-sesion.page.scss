@@ -1,66 +1,71 @@
 ion-card {
-    height: 350px;
-    width: 500px;
-    background: #222222;
+  height: 350px;
+  width: 500px;
+  background: #222222;
 }
 
+/* Importar fuente */
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
 ion-card-title {
-    font-family: 'arial', cursive;
-    font-size: 50px;
-    display: flex;
-    justify-content: center;
+  color: white;
+  font-family: 'Abril Fatface', cursive;
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+
 
 }
 
 .ion-card-content {
-    font-family: 'arial', cursive;
-    font-size: 30px;
-    display: flex;
-    justify-content: center;
+  font-family: 'Abril Fatface', cursive;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
 
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    /* Alineación horizontal al centro */
-    align-items: center;
-    /* Alineación vertical al centro */
-    height: 95vh;
-    /* Opcional: ajusta la altura del contenedor al 100% del viewport */
+  display: flex;
+  justify-content: center;
+  /* Alineación horizontal al centro */
+  align-items: center;
+  /* Alineación vertical al centro */
+  height: 95vh;
+  /* Opcional: ajusta la altura del contenedor al 100% del viewport */
+}
+
+//cuando este pequeña la pantalla:
+@media(width:320px) {
+  ion-card {
+    height: 450px;
+    width: 500px;
+    background: #222222;
+  }
+
 }
 
 
 /*este es el fondo*/
 ion-content {
-    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
+  --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
 }
+
 //correo=
-.example-container mat-form-field + mat-form-field {
-    margin-left: 8px;
-  }
-  
+.example-container mat-form-field+mat-form-field {
+  margin-left: 8px;
+}
+
 //clave=
-.example-container mat-form-field + mat-form-field {
-    margin-left: 8px;
-  }
-  
-  .example-right-align {
-    text-align: right;
-  }
-  
-  input.example-right-align::-webkit-outer-spin-button,
-  input.example-right-align::-webkit-inner-spin-button {
-    display: none;
-  }
-  
+.example-container mat-form-field+mat-form-field {
+  margin-left: 8px;
+}
 
+.example-right-align {
+  text-align: right;
+}
 
-
-
- 
-  
-
-  
-  
-
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}

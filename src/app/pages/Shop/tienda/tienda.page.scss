@@ -7,6 +7,24 @@ ion-card {
     width: fit-content;
     height: max-content;
 }
+//card del admin:
+.ion-grid {
+    ion-row {
+        display: flex;
+        justify-content: center;
+        /* Centrar horizontalmente */
+        margin: 0 auto;
+        /* Margen superior e inferior igual a 0 y margen lateral automático para centrar en el medio */
+
+        ion-card {
+            margin: 10px;
+            /* Margen entre las tarjetas */
+            max-width: 550px;
+            /* Ancho máximo de las tarjetas */
+        }
+    }
+}
+//RESTO DEL CODIGO
 
 ion-grid {
     ion-row {
@@ -62,6 +80,9 @@ ion-card-title {
     ion-title{
         font-size: 40px;
     }
+    ion-card-title{
+        font-size: 30px;
+    }
     
 
 }
@@ -96,3 +117,11 @@ ion-content {
     width: 400px;
     text-align: left;
 }
+//botones;
+
+.center-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Agrega margen superior si es necesario */
+  }
+  

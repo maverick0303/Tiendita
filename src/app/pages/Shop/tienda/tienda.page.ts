@@ -9,7 +9,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class TiendaPage implements OnInit {
   rol: number = 0;
 
-  constructor(private activeRoute: ActivatedRoute,private router: Router) { }
+  constructor(private activeRoute: ActivatedRoute,private router: Router) {
+    
+   }
 
   ngOnInit() {
     this.activeRoute.queryParams.subscribe((param) => {

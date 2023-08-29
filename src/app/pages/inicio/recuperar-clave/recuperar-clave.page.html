@@ -1,33 +1,6 @@
 <ion-header [translucent]="true">
 </ion-header>
 
-<style>
-  /* Importar la fuente Montserrat */
-  @import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
-
-  ion-card-title {
-    font-family: 'Tilt Prism', cursive;
-    font-size: 80px;
-    display: flex;
-    justify-content: center;
-
-  }
-
-  .container {
-    display: flex;
-    justify-content: center;
-    /* Alineación horizontal al centro */
-    align-items: center;
-    /* Alineación vertical al centro */
-    height: 95vh;
-    /* Opcional: ajusta la altura del contenedor al 100% del viewport */
-  }
-
-  /*este es el fondo*/
-  ion-content {
-    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
-  }
-</style>
 
 <ion-content class="fondo" [fullscreen]="true">
   <div class="container">
@@ -39,7 +12,16 @@
       <ion-card-content>
         <form id="registration-form">
           <!--Aqui tendriamos que mostrar la pregunta de seguridad que el usuario registro-->
-          <ion-item>Pregunta de seguridad: </ion-item>
+          <ion-list>
+            <ion-item>
+              <ion-select aria-label="Fruit" interface="popover" placeholder="Pregunta de seguridad" name="preguntaU"
+                requeride>
+                <ion-select-option value="1">¿Cuál es tu película favorita?</ion-select-option>
+                <ion-select-option value="2">¿Nombre de tu mascota?</ion-select-option>
+                <ion-select-option value="3">¿Color favorito?</ion-select-option></ion-select>
+            </ion-item>
+          </ion-list>
+
           <ion-item>
             <ion-label position="floating">Respuesta</ion-label>
             <ion-input type="text" name="respuesta" required></ion-input>
@@ -55,9 +37,9 @@
             <ion-input type="rContrasena" name="rContrasena" required></ion-input>
           </ion-item>
 
-          <ion-button expand="full" type="submit">Confirmar</ion-button>
+          <ion-button class="center-buttons" color="dark" type="submit">Guardar contraseña</ion-button>
         </form>
-        </ion-card-content>
+      </ion-card-content>
     </ion-card>
   </div>
 </ion-content>

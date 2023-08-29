@@ -114,11 +114,11 @@
             </div>
 
             <!--BOTON-->
-            <ion-button expand="full" [disabled]=" !nombreUModel.valid || !apellidoUModel.valid || !preguntaUModel.valid ||
+            <ion-button color="dark" class="center-buttons" [disabled]=" !nombreUModel.valid || !apellidoUModel.valid || !preguntaUModel.valid ||
                          !respuestaUModel.valid ||!emailInput.valid || !passwordInput.valid || 
                          !confirmPasswordInput.valid" type="submit">
               Registrarse</ion-button>
-            <p1 [routerLink]="['/inicio-sesion']"> ¿Ya tienes una cuenta? Inicia sesión aquí</p1><br>
+            <p1 [routerLink]="['/inicio-sesion']" style="text-align: center;"> ¿Ya tienes una cuenta? Inicia sesión aquí</p1><br>
           </form>
         </ion-card-content>
       </ion-card>

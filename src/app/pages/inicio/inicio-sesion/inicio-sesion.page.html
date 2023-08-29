@@ -27,9 +27,10 @@
             </button>
           </mat-form-field>
         </div>
-        <ion-button (click)="inicio_sesion()">Iniciar sesión</ion-button>
+        <ion-button (click)="inicio_sesion()" color="dark">Iniciar sesión</ion-button>
         <br>
-        <p1 [routerLink]="['/registro']">¿Aún no tienes una cuenta? Regístrate aquí</p1>
+        <p1 [routerLink]="['/registro']">¿Aún no tienes una cuenta? Regístrate aquí</p1><br>
+        <p1 [routerLink]="['/recuperar-clave']">¿Se le olvidó la contraseña? Ingrese aquí</p1>
 
       </ion-card-content>
     </ion-card>
