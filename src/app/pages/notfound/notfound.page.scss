@@ -1,0 +1,80 @@
+/* Importar fuente */
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
+/* Estilos del título de la tarjeta */
+ion-card-title {
+  font-size: 65px;
+  font-family: 'Abril Fatface', cursive;
+}
+
+/* Fondo */
+ion-content {
+    background-color: rgba(0, 0, 0, 0.521);
+}
+
+/* Estilos del grid */
+ion-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Esto centra verticalmente en la ventana */
+
+  ion-row {
+    ion-card {
+      border-radius: 45px;
+      background-color: rgba(0, 0, 0, 0.521);
+      max-width: 450px; /* Ajusta el ancho máximo de la tarjeta según tus necesidades */
+      width: 650px; /* Asegura que la tarjeta ocupe todo el ancho disponible */
+
+      /* Estilos de la imagen */
+      img {
+        display: block;
+        margin: 0 auto; /* Centrar la imagen horizontalmente */
+        width: 250px;
+        height: 250px;
+      }
+
+      /* Estilos del texto en la tarjeta */
+      ion-card-content {
+        padding: 20px; /* Agregar padding en lugar de margen para el contenido */
+      }
+    }
+  }
+}
+//para que la card quede bien ajustada=
+@media(width: 425px){
+  ion-card-title {
+    font-size: 45px;
+    font-family: 'Abril Fatface', cursive;
+  }
+  /* Estilos del grid */
+  ion-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Esto centra verticalmente en la ventana */
+  
+    ion-row {
+      ion-card {
+        border-radius: 45px;
+        background-color: rgba(0, 0, 0, 0.521);
+        max-width: 450px; /* Ajusta el ancho máximo de la tarjeta según tus necesidades */
+        width: 350px; /* Asegura que la tarjeta ocupe todo el ancho disponible */
+  
+        /* Estilos de la imagen */
+        img {
+          display: block;
+          margin: 0 auto; /* Centrar la imagen horizontalmente */
+          width: 250px;
+          height: 250px;
+        }
+  
+        /* Estilos del texto en la tarjeta */
+        ion-card-content {
+          padding: 20px; /* Agregar padding en lugar de margen para el contenido */
+        }
+      }
+    }
+  }
+
+}

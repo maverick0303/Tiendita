@@ -46,7 +46,7 @@
               <p *ngIf="!validateRutU(rutUValue)">El formato del RUT ingresado no es correcto</p>
             </div>
 
-            <!--
+            <!--CORREO-->
             <div class="input-row">
               <ion-input label="Correo electrónico:" type="email" label-placement="floating" fill="outline"
                 placeholder="ayuda@gmail.com" required (keydown)="onKeyDown($event)" [(ngModel)]="email" name="email"
@@ -56,7 +56,7 @@
             <ion-note class="error-message" *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
               correo no valido y no puede estar vacío
             </ion-note>
-          -->
+          
 
 
             <!--CLAVE-->
