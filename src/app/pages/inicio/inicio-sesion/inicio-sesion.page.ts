@@ -52,6 +52,6 @@ export class InicioSesionPage {
         correo: correo,
       },
     };
-    this.router.navigate(['/datos-personales'], navigationExtras);
+    this.router.navigate(['/tienda'], navigationExtras);
   }
 }
