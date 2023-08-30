@@ -9,7 +9,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TiendaPage implements OnInit {
   rol: number = 0;
-
+  //esto es de las pipes:
+  dinero = 50000;
+  dinero2 = 75000;
+  dinero3 = 35000;
+  dinero4 = 39990;
+  dinero5 = 42000;
+  dinero6 = 269000;
+  dinero7 = 119000;
+  dinero8 = 194990;
+  dinero9 = 289000;
+  dinero10 = 61990;
+  dinero11 = 54000;
+  dinero12 = 194550;
+  dinero13 = 139000;
+  dinero14 = 240000;
+  dinero15 = 360000;
+  //
   constructor(private activeRoute: ActivatedRoute,private router: Router) {
     
    }
