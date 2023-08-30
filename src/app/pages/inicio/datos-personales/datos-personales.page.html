@@ -56,7 +56,7 @@
             <div class="input-row">
               <ion-input label="Nombre:" type="text" name="nombre" minlength="3" maxlength="15" required
                 (keydown)="onKeyDown($event)" [(ngModel)]="nombreValue" #nombreModel="ngModel"
-                label-placement="floating" fill="outline" placeholder="Mario">
+                label-placement="floating" fill="outline" value="{{ nombreValue }}">
               </ion-input>
               <div class="error-message" *ngIf="nombreModel.invalid && (nombreModel.dirty || nombreModel.touched)">
                 <p *ngIf="nombreModel.errors?.['required']">El nombre es obligatorio</p>
@@ -67,7 +67,7 @@
             <br>
             <ion-input label="Apellido:" type="text" name="apellido" minlength="3" maxlength="15" required
               (keydown)="onKeyDown($event)" [(ngModel)]="apellidoValue" #apellidoModel="ngModel"
-              label-placement="floating" fill="outline" placeholder="Espinoza">
+              label-placement="floating" fill="outline" value="{{ apellidoValue }}" >
             </ion-input>
             <div class="error-message" *ngIf="apellidoModel.invalid && (apellidoModel.dirty || apellidoModel.touched)">
               <p *ngIf="apellidoModel.errors?.['required']">El nombre es obligatorio</p>
@@ -77,7 +77,7 @@
             <br>
 
             <ion-input label="Correo electrónico:" type="email" label-placement="floating" required readonly
-              fill="outline" placeholder="profeponga7@gmail.com"></ion-input>
+              fill="outline" placeholder="profeponga7@gmail.com" [value]="correo"></ion-input>
             <br>
             <ion-input label="Rut:" type="text" label-placement="floating" fill="outline" required readonly
               placeholder="26.098.098-2"></ion-input>
