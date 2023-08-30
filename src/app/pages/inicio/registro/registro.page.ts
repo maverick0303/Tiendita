@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationExtras } from '@angular/router';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro',
@@ -15,9 +17,10 @@ export class RegistroPage implements OnInit {
   preguntaUValue: string = '';
   confirmPassword: string = '';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    // Inicialización aquí...
   }
 
   //FUNCIÓN PARA QUE NO SE PUEDAN HACER ESPACIOS
@@ -26,6 +29,7 @@ export class RegistroPage implements OnInit {
       event.preventDefault(); 
     }
   }
+
   //LOGICA DEL INICIO DE SESIÓN
   onLogin() {
     if (this.email && this.password) {
@@ -66,12 +70,24 @@ export class RegistroPage implements OnInit {
       event.preventDefault();
     }
   }
-  
+
   validatePasswordMatch(): boolean {
     return this.password === this.confirmPassword;
   }
+
+  // Método para navegar a otra página con datos
+  irAPaginaSiguiente() {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        nombreEnviado: this.nombreUValue,
+        apellidoEnviado: this.apellidoUValue,
+        rutEnviado: this.rutUValue,
+        correoEnviado: this.email
+      }
+    };
   
-  
-  
+    this.router.navigate(['/datos-personales'], navigationExtras);
+  }
+
   
 }
