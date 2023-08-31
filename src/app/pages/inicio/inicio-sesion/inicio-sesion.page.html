@@ -37,10 +37,8 @@
               </button>
             </mat-form-field>
             <br>
-            <ion-button type="submit" (click)="play()">Borrar datos</ion-button> 
-
           </div>
-          <ion-button (click)="borrarDatos()" (click)="inicio_sesion()" color="dark">Iniciar sesión</ion-button>
+          <ion-button (click)="inicio_sesion(); play()" color="dark">Iniciar sesión</ion-button>
           <br>
           <p1 [routerLink]="['/registro']">¿Aún no tienes una cuenta? Regístrate aquí</p1><br>
           <p1 [routerLink]="['/recuperar-clave']">¿Se le olvidó la contraseña? Ingrese aquí</p1>
