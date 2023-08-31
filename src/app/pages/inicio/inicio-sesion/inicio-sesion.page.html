@@ -10,7 +10,7 @@
 
       <ion-card class="custom-card">
 
-        <img src="https://assets.stickpng.com/thumbs/585e4bf3cb11b227491c339a.png" alt="Icono de Usuario"
+        <img src="assets/user.png" alt="Icono de Usuario"
           class="centered-image">
 
         <ion-card-header>
@@ -19,9 +19,9 @@
         </ion-card-header>
         <ion-card-content>
           <div class="example-container">
-            <mat-form-field>
-              <mat-label>Ingresa tu correo:</mat-label>
-              <input matInput placeholder="pat@example.com" [formControl]="email" required name="gmail"
+            <mat-form-field style="width: 250px;">
+              <mat-label>Ingresa tu Correo:</mat-label>
+              <input  matInput placeholder="pat@example.com" [formControl]="email" required name="gmail"
                 [(ngModel)]="gmail">
               <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
@@ -38,7 +38,7 @@
             </mat-form-field>
             <br>
           </div>
-          <ion-button (click)="inicio_sesion(); play()" color="dark">Iniciar sesión</ion-button>
+          <ion-button (click)="inicio_sesion()" color="dark">Iniciar sesión</ion-button>
           <br>
           <p1 [routerLink]="['/registro']">¿Aún no tienes una cuenta? Regístrate aquí</p1><br>
           <p1 [routerLink]="['/recuperar-clave']">¿Se le olvidó la contraseña? Ingrese aquí</p1>

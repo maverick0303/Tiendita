@@ -49,6 +49,7 @@
     
   }
   ion-card-title{
+    text-align: center;
     font-size: 60px;
   }
   
@@ -60,4 +61,11 @@
   display: flex;
   justify-content: center;
   margin-top: 20px; /* Agrega margen superior si es necesario */
+}
+
+@media(width:425px){
+  ion-card-title{
+    text-align: center;
+    font-size: 40px;
+  }
 }

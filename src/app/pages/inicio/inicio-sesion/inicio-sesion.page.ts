@@ -87,6 +87,7 @@ export class InicioSesionPage {
       this.rol = (this.gmail === 'admin@gmail.com') ? 2 : 1;
       this.irADatosPersonales(this.gmail);
     } else {
+      this.play();
       this.presentToast();
       return;
     }
