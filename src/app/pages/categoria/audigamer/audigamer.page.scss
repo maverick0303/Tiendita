@@ -4,6 +4,7 @@ ion-img {
 }
 
 ion-card {
+    background-color: #222222;
     width: fit-content;
     height: max-content;
 }
@@ -47,12 +48,14 @@ p {
 }
 
 ion-card-title {
+    color: white;
     font-size: 60px;
     margin: 5px;
     text-align: center;
     font-family: 'DM Serif Display', serif;
 }
 .ion-title{
+    color: white;
     font-family: 'DM Serif Display', serif;
     font-size: 25px;
     text-align: center;

@@ -90,9 +90,13 @@ ion-content {
     display: flex;
     justify-content: center;
     align-items: center;
+    --ion-background-color: #000000;
     
   }
   ion-searchbar {
     width: 400px;
     text-align: left;
+}
+ion-toolbar{
+    --ion-background-color: #222222;
 }
