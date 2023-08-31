@@ -42,9 +42,9 @@
           </ion-input>
           </ion-item>
           <div class="error-message" *ngIf="descripcionPModel.invalid && (descripcionPModel.dirty || descripcionPModel.touched)">
-            <p *ngIf="descripcionPModel.errors?.['required']">La descripcion del producto es obligatorio.</p>
-            <p *ngIf="descripcionPModel.errors?.['minlength']">La descripcion debe tener al menos 3 caracteres.</p>
-            <p *ngIf="descripcionPModel.errors?.['maxlength']">La descripcion no debe exceder los 15 caracteres.</p>
+            <p *ngIf="descripcionPModel.errors?.['required']">La descripción del producto es obligatorio.</p>
+            <p *ngIf="descripcionPModel.errors?.['minlength']">La descripción debe tener al menos 3 caracteres.</p>
+            <p *ngIf="descripcionPModel.errors?.['maxlength']">La descripción no debe exceder los 15 caracteres.</p>
           </div>
 
           <ion-item>
@@ -57,13 +57,13 @@
           </div>
 
           <ion-item>
-            <ion-label position="floating">Categoria para el producto</ion-label>
+            <ion-label position="floating">Categoría para el producto</ion-label>
             <ion-select required name="categoriaP" [(ngModel)]="categoriaPValue" #categoriaPModel="ngModel">
               <ion-select-option>Reloj digital</ion-select-option>
               <ion-select-option>Reloj analógico</ion-select-option>
-              <ion-select-option>Audifono bluetooth</ion-select-option>
-              <ion-select-option>Audifono gamer</ion-select-option>
-              <ion-select-option>Audifonos deportivos</ion-select-option>
+              <ion-select-option>Audífono bluetooth</ion-select-option>
+              <ion-select-option>Audífono gamer</ion-select-option>
+              <ion-select-option>Audífonos deportivos</ion-select-option>
             </ion-select>
           </ion-item>
           <div class="error-message"
@@ -78,7 +78,7 @@
             #imagenPModel="ngModel"></ion-input>
           </ion-item>
           <div class="error-message" *ngIf="imagenPModel.invalid && (imagenPModel.dirty ||imagenPModel.touched)">
-            <p *ngIf="imagenPModel.errors?.['required']">La foto del producto es obligatorio.</p>
+            <p *ngIf="imagenPModel.errors?.['required']">La foto del producto es obligatoria.</p>
           </div>
           
           <ion-button expand="full" color="dark" [routerLink]="['/menu-admin']" type="submit" [disabled]=
