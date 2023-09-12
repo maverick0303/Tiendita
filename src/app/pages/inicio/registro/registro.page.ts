@@ -23,12 +23,31 @@ export class RegistroPage implements OnInit {
     // Inicialización aquí...
   }
 
-  //FUNCIÓN PARA QUE NO SE PUEDAN HACER ESPACIOS
-  onKeyDowns(event: KeyboardEvent) {
+  //FUNCIÓN PARA QUE NO SE PUEDAN HACER ESPACIOS en la contraseña
+  espacioContra(event: KeyboardEvent) {
     if (event.key === ' ') {
       event.preventDefault(); 
     }
   }
+  valiNombre(event: KeyboardEvent) {
+    const input = event.key;
+    const regex = /^[A-Za-z]+$/; //solo permitir letras
+
+    if (!regex.test(input)) {
+      event.preventDefault(); //No permite que ingrese espacio
+    }
+  }
+
+  valiApellido(event: KeyboardEvent) {
+    const input = event.key;
+    const regex = /^[A-Za-z]+$/; //solo permitir letras
+
+    if (!regex.test(input)) {
+      event.preventDefault(); //No permite que ingrese espacio
+    }
+  }
+
+  
 
   //LOGICA DEL INICIO DE SESIÓN
   onLogin() {
@@ -48,7 +67,7 @@ export class RegistroPage implements OnInit {
   }
 
   // Segunda validación del rut
-  onKeyDown(event: KeyboardEvent) {
+  validarut(event: KeyboardEvent) {
     const caretPosition = (<HTMLInputElement>event.target).selectionStart;
     const inputNumber = event.key;
   
@@ -88,6 +107,8 @@ export class RegistroPage implements OnInit {
   
     this.router.navigate(['/datos-personales'], navigationExtras);
   }
+
+
 
   
 }

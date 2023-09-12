@@ -12,11 +12,11 @@
               <!--NOMBRE-->
               <ion-input label="Nombre:" type="text" label-placement="floating" fill="outline" placeholder="Mario"
                 name="nombreU" minlength="3" maxlength="15" required [(ngModel)]="nombreUValue" #nombreUModel="ngModel"
-                (keydown)="onKeyDowns($event)">
+                (keydown)="valiNombre($event)">
               </ion-input>
               <!--VALIDACION-->
               <div class="error-message" *ngIf="nombreUModel.invalid && (nombreUModel.dirty || nombreUModel.touched)">
-                <p *ngIf="nombreUModel.errors?.['required']">El nombre de usuario es obligatorio.</p>
+                <p *ngIf="nombreUModel.errors?.['required']">El nombre es obligatorio.</p>
                 <p *ngIf="nombreUModel.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</p>
                 <p *ngIf="nombreUModel.errors?.['maxlength']">El nombre no debe exceder los 15 caracteres.</p>
               </div>
@@ -26,7 +26,7 @@
             <div class="input-row">
               <ion-input label="Apellido:" type="text" label-placement="floating" fill="outline" placeholder="Castillo"
                 name="apellidoU" minlength="3" maxlength="15" required [(ngModel)]="apellidoUValue"
-                #apellidoUModel="ngModel" (keydown)="onKeyDowns($event)"></ion-input>
+                #apellidoUModel="ngModel" (keydown)="valiApellido($event)"></ion-input>
             </div>
             <!--VALIDACION-->
             <div class="error-message"
@@ -38,7 +38,7 @@
 
             <!--RUT-->
             <ion-input label="Rut:" type="text" label-placement="floating" fill="outline" placeholder="28.999.777-8"
-              name="rutU" minlength="11" maxlength="12" required (keydown)="onKeyDown($event)" [(ngModel)]="rutUValue"
+              name="rutU" minlength="11" maxlength="12" required (keydown)="espacioContra($event);validarut($event)" [(ngModel)]="rutUValue"
               #rutUInput="ngModel"></ion-input>
             <!--VALIDACION-->
             <div class="error-message" *ngIf="rutUInput.invalid && (rutUInput.dirty || rutUInput.touched)">
@@ -49,10 +49,10 @@
             <!--CORREO-->
             <div class="input-row">
               <ion-input label="Correo electrónico:" type="email" label-placement="floating" fill="outline"
-                placeholder="ayuda@gmail.com" required (keydown)="onKeyDown($event)" [(ngModel)]="email" name="email"
+                placeholder="ayuda@gmail.com" required (keydown)="espacioContra($event)" [(ngModel)]="email" name="email"
                 #emailInput="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></ion-input>
             </div>
-            
+            <!--VALIDACION-->
             <ion-note class="error-message" *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
               correo no valido y no puede estar vacío
             </ion-note>
@@ -62,7 +62,7 @@
             <!--CLAVE-->
             <ion-input label="Contraseña:" type="password" label-placement="floating" fill="outline"
               placeholder="******" required [(ngModel)]="password" name="password" #passwordInput="ngModel"
-              minlength="3" maxlength="15" (keydown)="onKeyDowns($event)"
+              minlength="3" maxlength="15" (keydown)="espacioContra($event)"
               pattern="^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&.,-_*).{3,15}$"></ion-input>
             <!--VALIDACION-->
             <div class="error-message" *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)">
@@ -77,7 +77,7 @@
             <!--R CLAVE-->
             <ion-input label="Confirmar contraseña:" type="password" label-placement="floating" fill="outline"
               placeholder="******" name="cContrasena" required [(ngModel)]="confirmPassword"
-              #confirmPasswordInput="ngModel" (keydown)="onKeyDowns($event)"></ion-input>
+              #confirmPasswordInput="ngModel" (keydown)="espacioContra($event)"></ion-input>
 
             <!--VALIDACION-->
             <div class="error-message" *ngIf="confirmPassword !== '' && !validatePasswordMatch()">
@@ -115,10 +115,10 @@
             </div>
 
             <!--BOTON-->
-            <ion-button color="dark" class="center-buttons" [disabled]=" !nombreUModel.valid || !apellidoUModel.valid || !preguntaUModel.valid ||
-                         !respuestaUModel.valid || !passwordInput.valid || 
-                         !confirmPasswordInput.valid" (click)="irAPaginaSiguiente()">
-              Registrarse</ion-button>
+            <ion-button color="dark" class="center-buttons" 
+            [disabled]=" !nombreUModel.valid || !apellidoUModel.valid || !preguntaUModel.valid ||
+                         !respuestaUModel.valid || !passwordInput.valid || !confirmPasswordInput.valid"
+            (click)="irAPaginaSiguiente()">Registrarse</ion-button>
             <p1 [routerLink]="['/inicio-sesion']" style="text-align: center;"> ¿Ya tienes una cuenta? Inicia sesión aquí</p1><br>
           </form>
         </ion-card-content>

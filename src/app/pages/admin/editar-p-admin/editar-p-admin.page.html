@@ -45,12 +45,13 @@
 
           <ion-item>
             <ion-label position="floating">Precio:</ion-label>
-            <ion-input type="number" name="precioP" min="1000" required [(ngModel)]="precioPValue"
-            #precioPModel="ngModel"></ion-input>
+            <ion-input type="number" name="precioP" min="1000" [(ngModel)]="precioPValue"
+            (input)="limitarLongitudPrecio($event)" required #precioPModel="ngModel"></ion-input>
           </ion-item>
           <div class="error-message" *ngIf="precioPModel.invalid && (precioPModel.dirty || precioPModel.touched)">
             <p *ngIf="precioPModel.errors?.['required']">El precio del producto es obligatorio.</p>
           </div>
+          
 
           <ion-item>
             <ion-label position="floating">Categoria para el producto</ion-label>
