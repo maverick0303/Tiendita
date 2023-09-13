@@ -1,44 +1,40 @@
 <ion-toolbar>
-  <!--BOTON PARA ATRAS-->
-    
-<ion-back-button style="color: white;"  default-href="#" slot="start"></ion-back-button>
-  <!--LOGO DEL CARRITO-->
+  <!-- BOTÓN PARA ATRÁS -->
+  <ion-back-button style="color: white;" default-href="#" slot="start"></ion-back-button>
+
+  <!-- LOGO DEL CARRITO -->
   <div class="demo-section" slot="end">
-    <mat-icon matBadge="0" matBadgeColor="primary" [routerLink]="['/carrito']"><ion-icon style="width: 30px; height: 30px; margin-right: 80px; color: white;" name="cart-outline"></ion-icon></mat-icon>
+    <mat-icon matBadge="0" matBadgeColor="primary" [routerLink]="['/carrito']" aria-hidden="false">
+      <ion-icon style="width: 30px; height: 30px; margin-right: 80px; color: white;" name="cart-outline"></ion-icon>
+    </mat-icon>
   </div>
-  <!--Menu de la busqueda-->
+
+  <!-- MENÚ DE BÚSQUEDA -->
   <ion-buttons slot="start">
     <ion-menu-button style="color: white;"></ion-menu-button>
   </ion-buttons>
-  <!--El buscador-->
+
+  <!-- EL BUSCADOR -->
   <div class="search-container">
     <ion-searchbar style="color: white;" class="center-search" animated="true" placeholder="Buscar"></ion-searchbar>
   </div>
-  <!--este es el menu del usuario-->
+
+  <!-- MENÚ DEL USUARIO -->
   <ion-chip id="popover-button" slot="end" size="90px" style="background-color: #817d7d;">
     <ion-avatar>
       <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
     </ion-avatar>
     <ion-label>Cuenta</ion-label>
   </ion-chip>
-  <ion-popover trigger="popover-button" [dismissOnSelect]="true">
+
+  <ion-popover trigger="popover-button" [dismissOnSelect]="true" side="end">
     <ng-template>
       <ion-content>
         <ion-list>
           <ion-item [button]="true" [detail]="false" [routerLink]="['/datos-personales']">Perfil</ion-item>
           <ion-item [button]="true" [detail]="false" [routerLink]="['/historial']">Mis compras</ion-item>
           <ion-item [button]="true" [detail]="false" [routerLink]="['/home']">Cerrar Sesión</ion-item>
-
-          <ion-popover trigger="nested-trigger" [dismissOnSelect]="true" side="end">
-            <ng-template>
-              <ion-content>
-                <ion-list>
-                  <ion-item [button]="true" [detail]="false">Nested option</ion-item>
-                </ion-list>
-              </ion-content>
-            </ng-template>
-          </ion-popover>
-        </ion-list> 
+        </ion-list>
       </ion-content>
     </ng-template>
   </ion-popover>
