@@ -20,7 +20,12 @@ export class AgregarPAdminPage implements OnInit {
   const firstDigit = String(precioValue).charAt(0);
   
   if (firstDigit === '0') {
-    this.precioPValue = 1; // Establece un valor predeterminado o realiza otra acción según tus necesidades
+    this.precioPValue = 1; 
   }
+  if (firstDigit === '-') {
+    this.precioPValue = 1; 
+  }
+  
+
 }
 }

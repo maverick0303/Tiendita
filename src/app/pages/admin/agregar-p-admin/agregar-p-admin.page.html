@@ -37,11 +37,12 @@
 
           <ion-item>
             <ion-label position="floating" onlyread>Descripción del producto</ion-label>
-            <ion-input type="text" name="descripcionP" minlength="3" maxlength="50" required [(ngModel)]="descripcionPValue"
-            #descripcionPModel="ngModel">
-          </ion-input>
+            <ion-input type="text" name="descripcionP" minlength="3" maxlength="50" required
+              [(ngModel)]="descripcionPValue" #descripcionPModel="ngModel">
+            </ion-input>
           </ion-item>
-          <div class="error-message" *ngIf="descripcionPModel.invalid && (descripcionPModel.dirty || descripcionPModel.touched)">
+          <div class="error-message"
+            *ngIf="descripcionPModel.invalid && (descripcionPModel.dirty || descripcionPModel.touched)">
             <p *ngIf="descripcionPModel.errors?.['required']">La descripción del producto es obligatorio.</p>
             <p *ngIf="descripcionPModel.errors?.['minlength']">La descripción debe tener al menos 3 caracteres.</p>
             <p *ngIf="descripcionPModel.errors?.['maxlength']">La descripción no debe exceder los 15 caracteres.</p>
@@ -54,9 +55,9 @@
           </ion-item>
           <div class="error-message" *ngIf="!precioPModel.valid && (precioPModel.dirty || precioPModel.touched)">
             <p *ngIf="precioPModel.errors?.['required']">El precio del producto es obligatorio.</p>
-            <p *ngIf="precioPModel.errors?.['firstDigitNotZero']">El primer dígito no puede ser 0.</p>
+            <p *ngIf="precioPModel.errors?.['nocero']">El primer dígito no puede ser 0.</p>
           </div>
-          
+
 
           <ion-item>
             <ion-label position="floating">Categoría para el producto</ion-label>
@@ -77,18 +78,18 @@
             <ion-label position="floating">Imagen(es) del producto</ion-label>
             <br>
             <ion-input type="file" name="imagenP" required [(ngModel)]="imagenPValue"
-            #imagenPModel="ngModel"></ion-input>
+              #imagenPModel="ngModel"></ion-input>
           </ion-item>
           <div class="error-message" *ngIf="imagenPModel.invalid && (imagenPModel.dirty ||imagenPModel.touched)">
             <p *ngIf="imagenPModel.errors?.['required']">La foto del producto es obligatoria.</p>
           </div>
-          
-          <ion-button expand="full" color="dark" [routerLink]="['/menu-admin']" type="submit" [disabled]=
-          "!nombrePModel.valid || !descripcionPModel.valid || !precioPModel.valid  || !categoriaPModel.valid ||!imagenPModel.valid ">
-          Guardar</ion-button>
-  
+
+          <ion-button expand="full" color="dark" [routerLink]="['/menu-admin']" type="submit"
+            [disabled]="!nombrePModel.valid || !descripcionPModel.valid || !precioPModel.valid  || !categoriaPModel.valid ||!imagenPModel.valid ">
+            Guardar</ion-button>
+
         </form>
-        </ion-card-content>
+      </ion-card-content>
     </ion-card>
   </div>
 
