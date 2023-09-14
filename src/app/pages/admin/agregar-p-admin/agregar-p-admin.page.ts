@@ -16,5 +16,11 @@ export class AgregarPAdminPage implements OnInit {
 
   ngOnInit() {
   }
-
+  validatePrecio(precioValue: number) {
+  const firstDigit = String(precioValue).charAt(0);
+  
+  if (firstDigit === '0') {
+    this.precioPValue = 1; // Establece un valor predeterminado o realiza otra acción según tus necesidades
+  }
+}
 }
