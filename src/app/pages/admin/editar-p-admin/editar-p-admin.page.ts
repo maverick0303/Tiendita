@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class EditarPAdminPage implements OnInit {
   nombrePValue: string = '';
   descripcionPValue: string = '';
-  precioPValue: number = 0;
+  precioPValue: number = 1;
   imagenPValue: File | undefined;
   categoriaPValue: string = '';
   
@@ -25,13 +25,16 @@ export class EditarPAdminPage implements OnInit {
     }
   }
 
-  validarNumeros(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const regex = /^[0-9]*$/;
+  validatePrecio(precioValue: number) {
+    const firstDigit = String(precioValue).charAt(0);
 
-    if (!regex.test(input.value)) {
-      input.value = input.value.replace(/[^0-9]/g, '');
-      this.precioPValue = +input.value; // Convierte a número
+    if (firstDigit === '0') {
+      this.precioPValue = 1;
     }
+    if (firstDigit === '-') {
+      this.precioPValue = 1;
+    }
+
+
   }
 }

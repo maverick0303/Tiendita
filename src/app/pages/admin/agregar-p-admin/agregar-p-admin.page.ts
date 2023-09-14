@@ -17,15 +17,15 @@ export class AgregarPAdminPage implements OnInit {
   ngOnInit() {
   }
   validatePrecio(precioValue: number) {
-  const firstDigit = String(precioValue).charAt(0);
-  
-  if (firstDigit === '0') {
-    this.precioPValue = 1; 
-  }
-  if (firstDigit === '-') {
-    this.precioPValue = 1; 
-  }
-  
+    const firstDigit = String(precioValue).charAt(0);
 
-}
+    if (firstDigit === '0') {
+      this.precioPValue = 1;
+    }
+    if (firstDigit === '-') {
+      this.precioPValue = 1;
+    }
+
+
+  }
 }
