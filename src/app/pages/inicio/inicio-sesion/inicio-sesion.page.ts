@@ -16,10 +16,11 @@ export class InicioSesionPage {
   rol: number = 0;
   gmail: string = '';
   password: string = '';
-
+  //PARA QUE SE VEA EL OJITO DE LA CONTRASEÑA
   hide = true;
+  //VALIDACION DEL CORREO:
   email = new FormControl('', [Validators.required, Validators.email]);
-
+  //AQUI COMIENZA LA ANIMACION
   @ViewChildren(IonCard, { read: ElementRef }) cardElements!: QueryList<ElementRef<HTMLIonCardElement>>;
   private animation: Animation | null = null;
 
@@ -29,7 +30,7 @@ export class InicioSesionPage {
     const card = this.animationCtrl
       .create()
       .addElement(this.cardElements.first.nativeElement)
-      .duration(2000)
+      .duration(750)
       .beforeStyles({
         filter: 'invert(75%)',
       })
@@ -40,41 +41,29 @@ export class InicioSesionPage {
       .afterClearStyles(['filter'])
       .keyframes([
         { offset: 0, transform: 'scale(1)' },
-        { offset: 0.5, transform: 'scale(1.5)' },
+        { offset: 0.7, transform: 'scale(1.5)' },
         { offset: 1, transform: 'scale(1)' },
       ]);
 
-    this.animation = this.animationCtrl.create().duration(2000).addAnimation([card]);
+    this.animation = this.animationCtrl.create().duration(750).addAnimation([card]);
   }
-
+  //ACTIVA LA ANIMACION
   play() {
     if (this.animation) {
       this.animation.play();
     }
   }
-
-  pause() {
-    if (this.animation) {
-      this.animation.pause();
-    }
-  }
-
-  stop() {
-    if (this.animation) {
-      this.animation.stop();
-    }
-  }
-
+  //MENSAJE DE ERROR DEL CORREO
   getErrorMessage() {
     if (this.email.hasError('required')) {
-      return 'Debes ingresar un email :)';
+      return 'No debe quedar vacio los campo';
     }
     return this.email.hasError('email') ? 'No es un email valido' : '';
   }
-
+  //MENSAJE DE ERROR EN LOS DATOS
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Los datos proporcionados no coinciden',
+      message: 'La contraseña y el correo no son validos',
       duration: 950,
       position: 'middle',
     });
@@ -83,7 +72,7 @@ export class InicioSesionPage {
 
   inicio_sesion() {
     if ((this.gmail === 'admin@gmail.com' && this.password === 'Admin123.') ||
-        (this.gmail === 'usuario@gmail.com' && this.password === 'Usuario123.')) {
+      (this.gmail === 'usuario@gmail.com' && this.password === 'Usuario123.')) {
       this.rol = (this.gmail === 'admin@gmail.com') ? 2 : 1;
       this.irADatosPersonales(this.gmail);
     } else {
@@ -103,8 +92,4 @@ export class InicioSesionPage {
     this.router.navigate(['/tienda'], navigationExtras);
   }
 
-  borrarDatos() {
-    this.gmail = ''; 
-    this.password = '';    
-  }
 }

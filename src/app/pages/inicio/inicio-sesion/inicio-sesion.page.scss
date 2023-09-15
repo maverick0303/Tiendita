@@ -1,82 +1,41 @@
-ion-card {
-  border-radius: 20px;
-  height: 500px;
-  width: 500px;
-  background: #222222;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  
-}
-
-/* Importar fuente */
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
-
-ion-card-title {
-  color: white;
-  font-family: 'Abril Fatface', cursive;
-  font-size: 50px;
-  display: flex;
-  justify-content: center;
-
-
-}
-
-.ion-card-content {
-  font-family: 'Abril Fatface', cursive;
-  font-size: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-
-.container {
-  display: flex;
-  justify-content: center;
-  /* Alineación horizontal al centro */
-  align-items: center;
-  /* Alineación vertical al centro */
-
-  /* Opcional: ajusta la altura del contenedor al 100% del viewport */
-}
-
-//cuando este pequeña la pantalla:
-@media(width:425px) {
-  ion-card {
-    height: 500px;
-    width: 400px;
-    background: #222222;
-  }
-
-}
-
-
-/*este es el fondo*/
-ion-content {
-  --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
-}
-
-//correo=
-.example-container mat-form-field+mat-form-field {
-  margin-left: 8px;
-}
-
-//clave=
-.example-container mat-form-field+mat-form-field {
-  margin-left: 8px;
+//ESTO ES DE LA CONTRASEÑA
+.example-container2 mat-form-field+mat-form-field {
+  margin-left: 0;
 }
 
 .example-right-align {
   text-align: right;
 }
 
-input.example-right-align::-webkit-outer-spin-button,
-input.example-right-align::-webkit-inner-spin-button {
-  display: none;
+.example-right-align {
+  text-align: right;
 }
-img{
+
+//ESTO ES DEL CORREO
+.example-container mat-form-field+mat-form-field {
+  margin-left: 0;
+}
+
+//ESTO ES DE LA CARD:
+ion-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 460px;
+  max-width: 400px;
+  margin: 25px auto;
+  border-radius: 20px;
+  background: #222222;
+}
+
+//el fondo de la aplicacion:
+ion-content {
+  --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
+}
+
+//LA IMAGEN:
+img {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -84,4 +43,21 @@ img{
   width: 150px;
   height: 150px;
   margin: auto;
+}
+//LAS P:
+p {
+font-size: 15px;
+}
+//LAS A
+a{
+  color: #797575;
+}
+//CUANDO SE PONGA PEQUEÑA LA PANTALLA
+@media(width:425px) {
+  ion-card {
+    height: 500px;
+    width: 400px;
+    background: #222222;
+  }
+
 }
