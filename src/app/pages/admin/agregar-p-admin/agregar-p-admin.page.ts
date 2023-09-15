@@ -16,16 +16,23 @@ export class AgregarPAdminPage implements OnInit {
 
   ngOnInit() {
   }
+
+  limitarLongitudPrecio(event: any) {
+    const maxLength = 10;
+    if (event.target.value.length > maxLength) {
+      event.target.value = event.target.value.slice(0, maxLength);
+      this.precioPValue = parseInt(event.target.value, 10);
+    }
+  } 
+  
   validatePrecio(precioValue: number) {
     const firstDigit = String(precioValue).charAt(0);
-
+  
     if (firstDigit === '0') {
       this.precioPValue = 1;
     }
     if (firstDigit === '-') {
       this.precioPValue = 1;
     }
-
-
   }
 }
