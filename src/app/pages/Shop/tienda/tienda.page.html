@@ -9,15 +9,15 @@
   <ion-grid class="ion-grid" *ngIf="rol == 2">
     <ion-row>
       <ion-card>
-          <ion-card-title style="font-size: 40px;">Bienvenido Administrador</ion-card-title>
-          <ion-row>
-            <ion-button class="center-buttons" shape="round" color="dark" [routerLink]="['/agregar-p-admin']">Agregar
-              productos</ion-button>
-          </ion-row>
-          <ion-row>
-            <ion-button class="center-buttons" shape="round" color="dark" [routerLink]="['./tienda']">Ver
-              usuarios</ion-button>
-          </ion-row>
+        <ion-card-title style="font-size: 40px;">Bienvenido Administrador</ion-card-title>
+        <ion-row>
+          <ion-button class="center-buttons" shape="round" color="dark" [routerLink]="['/agregar-p-admin']">Agregar
+            productos</ion-button>
+        </ion-row>
+        <ion-row>
+          <ion-button class="center-buttons" shape="round" color="dark" [routerLink]="['./tienda']">Ver
+            usuarios</ion-button>
+        </ion-row>
       </ion-card>
     </ion-row>
   </ion-grid>
@@ -233,5 +233,7 @@
       </p>
     </ion-row>
   </ion-grid>
+
+  <app-componente2></app-componente2>
 
 </ion-content>

@@ -49,7 +49,7 @@ p {
 
 ion-card-title {
     color: white;
-    font-size: 60px;
+    font-size: 55px;
     margin: 5px;
     text-align: center;
     font-family: 'DM Serif Display', serif;
@@ -57,12 +57,12 @@ ion-card-title {
 .ion-title{
     color: white;
     font-family: 'DM Serif Display', serif;
-    font-size: 25px;
+    font-size: 30px;
     text-align: center;
     margin: 5px;
 }
-@media(width:423px){
-    ion-title{
+@media(width:425px) or (width:412px){
+    ion-card-title{
         font-size: 40px;
     }
     
@@ -70,32 +70,4 @@ ion-card-title {
 }
 ion-content {
     --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
-}
-//COSA DEL CARRITO::after
-:host {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .demo-section + .demo-section {
-    margin-top: 16px;
-  }
-  .demo-section {
-    margin-right: 20px; /* Agrega margen al lado derecho del primer elemento */
-    display: flex; /* Utiliza flexbox para alinear verticalmente los elementos */
-    align-items: center; /* Centra verticalmente los elementos */
-  }
-  
-//BUSQUEDA:
-/* Estilos para el contenedor que contiene el ion-searchbar */
-.search-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-  }
-  ion-searchbar {
-    width: 400px;
-    text-align: left;
 }

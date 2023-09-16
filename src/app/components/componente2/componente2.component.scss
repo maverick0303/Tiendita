@@ -1,0 +1,23 @@
+.fixed-bottom-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    height: 55px; /* Ajusta aquí la altura de las pestañas en tus ion-tabs */
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido dentro del menú */
+    padding: 10px; /* Espaciado interior opcional */
+  }
+  
+  .fixed-bottom-menu ion-icon {
+    font-size: 25px; /* Ajusta el tamaño de los íconos según sea necesario */
+    margin-right: 15px; /* Espacio entre los íconos y el texto, ajusta según sea necesario */
+    
+  }
+  
+  .main-content {
+    /* Ajusta el espacio superior del contenido principal para evitar que se superponga con el menú fijo */
+    padding-bottom: 35px; /* Ajusta aquí la misma altura que en .fixed-bottom-menu */
+  }
+  

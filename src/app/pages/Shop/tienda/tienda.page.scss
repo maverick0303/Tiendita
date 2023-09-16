@@ -68,23 +68,23 @@ p {
 ion-card-title {
     color: white;
     font-size: 50px;
-    margin: 5px;
+    margin: 2px;
     text-align: center;
     font-family: 'DM Serif Display', serif;
 }
 .ion-title{
     color: white;
     font-family: 'DM Serif Display', serif;
-    font-size: 25px;
-    text-align: center;
+    font-size: 20px;
+    text-align: left;
     margin: 5px;
 }
-@media(width:412px){
-    ion-title{
-        font-size: 30px;
+@media(width:412px) or (width: 425px){
+    .ion-title{
+        font-size: 20px;
     }
     ion-card-title{
-        font-size: 30px;
+        font-size: 35px;
     }
     ion-img {
         width: 250px;
@@ -100,6 +100,7 @@ ion-card-title {
             /* Margen superior e inferior igual a 0 y margen lateral automático para centrar en el medio */
     
             ion-card {
+                height: 420px;
                 margin: 10px;
                 /* Margen entre las tarjetas */
                 max-width: 250px;
@@ -113,6 +114,9 @@ ion-card-title {
                 }
             }
         }
+    }
+    td{
+        font-size: 20px;
     }
 }
 //FONDO 

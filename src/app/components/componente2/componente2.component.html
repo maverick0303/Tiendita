@@ -1,0 +1,35 @@
+<!-- MENÚ DEL USUARIO -->
+<div class="fixed-bottom-menu">
+  <ion-tabs>
+    <!--PERFIL DE USUARIO-->
+    <ion-tab-bar slot="bottom">
+      <p [routerLink]="['/datos-personales']">
+        <ion-tab-button>
+          <ion-icon name="person-circle-outline"></ion-icon>
+          Mi perfil
+        </ion-tab-button>
+      </p>
+      <!--HISTORIAL-->
+      <p [routerLink]="['/historial']">
+        <ion-tab-button>
+          <ion-icon name="document-text-outline"></ion-icon>
+          Mis compras
+        </ion-tab-button>
+      </p>
+      <!--INICIO DE LA TIENDA-->
+      <p [routerLink]="['/tienda']">
+        <ion-tab-button>
+          <ion-icon name="home-outline"></ion-icon>
+          Inicio
+        </ion-tab-button>
+      </p>
+      <!--CERRAR LA SESION-->
+      <p [routerLink]="['/home']">
+        <ion-tab-button >
+          <ion-icon name="log-out-outline"></ion-icon>
+          Cerrar sesión
+        </ion-tab-button>
+      </p>
+    </ion-tab-bar>
+  </ion-tabs>
+</div>
