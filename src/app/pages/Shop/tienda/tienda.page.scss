@@ -83,7 +83,7 @@ ion-card-title {
     text-align: left;
     margin: 5px;
 }
-@media(width:412px) or (width: 425px){
+@media(width:412px) or (width: 425px) or (width: 389px){
     .ion-title{
         font-size: 22px;
     }
@@ -130,5 +130,6 @@ ion-content {
 
 //LAS PIPES=
 td{
+    color: white;
     font-size: 40px;
 }

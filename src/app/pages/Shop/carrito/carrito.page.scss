@@ -59,7 +59,7 @@ p {
 
     
 
-@media (width: 425px) or (width: 412px) {
+@media(width:412px) or (width: 425px) or (width: 389px) {
     .btn{
         font-size: 25px;
     }
@@ -101,6 +101,9 @@ p {
         font-size: 1opx;
     }
     
+}
+ion-card-title{
+    color: white;
 }
 //FONDO 
 ion-content {

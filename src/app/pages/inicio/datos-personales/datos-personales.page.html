@@ -29,9 +29,9 @@
               label-placement="floating" fill="outline" [value]="apellidoEnviado" >
             </ion-input>
             <div class="error-message" *ngIf="apellidoEnviadoModel.invalid && (apellidoEnviadoModel.dirty || apellidoEnviadoModel.touched)">
-              <p *ngIf="apellidoEnviadoModel.errors?.['required']">El nombre es obligatorio</p>
-              <p *ngIf="apellidoEnviadoModel.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</p>
-              <p *ngIf="apellidoEnviadoModel.errors?.['maxlength']">El nombre no debe exceder los 15 caracteres.</p>
+              <p *ngIf="apellidoEnviadoModel.errors?.['required']">El apellido es obligatorio</p>
+              <p *ngIf="apellidoEnviadoModel.errors?.['minlength']">El Apellido debe tener al menos 3 caracteres.</p>
+              <p *ngIf="apellidoEnviadoModel.errors?.['maxlength']">El apellido no debe exceder los 15 caracteres.</p>
             </div>
             <br>
 

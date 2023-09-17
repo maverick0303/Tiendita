@@ -57,7 +57,7 @@ p {
     margin: 5px;
 }
 
-@media (width: 425px) or (width:412px){
+@media(width:412px) or (width: 425px) or (width: 389px){
     .custom-card {
         align-items: center;
         /* Mantiene el contenido centrado verticalmente en pantallas grandes */

@@ -70,7 +70,7 @@ ion-grid {
   }
 }
 //para que la card quede bien ajustada=
-@media(width: 425px){
+@media(width:412px) or (width: 425px) or (width: 389px){
   ion-card-title {
     font-size: 45px;
     font-family: 'Abril Fatface', cursive;
