@@ -13,8 +13,6 @@
         <ion-row>
           <ion-button class="center-buttons" shape="round" color="dark" [routerLink]="['/agregar-p-admin']">Agregar
             productos</ion-button>
-        </ion-row>
-        <ion-row>
           <ion-button class="center-buttons" shape="round" color="dark" [routerLink]="['./tienda']">Ver
             usuarios</ion-button>
         </ion-row>
@@ -29,169 +27,169 @@
     <ion-card-title>Audífonos Gamers</ion-card-title>
     <!--PRIMER PRODUCTO-->
     <ion-row>
-      <p [routerLink]="['/ag3']">
-        <ion-card>
-          <ion-img src="assets/AUDIFONOS GAMERS/ag3.webp" alt="aqui habia una imagen"></ion-img>
-          <ion-card-header>
-            <ion-card-title class="ion-title">Audífonos gamers<br>rojos con negro</ion-card-title>
-            <ion-card-content>
-              <td>{{ dinero | currency:'USD':'symbol':'4.0-0' }}</td>
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </p>
-
+      <ion-card>
+        <ion-img src="assets/AUDIFONOS GAMERS/ag3.webp" alt="aqui habia una imagen"></ion-img>
+        <ion-card-header>
+          <ion-card-title class="ion-title">Audífonos gamers<br>rojos con negro</ion-card-title>
+          <ion-card-content>
+            <td>{{ dinero | currency:'USD':'symbol':'4.0-0' }}</td>
+            <ion-button *ngIf="rol == 1" color="dark" [routerLink]="['/ag3']">Ver detalles</ion-button>
+            <ion-button *ngIf="rol == 2" color="dark" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
+          </ion-card-content>
+        </ion-card-header>
+      </ion-card>
       <!--PRIMER PRODUCTO-->
-      <p [routerLink]="['/ag4']">
-        <ion-card>
-          <ion-img src="assets/AUDIFONOS GAMERS/ag4.jpeg" alt="aqui habia una imagen"></ion-img>
-          <ion-card-header>
-            <ion-card-title class="ion-title">Audífonos gamers<br>negro con anaranjado</ion-card-title>
-            <ion-card-content>
-              <td>{{ dinero2 | currency:'USD':'symbol':'4.0-0' }}</td>
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </p>
+      <ion-card>
+        <ion-img src="assets/AUDIFONOS GAMERS/ag4.jpeg" alt="aqui habia una imagen"></ion-img>
+        <ion-card-header>
+          <ion-card-title class="ion-title">Audífonos gamers<br>negro con naranja</ion-card-title>
+          <ion-card-content>
+            <td>{{ dinero2 | currency:'USD':'symbol':'4.0-0' }}</td>
+            <ion-button *ngIf="rol == 1" color="dark" [routerLink]="['/ag4']">Ver detalles</ion-button>
+            <ion-button *ngIf="rol == 2" color="dark" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
+          </ion-card-content>
+        </ion-card-header>
+      </ion-card>
       <!--TERCER PRODUCTO-->
-      <p [routerLink]="['/ag5']">
-        <ion-card>
-          <ion-img src="assets/AUDIFONOS GAMERS/ag5.jpeg" alt="aqui habia una imagen"></ion-img>
-          <ion-card-header>
-            <ion-card-title class="ion-title">Audífonos gamers<br>lila con blanco</ion-card-title>
-            <ion-card-content>
-              <td>{{ dinero3 | currency:'USD':'symbol':'4.0-0' }}</td>
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </p>
+      <ion-card>
+        <ion-img src="assets/AUDIFONOS GAMERS/ag5.jpeg" alt="aqui habia una imagen"></ion-img>
+        <ion-card-header>
+          <ion-card-title class="ion-title">Audífonos gamers<br>lila con blanco</ion-card-title>
+          <ion-card-content>
+            <td>{{ dinero3 | currency:'USD':'symbol':'4.0-0' }}</td>
+            <ion-button *ngIf="rol == 1" color="dark" [routerLink]="['/ag5']">Ver detalles</ion-button>
+            <ion-button *ngIf="rol == 2" color="dark" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
+          </ion-card-content>
+        </ion-card-header>
+      </ion-card>
     </ion-row>
   </ion-grid>
   <ion-grid>
     <ion-card-title>Audífonos Inalámbricos</ion-card-title>
     <!--PRIMER PRODUCTO-->
     <ion-row>
-      <p [routerLink]="['/ai1']">
-        <ion-card>
-          <ion-img src="assets/AUDIFONOS BLUTU/a1.jpg" alt="aqui habia una imagen"></ion-img>
-          <ion-card-header>
-            <ion-card-title class="ion-title">Audífonos Bluetooth<br>morados</ion-card-title>
-            <ion-card-content>
-              <td>{{ dinero4 | currency:'USD':'symbol':'4.0-0' }}</td>
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </p>
+      <ion-card>
+        <ion-img src="assets/AUDIFONOS BLUTU/a1.jpg" alt="aqui habia una imagen"></ion-img>
+        <ion-card-header>
+          <ion-card-title class="ion-title">Audífonos Bluetooth<br>morados</ion-card-title>
+          <ion-card-content>
+            <td>{{ dinero4 | currency:'USD':'symbol':'4.0-0' }}</td>
+            <ion-button *ngIf="rol == 1" color="dark" [routerLink]="['/ai1']">Ver detalles</ion-button>
+            <ion-button *ngIf="rol == 2" color="dark" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
+          </ion-card-content>
+        </ion-card-header>
+      </ion-card>
       <!--SEGUNDO PRODUCTO-->
-      <p [routerLink]="['/ai4']">
-        <ion-card>
-          <ion-img src="assets/AUDIFONOS BLUTU/a4.jpg" alt="aqui habia una imagen"></ion-img>
-          <ion-card-header>
-            <ion-card-title class="ion-title">Audífonos Bluetooth<br>azules</ion-card-title>
-            <ion-card-content>
-              <td>{{ dinero5 | currency:'USD':'symbol':'4.0-0' }}</td>
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </p>
+      <ion-card>
+        <ion-img src="assets/AUDIFONOS BLUTU/a4.jpg" alt="aqui habia una imagen"></ion-img>
+        <ion-card-header>
+          <ion-card-title class="ion-title">Audífonos Bluetooth<br>azules</ion-card-title>
+          <ion-card-content>
+            <td>{{ dinero5 | currency:'USD':'symbol':'4.0-0' }}</td>
+            <ion-button *ngIf="rol == 1" color="dark" [routerLink]="['/ai4']">Ver detalles</ion-button>
+            <ion-button *ngIf="rol == 2" color="dark" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
+          </ion-card-content>
+        </ion-card-header>
+      </ion-card>
       <!--TERCER PRODUCTO-->
-      <p [routerLink]="['/ai6']">
-        <ion-card>
-          <ion-img src="assets/AUDIFONOS BLUTU/a6.jpg" alt="aqui habia una imagen"></ion-img>
-          <ion-card-header>
-            <ion-card-title class="ion-title">Audífonos Bluetooth<br>verdes</ion-card-title>
-            <ion-card-content>
-              <td>{{ dinero6 | currency:'USD':'symbol':'4.0-0' }}</td>
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </p>
+      <ion-card>
+        <ion-img src="assets/AUDIFONOS BLUTU/a6.jpg" alt="aqui habia una imagen"></ion-img>
+        <ion-card-header>
+          <ion-card-title class="ion-title">Audífonos Bluetooth<br>verdes</ion-card-title>
+          <ion-card-content>
+            <td>{{ dinero6 | currency:'USD':'symbol':'4.0-0' }}</td>
+            <ion-button *ngIf="rol == 1" color="dark" [routerLink]="['/ai6']">Ver detalles</ion-button>
+            <ion-button *ngIf="rol == 2" color="dark" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
+          </ion-card-content>
+        </ion-card-header>
+      </ion-card>
     </ion-row>
   </ion-grid>
-
+  <!--#####################################RELOJES ANALOGICOS##########################################-->
   <ion-grid>
     <ion-card-title>Relojes Analógicos</ion-card-title>
     <!--PRIMER PRODUCTO-->
     <ion-row>
-      <p [routerLink]="['/r3']">
-        <ion-card>
-          <ion-img src="assets/RELOJES ANALOGO/r3.webp" alt="aqui habia una imagen"></ion-img>
-          <ion-card-header>
-            <ion-card-title class="ion-title">Reloj Analógico<br>negro con azules</ion-card-title>
-            <ion-card-content>
-              <td>{{ dinero7 | currency:'USD':'symbol':'4.0-0' }}</td>
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </p>
+      <ion-card>
+        <ion-img src="assets/RELOJES ANALOGO/r3.webp" alt="aqui habia una imagen"></ion-img>
+        <ion-card-header>
+          <ion-card-title class="ion-title">Reloj Analógico<br>negro con azules</ion-card-title>
+          <ion-card-content>
+            <td>{{ dinero7 | currency:'USD':'symbol':'4.0-0' }}</td>
+            <ion-button *ngIf="rol == 1" color="dark" [routerLink]="['/r3']">Ver detalles</ion-button>
+            <ion-button *ngIf="rol == 2" color="dark" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
+          </ion-card-content>
+        </ion-card-header>
+      </ion-card>
       <!--SEGUNDO PRODUCTO-->
-      <p [routerLink]="['/r4']">
-        <ion-card>
-          <ion-img src="assets/RELOJES ANALOGO/r4.jpeg" alt="aqui habia una imagen"></ion-img>
-          <ion-card-header>
-            <ion-card-title class="ion-title">Reloj Analógico <br>negro fondo azul</ion-card-title>
-            <ion-card-content>
-              <td>{{ dinero8 | currency:'USD':'symbol':'4.0-0' }}</td>
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </p>
+      <ion-card>
+        <ion-img src="assets/RELOJES ANALOGO/r4.jpeg" alt="aqui habia una imagen"></ion-img>
+        <ion-card-header>
+          <ion-card-title class="ion-title">Reloj Analógico <br>negro fondo azul</ion-card-title>
+          <ion-card-content>
+            <td>{{ dinero8 | currency:'USD':'symbol':'4.0-0' }}</td>
+            <ion-button *ngIf="rol == 1" color="dark" [routerLink]="['/r4']">Ver detalles</ion-button>
+            <ion-button *ngIf="rol == 2" color="dark" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
+          </ion-card-content>
+        </ion-card-header>
+      </ion-card>
       <!--TERCER PRODUCTO-->
-      <p [routerLink]="['/r5']">
-        <ion-card>
-          <ion-img src="assets/RELOJES ANALOGO/r5.jpg" alt="aqui habia una imagen"></ion-img>
-          <ion-card-header>
-            <ion-card-title class="ion-title">Reloj Analógico <br>amarillo con negro</ion-card-title>
-            <ion-card-content>
-              <td>{{ dinero9 | currency:'USD':'symbol':'4.0-0' }}</td>
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </p>
+      <ion-card>
+        <ion-img src="assets/RELOJES ANALOGO/r5.jpg" alt="aqui habia una imagen"></ion-img>
+        <ion-card-header>
+          <ion-card-title class="ion-title">Reloj Analógico <br>amarillo con negro</ion-card-title>
+          <ion-card-content>
+            <td>{{ dinero9 | currency:'USD':'symbol':'4.0-0' }}</td>
+            <ion-button *ngIf="rol == 1" color="dark" [routerLink]="['/r5']">Ver detalles</ion-button>
+            <ion-button *ngIf="rol == 2" color="dark" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
+          </ion-card-content>
+        </ion-card-header>
+      </ion-card>
     </ion-row>
   </ion-grid>
-
+  <!--###############RELOJES DIGITALES####################################-->
   <ion-grid>
     <ion-card-title>Relojes Digitales</ion-card-title>
     <ion-row>
       <!--PRIMER PRODUCTO-->
-      <p [routerLink]="['/rd2']">
-        <ion-card>
-          <ion-img src="assets/digitales/rd2.jpeg" alt="aqui habia una imagen"></ion-img>
-          <ion-card-header>
-            <ion-card-title class="ion-title">Reloj Digital negro<br> con borde azul</ion-card-title>
-            <ion-card-content>
-              <td>{{ dinero10 | currency:'USD':'symbol':'4.0-0' }}</td>
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </p>
+      <ion-card>
+        <ion-img src="assets/digitales/rd2.jpeg" alt="aqui habia una imagen"></ion-img>
+        <ion-card-header>
+          <ion-card-title class="ion-title">Reloj Digital negro<br> con borde azul</ion-card-title>
+          <ion-card-content>
+            <td>{{ dinero10 | currency:'USD':'symbol':'4.0-0' }}</td>
+            <ion-button *ngIf="rol == 1" color="dark" [routerLink]="['/rd2']">Ver detalles</ion-button>
+            <ion-button *ngIf="rol == 2" color="dark" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
+          </ion-card-content>
+        </ion-card-header>
+      </ion-card>
       <!--SEGUNDO PRODUCTO-->
-      <p [routerLink]="['/rd5']">
-        <ion-card>
-          <ion-img src="assets/digitales/rd5.jpg" alt="aqui habia una imagen"></ion-img>
-          <ion-card-header>
-            <ion-card-title class="ion-title">Reloj Digital<br>negro</ion-card-title>
-            <ion-card-content>
-              <td>{{ dinero11 | currency:'USD':'symbol':'4.0-0' }}</td>
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </p>
+      <ion-card>
+        <ion-img src="assets/digitales/rd5.jpg" alt="aqui habia una imagen"></ion-img>
+        <ion-card-header>
+          <ion-card-title class="ion-title">Reloj Digital<br>negro</ion-card-title>
+          <ion-card-content>
+            <td>{{ dinero11 | currency:'USD':'symbol':'4.0-0' }}</td>
+            <ion-button *ngIf="rol == 1" color="dark" [routerLink]="['/rd5']">Ver detalles</ion-button>
+            <ion-button *ngIf="rol == 2" color="dark" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
+          </ion-card-content>
+        </ion-card-header>
+      </ion-card>
       <!--TERCER PRODUCTO-->
-      <p [routerLink]="['/rd6']">
-        <ion-card>
-          <ion-img src="assets/digitales/rd6.jpeg" alt="aqui habia una imagen"></ion-img>
-          <ion-card-header>
-            <ion-card-title class="ion-title">Reloj Digital<br>blanco</ion-card-title>
-            <ion-card-content>
-              <td>{{ dinero12 | currency:'USD':'symbol':'4.0-0' }}</td>
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </p>
+      <ion-card>
+        <ion-img src="assets/digitales/rd6.jpeg" alt="aqui habia una imagen"></ion-img>
+        <ion-card-header>
+          <ion-card-title class="ion-title">Reloj Digital<br>blanco</ion-card-title>
+          <ion-card-content>
+            <td>{{ dinero12 | currency:'USD':'symbol':'4.0-0' }}</td>
+            <ion-button *ngIf="rol == 1" color="dark" [routerLink]="['/rd6']">Ver detalles</ion-button>
+            <ion-button *ngIf="rol == 2" color="dark" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
+          </ion-card-content>
+        </ion-card-header>
+      </ion-card>
     </ion-row>
   </ion-grid>
+  <!--###########################################RELOJES SMART#################################################-->
   <ion-grid>
     <ion-card-title>Relojes Smartwatch</ion-card-title>
     <!--PRIMER PRODUCTO-->
@@ -203,6 +201,8 @@
             <ion-card-title class="ion-title">Reloj Smartwatch<br>Azul</ion-card-title>
             <ion-card-content>
               <td>{{ dinero13 | currency:'USD':'symbol':'4.0-0' }}</td>
+              <ion-button *ngIf="rol == 1" color="dark" [routerLink]="['/rs1']">Ver detalles</ion-button>
+              <ion-button *ngIf="rol == 2" color="dark" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
             </ion-card-content>
           </ion-card-header>
         </ion-card>
@@ -215,6 +215,8 @@
             <ion-card-title class="ion-title">Reloj Smartwatch<br>anaranjado</ion-card-title>
             <ion-card-content>
               <td>{{ dinero14 | currency:'USD':'symbol':'4.0-0' }}</td>
+              <ion-button *ngIf="rol == 1" color="dark" [routerLink]="['/rs3']">Ver detalles</ion-button>
+              <ion-button *ngIf="rol == 2" color="dark" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
             </ion-card-content>
           </ion-card-header>
         </ion-card>
@@ -227,6 +229,8 @@
             <ion-card-title class="ion-title">Reloj Smartwatch<br>morado</ion-card-title>
             <ion-card-content>
               <td>{{ dinero15 | currency:'USD':'symbol':'4.0-0' }}</td>
+              <ion-button *ngIf="rol == 1" color="dark" [routerLink]="['/rs5']">Ver detalles</ion-button>
+              <ion-button *ngIf="rol == 2" color="dark" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
             </ion-card-content>
           </ion-card-header>
         </ion-card>

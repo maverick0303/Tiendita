@@ -18,10 +18,11 @@ ion-card {
         /* Margen superior e inferior igual a 0 y margen lateral automático para centrar en el medio */
 
         ion-card {
-            margin: 10px;
+            margin: 1px;
             /* Margen entre las tarjetas */
-            max-width: 550px;
+            max-width: 350px;
             /* Ancho máximo de las tarjetas */
+            max-height: 220px;
         }
     }
 }
@@ -36,6 +37,7 @@ ion-grid {
         /* Margen superior e inferior igual a 0 y margen lateral automático para centrar en el medio */
 
         ion-card {
+            
             margin: 10px;
             /* Margen entre las tarjetas */
             max-width: 300px;
@@ -56,7 +58,9 @@ ion-grid {
 @import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Tilt+Prism&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
 
-
+ion-card-content{
+    margin: auto;
+}
 
 p {
     color: white;
@@ -81,10 +85,10 @@ ion-card-title {
 }
 @media(width:412px) or (width: 425px){
     .ion-title{
-        font-size: 20px;
+        font-size: 22px;
     }
     ion-card-title{
-        font-size: 35px;
+        font-size: 40px;
     }
     ion-img {
         width: 250px;
@@ -100,7 +104,7 @@ ion-card-title {
             /* Margen superior e inferior igual a 0 y margen lateral automático para centrar en el medio */
     
             ion-card {
-                height: 420px;
+                height: 470px;
                 margin: 10px;
                 /* Margen entre las tarjetas */
                 max-width: 250px;
