@@ -43,7 +43,7 @@ height: 750px;
 }
 
 //cuando este pequeña la pantalla:
-@media(width:412px) or (width: 425px) or (width: 389px){
+@media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px){
 ion-card {
   margin: auto 50px;
   height: 770px;

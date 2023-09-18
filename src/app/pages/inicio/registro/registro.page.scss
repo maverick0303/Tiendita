@@ -66,7 +66,7 @@
   margin-top: 20px; /* Agrega margen superior si es necesario */
 }
 
-@media(width:412px) or (width: 425px) or (width: 389px){
+@media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px){
   ion-card-title{
     text-align: center;
     font-size: 40px;

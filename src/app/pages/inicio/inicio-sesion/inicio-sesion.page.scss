@@ -53,7 +53,8 @@ a{
   color: #797575;
 }
 //CUANDO SE PONGA PEQUEÑA LA PANTALLA
-@media(width:412px) or (width: 425px) or (width: 389px) {
+@media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px){
+
   ion-card {
     height: 500px;
     width: 400px;
