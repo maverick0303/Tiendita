@@ -1,6 +1,3 @@
-<ion-header [translucent]="true">
-</ion-header>
-
 <ion-content class="fondo" [fullscreen]="true">
   <ion-grid>
     <ion-row class="center-row">
@@ -11,116 +8,85 @@
             <div class="input-row">
               <!--NOMBRE-->
               <ion-input label="Nombre:" type="text" label-placement="floating" fill="outline" placeholder="Mario"
-                name="nombreU" minlength="3" maxlength="15" required [(ngModel)]="nombreUValue" #nombreUModel="ngModel"
+                name="nombreU" required [(ngModel)]="nombreUValue" (ionBlur)="verificarFormulario()"
                 (keydown)="valiNombre($event)">
               </ion-input>
               <!--VALIDACION-->
-              <div class="error-message" *ngIf="nombreUModel.invalid && (nombreUModel.dirty || nombreUModel.touched)">
-                <p *ngIf="nombreUModel.errors?.['required']">El nombre es obligatorio.</p>
-                <p *ngIf="nombreUModel.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</p>
-                <p *ngIf="nombreUModel.errors?.['maxlength']">El nombre no debe exceder los 15 caracteres.</p>
+              <div class="error-message" *ngIf="!formularioValido">
+                <p *ngIf="nombreUValue.length === 0">El nombre es obligatorio.</p>
+                <p *ngIf="nombreUValue.length > 0 && !formularioValido">El nombre solo debe contener letras y tener
+                  entre 1 y 15 caracteres.</p>
               </div>
             </div>
-
             <!--APELLIDO-->
-            <div class="input-row">
-              <ion-input label="Apellido:" type="text" label-placement="floating" fill="outline" placeholder="Castillo"
-                name="apellidoU" minlength="3" maxlength="15" required [(ngModel)]="apellidoUValue"
-                #apellidoUModel="ngModel" (keydown)="valiApellido($event)"></ion-input>
-            </div>
+            <ion-input label="Apellido:" type="text" label-placement="floating" fill="outline" placeholder="Lopez"
+              name="nombreU" required [(ngModel)]="apellidoUValue" (ionBlur)="verificarFormulario()"
+              (keydown)="ValiApellido($event)">
+            </ion-input>
             <!--VALIDACION-->
-            <div class="error-message"
-              *ngIf="apellidoUModel.invalid && (apellidoUModel.dirty || apellidoUModel.touched)">
-              <p *ngIf="apellidoUModel.errors?.['required']">El apellido es obligatorio.</p>
-              <p *ngIf="apellidoUModel.errors?.['minlength']">El apellido debe tener al menos 3 caracteres.</p>
-              <p *ngIf="apellidoUModel.errors?.['maxlength']">El apellido no debe exceder los 15 caracteres.</p>
+            <div class="error-message" *ngIf="!formularioValido">
+              <p *ngIf="nombreUValue.length === 0">El nombre es obligatorio.</p>
+              <p *ngIf="nombreUValue.length > 0 && !formularioValido">El nombre solo debe contener letras y tener entre
+                1 y 15 caracteres.</p>
             </div>
-
             <!--RUT-->
-            <ion-input label="Rut:" type="text" label-placement="floating" fill="outline" placeholder="28.999.777-8"
-              name="rutU" minlength="11" maxlength="12" required (keydown)="espacioContra($event);validarut($event)"
-              [(ngModel)]="rutUValue" #rutUInput="ngModel"></ion-input>
+            <ion-input label="RUT:" type="text" label-placement="floating" fill="outline" placeholder="25.345.678-2"
+              name="rut" required [(ngModel)]="rutValue" (ionBlur)="verificarFormulario()" (keydown)="valiRut($event)">
+            </ion-input>
             <!--VALIDACION-->
-            <div class="error-message" *ngIf="rutUInput.invalid && (rutUInput.dirty || rutUInput.touched)">
-              <p *ngIf="rutUInput.errors?.['required']">Debe ingresar un RUT.</p>
-              <p *ngIf="!validateRutU(rutUValue)">El formato del RUT ingresado no es correcto</p>
+            <div class="error-message" *ngIf="!formularioValido">
+              <p *ngIf="rutValue.length === 0">El RUT es obligatorio.</p>
+              <p *ngIf="rutValue.length > 0 && !formularioValido">El RUT no tiene un formato válido.</p>
             </div>
-
-            <!--CORREO-->
-            <div class="input-row">
-              <ion-input label="Correo electrónico:" type="email" label-placement="floating" fill="outline"
-                placeholder="ayuda@gmail.com" required (keydown)="espacioContra($event)" [(ngModel)]="email"
-                name="email" #emailInput="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></ion-input>
+            <!--EMAIL-->
+            <ion-input label="Email:" type="text" label-placement="floating" fill="outline"
+              placeholder="correo@example.com" name="email" required [(ngModel)]="emailValue"
+              (ionBlur)="verificarFormulario()" (keydown)="valiEmail($event)">
+            </ion-input>
+            <!--VALIDACION EMAIL-->
+            <div class="error-message" *ngIf="!formularioValido">
+              <p *ngIf="emailValue.length === 0">El correo electrónico es obligatorio.</p>
+              <p *ngIf="emailValue.length > 0 && !formularioValido">El correo electrónico no tiene un formato válido.
+              </p>
             </div>
-            <!--VALIDACION-->
-            <ion-note class="error-message" *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
-              correo no valido y no puede estar vacío
-            </ion-note>
-
-
-
-            <!--CLAVE-->
+            <!--CONTRASEÑA-->
             <ion-input label="Contraseña:" type="password" label-placement="floating" fill="outline"
-              placeholder="******" required [(ngModel)]="password" name="password" #passwordInput="ngModel"
-              minlength="3" maxlength="15" (keydown)="espacioContra($event)"
-              pattern="^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&.,\-_*]).{3,15}$"></ion-input>
+              placeholder="M1@password" name="password" required [(ngModel)]="passwordValue"
+              (ionBlur)="verificarFormulario()" (keydown)="valiPassword($event)">
+            </ion-input>
+            <!--VALIDACION CONTRASEÑA-->
+            <div class="error-message" *ngIf="!formularioValido">
+              <p *ngIf="passwordValue.length === 0">La contraseña es obligatoria.</p>
+              <p *ngIf="passwordValue.length > 0 && !formularioValido">La contraseña no cumple con los requisitos.</p>
+            </div>
+            <!--CONFIRMAR CONTRASEÑA-->
+            <ion-input label="Confirmar Contraseña:" type="password" label-placement="floating" fill="outline"
+              placeholder="Confirmar contraseña" name="confirmPassword" required [(ngModel)]="confirmPasswordValue"
+              (ionBlur)="verificarFormulario()">
+            </ion-input>
             <!--VALIDACION-->
-            <div class="error-message" *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)">
-              <p *ngIf="passwordInput.errors?.['required']">La contraseña es requerida.</p>
-              <p *ngIf="passwordInput.errors?.['minlength']">La contraseña debe tener al menos 3 caracteres.</p>
-              <p *ngIf="passwordInput.errors?.['maxlength']">La contraseña no debe exceder los 15 caracteres.</p>
-              <p *ngIf="passwordInput.errors?.['pattern']">La contraseña debe contener al menos un número y un carácter
-                especial.</p>
+            <div class="error-message" *ngIf="!formularioValido">
+              <p *ngIf="passwordValue.length === 0">La contraseña es obligatoria.</p>
+              <p *ngIf="passwordValue.length > 0 && !formularioValido">La contraseña no cumple con los requisitos.</p>
+              <p *ngIf="passwordValue !== confirmPasswordValue">Las contraseñas no coinciden.</p>
             </div>
-
-
-            <!--#########################################################################################################-->
-
-            <!--R CLAVE-->
-            <ion-input label="Confirmar contraseña:" type="password" label-placement="floating" fill="outline"
-              placeholder="******" name="cContrasena" required [(ngModel)]="confirmPassword"
-              #confirmPasswordInput="ngModel" (keydown)="espacioContra($event)"></ion-input>
-
+            <!-- Pregunta de seguridad -->
+            <ion-select label="Pregunta de Seguridad" label-placement="floating" fill="outline" [(ngModel)]="preguntaSeguridad" required>
+              <ion-select-option value="1">¿Cuál es tu película favorita?</ion-select-option>
+              <ion-select-option value="2">¿Nombre de tu mascota?</ion-select-option>
+              <ion-select-option value="3">¿Color favorito?</ion-select-option>
+            </ion-select><br>
             <!--VALIDACION-->
-            <div class="error-message" *ngIf="confirmPassword !== '' && !validatePasswordMatch()">
-              <p *ngIf="confirmPasswordInput.invalid && confirmPasswordInput.errors?.['required']">Debe confirmar la
-                contraseña.</p>
-              <p *ngIf="!validatePasswordMatch()">Las contraseñas no coinciden.</p>
+            <div class="error-message" *ngIf="!preguntaSeguridad">
+              <p>Por favor, seleccione una pregunta de seguridad.</p>
             </div>
-
-
-            <!--PREGUNTA-->
-            <ion-list>
-              <ion-item>
-                <ion-select aria-label="Fruit" interface="popover" placeholder="Pregunta de seguridad" name="preguntaU"
-                  [(ngModel)]="preguntaUValue" #preguntaUModel="ngModel" required>
-                  <ion-select-option value="1">¿Cuál es tu película favorita?</ion-select-option>
-                  <ion-select-option value="2">¿Nombre de tu mascota?</ion-select-option>
-                  <ion-select-option value="3">¿Color favorito?</ion-select-option>
-                </ion-select>
-              </ion-item>
-            </ion-list>
-            <!-- VALIDACION -->
-            <div class="error-message"
-              *ngIf="preguntaUModel.invalid && (preguntaUModel.dirty || preguntaUModel.touched)">
-              <p *ngIf="preguntaUModel.hasError('required')">La pregunta de seguridad es obligatoria.</p>
-            </div>
-            <!--RESPUESTA-->
-            <ion-input label="Respuesta:" type="text" label-placement="floating" fill="outline"
-              placeholder="escriba su respuesta" name="respuestaU" minlength="3" maxlength="15" required
-              [(ngModel)]="respuestaUValue" #respuestaUModel="ngModel"></ion-input>
-            <!--VALIDACION-->
-            <div class="error-message"
-              *ngIf="respuestaUModel.invalid && (respuestaUModel.dirty || respuestaUModel.touched)">
-              <p *ngIf="respuestaUModel.errors?.['required']">La respuesta es obligatoria.</p>
-              <p *ngIf="respuestaUModel.errors?.['minlength']">La respuesta debe tener al menos 3 caracteres.</p>
-              <p *ngIf="respuestaUModel.errors?.['maxlength']">La respuesta no debe exceder los 15 caracteres.</p>
-            </div>
-
+            <!-- Respuesta a la pregunta de seguridad -->
+            <ion-input label="Respuesta a la Pregunta de Seguridad" type="text" label-placement="floating" fill="outline"
+              placeholder="Respuesta" name="respuestaSeguridad" [(ngModel)]="respuestaSeguridad" required>
+            </ion-input>
             <!--BOTON-->
-            <ion-button color="dark" class="center-buttons" [disabled]="!nombreUModel.valid || !apellidoUModel.valid || !preguntaUModel.valid ||
-                         !respuestaUModel.valid || !passwordInput.valid || !confirmPasswordInput.valid || !validatePasswordMatch()"
-              (click)="irAPaginaSiguiente()">Registrarse</ion-button>
+            <ion-button color="dark" class="center-buttons" (click)="irAPaginaSiguiente()"
+              [disabled]="!formularioValido">Registrarse</ion-button>
             <p1 [routerLink]="['/inicio-sesion']" style="text-align: center;"> ¿Ya tienes una cuenta? Inicia sesión aquí
             </p1><br>
           </form>

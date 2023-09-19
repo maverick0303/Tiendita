@@ -8,107 +8,129 @@ import { AlertController, ToastController } from '@ionic/angular';
   styleUrls: ['./registro.page.scss'],
 })
 export class RegistroPage implements OnInit {
-  email: string = ''; 
-  password: string = ''; 
+
   nombreUValue: string = '';
   apellidoUValue: string = '';
-  rutUValue: string = '';
-  respuestaUValue: string = '';
-  preguntaUValue: string = '';
-  confirmPassword: string = '';
+  rutValue: string = '';
+  emailValue: string = '';
+  passwordValue: string = '';
+  confirmPasswordValue: string = '';
+  preguntaSeguridad: string = '';
+  respuestaSeguridad: string = '';
+  formularioValido: boolean = false; // Agrega esta línea
 
   constructor(private router: Router) { }
 
   ngOnInit() {
     // Inicialización aquí...
   }
-
-  //FUNCIÓN PARA QUE NO SE PUEDAN HACER ESPACIOS en la contraseña
-  espacioContra(event: KeyboardEvent) {
-    if (event.key === ' ') {
-      event.preventDefault(); 
-    }
-  }
+  //validacion del nombre
   valiNombre(event: KeyboardEvent) {
     const input = event.key;
-    const regex = /^[A-Za-z]+$/; //solo permitir letras
+    const regex = /^[A-Za-z]+$/; // Solo permite letras
 
     if (!regex.test(input)) {
-      event.preventDefault(); //No permite que ingrese espacio
+      event.preventDefault(); // No permite que ingrese caracteres no válidos
     }
   }
-
-  valiApellido(event: KeyboardEvent) {
+  //validacion del apellido
+  ValiApellido(event: KeyboardEvent) {
     const input = event.key;
-    const regex = /^[A-Za-z]+$/; //solo permitir letras
+    const apellido = /^[A-Za-z]+$/; // Solo permite letras
+
+    if (!apellido.test(input)) {
+      event.preventDefault(); // No permite que ingrese caracteres no válidos
+    }
+  }
+  //validar el rut:
+  valiRut(event: KeyboardEvent) {
+    const input = event.key;
+
+    // Verifica si el input es un número o una 'k' (puede ser minúscula o mayúscula)
+    const regex = /^[0-9kK]$/i;
 
     if (!regex.test(input)) {
-      event.preventDefault(); //No permite que ingrese espacio
-    }
-  }
-
-  
-
-  //LOGICA DEL INICIO DE SESIÓN
-  onLogin() {
-    if (this.email && this.password) {
-      // Lógica para el inicio de sesión
-      console.log('Iniciar sesión con:', this.email, this.password);
-    }
-  }
-
-  // Primera validación del rut
-  validateRutU(rut: string): boolean {
-    if (rut === "") {
-      return false;
+      event.preventDefault(); // No permite caracteres no válidos
     } else {
-      return /^\d{1,2}\.\d{3}\.\d{3}-[\dkK]$/.test(rut);
-    }
-  }
-
-  // Segunda validación del rut
-  validarut(event: KeyboardEvent) {
-    const caretPosition = (<HTMLInputElement>event.target).selectionStart;
-    const inputNumber = event.key;
-  
-    if (
-      inputNumber === ' ' ||
-      (caretPosition === 0 && !/^\d$/.test(inputNumber) && inputNumber !== 'Backspace') ||
-      (caretPosition === 1 && !/^\d$/.test(inputNumber) && inputNumber !== 'Backspace') ||
-      (caretPosition === 2 && inputNumber !== '.' && inputNumber !== 'Backspace') ||
-      (caretPosition === 3 && !/^\d$/.test(inputNumber) && inputNumber !== 'Backspace') ||
-      (caretPosition === 4 && !/^\d$/.test(inputNumber) && inputNumber !== 'Backspace') ||
-      (caretPosition === 5 && !/^\d$/.test(inputNumber) && inputNumber !== 'Backspace') ||
-      (caretPosition === 6 && inputNumber !== '.' && inputNumber !== 'Backspace') ||
-      (caretPosition === 7 && !/^\d$/.test(inputNumber) && inputNumber !== 'Backspace') ||
-      (caretPosition === 8 && !/^\d$/.test(inputNumber) && inputNumber !== 'Backspace') ||
-      (caretPosition === 9 && !/^\d$/.test(inputNumber) && inputNumber !== 'Backspace') ||
-      (caretPosition === 10 && inputNumber !== '-' && inputNumber !== 'Backspace') ||
-      (caretPosition === 11 && !/^[\dkK0-9]$/.test(inputNumber) && inputNumber !== 'Backspace')
-    ) {
-      event.preventDefault();
-    }
-  }
-
-  validatePasswordMatch(): boolean {
-    return this.password === this.confirmPassword;
-  }
-
-  // Método para navegar a otra página con datos
-  irAPaginaSiguiente() {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        nombreEnviado: this.nombreUValue,
-        apellidoEnviado: this.apellidoUValue,
-        rutEnviado: this.rutUValue,
-        correoEnviado: this.email
+      // Comprueba si el input es un número o una 'k' para agregar punto y guión automáticamente
+      if (input.match(/[0-9kK]/i)) {
+        if (this.rutValue.length === 1) {
+          this.rutValue = this.rutValue + '.';
+        } else if (this.rutValue.length === 5 || this.rutValue.length === 9) {
+          this.rutValue = this.rutValue + '.';
+        } else if (this.rutValue.length === 13) {
+          this.rutValue = this.rutValue + '-';
+        }
       }
-    };
-  
-    this.router.navigate(['/datos-personales'], navigationExtras);
+    }
   }
 
+  autoCompleteRut() {
+    // Formatea el RUT con puntos y guión si es válido
+    const rutRegex = /^(\d{1,2}(\.\d{3}){2})-([\dkK])$/i;
+    if (rutRegex.test(this.rutValue)) {
+      this.rutValue = this.rutValue.replace(/(\d{1,2})(\d{3})(\d{3})-([\dkK])/i, '$1.$2.$3-$4');
+      this.verificarFormulario();
+    }
+  }
+  //VALIDAR EL CORREO:
+  valiEmail(event: KeyboardEvent) {
+    const input = event.key;
 
+    // Expresión regular para validar un correo electrónico
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  
+    if (!regex.test(input)) {
+      event.preventDefault(); // No permite caracteres no válidos
+    }
+  }
+  //validar la contraseña:
+  valiPassword(event: KeyboardEvent) {
+    const input = event.key;
+
+    // Expresión regular para validar la contraseña
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])(?!.*[.]{2,}).{5,15}$/;
+
+    if (!passwordRegex.test(input) && !passwordRegex.test(input)) {
+      event.preventDefault(); // No permite caracteres no válidos
+    }
+  }
+
+  //verifica si los campos son correctos
+  verificarFormulario() {
+    // Verificar si el campo de nombre solo contiene letras
+    const regex = /^[A-Za-z]+$/;
+    this.formularioValido = regex.test(this.nombreUValue) && this.nombreUValue.length >= 1 && this.nombreUValue.length <= 15;
+    //apellido
+    const apellido = /^[A-Za-z]+$/;
+    this.formularioValido = apellido.test(this.apellidoUValue) && this.apellidoUValue.length >= 1 && this.apellidoUValue.length <= 15;
+    // Verificar si el RUT es válido
+    const rutRegex = /^\d{1,2}\.\d{3}\.\d{3}-[\dkK]$/i;
+    this.formularioValido = rutRegex.test(this.rutValue);
+    //CORREO:
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    this.formularioValido = rutRegex.test(this.rutValue) && emailRegex.test(this.emailValue);
+    // Verificar si la contraseña es válida
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,15}$/;
+    this.formularioValido = rutRegex.test(this.rutValue) && emailRegex.test(this.emailValue) && passwordRegex.test(this.passwordValue);
+    //VALIDAR CLAVE REPETIDA:
+    this.formularioValido = rutRegex.test(this.rutValue) && emailRegex.test(this.emailValue) && passwordRegex.test(this.passwordValue) && this.passwordValue === this.confirmPasswordValue;
+    //PREGUNTA:
+    this.formularioValido = rutRegex.test(this.rutValue) && emailRegex.test(this.emailValue) && passwordRegex.test(this.passwordValue) && this.passwordValue === this.confirmPasswordValue && this.preguntaSeguridad !== '' && this.respuestaSeguridad !== '';
+  }
+  //redirigir a la pagina:
+  irAPaginaSiguiente() {
+    if (this.formularioValido) {
+      const navigationExtras: NavigationExtras = {
+        state: {
+          nombreEnviado: this.nombreUValue,
+          apellidoEnviado: this.apellidoUValue,
+          rutEnviado: this.rutValue,
+          emailEnviado: this.emailValue,
+          passwordEnviado: this.passwordValue
+        }
+      };
+      this.router.navigate(['/datos-personales'], navigationExtras);
+    }
+  }
 }

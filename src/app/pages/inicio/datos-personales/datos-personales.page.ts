@@ -9,8 +9,9 @@ import { ActivatedRoute } from '@angular/router';
 export class DatosPersonalesPage implements OnInit {
   nombreEnviado: string = '';
   apellidoEnviado: string = '';
-  correoEnviado: string = '';  
+  emailEnviado: string = '';  
   rutEnviado: string = '';
+  passwordEnviado: string = '';
   segPersonaValue: string = '';
 
   constructor(private route: ActivatedRoute) { }
@@ -22,7 +23,8 @@ export class DatosPersonalesPage implements OnInit {
       this.nombreEnviado = state.nombreEnviado;
       this.apellidoEnviado = state.apellidoEnviado;
       this.rutEnviado = state.rutEnviado;
-      this.correoEnviado = state.correoEnviado;
+      this.emailEnviado = state.emailEnviado;
+      this.passwordEnviado = state.passwordEnviado;
     });
   }
 
