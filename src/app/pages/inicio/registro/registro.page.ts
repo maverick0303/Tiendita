@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro',
@@ -17,32 +16,51 @@ export class RegistroPage implements OnInit {
   confirmPasswordValue: string = '';
   preguntaSeguridad: string = '';
   respuestaSeguridad: string = '';
-  formularioValido: boolean = false; // Agrega esta línea
+
+  errors = {
+    nombreU: '',
+    apellidoU: '',
+    rut: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    preguntaSeguridad: '',
+  };
+
+  formularioValido: boolean = false;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
     // Inicialización aquí...
   }
-  //validacion del nombre
+
   valiNombre(event: KeyboardEvent) {
     const input = event.key;
     const regex = /^[A-Za-z]+$/; // Solo permite letras
 
     if (!regex.test(input)) {
       event.preventDefault(); // No permite que ingrese caracteres no válidos
+      this.errors.nombreU = 'El nombre solo debe contener letras.';
+    } else {
+      this.errors.nombreU = '';
     }
+    this.verificarFormulario();
   }
-  //validacion del apellido
+
   ValiApellido(event: KeyboardEvent) {
     const input = event.key;
     const apellido = /^[A-Za-z]+$/; // Solo permite letras
 
     if (!apellido.test(input)) {
       event.preventDefault(); // No permite que ingrese caracteres no válidos
+      this.errors.apellidoU = 'El apellido solo debe contener letras.';
+    } else {
+      this.errors.apellidoU = '';
     }
+    this.verificarFormulario();
   }
-  //validar el rut:
+
   valiRut(event: KeyboardEvent) {
     const input = event.key;
 
@@ -63,6 +81,7 @@ export class RegistroPage implements OnInit {
         }
       }
     }
+    this.autoCompleteRut();
   }
 
   autoCompleteRut() {
@@ -70,10 +89,10 @@ export class RegistroPage implements OnInit {
     const rutRegex = /^(\d{1,2}(\.\d{3}){2})-([\dkK])$/i;
     if (rutRegex.test(this.rutValue)) {
       this.rutValue = this.rutValue.replace(/(\d{1,2})(\d{3})(\d{3})-([\dkK])/i, '$1.$2.$3-$4');
-      this.verificarFormulario();
     }
+    this.verificarFormulario();
   }
-  //VALIDAR EL CORREO:
+
   valiEmail(event: KeyboardEvent) {
     const input = event.key;
 
@@ -83,42 +102,73 @@ export class RegistroPage implements OnInit {
     if (!regex.test(input)) {
       event.preventDefault(); // No permite caracteres no válidos
     }
+    this.verificarFormulario();
   }
-  //validar la contraseña:
+
   valiPassword(event: KeyboardEvent) {
     const input = event.key;
 
     // Expresión regular para validar la contraseña
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])(?!.*[.]{2,}).{5,15}$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{5,15}$/;
 
-    if (!passwordRegex.test(input) && !passwordRegex.test(input)) {
+    if (!passwordRegex.test(input)) {
       event.preventDefault(); // No permite caracteres no válidos
     }
+    this.verificarFormulario();
   }
 
-  //verifica si los campos son correctos
   verificarFormulario() {
-    // Verificar si el campo de nombre solo contiene letras
-    const regex = /^[A-Za-z]+$/;
-    this.formularioValido = regex.test(this.nombreUValue) && this.nombreUValue.length >= 1 && this.nombreUValue.length <= 15;
-    //apellido
-    const apellido = /^[A-Za-z]+$/;
-    this.formularioValido = apellido.test(this.apellidoUValue) && this.apellidoUValue.length >= 1 && this.apellidoUValue.length <= 15;
-    // Verificar si el RUT es válido
-    const rutRegex = /^\d{1,2}\.\d{3}\.\d{3}-[\dkK]$/i;
-    this.formularioValido = rutRegex.test(this.rutValue);
-    //CORREO:
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    this.formularioValido = rutRegex.test(this.rutValue) && emailRegex.test(this.emailValue);
-    // Verificar si la contraseña es válida
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,15}$/;
-    this.formularioValido = rutRegex.test(this.rutValue) && emailRegex.test(this.emailValue) && passwordRegex.test(this.passwordValue);
-    //VALIDAR CLAVE REPETIDA:
-    this.formularioValido = rutRegex.test(this.rutValue) && emailRegex.test(this.emailValue) && passwordRegex.test(this.passwordValue) && this.passwordValue === this.confirmPasswordValue;
-    //PREGUNTA:
-    this.formularioValido = rutRegex.test(this.rutValue) && emailRegex.test(this.emailValue) && passwordRegex.test(this.passwordValue) && this.passwordValue === this.confirmPasswordValue && this.preguntaSeguridad !== '' && this.respuestaSeguridad !== '';
+    let hasError = false;
+
+    // Validación del nombre
+    this.errors.nombreU = '';
+    if (!/^[A-Za-z]+$/.test(this.nombreUValue) || this.nombreUValue.length < 1 || this.nombreUValue.length > 15) {
+      this.errors.nombreU = 'El nombre solo debe contener letras y tener entre 1 y 15 caracteres.';
+      hasError = true;
+    }
+
+    // Validación del apellido
+    this.errors.apellidoU = '';
+    if (!/^[A-Za-z]+$/.test(this.apellidoUValue) || this.apellidoUValue.length < 1 || this.apellidoUValue.length > 15) {
+      this.errors.apellidoU = 'El apellido solo debe contener letras y tener entre 1 y 15 caracteres.';
+      hasError = true;
+    }
+
+    // Validación del RUT
+    this.errors.rut = '';
+    if (!/^(\d{1,2}(\.\d{3}){2}-[\dkK])$/i.test(this.rutValue)) {
+      this.errors.rut = 'El RUT no tiene un formato válido.';
+      hasError = true;
+    }
+
+    // Validación del correo electrónico
+    this.errors.email = '';
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(this.emailValue)) {
+      this.errors.email = 'El correo electrónico no tiene un formato válido.';
+      hasError = true;
+    }
+
+    // Validación de la contraseña
+    this.errors.password = '';
+    if (!/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,15}$/.test(this.passwordValue)) {
+      this.errors.password = 'La contraseña no cumple con los requisitos.';
+      hasError = true;
+    }
+
+    // Validación de la confirmación de contraseña
+    this.errors.confirmPassword = '';
+    if (this.passwordValue !== this.confirmPasswordValue) {
+      this.errors.confirmPassword = 'Las contraseñas no coinciden.';
+      hasError = true;
+    }
+
+    // Validación de la pregunta de seguridad
+    this.errors.preguntaSeguridad = this.preguntaSeguridad ? '' : 'Por favor, seleccione una pregunta de seguridad.';
+    hasError = !this.preguntaSeguridad;
+
+    this.formularioValido = !hasError;
   }
-  //redirigir a la pagina:
+
   irAPaginaSiguiente() {
     if (this.formularioValido) {
       const navigationExtras: NavigationExtras = {
