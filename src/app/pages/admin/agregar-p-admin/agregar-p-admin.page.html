@@ -83,7 +83,7 @@
             <p *ngIf="imagenPModel.errors?.['required']">La foto del producto es obligatoria.</p>
           </div>
 
-          <ion-button expand="full" color="dark" [routerLink]="['/menu-admin']" type="submit"
+          <ion-button expand="full" color="dark" click="insertar()" [routerLink]="['/menu-admin']" type="submit"
             [disabled]="!nombrePModel.valid || !descripcionPModel.valid || !precioPModel.valid  || !categoriaPModel.valid ||!imagenPModel.valid ">
             Guardar</ion-button>
 
