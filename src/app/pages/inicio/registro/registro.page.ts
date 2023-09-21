@@ -25,6 +25,7 @@ export class RegistroPage implements OnInit {
     password: '',
     confirmPassword: '',
     preguntaSeguridad: '',
+    respuestaSeguridad: '',
   };
 
   formularioValido: boolean = false;
@@ -166,6 +167,10 @@ export class RegistroPage implements OnInit {
     this.errors.preguntaSeguridad = this.preguntaSeguridad ? '' : 'Por favor, seleccione una pregunta de seguridad.';
     hasError = !this.preguntaSeguridad || hasError; // Agregar la condición aquí
 
+    // Validación de la respuesta de seguridad
+    this.errors.respuestaSeguridad = this.respuestaSeguridad ? '' : 'La respuesta es obligatoria.';
+    hasError = !this.respuestaSeguridad || hasError;
+
     // Validación adicional para comprobar si todos los campos requeridos están llenos
     if (
       !this.nombreUValue ||
@@ -173,7 +178,8 @@ export class RegistroPage implements OnInit {
       !this.rutValue ||
       !this.emailValue ||
       !this.passwordValue ||
-      !this.confirmPasswordValue
+      !this.confirmPasswordValue ||
+      !this.respuestaSeguridad 
     ) {
       hasError = true;
     }
@@ -189,7 +195,8 @@ export class RegistroPage implements OnInit {
           apellidoEnviado: this.apellidoUValue,
           rutEnviado: this.rutValue,
           emailEnviado: this.emailValue,
-          passwordEnviado: this.passwordValue
+          passwordEnviado: this.passwordValue,
+          respuestaSeguridad: this.respuestaSeguridad // Agregar respuesta de seguridad a la navegación
         }
       };
       this.router.navigate(['/datos-personales'], navigationExtras);

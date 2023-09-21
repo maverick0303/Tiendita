@@ -1,99 +1,62 @@
+/* Estilos generales para las tarjetas */
 .card-container {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0 20px;
     /* Ajusta el margen de pantalla */
-}
-
-.custom-card {
+  }
+  
+  .custom-card {
     background: #222222;
     display: flex;
+    flex-direction: column; /* Coloca el contenido en columna */
     align-items: center;
-    width: 70%;
-}
-
-.card-image {
-    width: 450%;
-    /* Aumenta aún más el ancho de la imagen */
+    width: 90%; /* Aumenta el ancho de la tarjeta al 80% del contenedor */
+    text-align: center; /* Centra el texto horizontalmente */
+  }
+  
+  .card-image {
+    width: 100%;
     max-width: 350px;
     object-fit: cover;
-}
-
-.card-content {
-    flex: 10;
+  }
+  
+  .card-content {
+    flex: 1; /* Ocupa el espacio restante */
     padding: 20px;
-    /* Agrega un poco de espacio alrededor del contenido */
     text-align: left;
-    /* Centra el texto en pantallas más pequeñas */
-    align-self: flex-start;
-}
-
-//titulos
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Tilt+Prism&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
-
-
-
-p {
+    width: 100%; /* Ajusta el ancho del contenido */
+  }
+  
+  /* Estilos para los títulos y textos */
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Tilt+Prism&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+  
+  p {
     color: white;
     font-size: 18px;
     text-align: left;
     font-family: 'ADLaM Display';
-}
-.subti{
+  }
+  
+  .subti {
     font-size: 18px;
     font-family: 'Poppins', sans-serif;
     color: white;
-}
-
-.titulo{
+  }
+  
+  .titulo {
     color: white;
     font-family: 'DM Serif Display', serif;
-    font-size: 55px;
+    font-size: 25px;
     text-align: left;
     margin: 5px;
-}
-
-@media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px){
-    .custom-card {
-        align-items: center;
-        /* Mantiene el contenido centrado verticalmente en pantallas grandes */
-        justify-content: space-between;
-        /* Distribuye el contenido en el eje horizontal */
-        flex-direction: column;
-        /* Coloca el contenido en fila */
-    }
-
-    .card-content {
-        text-align: left;
-        /* Vuelve al alineamiento a la izquierda en pantallas más grandes */
-        flex: 1;
-        /* Ocupa el espacio restante */
-        padding: 20px;
-        /* Agrega un poco de espacio alrededor del contenido */
-    }
-
-    .card-image {
-        width: 100%;
-        /* Aumenta aún más el ancho de la imagen */
-        max-width: 450px;
-        object-fit: cover;
-    }
-    .titulo{
-        font-size: 25px;
-        text-align: left;
-    }
-    p{
-        font-size: 15px;
-    }
-    .subti{
-        font-size: 15px;
-    }
-    
-}
-ion-content {
+  }
+  
+ 
+  ion-content {
     --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
-}
+  }
+  

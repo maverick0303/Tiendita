@@ -1,86 +1,81 @@
-//FONDO
+/*FONDO*/
 ion-content {
     --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
-}
-//
-ion-img {
+  }
+  
+  ion-img {
     width: 300px;
     height: 300px;
-}
-
-ion-card {
+  }
+  
+  ion-card {
     border-radius: 16px;
     background-color: #222222;
     width: fit-content;
     height: max-content;
-}
-
-ion-grid {
+  }
+  
+  ion-grid {
     ion-row {
-        display: flex;
-        justify-content: center;
-        /* Centrar horizontalmente */
-        margin: 0 auto;
-        /* Margen superior e inferior igual a 0 y margen lateral automático para centrar en el medio */
-
-        ion-card {
-            margin: 10px;
-            /* Margen entre las tarjetas */
-            max-width: 550px;
-            /* Ancho máximo de las tarjetas */
-
-            ion-img.img-container {
-                max-width: 100%;
-                /* Asegurarse de que la imagen no exceda el ancho de la tarjeta */
-                height: auto;
-                /* Mantener la proporción de aspecto */
-            }
+      display: flex;
+      justify-content: center; /* Centrar horizontalmente */
+      margin: 0 auto; /* Margen superior e inferior igual a 0 y margen lateral automático para centrar en el medio */
+  
+      ion-card {
+        margin: 10px; /* Margen entre las tarjetas */
+        max-width: 550px; /* Ancho máximo de las tarjetas */
+  
+        ion-img.img-container {
+          max-width: 100%; /* Asegurarse de que la imagen no exceda el ancho de la tarjeta */
+          height: auto; /* Mantener la proporción de aspecto */
         }
+      }
     }
-}
-
-
-
-//titulos
-
-@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Tilt+Prism&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
-
-
-
-p {
+  }
+  
+  /*titulos*/
+  
+  @import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Tilt+Prism&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+  
+  p {
     color: white;
-    font-size: 20px;
+    font-size: 15px;
     text-align: left;
     font-family: 'ADLaM Display', cursive;
-}
-
-ion-card-title {
+  }
+  
+  ion-card-title {
     color: white;
-    font-size: 60px;
+    font-size: 40px; /* Ajusta el tamaño del título según tus preferencias */
     margin: 5px;
     text-align: center;
     font-family: 'DM Serif Display', serif;
-}
-.ion-title{
+  }
+  
+  .ion-title {
     color: white;
     font-family: 'DM Serif Display', serif;
     font-size: 25px;
     text-align: center;
     margin: 5px;
-}
-@media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px){
-    ion-title{
-        font-size: 40px;
-    }
-    
-
-}
+  }
   
-/* Estilo para los mensajes de error */
-.error-message {
+  /* Estilo para los mensajes de error */
+  .error-message {
     color: red;
     font-size: 14px;
     margin-top: 5px;
+  }
+  
+  /* Ajustes para dispositivos específicos */
+  @media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px) {
+    ion-card-title {
+      font-size: 30px; /* Ajusta el tamaño del título para pantallas más pequeñas */
+    }
+  
+    .ion-title {
+      font-size: 40px; /* Ajusta el tamaño del título para pantallas más pequeñas */
+    }
   }
   

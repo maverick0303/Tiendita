@@ -56,12 +56,10 @@
               <ion-select-option value="3">¿Color favorito?</ion-select-option>
             </ion-select><br>
             <!-- VALIDACION -->
-            <div class="error-message" *ngIf="!preguntaSeguridad">
-              <p>Por favor, seleccione una pregunta de seguridad.</p>
-            </div>
+            <div class="error-message" *ngIf="errors.respuestaSeguridad">{{ errors.respuestaSeguridad }}</div>
             <!-- Respuesta a la pregunta de seguridad -->
             <ion-input label="Respuesta a la Pregunta de Seguridad" type="text" label-placement="floating"
-              fill="outline" placeholder="Respuesta" name="respuestaSeguridad" [(ngModel)]="respuestaSeguridad"
+              fill="outline" placeholder="Respuesta" name="respuestaSeguridad" [(ngModel)]="respuestaSeguridad" (ionBlur)="verificarFormulario()"
               required>
             </ion-input>
             <!--BOTON-->

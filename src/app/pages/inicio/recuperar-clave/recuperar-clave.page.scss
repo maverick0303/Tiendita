@@ -1,60 +1,53 @@
+/* FONDO */
 ion-content {
-    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
+  --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
 }
+
 ion-card {
-    height: 550px;
+  height: 550px;
+  width: 500px;
+  background: #222222;
+}
+
+/* Importar fuente */
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
+ion-card-title {
+  color: white;
+  font-family: 'Abril Fatface', cursive;
+  font-size: 45px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 95vh;
+}
+
+/* Ajustes para dispositivos específicos */
+@media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px) {
+  ion-card {
+    height: 450px;
     width: 500px;
     background: #222222;
   }
-  
-  /* Importar fuente */
-  @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
-  
+
   ion-card-title {
-    color: white;
-    font-family: 'Abril Fatface', cursive;
-    font-size:45px;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-  
-  
-  }
-  
-  
-  .container {
-    display: flex;
-    justify-content: center;
-    /* Alineación horizontal al centro */
-    align-items: center;
-    /* Alineación vertical al centro */
-    height: 95vh;
-    /* Opcional: ajusta la altura del contenedor al 100% del viewport */
-  }
-  
-  //cuando este pequeña la pantalla:
-  @media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px){
-    ion-card {
-      height: 450px;
-      width: 500px;
-      background: #222222;
-    }
-  
+    font-size: 30px; /* Ajusta el tamaño del título para pantallas más pequeñas */
   }
 
   .container {
-    display: flex;
-    justify-content: center;
-    /* Alineación horizontal al centro */
-    align-items: center;
-    /* Alineación vertical al centro */
-    height: 95vh;
-    /* Opcional: ajusta la altura del contenedor al 100% del viewport */
+    height: 90vh; /* Ajusta la altura del contenedor para pantallas más pequeñas */
   }
-//botones;
+}
 
+/* Estilos para botones */
 .center-buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px; /* Agrega margen superior si es necesario */
-  }
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Agrega margen superior si es necesario */
+}

@@ -1,64 +1,51 @@
+/* Estilos para las imágenes */
 ion-img {
     width: 300px;
     height: 300px;
 }
 
+/* Estilos generales para las tarjetas */
 ion-card {
     background-color: #222222;
     width: fit-content;
     height: max-content;
 }
-//card del admin:
-.ion-grid {
-    ion-row {
-        display: flex;
-        justify-content: center;
-        /* Centrar horizontalmente */
-        margin: 0 auto;
-        /* Margen superior e inferior igual a 0 y margen lateral automático para centrar en el medio */
 
-        ion-card {
-            margin: 1px;
-            /* Margen entre las tarjetas */
-            max-width: 350px;
-            /* Ancho máximo de las tarjetas */
-            max-height: 220px;
-        }
-    }
-}
-//RESTO DEL CODIGO de las card de los productos
-
-ion-grid {
-    ion-row {
-        display: flex;
-        justify-content: center;
-        /* Centrar horizontalmente */
-        margin: 0 auto;
-        /* Margen superior e inferior igual a 0 y margen lateral automático para centrar en el medio */
-
-        ion-card {
-            
-            margin: 10px;
-            /* Margen entre las tarjetas */
-            max-width: 300px;
-            /* Ancho máximo de las tarjetas */
-
-            ion-img.img-container {
-                max-width: 100%;
-                /* Asegurarse de que la imagen no exceda el ancho de la tarjeta */
-                height: auto;
-                /* Mantener la proporción de aspecto */
-            }
-        }
-    }
+/* Estilos para las tarjetas del administrador */
+.ion-grid ion-row {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
 }
 
-//titulos
+.ion-grid ion-card {
+    margin: 1px;
+    max-width: 300px; /* Ajusta el ancho de las tarjetas del administrador */
+    max-height: 220px;
+}
 
+/* Estilos para las tarjetas de productos */
+ion-grid ion-row {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+ion-grid ion-card {
+    margin: 10px;
+    max-width: 300px; /* Ajusta el ancho de las tarjetas de productos */
+}
+
+ion-img.img-container {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Estilos para los títulos y textos */
 @import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Tilt+Prism&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
 
-ion-card-content{
+ion-card-content {
     margin: auto;
 }
 
@@ -76,60 +63,22 @@ ion-card-title {
     text-align: center;
     font-family: 'DM Serif Display', serif;
 }
-.ion-title{
+
+.ion-title {
     color: white;
     font-family: 'DM Serif Display', serif;
-    font-size: 20px;
+    font-size: 15px;
     text-align: left;
     margin: 5px;
 }
-@media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px){
-    .ion-title{
-        font-size: 22px;
-    }
-    ion-card-title{
-        font-size: 40px;
-    }
-    ion-img {
-        width: 250px;
-        height: 250px;
-    }
-    
-    ion-grid {
-        ion-row {
-            display: flex;
-            justify-content: center;
-            /* Centrar horizontalmente */
-            margin: 0 auto;
-            /* Margen superior e inferior igual a 0 y margen lateral automático para centrar en el medio */
-    
-            ion-card {
-                height: 470px;
-                margin: 10px;
-                /* Margen entre las tarjetas */
-                max-width: 250px;
-                /* Ancho máximo de las tarjetas */
-    
-                ion-img.img-container {
-                    max-width: 70%;
-                    /* Asegurarse de que la imagen no exceda el ancho de la tarjeta */
-                    height: auto;
-                    /* Mantener la proporción de aspecto */
-                }
-            }
-        }
-    }
-    td{
-        font-size: 20px;
-    }
-}
-//FONDO 
+
+/* Estilos para el fondo */
 ion-content {
     --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
 }
 
-//LAS PIPES=
-td{
+/* Estilos para las pipes (tabla) */
+td {
     color: white;
-    font-size: 40px;
+    font-size: 30px;
 }
