@@ -18,9 +18,9 @@ export class BaseDatosService {
 
   tablaPregunta: string = "CREATE TABLE IF NOT EXISTS pregunta (idPregunta integer primary key autoincrement,  nombrePregunta VARCHAR(25) not null);";
 
-  tablaProducto: string = "CREATE TABLE IF NOT EXISTS producto (codProducto integer primary key autoincrement, nombrePregunta VARCHAR(25) not null, descProducto VARCHAR(100) not null, precioProducto integer not null, stockPropducto integer not null, fotooooo, FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria));";
+  tablaProducto: string = "CREATE TABLE IF NOT EXISTS producto (codProducto integer primary key autoincrement, nombrePregunta VARCHAR(25) not null, descProducto VARCHAR(100) not null, precioProducto integer not null, stockPropducto integer not null, bloob not null, FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria));";
 
-  tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle (idDetalle integer primary key autoincrement, cantidadProducto integer not null, subtotalD integer not null, FOREIGN KEY (idProducto) REFERENCES producto(idProducto));";
+  tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle (idDetalle integer primary key autoincrement, cantidadProducto integer not null, subtotalD integer not null, FOREIGN KEY (codProducto) REFERENCES producto(codProducto));";
   
   tablaVenta: string = "CREATE TABLE IF NOT EXISTS venta (idVenta integer primary key autoincrement, totalV integer not null, carritoV VARCHAR(25) not null, fechaV VARCHAR(25) not null , FOREIGN KEY (idDetalle) REFERENCES detalle(idDetalle));";
   
