@@ -55,19 +55,19 @@
               <ion-select-option value="2">¿Nombre de tu mascota?</ion-select-option>
               <ion-select-option value="3">¿Color favorito?</ion-select-option>
             </ion-select><br>
-            <!-- VALIDACION -->
-            <div class="error-message" *ngIf="errors.respuestaSeguridad">{{ errors.respuestaSeguridad }}</div>
+            <!--VALIDACION DE LA PREGUNTA-->
+            <div class="error-message" *ngIf="errors.preguntaSeguridad">{{ errors.preguntaSeguridad }}</div>
             <!-- Respuesta a la pregunta de seguridad -->
-            <ion-input label="Respuesta a la Pregunta de Seguridad" type="text" label-placement="floating"
+            <ion-input label="Respuesta" type="text" label-placement="floating"
               fill="outline" placeholder="Respuesta" name="respuestaSeguridad" [(ngModel)]="respuestaSeguridad" (ionBlur)="verificarFormulario()"
               required>
             </ion-input>
+            <!-- VALIDACION -->
+            <div class="error-message" *ngIf="errors.respuestaSeguridad">{{ errors.respuestaSeguridad }}</div>
             <!--BOTON-->
-            <ion-button color="dark" class="center-buttons" (click)="irAPaginaSiguiente()"
-              [disabled]="!formularioValido">Registrarse</ion-button>
+            <ion-button color="dark" class="center-buttons" (click)="irAPaginaSiguiente()" [disabled]="!formularioValido">Registrarse</ion-button>
             <!--MENSAJITO-->
-            <p1 [routerLink]="['/inicio-sesion']" style="text-align: center;"> ¿Ya tienes una cuenta? Inicia sesión aquí
-            </p1><br>
+            <p [routerLink]="['/inicio-sesion']" style="text-align: center;"> ¿Ya tienes una cuenta? Inicia sesión aquí</p>
           </form>
         </ion-card-content>
       </ion-card>

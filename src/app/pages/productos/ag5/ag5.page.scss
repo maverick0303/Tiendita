@@ -1,9 +1,9 @@
+/* Estilos para pantallas grandes */
 .card-container {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0 20px;
-    /* Ajusta el margen de pantalla */
 }
 
 .custom-card {
@@ -15,7 +15,6 @@
 
 .card-image {
     width: 125%;
-    /* Aumenta aún más el ancho de la imagen */
     max-width: 500px;
     object-fit: cover;
 }
@@ -23,77 +22,53 @@
 .card-content {
     flex: 10;
     padding: 20px;
-    /* Agrega un poco de espacio alrededor del contenido */
     text-align: left;
-    /* Centra el texto en pantallas más pequeñas */
     align-self: flex-start;
 }
 
-//titulos
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Tilt+Prism&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
-
-
-
 p {
     color: white;
-    font-size: 18px;
+    font-size: 15px;
     text-align: left;
     font-family: 'ADLaM Display';
 }
-.subti{
-    font-size: 18px;
+
+.subti {
+    font-size: 15px;
     font-family: 'Poppins', sans-serif;
     color: white;
 }
 
-.titulo{
+.titulo {
     color: white;
     font-family: 'DM Serif Display', serif;
-    font-size: 55px;
+    font-size: 25px;
     text-align: left;
-    margin: 5px;
+    margin: 2px;
 }
 
-@media(width:412px) or (width: 425px) or (width: 389px){
-    .custom-card {
-        align-items: center;
-        /* Mantiene el contenido centrado verticalmente en pantallas grandes */
-        justify-content: space-between;
-        /* Distribuye el contenido en el eje horizontal */
-        flex-direction: column;
-        /* Coloca el contenido en fila */
-    }
+ion-content {
+    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
+}
 
-    .card-content {
-        text-align: left;
-        /* Vuelve al alineamiento a la izquierda en pantallas más grandes */
-        flex: 1;
-        /* Ocupa el espacio restante */
-        padding: 20px;
-        /* Agrega un poco de espacio alrededor del contenido */
+/* Estilos para pantallas pequeñas (por ejemplo, cuando el ancho de la ventana es menor a 768px) */
+@media screen and (max-width: 480px) {
+    .custom-card {
+        flex-direction: column; /* Cambia la dirección de flex para apilar contenido */
+        width: 100%;
     }
 
     .card-image {
         width: 100%;
-        /* Aumenta aún más el ancho de la imagen */
-        max-width: 450px;
-        object-fit: cover;
+        max-width: none; /* Elimina la limitación del ancho máximo */
     }
-    .titulo{
-        font-size: 25px;
-        text-align: left;
+
+    .card-content {
+        padding: 10px; /* Reduce el espacio alrededor del contenido */
+        text-align: center; /* Centra el texto en pantallas más pequeñas */
     }
-    p{
-        font-size: 15px;
+
+    .titulo {
+        font-size: 25px; /* Reduce el tamaño del título */
     }
-    .subti{
-        font-size: 15px;
-    }
-    
-}
-ion-content {
-    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
 }

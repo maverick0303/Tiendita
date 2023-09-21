@@ -164,7 +164,7 @@ export class RegistroPage implements OnInit {
     }
 
     // Validación de la pregunta de seguridad
-    this.errors.preguntaSeguridad = this.preguntaSeguridad ? '' : 'Por favor, seleccione una pregunta de seguridad.';
+    this.errors.preguntaSeguridad = this.preguntaSeguridad ? '' : 'La pregunta es obligatoria';
     hasError = !this.preguntaSeguridad || hasError; // Agregar la condición aquí
 
     // Validación de la respuesta de seguridad
@@ -179,7 +179,8 @@ export class RegistroPage implements OnInit {
       !this.emailValue ||
       !this.passwordValue ||
       !this.confirmPasswordValue ||
-      !this.respuestaSeguridad 
+      !this.respuestaSeguridad ||
+      !this.preguntaSeguridad
     ) {
       hasError = true;
     }

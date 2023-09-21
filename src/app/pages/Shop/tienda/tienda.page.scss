@@ -58,7 +58,7 @@ p {
 
 ion-card-title {
     color: white;
-    font-size: 50px;
+    font-size: 40px;
     margin: 2px;
     text-align: center;
     font-family: 'DM Serif Display', serif;
@@ -67,7 +67,7 @@ ion-card-title {
 .ion-title {
     color: white;
     font-family: 'DM Serif Display', serif;
-    font-size: 15px;
+    font-size: 25px;
     text-align: left;
     margin: 5px;
 }
@@ -79,6 +79,16 @@ ion-content {
 
 /* Estilos para las pipes (tabla) */
 td {
+    text-align: center;
     color: white;
     font-size: 30px;
 }
+//botones:
+.center-buttons {
+    text-align: center;
+  }
+  
+  .center-buttons button {
+    margin: 0 auto;
+  }
+  
