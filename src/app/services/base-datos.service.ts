@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
-import { SQLite, SQLiteObject } from;
-  import { SetDisabledStateOption } from '@angular/forms';
+import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
+import { AlertController, Platform } from '@ionic/angular';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Usuario } from './usuario';
+import { Pregunta } from './pregunta';
+import { Detalle } from './detalle';
+import { Producto } from './producto';
 
 @Injectable({
   providedIn: 'root'
@@ -9,21 +14,206 @@ export class BaseDatosService {
 
   //Variable para manipular la conexión a la BD
   public database!: SQLiteObject;
+
   //variables para la creación de tablas
   tablaCategoria: string = "CREATE TABLE IF NOT EXISTS categoria (idCategoria integer primary key autoincrement,  nombreCategoria VARCHAR(25) not null);";
 
   tablaRol: string = "CREATE TABLE IF NOT EXISTS rol (idRol integer primary key autoincrement,  nombreRol VARCHAR(25) not null);";
 
-  tablaTienda: string = "CREATE TABLE IF NOT EXISTS tienda (idTienda integer primary key autoincrement,  nombreTienda VARCHAR(25) not null);";
-
   tablaPregunta: string = "CREATE TABLE IF NOT EXISTS pregunta (idPregunta integer primary key autoincrement,  nombrePregunta VARCHAR(25) not null);";
 
-  tablaProducto: string = "CREATE TABLE IF NOT EXISTS producto (codProducto integer primary key autoincrement, nombrePregunta VARCHAR(25) not null, descProducto VARCHAR(100) not null, precioProducto integer not null, stockPropducto integer not null, bloob not null, FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria));";
+  tablaProducto: string = "CREATE TABLE IF NOT EXISTS producto (idProducto integer primary key autoincrement, nombrePregunta VARCHAR(25) not null, descripcion VARCHAR(100) not null, precioProducto integer not null, stockPropducto integer not null, bloob not null, FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria));";
 
-  tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle (idDetalle integer primary key autoincrement, cantidadProducto integer not null, subtotalD integer not null, FOREIGN KEY (codProducto) REFERENCES producto(codProducto));";
-  
+  tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle (idDetalle integer primary key autoincrement, cantidadProducto integer not null, subtotalD integer not null, FOREIGN KEY (idProducto) REFERENCES producto(idProducto));";
+
   tablaVenta: string = "CREATE TABLE IF NOT EXISTS venta (idVenta integer primary key autoincrement, totalV integer not null, carritoV VARCHAR(25) not null, fechaV VARCHAR(25) not null , FOREIGN KEY (idDetalle) REFERENCES detalle(idDetalle));";
+
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (idUsuario integer primary key autoincrement, nombreU VARCHAR(25) not null, apellidoU VARCHAR(25) not null, rutU VARCHAR(13) not null, correoU VARCHAR(25) not null, contrasenaU VARCHAR(15) not null, FOREIGN KEY (idRol) REFERENCES rol(idRol), FOREIGN KEY (idPregunta) REFERENCES pregunta(idPregunta), FOREIGN KEY (idVenta) REFERENCES venta(idVenta));";
   
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (idUsuario integer primary key autoincrement, nombreU VARCHAR(25) not null, apellidoU VARCHAR(25) not null, rutU VARCHAR(13) not null, correoU VARCHAR(25) not null, contrasena VARCHAR(15) not null, FOREIGN KEY (idRol) REFERENCES rol(idRol), FOREIGN KEY (idPregunta) REFERENCES pregunta(idPregunta), FOREIGN KEY (idVenta) REFERENCES venta(idVenta));";
-  constructor() { }
+  //variables de insert en las tablas de registros iniciales
+  registroUsuario: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,claveU) VALUES (1,'Alfredo','Estay','211266813','alfr.estay@duocuc.cl','Alfredo123@');";
+
+  //variables Observables para las consultas en las tablas
+  listaUsuario = new BehaviorSubject([]);
+  listaDetalle = new BehaviorSubject([]);
+  listaProducto = new BehaviorSubject([]);
+  listaPregunta = new BehaviorSubject([]);
+
+  //variable para manipulación del estatus de la BD
+  private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+  //CONSTRUCTOR
+  constructor(private alertController: AlertController,private sqlite: SQLite, private platform: Platform) {
+    this.crearBD();
+  }
+
+  //funciones para subscribirme al observable
+  dbState(){
+    return this.isDBReady.asObservable();
+  }
+
+  fetchUsuario(): Observable<Usuario[]>{
+    return this.listaUsuario.asObservable();
+  }
+  fetchProducto(): Observable<Producto[]>{
+    return this.listaProducto.asObservable();
+  }
+  fetchPregunta(): Observable<Pregunta[]>{
+    return this.listaPregunta.asObservable();
+  }
+  fetchDetalle(): Observable<Detalle[]>{
+    return this.listaDetalle.asObservable();
+  }
+
+  buscarUsuario(){
+    return this.database.executeSql('SELECT * FROM usuario',[]).then(res=>{
+      //variable para almacenar la consulta
+      let items: Usuario[] = [];
+      //validar si existen registros
+      if(res.rows.length > 0){
+        //procedo a recorrer y guardar
+        for(var i=0; i<res.rows.length; i++){
+          //agrego los datos a mi variable
+          items.push({
+            idUsuario: res.rows.item(i).idUsuario,
+            nombreU: res.rows.item(i).nombreU,
+            apellidoU: res.rows.item(i).apellidoU,
+            rutU:  res.rows.item(i).rutU,
+            correoU: res.rows.item(i).correoU,
+            claveU: res.rows.item(i).clave
+          })
+        }
+      }
+      //actualizar mi observable
+      this.listaUsuario.next(items as any);
+
+    })
+  }
+
+  buscarPregunta(){
+    return this.database.executeSql('SELECT * FROM pregunta',[]).then(res=>{
+      //variable para almacenar la consulta
+      let items: Pregunta[] = [];
+      //validar si existen registros
+      if(res.rows.length > 0){
+        //procedo a recorrer y guardar
+        for(var i=0; i<res.rows.length; i++){
+          //agrego los datos a mi variable
+          items.push({
+            idPregunta: res.rows.item(i).idPregunta,
+            nombrePregunta: res.rows.item(i).nombrePregunta
+          })
+        }
+      }
+      //actualizar mi observable
+      this.listaPregunta.next(items as any);
+
+    })
+  }
+
+  buscarProducto(){
+    return this.database.executeSql('SELECT * FROM producto',[]).then(res=>{
+      //variable para almacenar la consulta
+      let items: Producto[] = [];
+      //validar si existen registros
+      if(res.rows.length > 0){
+        //procedo a recorrer y guardar
+        for(var i=0; i<res.rows.length; i++){
+          //agrego los datos a mi variable
+          items.push({
+            idProducto: res.rows.item(i).idProducto,
+            nombreProducto: res.rows.item(i).nombreProducto,
+            descripcion:  res.rows.item(i).descripcion,
+            precio: res.rows.item(i).precio,
+            stock: res.rows.item(i).stock,
+            foto: res.rows.item(i).foto
+          })
+        }
+      }
+      //actualizar mi observable
+      this.listaProducto.next(items as any);
+
+    })
+  }
+
+  buscarDetalle(){
+    return this.database.executeSql('SELECT * FROM detalle',[]).then(res=>{
+      //variable para almacenar la consulta
+      let items: Detalle[] = [];
+      //validar si existen registros
+      if(res.rows.length > 0){
+        //procedo a recorrer y guardar
+        for(var i=0; i<res.rows.length; i++){
+          //agrego los datos a mi variable
+          items.push({
+            idDetalle: res.rows.item(i).idDetalle,
+            cantidad: res.rows.item(i).cantidad,
+            subtotal: res.rows.item(i).subtotal,
+            precio:  res.rows.item(i).precio,
+            stock: res.rows.item(i).stock
+          })
+        }
+      }
+      //actualizar mi observable
+      this.listaDetalle.next(items as any);
+
+    })
+  }
+  
+  
+  //funcion para crear la BD
+  crearBD() {
+    //verificamos que la plataforma esta lista
+    this.platform.ready().then(() => {
+      //crear la BD
+      this.sqlite.create({
+        name: 'bdtiendita.db',
+        location: 'default'
+      }).then((db: SQLiteObject)=>{
+        //guardamos la conexión en mi variable global
+        this.database = db;
+        //llamar a la funcion que crea las tablas
+        this.crearTablas();
+      }).catch(e=> {
+        //capturamos y mostramos el error en la creacion de la BD
+        this.presentAlert("Error en Crear BD: " + e);
+      })
+    })
+  }
+
+  async crearTablas(){
+    try{
+      //ejecutar la creación de tablas
+      await this.database.executeSql(this.tablaCategoria,[]);
+      await this.database.executeSql(this.tablaRol,[]);
+      await this.database.executeSql(this.tablaPregunta,[]);
+      await this.database.executeSql(this.tablaProducto,[]);
+      await this.database.executeSql(this.tablaDetalle,[]);
+      await this.database.executeSql(this.tablaVenta,[]);
+      await this.database.executeSql(this.tablaUsuario,[]);
+
+      //ejecuto los registros
+      await this.database.executeSql(this.registroUsuario,[]);
+
+      //actualizar el estatus de la BD
+      this.isDBReady.next(true);
+      this.buscarUsuario();
+      this.buscarProducto();
+      this.buscarDetalle();
+      this.buscarPregunta();
+    }catch(e){
+      //capturamos y mostramos el error en la creacion de las tablas
+      this.presentAlert("Error en Crear Tablas: " + e);
+    }
+  }
+
+  async presentAlert(msj:string) {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: msj,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
 }
