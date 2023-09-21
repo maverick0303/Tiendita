@@ -10,7 +10,7 @@ import { Producto } from './producto';
 @Injectable({
   providedIn: 'root'
 })
-export class BaseDatosService {
+export class BdserviceService {
 
   //Variable para manipular la conexión a la BD
   public database!: SQLiteObject;
@@ -32,7 +32,7 @@ export class BaseDatosService {
   
   //variables de insert en las tablas de registros iniciales
   registroUsuario: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,claveU) VALUES (1,'Alfredo','Estay','211266813','alfr.estay@duocuc.cl','Alfredo123@');";
-
+  
   //variables Observables para las consultas en las tablas
   listaUsuario = new BehaviorSubject([]);
   listaDetalle = new BehaviorSubject([]);
@@ -157,6 +157,45 @@ export class BaseDatosService {
       //actualizar mi observable
       this.listaDetalle.next(items as any);
 
+    })
+  }
+
+  //FUNCIONES PARA INSERTAR EN LAS TABLAS
+  //INSERTAR
+  insertarProducto(nombreProducto:any, descripcion:any, precio:any, stock:any, foto:any){
+    return this.database.executeSql('INSERT INTO producto(nombreProducto,descripcion,precio,stock,foto) VALUES (?,?,?,?,?)',[nombreProducto,descripcion,precio,stock,foto]).then(res=>{
+      this.buscarProducto();
+    })
+  }
+  insertarPregunta(nombrePregunta:any){
+    return this.database.executeSql('INSERT INTO pregunta(nombrePregunta) VALUES (?)',[nombrePregunta]).then(res=>{
+      this.buscarPregunta();
+    })
+  }
+
+  //ACTUALIZAR TABLAS
+  actualizarProducto(idProducto:any, nombreProducto:any, descripcion:any, precio:any, stock:any, foto:any){
+    return this.database.executeSql('UPDATE producto SET nombreProducto = ?, descripcion = ?, precio = ?, stock = ?, foto = ? WHERE idProducto = ?',[nombreProducto,descripcion,precio,stock,foto,idProducto]).then(res=>{
+      this.buscarProducto();
+    })
+  }
+
+  actualizarPregunta(idPregunta:any, nombrePregunta:any){
+    return this.database.executeSql('UPDATE pregunta set nombrePregunta = ? where idPregunta = ?',[nombrePregunta, idPregunta]).then(res=>{
+      this.buscarPregunta();
+    })
+  }
+
+  //BORRAR ALGO DE LAS TABLAS
+  eliminarProducto(idProducto:any){
+    return this.database.executeSql('DELETE FROM producto WHERE idProducto = ?',[idProducto]).then(res=>{
+      this.buscarProducto();
+    })
+  }
+
+  eliminarPregunta(idPregunta:any){
+    return this.database.executeSql('DELETE FROM producto WHERE idProducto = ?',[idPregunta]).then(res=>{
+      this.buscarPregunta();
     })
   }
   

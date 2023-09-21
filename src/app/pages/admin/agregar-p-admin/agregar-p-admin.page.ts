@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BdserviceService } from 'src/app/services/bd.service';
 
 @Component({
   selector: 'app-agregar-p-admin',
@@ -9,10 +11,15 @@ export class AgregarPAdminPage implements OnInit {
   nombrePValue: string = '';
   descripcionPValue: string = '';
   precioPValue: number = 1;
+  stockPValue: number = 1;
   imagenPValue: File | undefined;
   categoriaPValue: string = '';
 
-  constructor() { }
+  constructor(public router:Router, private db: BdserviceService) { }
+  
+  InjectSetupWrapper(){
+    this.db.insertarProducto(this.nombrePValue,this.descripcionPValue,this.precioPValue,this.stockPValue,this.imagenPValue)
+  }
 
   ngOnInit() {
   }
