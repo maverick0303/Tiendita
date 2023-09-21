@@ -1,75 +1,59 @@
-
-  
-  /* este es el fondo */
-  ion-content {
-    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
-  }
-  
-  ion-input {
-    width: 100%;
-  }
-  /* Centrar el contenido verticalmente y horizontalmente */
-.fondo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: #222222; /* Color de fondo */
-  }
-  
-  .center-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Estilo para las tarjetas de entrada */
-  .input-card {
-    width: 80%;
-    max-width: 400px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-    background-color: #222222;
-  }
-  
-  /* Estilo para los mensajes de error */
-  .error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
-  }
-  
-  /* Personaliza el borde y el padding de los campos de entrada */
-  ion-input {
-    --padding-start: 15px;
-    --padding-end: 15px;
-    --border-radius: 8px;
-    line-height: 2.5; /* Ajusta el valor según tus preferencias */
-    margin-bottom: 15px;
-    background-color: #222222;
-    
-  }
-  ion-card-title{
-    color: white;
-    text-align: center;
-    font-size: 60px;
-  }
-  
-  ion-content {
-    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
+/* este es el fondo */
+ion-content {
+  --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
 }
 
-.center-buttons {
+ion-input {
+  width: 100%;
+}
+
+/* Centrar el contenido verticalmente y horizontalmente */
+.fondo {
   display: flex;
   justify-content: center;
-  margin-top: 20px; /* Agrega margen superior si es necesario */
+  align-items: center;
+  height: 100vh;
+  background: #222222; /* Color de fondo */
 }
 
-@media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px){
-  ion-card-title{
+/* Estilo para las tarjetas de entrada */
+.input-card {
+  width: 80%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgb(0, 162, 255);
+  background-color: #222222;
+  margin: 50px auto 0 auto; /* Margen superior de 40px, centrar horizontalmente */
+}
+
+/* Estilo para los mensajes de error */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Personaliza el borde y el padding de los campos de entrada */
+ion-input {
+  --padding-start: 15px;
+  --padding-end: 15px;
+  --border-radius: 8px;
+  line-height: 2.5; /* Ajusta el valor según tus preferencias */
+  margin-bottom: 15px;
+  background-color: #222222;
+}
+
+ion-card-title {
+  color: white;
+  text-align: center;
+  font-size: 40px; /* Ajusta el tamaño del título según tus preferencias */
+}
+
+/* Ajustes para dispositivos específicos */
+@media (max-width: 425px) and (height: 857px) {
+  ion-card-title {
     text-align: center;
-    font-size: 40px;
+    font-size: 30px; /* Ajusta el tamaño del título para pantallas más pequeñas */
   }
 }
-

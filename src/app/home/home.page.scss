@@ -29,7 +29,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 
 /* Estilos del título de la tarjeta */
-ion-card-title {
+ion-card ion-card-title {
   color: white;
   font-size: 65px;
   font-family: 'Abril Fatface', cursive;
@@ -38,81 +38,52 @@ ion-card-title {
 /* Fondo */
 ion-content {
   --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
-}
-
-/* Estilos del grid */
-ion-grid {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Esto centra verticalmente en la ventana */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  height: 100vh; /* Establecer la altura al 100% de la ventana */
+}
 
-  ion-row {
-    ion-card {
-      border-radius: 45px;
-      background-color: rgba(0, 0, 0, 0.521);
-      max-width: 450px; /* Ajusta el ancho máximo de la tarjeta según tus necesidades */
-      width: 650px; /* Asegura que la tarjeta ocupe todo el ancho disponible */
+/* Estilos de la tarjeta */
+ion-card {
+  border-radius: 45px;
+  background-color: rgba(0, 0, 0, 0.521);
+  max-width: 450px;
+  width: 90%;
+  margin: 150px auto 0 auto; /* Margen superior de 40px, centrar horizontalmente */
 
-      /* Estilos de la imagen */
-      img {
-        display: block;
-        margin: 0 auto; /* Centrar la imagen horizontalmente */
-        width: 250px;
-        height: 250px;
-      }
+  /* Estilos de la imagen en la tarjeta */
+  img {
+    display: block;
+    margin: 0 auto; /* Centrar la imagen horizontalmente */
+    width: 250px;
+    height: 250px;
+  }
 
-      /* Estilos del texto en la tarjeta */
-      ion-card-content {
-        padding: 20px; /* Agregar padding en lugar de margen para el contenido */
-      }
-    }
+  /* Estilos del texto en la tarjeta */
+  ion-card-content {
+    padding: 20px;
   }
 }
-//para que la card quede bien ajustada=
-@media(width:412px) or (width: 425px) or (width: 389px){
-  ion-card-title {
+
+/* Ajustes para dispositivos específicos */
+@media (max-width: 425px) {
+  ion-card ion-card-title {
     font-size: 45px;
-    font-family: 'Abril Fatface', cursive;
-  }
-  /* Estilos del grid */
-  ion-grid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Esto centra verticalmente en la ventana */
-  
-    ion-row {
-      ion-card {
-        border-radius: 45px;
-        background-color: rgba(0, 0, 0, 0.521);
-        max-width: 450px; /* Ajusta el ancho máximo de la tarjeta según tus necesidades */
-        width: 350px; /* Asegura que la tarjeta ocupe todo el ancho disponible */
-  
-        /* Estilos de la imagen */
-        img {
-          display: block;
-          margin: 0 auto; /* Centrar la imagen horizontalmente */
-          width: 250px;
-          height: 250px;
-        }
-  
-        /* Estilos del texto en la tarjeta */
-        ion-card-content {
-          padding: 20px; /* Agregar padding en lugar de margen para el contenido */
-        }
-      }
-    }
   }
 
+  ion-card {
+    width: 80%;
+  }
 }
-//esto es lo de los botones.
-button{
+
+/* Estilos de botones */
+button {
   border-radius: 15px;
   font-size: 25px;
-
 }
 
+/* Estilos para secciones y etiquetas */
 section {
   display: table;
 }
@@ -144,4 +115,3 @@ section {
   justify-content: center;
   width: 120px;
 }
-

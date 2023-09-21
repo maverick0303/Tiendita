@@ -108,8 +108,8 @@ export class RegistroPage implements OnInit {
   valiPassword(event: KeyboardEvent) {
     const input = event.key;
 
-    // Expresión regular para validar la contraseña
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{5,15}$/;
+    // Expresión regular para validar la contraseña permitiendo "."
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.]).{5,15}$/;
 
     if (!passwordRegex.test(input)) {
       event.preventDefault(); // No permite caracteres no válidos
@@ -150,7 +150,7 @@ export class RegistroPage implements OnInit {
 
     // Validación de la contraseña
     this.errors.password = '';
-    if (!/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,15}$/.test(this.passwordValue)) {
+    if (!/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{5,15}$/.test(this.passwordValue)) {
       this.errors.password = 'La contraseña no cumple con los requisitos.';
       hasError = true;
     }
@@ -164,7 +164,19 @@ export class RegistroPage implements OnInit {
 
     // Validación de la pregunta de seguridad
     this.errors.preguntaSeguridad = this.preguntaSeguridad ? '' : 'Por favor, seleccione una pregunta de seguridad.';
-    hasError = !this.preguntaSeguridad;
+    hasError = !this.preguntaSeguridad || hasError; // Agregar la condición aquí
+
+    // Validación adicional para comprobar si todos los campos requeridos están llenos
+    if (
+      !this.nombreUValue ||
+      !this.apellidoUValue ||
+      !this.rutValue ||
+      !this.emailValue ||
+      !this.passwordValue ||
+      !this.confirmPasswordValue
+    ) {
+      hasError = true;
+    }
 
     this.formularioValido = !hasError;
   }
