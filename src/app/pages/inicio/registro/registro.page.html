@@ -48,15 +48,15 @@
             </ion-input>
             <!-- VALIDACION -->
             <div class="error-message" *ngIf="errors.confirmPassword">{{ errors.confirmPassword }}</div>
+
             <!-- Pregunta de seguridad -->
             <ion-select label="Pregunta de Seguridad" label-placement="floating" fill="outline"
-              [(ngModel)]="preguntaSeguridad" required>
-              <ion-select-option value="1">¿Cuál es tu película favorita?</ion-select-option>
-              <ion-select-option value="2">¿Nombre de tu mascota?</ion-select-option>
-              <ion-select-option value="3">¿Color favorito?</ion-select-option>
+              [(ngModel)]="preguntaSeguridad" required >
+              <ion-select-option *ngFor="let pregunta of arregloPreguntas" value="{{ pregunta.idPregunta }}" >{{ pregunta.nombrePregunta }}</ion-select-option>
             </ion-select><br>
             <!--VALIDACION DE LA PREGUNTA-->
             <div class="error-message" *ngIf="errors.preguntaSeguridad">{{ errors.preguntaSeguridad }}</div>
+
             <!-- Respuesta a la pregunta de seguridad -->
             <ion-input label="Respuesta" type="text" label-placement="floating"
               fill="outline" placeholder="Respuesta" name="respuestaSeguridad" [(ngModel)]="respuestaSeguridad" (ionBlur)="verificarFormulario()"

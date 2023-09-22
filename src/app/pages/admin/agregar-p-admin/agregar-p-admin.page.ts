@@ -20,7 +20,6 @@ export class AgregarPAdminPage implements OnInit {
   InjectSetupWrapper(){
     this.db.insertarProducto(this.nombrePValue,this.descripcionPValue,this.precioPValue,this.stockPValue,this.imagenPValue)
   }
-
   ngOnInit() {
   }
 

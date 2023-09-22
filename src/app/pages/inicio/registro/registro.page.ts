@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+import { BdserviceService } from 'src/app/services/bd.service';
 
 @Component({
   selector: 'app-registro',
@@ -28,12 +29,27 @@ export class RegistroPage implements OnInit {
     respuestaSeguridad: '',
   };
 
+  arregloPreguntas: any = [
+    {
+      idPregunta: '',
+      nombrePregunta: ''
+    }
+  ]
+
   formularioValido: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router:Router, private bd: BdserviceService) { }
 
   ngOnInit() {
-    // Inicialización aquí...
+    //subscribo al observable de la BD
+    this.bd.dbState().subscribe(res=>{
+      if(res){
+        this.bd.fetchPregunta().subscribe(datos=>{
+          this.arregloPreguntas = datos;
+        })
+      }
+    })
+
   }
 
   valiNombre(event: KeyboardEvent) {
