@@ -37,6 +37,11 @@ export class BdserviceService {
   registroPregunta3: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (3,'¿Cuál es tu fruta favorita?');";
 
   
+  //registro de categoria
+  registroCategoria1: string = "INSERTAR O IGNORE into categoria(idCategoria, nombreCategoria) VALUES (1,'Reloj digital');";
+  registroCategoria2: string = "INSERTAR O IGNORE into categoria(idCategoria, nombreCategoria) VALUES (1,'Reloj analógico');";
+  registroCategoria3: string = "INSERTAR O IGNORE into categoria(idCategoria, nombreCategoria) VALUES (1,'Audifono bluetooth');";
+  registroCategoria4: string = "INSERTAR O IGNORE into categoria(idCategoria, nombreCategoria) VALUES (1,'Audifono gamer');";
 
   //variables Observables para las consultas en las tablas
   listaUsuario = new BehaviorSubject([]);
@@ -243,6 +248,8 @@ export class BdserviceService {
       await this.database.executeSql(this.registroPregunta1,[]);
       await this.database.executeSql(this.registroPregunta2,[]);
       await this.database.executeSql(this.registroPregunta3,[]);
+
+      //REGISTROS DE CATEGORIAS
 
       //actualizar el estatus de la BD
       this.isDBReady.next(true);
