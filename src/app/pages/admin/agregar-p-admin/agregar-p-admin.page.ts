@@ -15,12 +15,29 @@ export class AgregarPAdminPage implements OnInit {
   imagenPValue: File | undefined;
   categoriaPValue: string = '';
 
+  arregloCategoria: any = [
+    {
+      idCategoria: '',
+      nombreCategoria: ''
+    }
+  ]
+
   constructor(private router:Router, private db: BdserviceService) { }
   
   InjectSetupWrapper(){
     this.db.insertarProducto(this.nombrePValue,this.descripcionPValue,this.precioPValue,this.stockPValue,this.imagenPValue)
   }
+
   ngOnInit() {
+    //subscribo al observable de la BD
+    this.db.dbState().subscribe(res=>{
+      if(res){
+        this.db.fetchCategoria().subscribe(datos=>{
+          this.arregloCategoria = datos;
+        })
+      }
+    })
+
   }
 
   limitarLongitudPrecio(event: any) {

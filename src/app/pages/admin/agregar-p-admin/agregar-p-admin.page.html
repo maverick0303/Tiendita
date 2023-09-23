@@ -62,10 +62,8 @@
           <ion-item>
             <ion-label position="floating">Categoría para el producto</ion-label>
             <ion-select required name="categoriaP" [(ngModel)]="categoriaPValue" #categoriaPModel="ngModel">
-              <ion-select-option>Reloj digital</ion-select-option>
-              <ion-select-option>Reloj analógico</ion-select-option>
-              <ion-select-option>Audífono bluetooth</ion-select-option>
-              <ion-select-option>Audífono gamer</ion-select-option>
+              <ion-select-option *ngFor="let categoria of arregloCategoria" value="{{ categoria.idCategoria }}" >{{ categoria.nombreCategoria }} </ion-select-option>
+              
             </ion-select>
           </ion-item>
           <div class="error-message"

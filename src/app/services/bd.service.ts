@@ -6,6 +6,7 @@ import { Usuario } from './usuario';
 import { Pregunta } from './pregunta';
 import { Detalle } from './detalle';
 import { Producto } from './producto';
+import { Categoria } from './categoria';
 
 @Injectable({
   providedIn: 'root'
@@ -36,18 +37,21 @@ export class BdserviceService {
   registroPregunta2: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (2,'¿Cuál es tu pelicula favorita?');";
   registroPregunta3: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (3,'¿Cuál es tu fruta favorita?');";
 
+  //variables para productos
+  
   
   //registro de categoria
-  registroCategoria1: string = "INSERTAR O IGNORE into categoria(idCategoria, nombreCategoria) VALUES (1,'Reloj digital');";
-  registroCategoria2: string = "INSERTAR O IGNORE into categoria(idCategoria, nombreCategoria) VALUES (1,'Reloj analógico');";
-  registroCategoria3: string = "INSERTAR O IGNORE into categoria(idCategoria, nombreCategoria) VALUES (1,'Audifono bluetooth');";
-  registroCategoria4: string = "INSERTAR O IGNORE into categoria(idCategoria, nombreCategoria) VALUES (1,'Audifono gamer');";
+  registroCategoria1: string = "INSERT Or IGNORE into categoria(idCategoria, nombreCategoria) VALUES (1,'Reloj digital');";
+  registroCategoria2: string = "INSERT Or IGNORE into categoria(idCategoria, nombreCategoria) VALUES (2,'Reloj analógico');";
+  registroCategoria3: string = "INSERT Or IGNORE into categoria(idCategoria, nombreCategoria) VALUES (3,'Audifono bluetooth');";
+  registroCategoria4: string = "INSERT Or IGNORE into categoria(idCategoria, nombreCategoria) VALUES (4,'Audifono gamer');";
 
   //variables Observables para las consultas en las tablas
   listaUsuario = new BehaviorSubject([]);
   listaDetalle = new BehaviorSubject([]);
   listaProducto = new BehaviorSubject([]);
   listaPregunta = new BehaviorSubject([]);
+  listaCategoria = new BehaviorSubject([]);
 
   //variable para manipulación del estatus de la BD
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -73,6 +77,9 @@ export class BdserviceService {
   }
   fetchDetalle(): Observable<Detalle[]>{
     return this.listaDetalle.asObservable();
+  }
+  fetchCategoria(): Observable<Categoria[]>{
+    return this.listaCategoria.asObservable();    
   }
 
   buscarUsuario(){
@@ -172,16 +179,32 @@ export class BdserviceService {
     })
   }
 
+  buscarCategoria(){
+    return this.database.executeSql('SELECT * FROM categoria',[]).then(res=>{
+      //variable para almacenar la consulta
+      let items: Categoria [] = [];
+      //validar si existen registros
+      if(res.rows.length > 0){
+        //procedo a recorrer y guardar
+        for(var i=0; i<res.rows.length; i++){
+          //agrego los datos a mi variable
+          items.push({
+            idCategoria: res.rows.item(i).idCategoria,
+            nombreCategoria: res.rows.item(i).nombreCategoria
+          })
+        }
+      }
+      //actualizar mi observable
+      this.listaCategoria.next(items as any);
+
+    })
+  }
+
   //FUNCIONES PARA INSERTAR EN LAS TABLAS
   //INSERTAR
   insertarProducto(nombreProducto:any, descripcion:any, precio:any, stock:any, foto:any){
     return this.database.executeSql('INSERT INTO producto(nombreProducto,descripcion,precio,stock,foto) VALUES (?,?,?,?,?)',[nombreProducto,descripcion,precio,stock,foto]).then(res=>{
       this.buscarProducto();
-    })
-  }
-  insertarPregunta(nombrePregunta:any){
-    return this.database.executeSql('INSERT INTO pregunta(nombrePregunta) VALUES (?)',[nombrePregunta]).then(res=>{
-      this.buscarPregunta();
     })
   }
 
@@ -192,22 +215,10 @@ export class BdserviceService {
     })
   }
 
-  actualizarPregunta(idPregunta:any, nombrePregunta:any){
-    return this.database.executeSql('UPDATE pregunta set nombrePregunta = ? where idPregunta = ?',[nombrePregunta, idPregunta]).then(res=>{
-      this.buscarPregunta();
-    })
-  }
-
   //BORRAR ALGO DE LAS TABLAS
   eliminarProducto(idProducto:any){
     return this.database.executeSql('DELETE FROM producto WHERE idProducto = ?',[idProducto]).then(res=>{
       this.buscarProducto();
-    })
-  }
-
-  eliminarPregunta(idPregunta:any){
-    return this.database.executeSql('DELETE FROM producto WHERE idProducto = ?',[idPregunta]).then(res=>{
-      this.buscarPregunta();
     })
   }
   
@@ -251,12 +262,18 @@ export class BdserviceService {
 
       //REGISTROS DE CATEGORIAS
 
+      await this.database.executeSql(this.registroCategoria1,[]);
+      await this.database.executeSql(this.registroCategoria2,[]);
+      await this.database.executeSql(this.registroCategoria3,[]);
+      await this.database.executeSql(this.registroCategoria4,[]);
+
       //actualizar el estatus de la BD
       this.isDBReady.next(true);
       this.buscarUsuario();
       this.buscarProducto();
       this.buscarDetalle();
       this.buscarPregunta();
+      this.buscarCategoria();
     }catch(e){
       //capturamos y mostramos el error en la creacion de las tablas
       this.presentAlert("Error en Crear Tablas: " + e);
