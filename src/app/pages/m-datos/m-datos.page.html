@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <app-componente1></app-componente1>
+</ion-header>
+
+<!--#############################################PRODUCTOS################################################-->
+
+<ion-content class="fondo" [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-card>
+        <ion-card-title>Datos personales</ion-card-title>
+        <ion-card-content>
+          <!-- NOMBRE -->
+          <div class="input-row">
+            <ion-input label="Nombre:" type="text" label-placement="floating" fill="outline" placeholder="Mario"
+              name="nombreEnviado" required [(ngModel)]="nombreEnviado" (ionBlur)="verificarFormulario()"
+              (keydown)="valiNombre($event)">
+            </ion-input>
+          </div>
+          <!-- VALIDACION -->
+          <div class="error-message" *ngIf="errors.nombreEnviado">{{ errors.nombreEnviado }}</div><br>
+          <!-- APELLIDO -->
+          <ion-input label="Apellido:" type="text" label-placement="floating" fill="outline" placeholder="Lopez"
+            name="apellidoEnviado" required [(ngModel)]="apellidoEnviado" (ionBlur)="verificarFormulario()"
+            (keydown)="ValiApellido($event)">
+          </ion-input>
+          <!-- VALIDACION -->
+          <div class="error-message" *ngIf="errors.apellidoEnviado">{{ errors.apellidoEnviado }}</div><br>
+          <!-- RUT -->
+          <ion-input label="RUT:" type="text" label-placement="floating" fill="outline" name="rut" disabled
+            [(ngModel)]="rutEnviado">
+          </ion-input><br>
+          <!-- EMAIL -->
+          <ion-input label="Email:" type="text" label-placement="floating" fill="outline" name="email"
+            [(ngModel)]="emailEnviado" disabled></ion-input><br>
+          <!--BOTON-->
+          <ion-button expand="50px" style="align-content: center;align-items: center;display: flex;"
+            [disabled]="!formularioValido">Guardar cambios</ion-button>
+
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+  <app-componente2></app-componente2>
+</ion-content>

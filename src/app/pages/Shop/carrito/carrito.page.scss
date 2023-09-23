@@ -8,11 +8,11 @@
   }
   
   .custom-card {
-    background: #222222;
+    background: #010626;
     display: flex;
     flex-direction: column; /* Coloca el contenido en columna */
     align-items: center;
-    width: 70%; /* Aumenta el ancho de la tarjeta al 70% del contenedor */
+    width: 90%; /* Aumenta el ancho de la tarjeta al 70% del contenedor */
     text-align: center; /* Centra el texto horizontalmente */
   }
   
@@ -51,8 +51,12 @@
     color: white;
     font-family: 'DM Serif Display', serif;
     font-size: 55px;
-    text-align: center;
+    text-align: left;
     margin: 5px;
+  }
+  .btn{
+    --background: #79F2E6;
+    color: #0d0d0d;
   }
   
   /* Ajustes para pantallas más pequeñas */
@@ -98,6 +102,6 @@
   
   /* FONDO */
   ion-content {
-    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
+    --background: url(https://w0.peakpx.com/wallpaper/955/141/HD-wallpaper-purple-science-tech.jpg);
   }
   

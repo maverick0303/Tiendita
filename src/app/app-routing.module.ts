@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/inicio/inicio-sesion/inicio-sesion.module').then( m => m.InicioSesionPageModule)
   },
   {
+    path: 'm-datos',
+    loadChildren: () => import('./pages/m-datos/m-datos.module').then( m => m.MDatosPageModule)
+  },
+  {
     path: 'registro',
     loadChildren: () => import('./pages/inicio/registro/registro.module').then( m => m.RegistroPageModule)
   },
@@ -129,10 +133,6 @@ const routes: Routes = [
   {
     path: 'historial',
     loadChildren: () => import('./pages/Shop/historial/historial.module').then( m => m.HistorialPageModule)
-  },
-  {
-    path: '**',
-    loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
   },
   {
     path: 'menu-admin',

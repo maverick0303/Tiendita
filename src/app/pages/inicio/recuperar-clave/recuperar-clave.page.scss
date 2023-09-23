@@ -18,14 +18,16 @@ ion-input {
 
 /* Estilo para las tarjetas de entrada */
 .input-card {
-  width: 80%;
-  max-width: 400px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 6px 2px 6px #79F2E6;
-  background-color: #222222;
-  margin: 35px auto 0 auto;
-  /* Margen superior de 40px, centrar horizontalmente */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+  max-width: 350px;
+  margin: 150px auto;
+  border-radius: 20px;
+  box-shadow: 0px 2px 6px #79F2E6;
+  background: #010626;
 }
 
 /* Estilo para los mensajes de error */
@@ -42,14 +44,14 @@ ion-input {
   --border-radius: 8px;
   line-height: 2.5;
   /* Ajusta el valor según tus preferencias */
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   background-color: #222222;
 }
 
 ion-card-title {
   color: white;
   text-align: center;
-  font-size: 40px;
+  font-size: 35px;
   /* Ajusta el tamaño del título según tus preferencias */
 }
 
