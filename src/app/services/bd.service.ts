@@ -22,7 +22,7 @@ export class BdserviceService {
 
   tablaPregunta: string = "CREATE TABLE IF NOT EXISTS pregunta (idPregunta integer primary key autoincrement,  nombrePregunta VARCHAR(50) not null);";
 
-  tablaProducto: string = "CREATE TABLE IF NOT EXISTS producto (idProducto integer primary key autoincrement, nombreProducto VARCHAR(25) not null, descripcion VARCHAR(100) not null, precioProducto integer not null, stockProducto integer not null, nombreCategoria varchar(50) not null, bloob not null, FOREIGN KEY (nombreCategoria) REFERENCES categoria(idCategoria));";
+  tablaProducto: string = "CREATE TABLE IF NOT EXISTS producto (idProducto integer primary key autoincrement, nombreProducto VARCHAR(25) not null, descripcion VARCHAR(100) not null, precioProducto integer not null, stockPropducto integer not null, nombreCategoria varchar(50) not null, bloob not null, FOREIGN KEY (nombreCategoria) REFERENCES categoria(idCategoria));";
 
   tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle (idDetalle integer primary key autoincrement, cantidadProducto integer not null, subtotalD integer not null,nombreProducto not null, FOREIGN KEY (nombreProducto) REFERENCES producto(idProducto));";
 
@@ -31,19 +31,12 @@ export class BdserviceService {
   tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (idUsuario integer primary key autoincrement, nombreU VARCHAR(25) not null, apellidoU VARCHAR(25) not null, rutU VARCHAR(13) not null, correoU VARCHAR(25) not null, contrasenaU VARCHAR(15) not null, idRol not null, nombrePregunta not null, idVenta not null, FOREIGN KEY (idRol) REFERENCES rol(idRol), FOREIGN KEY (nombrePregunta) REFERENCES pregunta(idPregunta), FOREIGN KEY (idVenta) REFERENCES venta(idVenta));";
   
   //variables de insert en las tablas de registros iniciales
-  //registros de usuario
-  registroUsuario1a: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU) VALUES (1,'Alfredo','Estay','211266813','alfr.estay@duocuc.cl','Alfredo123@');";
-  registroUsuario2a: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU) VALUES (2,'Maria','Yeguez','269374225','ma.yeguez@duocuc.cl','Maria123@');"; 
-
-  //registros de preguntas
+  registroUsuario: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU) VALUES (1,'Alfredo','Estay','211266813','alfr.estay@duocuc.cl','Alfredo123@');";
   registroPregunta1: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (1,'¿Cuál es el nombre de tu mascota?');";
   registroPregunta2: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (2,'¿Cuál es tu pelicula favorita?');";
   registroPregunta3: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (3,'¿Cuál es tu fruta favorita?');";
-  //registros de productos
 
-  producto1: string = "INSERT or IGNORE INTO producto(idProducto, nombreProducto,descripcion, precioProducto, stockProducto, nombreCategoria) VALUES (1,'Audifono gamer','Audifono gamer perfecto para juegos.', 10000, 53, audifono gamer, FALTA LA FOTO);";
   
-
 
   //variables Observables para las consultas en las tablas
   listaUsuario = new BehaviorSubject([]);
@@ -246,17 +239,10 @@ export class BdserviceService {
       await this.database.executeSql(this.tablaUsuario,[]);
 
       //ejecuto los registros
-      //REGISTRO DE ADMINISTRADOR
-      await this.database.executeSql(this.registroUsuario1a,[]);
-      await this.database.executeSql(this.registroUsuario2a,[]);
-
-      //REGISTRO DE PREGUNTAS
+      await this.database.executeSql(this.registroUsuario,[]);
       await this.database.executeSql(this.registroPregunta1,[]);
       await this.database.executeSql(this.registroPregunta2,[]);
       await this.database.executeSql(this.registroPregunta3,[]);
-
-      //REGISTRO DE PRODUCTOS
-
 
       //actualizar el estatus de la BD
       this.isDBReady.next(true);
