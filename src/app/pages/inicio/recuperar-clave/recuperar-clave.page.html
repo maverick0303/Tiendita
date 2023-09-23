@@ -1,46 +1,33 @@
 <ion-header [translucent]="true">
 </ion-header>
-
-
 <ion-content class="fondo" [fullscreen]="true">
   <div class="container">
     <ion-card style="background-color: #222222;">
-      
       <ion-card-header>
         <ion-card-title>Recuperar Contraseña</ion-card-title>
       </ion-card-header>
       <br>
-      <ion-card-content style="background-color: #222222;">
+      <ion-card-content>
         <form id="registration-form">
-          <!--Aqui tendriamos que mostrar la pregunta de seguridad que el usuario registro-->
-          <ion-list style="background-color: #222222;">
-            <ion-item>
-              <ion-select aria-label="Fruit" interface="popover" placeholder="Pregunta de seguridad" name="preguntaU"
-                requeride>
-                <ion-select-option value="1">¿Cuál es tu película favorita?</ion-select-option>
-                <ion-select-option value="2">¿Nombre de tu mascota?</ion-select-option>
-                <ion-select-option value="3">¿Color favorito?</ion-select-option></ion-select>
-            </ion-item>
-          </ion-list>
-
-          <ion-item style="background-color: #222222;">
-            <ion-label position="floating">Respuesta</ion-label>
-            <ion-input type="text" name="respuesta" required></ion-input>
-          </ion-item>
-
-          <ion-item style="background-color: #222222;">
-            <ion-label position="floating">Nueva contraseña:</ion-label>
-            <ion-input type="nContrasena" name="nContrasena" required></ion-input>
-          </ion-item>
-
-          <ion-item style="background-color: #222222;">
-            <ion-label position="floating">Repetir contraseña:</ion-label>
-            <ion-input type="rContrasena" name="rContrasena" required></ion-input>
-          </ion-item>
-
-          <ion-button class="center-buttons" color="dark" type="submit">Guardar contraseña</ion-button>
+          <!--PREGUNTA-->
+          <ion-select label="Pregunta de seguridad" label-placement="floating" fill="outline">
+            requeride>
+            <ion-select-option value="1">¿Cuál es tu película favorita?</ion-select-option>
+            <ion-select-option value="2">¿Nombre de tu mascota?</ion-select-option>
+            <ion-select-option value="3">¿Color favorito?</ion-select-option>
+          </ion-select>
+          <!--RESPUESTA-->
+          <ion-input label="Respuesta" type="text" label-placement="floating" fill="outline"
+            placeholder="Respuesta"></ion-input>
+          <!--NUEVA-->
+          <ion-input label="Nueva contraseña" type="text" label-placement="floating" fill="outline"
+            placeholder="Respuesta"></ion-input>
+          <!--REPETIR-->
+          <ion-input label="Respuesta" type="text" label-placement="floating" fill="outline"
+            placeholder="Repetir contraseña">Respuesta</ion-input>
+          <!--BOTON-->
+          <ion-button class="center-buttons">Guardar contraseña</ion-button>
         </form>
-        
       </ion-card-content>
     </ion-card>
   </div>

@@ -37,10 +37,6 @@ export class BdserviceService {
   registroPregunta2: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (2,'¿Cuál es tu pelicula favorita?');";
   registroPregunta3: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (3,'¿Cuál es tu fruta favorita?');";
 
-  //variables para productos
-  registroProdR1: string = "INSERT or IGNORE INTO producto(idProducto,nombreProducto,descripcion,precioProducto,stockPropducto,nombreCategoria) VALUES (1,'Audifono JBL', 'Audifonos de alta gama', 120000, 52,'Audifono bluetooth');";
-  registroProdR2: string = "INSERT or IGNORE INTO producto(idProducto,nombreProducto,descripcion,precioProducto,stockPropducto,nombreCategoria) VALUES (2,'Audifono JBL', 'Audifonos de alta gama', 120000, 52,'Audifono bluetooth');";
-  registroProdR3: string = "INSERT or IGNORE INTO producto(idProducto,nombreProducto,descripcion,precioProducto,stockPropducto,nombreCategoria) VALUES (3,'Audifono JBL', 'Audifonos de alta gama', 120000, 52,'Audifono bluetooth');";
 
   
   //registro de categoria
@@ -270,10 +266,6 @@ export class BdserviceService {
       await this.database.executeSql(this.registroCategoria3,[]);
       await this.database.executeSql(this.registroCategoria4,[]);
 
-      //REGISTROS DE PRODUCTOS
-      await this.database.executeSql(this.registroProdR1,[]);
-      await this.database.executeSql(this.registroProdR2,[]);
-      await this.database.executeSql(this.registroProdR3,[]);
 
 
       //actualizar el estatus de la BD

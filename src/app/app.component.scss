@@ -1,9 +1,22 @@
 ion-menu::part(backdrop) {
-    background-color:  rgb(12, 6, 39);
+  --ion-background-color: rgb(12, 6, 39);
+}
+
+ion-menu::part(container) {
+  --ion-background-color: #222222;
+  box-shadow: 16px 16px 16px #F079F2;
+}
+
+ion-item {
+  ion-label{
+    color: white;
+  }
+  ion-icon{
+    color: white;
   }
   
-  ion-menu::part(container) {
-    border-radius: 10 20px 20px 10;
-  
-    box-shadow: 16px 16px 16px rgb(255, 255, 255);
-  }
+}
+
+ion-title{
+  color: white;
+}

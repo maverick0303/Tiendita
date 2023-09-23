@@ -26,12 +26,13 @@ ion-card {
   max-width: 350px;
   margin: 150px auto;
   border-radius: 20px;
-  background: #222222;
+  box-shadow: 0px 2px 6px #79F2E6;
+  background: #010626;
 }
 
 //el fondo de la aplicacion:
 ion-content {
-  --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
+  --background: url(https://w0.peakpx.com/wallpaper/955/141/HD-wallpaper-purple-science-tech.jpg);
 }
 
 //LA IMAGEN:
@@ -47,10 +48,11 @@ img {
 //LAS P:
 p {
 font-size: 15px;
+color: white;
 }
 //LAS A
 a{
-  color: #797575;
+  color: white;
 }
 //CUANDO SE PONGA PEQUEÑA LA PANTALLA
 @media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px){
@@ -61,4 +63,10 @@ a{
     background: #222222;
   }
 
+}
+ion-button {
+  --background: #79F2E6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

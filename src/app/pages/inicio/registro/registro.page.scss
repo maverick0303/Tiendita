@@ -1,6 +1,6 @@
 /* este es el fondo */
 ion-content {
-  --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
+  --background: url(https://w0.peakpx.com/wallpaper/955/141/HD-wallpaper-purple-science-tech.jpg);
 }
 
 ion-input {
@@ -13,7 +13,6 @@ ion-input {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #222222;
   /* Color de fondo */
 }
 
@@ -23,9 +22,9 @@ ion-input {
   max-width: 400px;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0px 2px 6px rgb(0, 162, 255);
+  box-shadow: 6px 2px 6px #79F2E6;
   background-color: #222222;
-  margin: 50px auto 0 auto;
+  margin: 35px auto 0 auto;
   /* Margen superior de 40px, centrar horizontalmente */
 }
 
@@ -43,7 +42,7 @@ ion-input {
   --border-radius: 8px;
   line-height: 2.5;
   /* Ajusta el valor según tus preferencias */
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   background-color: #222222;
 }
 
@@ -56,9 +55,14 @@ ion-card-title {
 
 p {
   text-align: justify;
+  color:white;
+}
+a{
+  color:white;
 }
 
 ion-button {
+  --background: #79F2E6;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,53 +1,69 @@
-/* FONDO */
+/* este es el fondo */
 ion-content {
-  --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
+  --background: url(https://w0.peakpx.com/wallpaper/955/141/HD-wallpaper-purple-science-tech.jpg);
 }
 
-ion-card {
-  height: 550px;
-  width: 500px;
-  background: #222222;
+ion-input {
+  width: 100%;
 }
 
-/* Importar fuente */
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
-
-ion-card-title {
-  color: white;
-  font-family: 'Abril Fatface', cursive;
-  font-size: 45px;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-}
-
-.container {
+/* Centrar el contenido verticalmente y horizontalmente */
+.fondo {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 95vh;
+  height: 100vh;
+  /* Color de fondo */
 }
 
-/* Ajustes para dispositivos específicos */
-@media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px) {
-  ion-card {
-    height: 450px;
-    width: 500px;
-    background: #222222;
-  }
-
-  ion-card-title {
-    font-size: 30px; /* Ajusta el tamaño del título para pantallas más pequeñas */
-  }
-
-  .container {
-    height: 90vh; /* Ajusta la altura del contenedor para pantallas más pequeñas */
-  }
+/* Estilo para las tarjetas de entrada */
+.input-card {
+  width: 80%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 6px 2px 6px #79F2E6;
+  background-color: #222222;
+  margin: 35px auto 0 auto;
+  /* Margen superior de 40px, centrar horizontalmente */
 }
 
-/* Estilos para botones */
-.center-buttons {
+/* Estilo para los mensajes de error */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Personaliza el borde y el padding de los campos de entrada */
+ion-input {
+  --padding-start: 15px;
+  --padding-end: 15px;
+  --border-radius: 8px;
+  line-height: 2.5;
+  /* Ajusta el valor según tus preferencias */
+  margin-bottom: 10px;
+  background-color: #222222;
+}
+
+ion-card-title {
+  color: white;
+  text-align: center;
+  font-size: 40px;
+  /* Ajusta el tamaño del título según tus preferencias */
+}
+
+p {
+  text-align: justify;
+  color:white;
+}
+a{
+  color:white;
+}
+
+ion-button {
+  --background: #79F2E6;
   display: flex;
   justify-content: center;
-  margin-top: 20px; /* Agrega margen superior si es necesario */
+  align-items: center;
 }

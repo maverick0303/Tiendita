@@ -1,5 +1,6 @@
 <ion-content [fullscreen]="true">
   <ion-card>
+    <br><br>
     <!--LOGO DE USUARIO-->
     <img src="assets/user.png" alt="Icono de Usuario" class="centered-image">
     <!---->
@@ -26,9 +27,9 @@
       </mat-form-field>
     </div>
     <!--BOTON-->
-    <ion-button (click)="inicio_sesion()" color="dark">Iniciar sesión</ion-button>
+    <ion-button (click)="inicio_sesion()">Iniciar sesión</ion-button>
     <!--MENSAJITO PARA SABER SI TIENE O NO UNA CUENTA-->
     <p>¿Aún no tiene una cuenta?<a [routerLink]="['/registro']">Registrese</a></p>
-    <p>¿Se le olvido su clave?<a [routerLink]="['/recuperar-clave']">Recuperela</a></p>
+    <p>¿Se le olvido su clave?<a [routerLink]="['/recuperar-clave']">Recuperela</a></p><br><br>
   </ion-card>
 </ion-content>

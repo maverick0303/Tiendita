@@ -65,12 +65,12 @@
             <!-- VALIDACION -->
             <div class="error-message" *ngIf="errors.respuestaSeguridad">{{ errors.respuestaSeguridad }}</div>
             <!--BOTON-->
-            <ion-button color="dark" class="center-buttons" (click)="irAPaginaSiguiente()" [disabled]="!formularioValido">Registrarse</ion-button>
+            <ion-button  (click)="irAPaginaSiguiente()" [disabled]="!formularioValido">Registrarse</ion-button>
             <!--MENSAJITO-->
-            <p [routerLink]="['/inicio-sesion']" style="text-align: center;"> ¿Ya tienes una cuenta? Inicia sesión aquí</p>
+            <p style="text-align: center;">¿Tiene una cuenta?<a [routerLink]="['/inicio-sesion']">Inicie sesión</a></p>
           </form>
         </ion-card-content>
       </ion-card>
     </ion-row>
-  </ion-grid>
+  </ion-grid> 
 </ion-content>

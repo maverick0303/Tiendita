@@ -27,16 +27,7 @@ export class TiendaPage implements OnInit {
   dinero14 = 240000;
   dinero15 = 360000;
   //
-  arregloProductos: any = [
-    {
-      idProducto: '',
-      nombreProducto: '',
-      descripcion: '',
-      precioProducto: '',
-      stockPropducto: '',
-      nombreCategoria: ''
-    }
-  ]
+
   constructor(private activeRoute: ActivatedRoute, private router: Router, private bd: BdserviceService) {
 
   }
@@ -46,17 +37,7 @@ export class TiendaPage implements OnInit {
       this.rol = this.router.getCurrentNavigation()?.extras?.state?.['roles'];
     });
   
-    //subscribo al observable de la BD
-    this.bd.dbState().subscribe(res=>{
-      if(res){
-        this.bd.fetchProducto().subscribe(datos=>{
-          this.arregloProductos = datos;
-        })
-      }
-    })
-
   }
 }
-
 
 

@@ -1,10 +1,6 @@
 <ion-header [translucent]="true">
 </ion-header>
-
-
-
-<ion-content  [fullscreen]="true">
-
+<ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row>
       <ion-card>
@@ -14,17 +10,10 @@
         <img alt="les juro que aqui habia una foto" src="assets/fondo.png" />
         <ion-card-header>
           <!--AQUI IRAN LOS BOTONES-->
-          <button style="font-family: 'Abril Fatface', cursive;" mat-raised-button color="primary" [routerLink]="['/registro']">Registrarse</button>
-          <br>
-          <button style="font-family: 'Abril Fatface', cursive;" mat-raised-button color="primary" [routerLink]="['/inicio-sesion']">Iniciar sesión</button>
-          <br>
+          <ion-button [routerLink]="['/registro']">Registrarse</ion-button>
+          <ion-button [routerLink]="['/inicio-sesion']">Iniciar sesión</ion-button>
         </ion-card-header>
       </ion-card>
     </ion-row>
   </ion-grid>
-
-
-
-
-
 </ion-content>

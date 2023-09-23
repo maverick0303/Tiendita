@@ -1,12 +1,13 @@
 /* Estilos para las imágenes */
 ion-img {
-    width: 300px;
-    height: 300px;
+    width: auto;
+    height: auto;
 }
 
 /* Estilos generales para las tarjetas */
 ion-card {
-    background-color: #222222;
+    box-shadow: 6px 2px 6px #79F2E6;
+    background-color: #010626;
     width: fit-content;
     height: max-content;
 }
@@ -33,7 +34,7 @@ ion-grid ion-row {
 
 ion-grid ion-card {
     margin: 10px;
-    max-width: 300px; /* Ajusta el ancho de las tarjetas de productos */
+    max-width: 350px; /* Ajusta el ancho de las tarjetas de productos */
 }
 
 ion-img.img-container {
@@ -49,16 +50,10 @@ ion-card-content {
     margin: auto;
 }
 
-p {
-    color: white;
-    font-size: 20px;
-    text-align: left;
-    font-family: 'ADLaM Display', cursive;
-}
-
 ion-card-title {
+    border-color: #532473;
     color: white;
-    font-size: 40px;
+    font-size: 35px;
     margin: 2px;
     text-align: center;
     font-family: 'DM Serif Display', serif;
@@ -69,26 +64,25 @@ ion-card-title {
     font-family: 'DM Serif Display', serif;
     font-size: 25px;
     text-align: left;
-    margin: 5px;
+    margin: 3px;
 }
 
 /* Estilos para el fondo */
 ion-content {
-    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
+    --background: url(https://w0.peakpx.com/wallpaper/955/141/HD-wallpaper-purple-science-tech.jpg);
 }
 
 /* Estilos para las pipes (tabla) */
 td {
+    align-items: center;
     text-align: center;
     color: white;
     font-size: 30px;
 }
 //botones:
-.center-buttons {
-    text-align: center;
-  }
-  
-  .center-buttons button {
-    margin: 0 auto;
-  }
-  
+ion-button{
+    --background: #7630D9;
+}
+.borrar{
+    --background: red;
+}
