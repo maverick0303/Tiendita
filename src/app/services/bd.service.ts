@@ -23,7 +23,7 @@ export class BdserviceService {
 
   tablaPregunta: string = "CREATE TABLE IF NOT EXISTS pregunta (idPregunta integer primary key autoincrement,  nombrePregunta VARCHAR(50) not null);";
 
-  tablaProducto: string = "CREATE TABLE IF NOT EXISTS producto (idProducto integer primary key autoincrement, nombreProducto VARCHAR(25) not null, descripcion VARCHAR(100) not null, precioProducto integer not null, stockPropducto integer not null, nombreCategoria varchar(50) not null, bloob not null, FOREIGN KEY (nombreCategoria) REFERENCES categoria(idCategoria));";
+  tablaProducto: string = "CREATE TABLE IF NOT EXISTS producto (idProducto integer primary key autoincrement, nombreProducto VARCHAR(25) not null, descripcion VARCHAR(100) not null, precioProducto integer not null, stockPropducto integer not null, nombreCategoria varchar(50) not null, FOREIGN KEY (nombreCategoria) REFERENCES categoria(idCategoria));";
 
   tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle (idDetalle integer primary key autoincrement, cantidadProducto integer not null, subtotalD integer not null,nombreProducto not null, FOREIGN KEY (nombreProducto) REFERENCES producto(idProducto));";
 
@@ -38,7 +38,10 @@ export class BdserviceService {
   registroPregunta3: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (3,'¿Cuál es tu fruta favorita?');";
 
   //variables para productos
-  
+  registroProdR1: string = "INSERT or IGNORE INTO producto(idProducto,nombreProducto,descripcion,precioProducto,stockPropducto,nombreCategoria) VALUES (1,'Audifono JBL', 'Audifonos de alta gama', 120000, 52,'Audifono bluetooth');";
+  registroProdR2: string = "INSERT or IGNORE INTO producto(idProducto,nombreProducto,descripcion,precioProducto,stockPropducto,nombreCategoria) VALUES (2,'Audifono JBL', 'Audifonos de alta gama', 120000, 52,'Audifono bluetooth');";
+  registroProdR3: string = "INSERT or IGNORE INTO producto(idProducto,nombreProducto,descripcion,precioProducto,stockPropducto,nombreCategoria) VALUES (3,'Audifono JBL', 'Audifonos de alta gama', 120000, 52,'Audifono bluetooth');";
+
   
   //registro de categoria
   registroCategoria1: string = "INSERT Or IGNORE into categoria(idCategoria, nombreCategoria) VALUES (1,'Reloj digital');";
@@ -52,6 +55,7 @@ export class BdserviceService {
   listaProducto = new BehaviorSubject([]);
   listaPregunta = new BehaviorSubject([]);
   listaCategoria = new BehaviorSubject([]);
+  
 
   //variable para manipulación del estatus de la BD
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -261,11 +265,16 @@ export class BdserviceService {
       await this.database.executeSql(this.registroPregunta3,[]);
 
       //REGISTROS DE CATEGORIAS
-
       await this.database.executeSql(this.registroCategoria1,[]);
       await this.database.executeSql(this.registroCategoria2,[]);
       await this.database.executeSql(this.registroCategoria3,[]);
       await this.database.executeSql(this.registroCategoria4,[]);
+
+      //REGISTROS DE PRODUCTOS
+      await this.database.executeSql(this.registroProdR1,[]);
+      await this.database.executeSql(this.registroProdR2,[]);
+      await this.database.executeSql(this.registroProdR3,[]);
+
 
       //actualizar el estatus de la BD
       this.isDBReady.next(true);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BdserviceService } from 'src/app/services/bd.service';
 
 
 @Component({
@@ -26,14 +27,34 @@ export class TiendaPage implements OnInit {
   dinero14 = 240000;
   dinero15 = 360000;
   //
-  constructor(private activeRoute: ActivatedRoute,private router: Router) {
-    
-   }
+  arregloProductos: any = [
+    {
+      idProducto: '',
+      nombreProducto: '',
+      descripcion: '',
+      precioProducto: '',
+      stockPropducto: '',
+      nombreCategoria: ''
+    }
+  ]
+  constructor(private activeRoute: ActivatedRoute, private router: Router, private bd: BdserviceService) {
+
+  }
 
   ngOnInit() {
     this.activeRoute.queryParams.subscribe((param) => {
       this.rol = this.router.getCurrentNavigation()?.extras?.state?.['roles'];
     });
+  
+    //subscribo al observable de la BD
+    this.bd.dbState().subscribe(res=>{
+      if(res){
+        this.bd.fetchProducto().subscribe(datos=>{
+          this.arregloProductos = datos;
+        })
+      }
+    })
+
   }
 }
 

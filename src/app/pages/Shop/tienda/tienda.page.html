@@ -27,17 +27,17 @@
     <ion-card-title>Audífonos Gamers</ion-card-title>
     <!--PRIMER PRODUCTO-->
     <ion-row>
-      <ion-card>
+      <ion-card *ngFor="let producto of arregloProductos">
         <ion-img src="assets/AUDIFONOS GAMERS/ag3.webp" alt="aqui habia una imagen"></ion-img>
         <ion-card-header>
-          <ion-card-title class="ion-title">Audífonos gamers<br>rojos con negro</ion-card-title>
-          <ion-card-content>
-            <td>{{ dinero | currency:'USD':'symbol':'4.0-0' }}</td>
-            <ion-button class="center-buttons"  color="dark" [routerLink]="['/ag3']">Ver detalles</ion-button>
-            <ion-button class="center-buttons" *ngIf="rol == 2" color="dark" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
-          </ion-card-content>
+          <ion-card-title class="ion-title">{{ producto.nombreProducto }}<br> {{ producto.descripcion }} <br> {{ producto.stockPropducto }}</ion-card-title>
         </ion-card-header>
-      </ion-card>
+        <ion-card-content>
+          <td>{{ producto.precioProducto | currency:'USD':'symbol':'4.0-0' }}</td>
+          <ion-button class="center-buttons" color="dark" [routerLink]="['/ag3']">Ver detalles</ion-button>
+          <ion-button class="center-buttons" *ngIf="rol == 2" color="dark" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
+        </ion-card-content>
+      </ion-card>      
       <!--PRIMER PRODUCTO-->
       <ion-card>
         <ion-img src="assets/AUDIFONOS GAMERS/ag4.jpeg" alt="aqui habia una imagen"></ion-img>
