@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { AlertController, Platform } from '@ionic/angular';
-import { Storage } from '@ionic/storage-angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Usuario } from './usuario';
 import { Pregunta } from './pregunta';
@@ -24,7 +23,7 @@ export class BdserviceService {
 
   tablaPregunta: string = "CREATE TABLE IF NOT EXISTS pregunta (idPregunta integer primary key autoincrement,  nombrePregunta VARCHAR(50) not null);";
 
-  tablaProducto: string = "CREATE TABLE IF NOT EXISTS producto (idProducto integer primary key autoincrement, nombreProducto VARCHAR(25) not null, descripcion VARCHAR(100) not null, precioProducto integer not null, stockPropducto integer not null, nombreCategoria varchar(50) not null, FOREIGN KEY (nombreCategoria) REFERENCES categoria(idCategoria));";
+  tablaProducto: string = "CREATE TABLE IF NOT EXISTS producto (idProducto integer primary key autoincrement, nombreProducto VARCHAR(25) not null, descripcion VARCHAR(100) not null, precio integer not null, stock integer not null, nombreCategoria varchar(50) not null, foto TEXT not null, FOREIGN KEY (nombreCategoria) REFERENCES categoria(idCategoria));";
 
   tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle (idDetalle integer primary key autoincrement, cantidadProducto integer not null, subtotalD integer not null,nombreProducto not null, FOREIGN KEY (nombreProducto) REFERENCES producto(idProducto));";
 
@@ -43,7 +42,28 @@ export class BdserviceService {
   registroCategoria2: string = "INSERT Or IGNORE into categoria(idCategoria, nombreCategoria) VALUES (2,'Reloj analógico');";
   registroCategoria3: string = "INSERT Or IGNORE into categoria(idCategoria, nombreCategoria) VALUES (3,'Audifono bluetooth');";
   registroCategoria4: string = "INSERT Or IGNORE into categoria(idCategoria, nombreCategoria) VALUES (4,'Audifono gamer');";
+  registroCategoria5: string = "INSERT Or IGNORE into categoria(idCategoria, nombreCategoria) VALUES (5,'Reloj smartwatch');";
 
+  //variable de Productos:
+  prod1: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (1,'Audífonos gamers rojos con negro', 'Auriculares gamer rojos con diseño llamativo y elegante, brindando sonido inmersivo y comodidad en sus oidos.', 50.000, 10, 4, 'assets/AUDIFONOS GAMERS/ag3.webp');";
+  prod2: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (2,'Audífonos gamers negro con naranja', 'Auriculares gamer en negro con toques anaranjados que ofrecen sonido envolvente, comodidad ergonómica y estilo llamativo', 75.000, 7, 4, 'assets/AUDIFONOS GAMERS/ag4.jpeg');";
+  prod3: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (3,'Audífonos gamers lila con blanco','Estos audífonos con diseño atractivo, audio inmersivo,comodidad asegurada,son perfectos para quienes buscan rendimiento y estilo en un solo paquete.',35.000,10,4,'assets/AUDIFONOS GAMERS/ag5.jpeg');";
+  //audifonos inalambricos:
+  prod4: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (4,'Audífonos Bluetooth morados','Estos audifonos con tono morado,ofrecen conectividad sin cables con estilo.Perfectos para quienes buscan comodidad y libertad en su experiencia auditiva.',39.990, 10,3,'assets/AUDIFONOS BLUTU/a1.jpg');";
+  prod5: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (5,'Audífonos Bluetooth azules','Estos audífonos en tono azul,ofrecen conectividad inalámbrica con un toque de frescura. Ideales para quienes buscan comodidad y estilo en su experiencia auditiva sin necesidad de cables.',42.000,6,3,'assets/AUDIFONOS BLUTU/a4.jpg');";
+  prod6: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (6,'Audífonos Bluetooth verde','Estos audífonos, brindan conectividad inalámbrica con un toque de naturaleza. Perfectos para quienes desean comodidad y un estilo distintivo en sus dispositivos de audio.',269.000,12,3,'assets/AUDIFONOS BLUTU/a6.jpg');";
+  //relojes analogicos
+  prod7: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (7,'Reloj Analógico Negro con azules','Este reloj negro con acentos en azul, une elegancia y modernidad. Perfecto para quienes buscan un estilo sofisticado con un toque de color audaz en su reloj de pulsera.',119.000,12,2,'assets/RELOJES ANALOGO/r3.webp');";
+  prod8: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (8,'Reloj Analógico negro fondo azul','Este reloj con esfera en tono negro y fondo azul, fusiona elegancia y un toque de originalidad. Ideal para aquellos que buscan un reloj clásico pero con un detalle único que resalta su estilo.',194.990,8,2,'assets/RELOJES ANALOGO/r4.jpeg');";
+  prod9: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (9,'Reloj Analógico amarillo con negro','Reloj analógico en amarillo con fondo negro, aporta un contraste audaz y llamativo. Perfecto para quienes quieran destacar con un toque de color vibrante en su muñeca, sin dejar de ser elegante.',289.000,10,2,'assets/RELOJES ANALOGO/r5.jpg');";
+  //relojes digitales
+  prod10: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (10,'Reloj Digital negro con borde azul','Reloj digital en negro con borde azul, fusiona elegancia con un toque de estilo contemporáneo.',61.990,5,1,'assets/digitales/rd2.jpeg');";
+  prod11: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (11,'Reloj Digital negro','Reloj digital en negro, brinda una estética moderna y minimalista. Ideal para quienes buscan simplicidad y funcionalidad en la visualización de la hora, manteniendo un estilo elegante.',54.000,11,1,'assets/digitales/rd5.jpg');";
+  prod12: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (12,'Reloj Digital blanco','Reloj digital blanco, combina estilo y funcionalidad de manera moderna. Perfecto para quienes buscan un reloj que resalte con un toque de color y una pantalla clara.',194.990,5,1,'assets/digitales/rd6.jpeg');";
+  //relojes smartwatch
+  prod13: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (13,'Reloj Smartwatch azul','Este Smartwatch es un reloj moderno con funciones inteligentes. Con pantalla táctil y conexión al teléfono, muestra notificaciones y rastrea la salud. Diseño atractivo y personalizable.',139.990,8,5,'assets/SMARTWATCH/rs1.webp');";
+  prod14: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (14,'Reloj smartwatch naranja','Este reloj combina estilo y tecnología, se enlaza con tu  teléfono para notificaciones y  seguimiento de salud. Su llamativo  color naranja y opciones de personalización  lo hace muy moderno.',240.000,10,5,'assets/SMARTWATCH/rs2.jpeg');";
+  prod15: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (15,'Reloj Smartwatch morado','Este reloj fusiona moda y funcionalidad, se conecta a tu teléfono para notificaciones y monitoreo de salud. Su color y sus opciones de personalización lo convierten en un reloj elegante y útil.',360.000,12,5,'assets/SMARTWATCH/rs3.jpeg');";
   //variables Observables para las consultas en las tablas
   listaUsuario = new BehaviorSubject([]);
   listaDetalle = new BehaviorSubject([]);
@@ -56,9 +76,13 @@ export class BdserviceService {
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   //CONSTRUCTOR
+
   constructor(private alertController: AlertController, private sqlite: SQLite, private platform: Platform, private storage: Storage) {
+
+  
+
     this.crearBD();
-    this.initStorage();
+    
   }
 
   //funciones para subscribirme al observable
@@ -269,8 +293,23 @@ export class BdserviceService {
       await this.database.executeSql(this.registroCategoria3, []);
       await this.database.executeSql(this.registroCategoria4, []);
 
-
-
+      //REGISTROS DE PRODUCTOS
+      await this.database.executeSql(this.prod1,[]);
+      await this.database.executeSql(this.prod2,[]);
+      await this.database.executeSql(this.prod3,[]);
+      await this.database.executeSql(this.prod4,[]);
+      await this.database.executeSql(this.prod5,[]);
+      await this.database.executeSql(this.prod6,[]);
+      await this.database.executeSql(this.prod7,[]);
+      await this.database.executeSql(this.prod8,[]);
+      await this.database.executeSql(this.prod9,[]);
+      await this.database.executeSql(this.prod10,[]);
+      await this.database.executeSql(this.prod11,[]);
+      await this.database.executeSql(this.prod12,[]);
+      await this.database.executeSql(this.prod13,[]);
+      await this.database.executeSql(this.prod14,[]);
+      await this.database.executeSql(this.prod15,[]);
+      
       //actualizar el estatus de la BD
       this.isDBReady.next(true);
       this.buscarUsuario();
@@ -292,79 +331,6 @@ export class BdserviceService {
     });
 
     await alert.present();
-  }
-
-  //LOGICA DE REGISTRO DE USUARIO
-  guardarUsuario(usuario: any) {
-    return this.storage.set('usuarioRegistrado', usuario)
-      .then(() => {
-        this.buscarUsuario();
-        this.mostrarAlerta('Usuario agregado con éxito');
-      })
-      .catch(e => {
-        this.presentAlert("Error al guardar usuario: " + e);
-      });
-  }
-
-  async mostrarAlerta(mensaje: string) {
-    const alert = await this.alertController.create({
-      header: 'Éxito',
-      message: mensaje,
-      buttons: ['OK']
-    });
-    await alert.present();
-  }
-  //LOGICA INICIO DE SESION
-  verificarCredenciales(correo: string, contrasena: string): Promise<boolean> {
-    return this.database.executeSql('SELECT * FROM usuario WHERE correoU = ? AND contrasenaU = ?', [correo, contrasena])
-      .then(res => {
-        if (res.rows.length > 0) {
-          return true; // Credenciales válidas
-        } else {
-          // Las credenciales no coinciden
-          this.mostrarErrorAlert('Credenciales inválidas');
-          return false;
-        }
-      })
-      .catch(e => {
-        this.presentAlert("Error al verificar credenciales: " + e);
-        return false;
-      });
-  }
-
-  async mostrarErrorAlert(mensaje: string) {
-    const alert = await this.alertController.create({
-      header: 'Error',
-      message: mensaje,
-      buttons: ['OK']
-    });
-    await alert.present();
-  }
-
-
-  obtenerRolPorCorreo(correo: string): Promise<number> {
-    return this.database.executeSql('SELECT idRol FROM usuario WHERE correoU = ?', [correo])
-      .then(res => {
-        if (res.rows.length > 0) {
-          return res.rows.item(0).idRol;
-        } else {
-          return null;
-        }
-      })
-      .catch(e => {
-        this.presentAlert("Error al obtener rol por correo: " + e);
-        return null;
-      });
-  }
-  //ALMACENAMIENTO LOCAL
-
-  async initStorage() {
-    await this.storage.create();
-  }
-
-  async getUsuarioRegistrado() {
-    await this.initStorage();
-    return this.storage.get('usuarioRegistrado');
   }
 
 }

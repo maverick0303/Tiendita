@@ -68,7 +68,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/categoria/audigamer/audigamer.module').then( m => m.AudigamerPageModule)
   },
   {
-    path: 'ag3',
+    path: 'ag3:idProducto',
     loadChildren: () => import('./pages/productos/ag3/ag3.module').then( m => m.Ag3PageModule)
   },
   {

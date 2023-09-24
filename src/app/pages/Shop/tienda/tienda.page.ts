@@ -27,16 +27,40 @@ export class TiendaPage implements OnInit {
   dinero14 = 240000;
   dinero15 = 360000;
   //
+  //ARREGLO DE LOS PRODUCTOS
+  arregloProductos: any = [
+    {
+      idProducto: '',
+      nombreProducto: '',
+      descripcion: '',
+      precio: '',
+      stock: '',
+      nombreCategoria: '',
+      foto: ''
+    }
+  ]
 
   constructor(private activeRoute: ActivatedRoute, private router: Router, private bd: BdserviceService) {
 
   }
+  verDetalles(idProducto: number) {
+    // Redirige a la página de detalles del producto con el idProducto proporcionado
+    this.router.navigate(['/ag3', idProducto]);
+  }
+
 
   ngOnInit() {
     this.activeRoute.queryParams.subscribe((param) => {
       this.rol = this.router.getCurrentNavigation()?.extras?.state?.['roles'];
     });
-  
+    //subscribo al observable de la BD
+    this.bd.dbState().subscribe(res => {
+      if (res) {
+        this.bd.fetchProducto().subscribe(datos => {
+          this.arregloProductos = datos;
+        })
+      }
+    })
   }
 }
 
