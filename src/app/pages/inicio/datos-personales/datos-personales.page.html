@@ -13,14 +13,14 @@
           <!--NOMBRE-->
           <div class="input-row">
             <ion-input label="Nombre:" type="text" name="nombre" minlength="3" maxlength="15" required
-              (keydown)="onKeyDown($event)" [(ngModel)]="nombreEnviado" #nombreEnviadoModel="ngModel"
+               [(ngModel)]="nombreEnviado" #nombreEnviadoModel="ngModel"
               label-placement="floating" fill="outline" [value]="nombreEnviado">
             </ion-input>
           </div>
           <br>
           <!--APELLIDO-->
           <ion-input label="Apellido:" type="text" name="apellido" minlength="3" maxlength="15" required
-            (keydown)="onKeyDown($event)" [(ngModel)]="apellidoEnviado" #apellidoEnviadoModel="ngModel"
+             [(ngModel)]="apellidoEnviado" #apellidoEnviadoModel="ngModel"
             label-placement="floating" fill="outline" [value]="apellidoEnviado">
           </ion-input>
           <br>
