@@ -79,10 +79,10 @@ export class BdserviceService {
 
   constructor(private alertController: AlertController, private sqlite: SQLite, private platform: Platform, private storage: Storage) {
 
-  
+
 
     this.crearBD();
-    
+
   }
 
   //funciones para subscribirme al observable
@@ -294,22 +294,22 @@ export class BdserviceService {
       await this.database.executeSql(this.registroCategoria4, []);
 
       //REGISTROS DE PRODUCTOS
-      await this.database.executeSql(this.prod1,[]);
-      await this.database.executeSql(this.prod2,[]);
-      await this.database.executeSql(this.prod3,[]);
-      await this.database.executeSql(this.prod4,[]);
-      await this.database.executeSql(this.prod5,[]);
-      await this.database.executeSql(this.prod6,[]);
-      await this.database.executeSql(this.prod7,[]);
-      await this.database.executeSql(this.prod8,[]);
-      await this.database.executeSql(this.prod9,[]);
-      await this.database.executeSql(this.prod10,[]);
-      await this.database.executeSql(this.prod11,[]);
-      await this.database.executeSql(this.prod12,[]);
-      await this.database.executeSql(this.prod13,[]);
-      await this.database.executeSql(this.prod14,[]);
-      await this.database.executeSql(this.prod15,[]);
-      
+      await this.database.executeSql(this.prod1, []);
+      await this.database.executeSql(this.prod2, []);
+      await this.database.executeSql(this.prod3, []);
+      await this.database.executeSql(this.prod4, []);
+      await this.database.executeSql(this.prod5, []);
+      await this.database.executeSql(this.prod6, []);
+      await this.database.executeSql(this.prod7, []);
+      await this.database.executeSql(this.prod8, []);
+      await this.database.executeSql(this.prod9, []);
+      await this.database.executeSql(this.prod10, []);
+      await this.database.executeSql(this.prod11, []);
+      await this.database.executeSql(this.prod12, []);
+      await this.database.executeSql(this.prod13, []);
+      await this.database.executeSql(this.prod14, []);
+      await this.database.executeSql(this.prod15, []);
+
       //actualizar el estatus de la BD
       this.isDBReady.next(true);
       this.buscarUsuario();
@@ -332,5 +332,78 @@ export class BdserviceService {
 
     await alert.present();
   }
+/*  //LOGICA DE REGISTRO DE USUARIO
+  guardarUsuario(usuario: any) {
+    return this.storage.set('usuarioRegistrado', usuario)
+      .then(() => {
+        this.buscarUsuario();
+        this.mostrarAlerta('Usuario agregado con éxito');
+      })
+      .catch(e => {
+        this.presentAlert("Error al guardar usuario: " + e);
+      });
+  }
 
+  async mostrarAlerta(mensaje: string) {
+    const alert = await this.alertController.create({
+      header: 'Éxito',
+      message: mensaje,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+  //LOGICA INICIO DE SESION
+  verificarCredenciales(correo: string, contrasena: string): Promise<boolean> {
+    return this.database.executeSql('SELECT * FROM usuario WHERE correoU = ? AND contrasenaU = ?', [correo, contrasena])
+      .then(res => {
+        if (res.rows.length > 0) {
+          return true; // Credenciales válidas
+        } else {
+          // Las credenciales no coinciden
+          this.mostrarErrorAlert('Credenciales inválidas');
+          return false;
+        }
+      })
+      .catch(e => {
+        this.presentAlert("Error al verificar credenciales: " + e);
+        return false;
+      });
+  }
+
+  async mostrarErrorAlert(mensaje: string) {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: mensaje,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+
+  obtenerRolPorCorreo(correo: string): Promise<number> {
+    return this.database.executeSql('SELECT idRol FROM usuario WHERE correoU = ?', [correo])
+      .then(res => {
+        if (res.rows.length > 0) {
+          return res.rows.item(0).idRol;
+        } else {
+          return null;
+        }
+      })
+      .catch(e => {
+        this.presentAlert("Error al obtener rol por correo: " + e);
+        return null;
+      });
+  }
+  //ALMACENAMIENTO LOCAL
+
+  async initStorage() {
+    await this.storage.create();
+  }
+
+  async getUsuarioRegistrado() {
+    await this.initStorage();
+    return this.storage.get('usuarioRegistrado');
+  }
+
+}*/
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
-import { Storage } from '@ionic/storage-angular';
+
 
 @Component({
   selector: 'app-registro',
@@ -206,7 +206,7 @@ export class RegistroPage implements OnInit {
     this.formularioValido = !hasError;
   }
 
-  irAPaginaSiguiente() {
+ /* irAPaginaSiguiente() {
     if (this.formularioValido) {
       // Guardar datos del usuario en la base de datos
       this.bd.guardarUsuario({
@@ -239,5 +239,6 @@ export class RegistroPage implements OnInit {
     await this.storage.create();
     await this.storage.set('usuarioRegistrado', usuario);
   }
+  */
   
 }
