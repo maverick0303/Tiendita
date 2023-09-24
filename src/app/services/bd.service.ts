@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { AlertController, Platform } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Usuario } from './usuario';
 import { Pregunta } from './pregunta';
@@ -30,15 +31,13 @@ export class BdserviceService {
   tablaVenta: string = "CREATE TABLE IF NOT EXISTS venta (idVenta integer primary key autoincrement, totalV integer not null, carritoV VARCHAR(25) not null, fechaV VARCHAR(25) not null , idDetalle not null, FOREIGN KEY (idDetalle) REFERENCES detalle(idDetalle));";
 
   tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (idUsuario integer primary key autoincrement, nombreU VARCHAR(25) not null, apellidoU VARCHAR(25) not null, rutU VARCHAR(13) not null, correoU VARCHAR(25) not null, contrasenaU VARCHAR(15) not null, idRol not null, nombrePregunta not null, idVenta not null, FOREIGN KEY (idRol) REFERENCES rol(idRol), FOREIGN KEY (nombrePregunta) REFERENCES pregunta(idPregunta), FOREIGN KEY (idVenta) REFERENCES venta(idVenta));";
-  
+
   //variables de insert en las tablas de registros iniciales
   registroUsuario: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU) VALUES (1,'Alfredo','Estay','211266813','alfr.estay@duocuc.cl','Alfredo123@');";
   registroPregunta1: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (1,'¿Cuál es el nombre de tu mascota?');";
   registroPregunta2: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (2,'¿Cuál es tu pelicula favorita?');";
   registroPregunta3: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (3,'¿Cuál es tu fruta favorita?');";
 
-
-  
   //registro de categoria
   registroCategoria1: string = "INSERT Or IGNORE into categoria(idCategoria, nombreCategoria) VALUES (1,'Reloj digital');";
   registroCategoria2: string = "INSERT Or IGNORE into categoria(idCategoria, nombreCategoria) VALUES (2,'Reloj analógico');";
@@ -51,53 +50,57 @@ export class BdserviceService {
   listaProducto = new BehaviorSubject([]);
   listaPregunta = new BehaviorSubject([]);
   listaCategoria = new BehaviorSubject([]);
-  
+
 
   //variable para manipulación del estatus de la BD
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   //CONSTRUCTOR
-  constructor(private alertController: AlertController,private sqlite: SQLite, private platform: Platform) {
+  constructor(private alertController: AlertController, private sqlite: SQLite, private platform: Platform, private storage: Storage) {
     this.crearBD();
+    this.initStorage();
   }
 
   //funciones para subscribirme al observable
-  dbState(){
+  dbState() {
     return this.isDBReady.asObservable();
   }
 
-  fetchUsuario(): Observable<Usuario[]>{
+  fetchUsuario(): Observable<Usuario[]> {
     return this.listaUsuario.asObservable();
   }
-  fetchProducto(): Observable<Producto[]>{
+  fetchProducto(): Observable<Producto[]> {
     return this.listaProducto.asObservable();
   }
-  fetchPregunta(): Observable<Pregunta[]>{
+  fetchPregunta(): Observable<Pregunta[]> {
     return this.listaPregunta.asObservable();
   }
-  fetchDetalle(): Observable<Detalle[]>{
+  fetchDetalle(): Observable<Detalle[]> {
     return this.listaDetalle.asObservable();
   }
-  fetchCategoria(): Observable<Categoria[]>{
-    return this.listaCategoria.asObservable();    
+  fetchCategoria(): Observable<Categoria[]> {
+    return this.listaCategoria.asObservable();
   }
 
-  buscarUsuario(){
-    return this.database.executeSql('SELECT * FROM usuario',[]).then(res=>{
+  buscarUsuario() {
+    return this.database.executeSql('SELECT * FROM usuario', []).then(res => {
       //variable para almacenar la consulta
       let items: Usuario[] = [];
       //validar si existen registros
-      if(res.rows.length > 0){
+      if (res.rows.length > 0) {
         //procedo a recorrer y guardar
-        for(var i=0; i<res.rows.length; i++){
+        for (var i = 0; i < res.rows.length; i++) {
           //agrego los datos a mi variable
           items.push({
             idUsuario: res.rows.item(i).idUsuario,
             nombreU: res.rows.item(i).nombreU,
             apellidoU: res.rows.item(i).apellidoU,
-            rutU:  res.rows.item(i).rutU,
+            rutU: res.rows.item(i).rutU,
             correoU: res.rows.item(i).correoU,
-            claveU: res.rows.item(i).clave
+            claveU: res.rows.item(i).clave,
+            idRol: res.rows.item(i).idRol,
+            nombrePregunta: res.rows.item(i).nombrePregunta,
+            idVenta: res.rows.item(i).idVenta
           })
         }
       }
@@ -107,14 +110,14 @@ export class BdserviceService {
     })
   }
 
-  buscarPregunta(){
-    return this.database.executeSql('SELECT * FROM pregunta',[]).then(res=>{
+  buscarPregunta() {
+    return this.database.executeSql('SELECT * FROM pregunta', []).then(res => {
       //variable para almacenar la consulta
       let items: Pregunta[] = [];
       //validar si existen registros
-      if(res.rows.length > 0){
+      if (res.rows.length > 0) {
         //procedo a recorrer y guardar
-        for(var i=0; i<res.rows.length; i++){
+        for (var i = 0; i < res.rows.length; i++) {
           //agrego los datos a mi variable
           items.push({
             idPregunta: res.rows.item(i).idPregunta,
@@ -125,24 +128,24 @@ export class BdserviceService {
       //actualizar mi observable
       this.listaPregunta.next(items as any);
 
-    }).catch(e=>{
+    }).catch(e => {
       this.presentAlert("error en buscar pregunta: " + e);
-  }) 
+    })
   }
 
-  buscarProducto(){
-    return this.database.executeSql('SELECT * FROM producto',[]).then(res=>{
+  buscarProducto() {
+    return this.database.executeSql('SELECT * FROM producto', []).then(res => {
       //variable para almacenar la consulta
       let items: Producto[] = [];
       //validar si existen registros
-      if(res.rows.length > 0){
+      if (res.rows.length > 0) {
         //procedo a recorrer y guardar
-        for(var i=0; i<res.rows.length; i++){
+        for (var i = 0; i < res.rows.length; i++) {
           //agrego los datos a mi variable
           items.push({
             idProducto: res.rows.item(i).idProducto,
             nombreProducto: res.rows.item(i).nombreProducto,
-            descripcion:  res.rows.item(i).descripcion,
+            descripcion: res.rows.item(i).descripcion,
             precio: res.rows.item(i).precio,
             stock: res.rows.item(i).stock,
             foto: res.rows.item(i).foto
@@ -155,20 +158,20 @@ export class BdserviceService {
     })
   }
 
-  buscarDetalle(){
-    return this.database.executeSql('SELECT * FROM detalle',[]).then(res=>{
+  buscarDetalle() {
+    return this.database.executeSql('SELECT * FROM detalle', []).then(res => {
       //variable para almacenar la consulta
       let items: Detalle[] = [];
       //validar si existen registros
-      if(res.rows.length > 0){
+      if (res.rows.length > 0) {
         //procedo a recorrer y guardar
-        for(var i=0; i<res.rows.length; i++){
+        for (var i = 0; i < res.rows.length; i++) {
           //agrego los datos a mi variable
           items.push({
             idDetalle: res.rows.item(i).idDetalle,
             cantidad: res.rows.item(i).cantidad,
             subtotal: res.rows.item(i).subtotal,
-            precio:  res.rows.item(i).precio,
+            precio: res.rows.item(i).precio,
             stock: res.rows.item(i).stock
           })
         }
@@ -179,14 +182,14 @@ export class BdserviceService {
     })
   }
 
-  buscarCategoria(){
-    return this.database.executeSql('SELECT * FROM categoria',[]).then(res=>{
+  buscarCategoria() {
+    return this.database.executeSql('SELECT * FROM categoria', []).then(res => {
       //variable para almacenar la consulta
-      let items: Categoria [] = [];
+      let items: Categoria[] = [];
       //validar si existen registros
-      if(res.rows.length > 0){
+      if (res.rows.length > 0) {
         //procedo a recorrer y guardar
-        for(var i=0; i<res.rows.length; i++){
+        for (var i = 0; i < res.rows.length; i++) {
           //agrego los datos a mi variable
           items.push({
             idCategoria: res.rows.item(i).idCategoria,
@@ -202,27 +205,27 @@ export class BdserviceService {
 
   //FUNCIONES PARA INSERTAR EN LAS TABLAS
   //INSERTAR
-  insertarProducto(nombreProducto:any, descripcion:any, precio:any, stock:any, foto:any){
-    return this.database.executeSql('INSERT INTO producto(nombreProducto,descripcion,precio,stock,foto) VALUES (?,?,?,?,?)',[nombreProducto,descripcion,precio,stock,foto]).then(res=>{
+  insertarProducto(nombreProducto: any, descripcion: any, precio: any, stock: any, foto: any) {
+    return this.database.executeSql('INSERT INTO producto(nombreProducto,descripcion,precio,stock,foto) VALUES (?,?,?,?,?)', [nombreProducto, descripcion, precio, stock, foto]).then(res => {
       this.buscarProducto();
     })
   }
 
   //ACTUALIZAR TABLAS
-  actualizarProducto(idProducto:any, nombreProducto:any, descripcion:any, precio:any, stock:any, foto:any){
-    return this.database.executeSql('UPDATE producto SET nombreProducto = ?, descripcion = ?, precio = ?, stock = ?, foto = ? WHERE idProducto = ?',[nombreProducto,descripcion,precio,stock,foto,idProducto]).then(res=>{
+  actualizarProducto(idProducto: any, nombreProducto: any, descripcion: any, precio: any, stock: any, foto: any) {
+    return this.database.executeSql('UPDATE producto SET nombreProducto = ?, descripcion = ?, precio = ?, stock = ?, foto = ? WHERE idProducto = ?', [nombreProducto, descripcion, precio, stock, foto, idProducto]).then(res => {
       this.buscarProducto();
     })
   }
 
   //BORRAR ALGO DE LAS TABLAS
-  eliminarProducto(idProducto:any){
-    return this.database.executeSql('DELETE FROM producto WHERE idProducto = ?',[idProducto]).then(res=>{
+  eliminarProducto(idProducto: any) {
+    return this.database.executeSql('DELETE FROM producto WHERE idProducto = ?', [idProducto]).then(res => {
       this.buscarProducto();
     })
   }
-  
-  
+
+
   //funcion para crear la BD
   crearBD() {
     //verificamos que la plataforma esta lista
@@ -231,40 +234,40 @@ export class BdserviceService {
       this.sqlite.create({
         name: 'bdtiendita2.db',
         location: 'default'
-      }).then((db: SQLiteObject)=>{
+      }).then((db: SQLiteObject) => {
         //guardamos la conexión en mi variable global
         this.database = db;
         //llamar a la funcion que crea las tablas
         this.crearTablas();
-      }).catch(e=> {
+      }).catch(e => {
         //capturamos y mostramos el error en la creacion de la BD
         this.presentAlert("Error en Crear BD: " + e);
       })
     })
   }
 
-  async crearTablas(){
-    try{
+  async crearTablas() {
+    try {
       //ejecutar la creación de tablas
-      await this.database.executeSql(this.tablaCategoria,[]);
-      await this.database.executeSql(this.tablaRol,[]);
-      await this.database.executeSql(this.tablaPregunta,[]);
-      await this.database.executeSql(this.tablaProducto,[]);
-      await this.database.executeSql(this.tablaDetalle,[]);
-      await this.database.executeSql(this.tablaVenta,[]);
-      await this.database.executeSql(this.tablaUsuario,[]);
+      await this.database.executeSql(this.tablaCategoria, []);
+      await this.database.executeSql(this.tablaRol, []);
+      await this.database.executeSql(this.tablaPregunta, []);
+      await this.database.executeSql(this.tablaProducto, []);
+      await this.database.executeSql(this.tablaDetalle, []);
+      await this.database.executeSql(this.tablaVenta, []);
+      await this.database.executeSql(this.tablaUsuario, []);
 
       //ejecuto los registros
-      await this.database.executeSql(this.registroUsuario,[]);
-      await this.database.executeSql(this.registroPregunta1,[]);
-      await this.database.executeSql(this.registroPregunta2,[]);
-      await this.database.executeSql(this.registroPregunta3,[]);
+      await this.database.executeSql(this.registroUsuario, []);
+      await this.database.executeSql(this.registroPregunta1, []);
+      await this.database.executeSql(this.registroPregunta2, []);
+      await this.database.executeSql(this.registroPregunta3, []);
 
       //REGISTROS DE CATEGORIAS
-      await this.database.executeSql(this.registroCategoria1,[]);
-      await this.database.executeSql(this.registroCategoria2,[]);
-      await this.database.executeSql(this.registroCategoria3,[]);
-      await this.database.executeSql(this.registroCategoria4,[]);
+      await this.database.executeSql(this.registroCategoria1, []);
+      await this.database.executeSql(this.registroCategoria2, []);
+      await this.database.executeSql(this.registroCategoria3, []);
+      await this.database.executeSql(this.registroCategoria4, []);
 
 
 
@@ -275,13 +278,13 @@ export class BdserviceService {
       this.buscarDetalle();
       this.buscarPregunta();
       this.buscarCategoria();
-    }catch(e){
+    } catch (e) {
       //capturamos y mostramos el error en la creacion de las tablas
       this.presentAlert("Error en Crear Tablas: " + e);
     }
   }
 
-  async presentAlert(msj:string) {
+  async presentAlert(msj: string) {
     const alert = await this.alertController.create({
       header: 'Error',
       message: msj,
@@ -290,4 +293,78 @@ export class BdserviceService {
 
     await alert.present();
   }
+
+  //LOGICA DE REGISTRO DE USUARIO
+  guardarUsuario(usuario: any) {
+    return this.storage.set('usuarioRegistrado', usuario)
+      .then(() => {
+        this.buscarUsuario();
+        this.mostrarAlerta('Usuario agregado con éxito');
+      })
+      .catch(e => {
+        this.presentAlert("Error al guardar usuario: " + e);
+      });
+  }
+
+  async mostrarAlerta(mensaje: string) {
+    const alert = await this.alertController.create({
+      header: 'Éxito',
+      message: mensaje,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+  //LOGICA INICIO DE SESION
+  verificarCredenciales(correo: string, contrasena: string): Promise<boolean> {
+    return this.database.executeSql('SELECT * FROM usuario WHERE correoU = ? AND contrasenaU = ?', [correo, contrasena])
+      .then(res => {
+        if (res.rows.length > 0) {
+          return true; // Credenciales válidas
+        } else {
+          // Las credenciales no coinciden
+          this.mostrarErrorAlert('Credenciales inválidas');
+          return false;
+        }
+      })
+      .catch(e => {
+        this.presentAlert("Error al verificar credenciales: " + e);
+        return false;
+      });
+  }
+
+  async mostrarErrorAlert(mensaje: string) {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: mensaje,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+
+  obtenerRolPorCorreo(correo: string): Promise<number> {
+    return this.database.executeSql('SELECT idRol FROM usuario WHERE correoU = ?', [correo])
+      .then(res => {
+        if (res.rows.length > 0) {
+          return res.rows.item(0).idRol;
+        } else {
+          return null;
+        }
+      })
+      .catch(e => {
+        this.presentAlert("Error al obtener rol por correo: " + e);
+        return null;
+      });
+  }
+  //ALMACENAMIENTO LOCAL
+
+  async initStorage() {
+    await this.storage.create();
+  }
+
+  async getUsuarioRegistrado() {
+    await this.initStorage();
+    return this.storage.get('usuarioRegistrado');
+  }
+
 }

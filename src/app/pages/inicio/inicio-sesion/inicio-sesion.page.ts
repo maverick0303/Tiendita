@@ -6,6 +6,7 @@ import { AnimationController } from '@ionic/angular';
 import { QueryList } from '@angular/core';
 import { Animation } from '@ionic/angular';
 import { IonCard } from '@ionic/angular';
+import { BdserviceService } from 'src/app/services/bd.service';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -16,15 +17,13 @@ export class InicioSesionPage {
   rol: number = 0;
   gmail: string = '';
   password: string = '';
-  //PARA QUE SE VEA EL OJITO DE LA CONTRASEÑA
   hide = true;
-  //VALIDACION DEL CORREO:
   email = new FormControl('', [Validators.required, Validators.email]);
-  //AQUI COMIENZA LA ANIMACION
+
   @ViewChildren(IonCard, { read: ElementRef }) cardElements!: QueryList<ElementRef<HTMLIonCardElement>>;
   private animation: Animation | null = null;
 
-  constructor(private router: Router, private toastController: ToastController, private animationCtrl: AnimationController) { }
+  constructor(private router: Router, private toastController: ToastController, private animationCtrl: AnimationController, private bd: BdserviceService) { }
 
   ngAfterViewInit() {
     const card = this.animationCtrl
@@ -47,23 +46,23 @@ export class InicioSesionPage {
 
     this.animation = this.animationCtrl.create().duration(750).addAnimation([card]);
   }
-  //ACTIVA LA ANIMACION
+
   play() {
     if (this.animation) {
       this.animation.play();
     }
   }
-  //MENSAJE DE ERROR DEL CORREO
+
   getErrorMessage() {
     if (this.email.hasError('required')) {
-      return 'No debe quedar vacio los campo';
+      return 'No debe quedar vacío el campo';
     }
-    return this.email.hasError('email') ? 'No es un email valido' : '';
+    return this.email.hasError('email') ? 'No es un email válido' : '';
   }
-  //MENSAJE DE ERROR EN LOS DATOS
+
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'La contraseña y el correo no son validos',
+      message: 'La contraseña y el correo no son válidos',
       duration: 950,
       position: 'middle',
     });
@@ -71,25 +70,26 @@ export class InicioSesionPage {
   }
 
   inicio_sesion() {
-    if ((this.gmail === 'admin@gmail.com' && this.password === 'Admin123.') ||
-      (this.gmail === 'usuario@gmail.com' && this.password === 'Usuario123.')) {
-      this.rol = (this.gmail === 'admin@gmail.com') ? 2 : 1;
-      this.irADatosPersonales(this.gmail);
-    } else {
-      this.play();
-      this.presentToast();
-      return;
-    }
+    this.bd.verificarCredenciales(this.gmail, this.password)
+      .then(usuarioValido => {
+        console.log('Usuario válido:', usuarioValido); // Agrega este console.log
+        if (usuarioValido) {
+          const correo = this.gmail;
+  
+          this.bd.obtenerRolPorCorreo(correo)
+            .then(idRol => {
+              console.log('ID de rol:', idRol); // Agrega este console.log
+              if (idRol !== null) {
+                // Ir directamente a la página de tienda
+                this.router.navigate(['/tienda']);
+              } else {
+                this.presentToast(); // El correo no está en la base de datos
+              }
+            });
+        } else {
+          this.play();
+          this.presentToast();
+        }
+      });
   }
-
-  irADatosPersonales(correo: string) {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        roles: this.rol,
-        correo: correo,
-      },
-    };
-    this.router.navigate(['/tienda'], navigationExtras);
-  }
-
-}
+}  

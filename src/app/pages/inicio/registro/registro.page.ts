@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-registro',
@@ -17,6 +18,8 @@ export class RegistroPage implements OnInit {
   confirmPasswordValue: string = '';
   preguntaSeguridad: string = '';
   respuestaSeguridad: string = '';
+  idRol = 1;
+  idVenta = 1;
 
   errors = {
     nombreU: '',
@@ -38,13 +41,12 @@ export class RegistroPage implements OnInit {
 
   formularioValido: boolean = false;
 
-  constructor(private router:Router, private bd: BdserviceService) { }
-
+  constructor(private router: Router, private bd: BdserviceService, private storage: Storage) { }
   ngOnInit() {
     //subscribo al observable de la BD
-    this.bd.dbState().subscribe(res=>{
-      if(res){
-        this.bd.fetchPregunta().subscribe(datos=>{
+    this.bd.dbState().subscribe(res => {
+      if (res) {
+        this.bd.fetchPregunta().subscribe(datos => {
           this.arregloPreguntas = datos;
         })
       }
@@ -206,17 +208,36 @@ export class RegistroPage implements OnInit {
 
   irAPaginaSiguiente() {
     if (this.formularioValido) {
-      const navigationExtras: NavigationExtras = {
-        state: {
-          nombreEnviado: this.nombreUValue,
-          apellidoEnviado: this.apellidoUValue,
-          rutEnviado: this.rutValue,
-          emailEnviado: this.emailValue,
-          passwordEnviado: this.passwordValue,
-          respuestaSeguridad: this.respuestaSeguridad // Agregar respuesta de seguridad a la navegación
-        }
-      };
-      this.router.navigate(['/datos-personales'], navigationExtras);
+      // Guardar datos del usuario en la base de datos
+      this.bd.guardarUsuario({
+        nombreU: this.nombreUValue,
+        apellidoU: this.apellidoUValue,
+        rutU: this.rutValue,
+        correoU: this.emailValue,
+        contrasenaU: this.passwordValue,
+        idVenta: this.idVenta,
+        idRol: this.idRol,
+        nombrePregunta: this.preguntaSeguridad
+      });
+      // Guardar datos del usuario en el almacenamiento local
+      this.guardarUsuarioEnStorage({
+        nombreU: this.nombreUValue,
+        apellidoU: this.apellidoUValue,
+        rutU: this.rutValue,
+        correoU: this.emailValue,
+        contrasenaU: this.passwordValue,
+        idVenta: this.idVenta,
+        idRol: this.idRol,
+        nombrePregunta: this.preguntaSeguridad
+      });
+
+      this.router.navigate(['/tienda']);
     }
+    
   }
+  async guardarUsuarioEnStorage(usuario: any) {
+    await this.storage.create();
+    await this.storage.set('usuarioRegistrado', usuario);
+  }
+  
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BdserviceService } from 'src/app/services/bd.service';
 
 @Component({
   selector: 'app-datos-personales', 
@@ -11,20 +12,17 @@ export class DatosPersonalesPage implements OnInit {
   apellidoEnviado: string = '';
   emailEnviado: string = '';  
   rutEnviado: string = '';
-  passwordEnviado: string = '';
-  segPersonaValue: string = '';
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,private bdService: BdserviceService) { }
 
   ngOnInit() {
-    // Access the state property directly
-    this.route.paramMap.subscribe(params => {
-      const state = window.history.state;
-      this.nombreEnviado = state.nombreEnviado;
-      this.apellidoEnviado = state.apellidoEnviado;
-      this.rutEnviado = state.rutEnviado;
-      this.emailEnviado = state.emailEnviado;
-      this.passwordEnviado = state.passwordEnviado;
+    this.bdService.getUsuarioRegistrado().then(usuario => {
+      if (usuario) {
+        this.nombreEnviado = usuario.nombreU;
+        this.apellidoEnviado = usuario.apellidoU;
+        this.emailEnviado = usuario.correoU;
+        this.rutEnviado = usuario.rutU;
+      }
     });
   }
 
