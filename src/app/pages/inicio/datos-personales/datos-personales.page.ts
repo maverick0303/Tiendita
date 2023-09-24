@@ -14,8 +14,8 @@ export class DatosPersonalesPage implements OnInit {
   rutEnviado: string = '';
 
   constructor(private route: ActivatedRoute,private bdService: BdserviceService) { }
-
-  ngOnInit() {
+  ngOnInit() {}
+  /*ngOnInit() {
     this.bdService.getUsuarioRegistrado().then(usuario => {
       if (usuario) {
         this.nombreEnviado = usuario.nombreU;
@@ -31,4 +31,5 @@ export class DatosPersonalesPage implements OnInit {
       event.preventDefault(); 
     }
   }
+}*/
 }
