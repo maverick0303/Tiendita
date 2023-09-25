@@ -366,8 +366,8 @@ export class BdserviceService {
     await alert.present();
   }
 
-   //LOGICA DE REGISTRO DE USUARIO
-   guardarUsuario(usuario: any) {
+  //LOGICA DE REGISTRO DE USUARIO
+  guardarUsuario(usuario: any) {
     return this.storage.set('usuarioRegistrado', usuario)
       .then(() => {
         this.buscarUsuario();
@@ -438,6 +438,4 @@ export class BdserviceService {
     await this.initStorage();
     return this.storage.get('usuarioRegistrado');
   }
-
 }
-
