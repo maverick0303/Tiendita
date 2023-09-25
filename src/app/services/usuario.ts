@@ -9,4 +9,5 @@ export class Usuario {
     nombrePregunta = "";
     idVenta = 1;
     
+    
 }

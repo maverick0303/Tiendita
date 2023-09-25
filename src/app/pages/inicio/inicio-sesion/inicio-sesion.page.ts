@@ -6,6 +6,7 @@ import { AnimationController } from '@ionic/angular';
 import { QueryList } from '@angular/core';
 import { Animation } from '@ionic/angular';
 import { IonCard } from '@ionic/angular';
+import { BdserviceService } from 'src/app/services/bd.service';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -22,7 +23,7 @@ export class InicioSesionPage {
   @ViewChildren(IonCard, { read: ElementRef }) cardElements!: QueryList<ElementRef<HTMLIonCardElement>>;
   private animation: Animation | null = null;
 
-  constructor(private router: Router, private toastController: ToastController, private animationCtrl: AnimationController) { }
+  constructor(private router: Router, private toastController: ToastController, private animationCtrl: AnimationController, private bd: BdserviceService) { }
 
   ngAfterViewInit() {
     const card = this.animationCtrl
@@ -69,24 +70,26 @@ export class InicioSesionPage {
   }
 
   inicio_sesion() {
-    if ((this.gmail === 'admin@gmail.com' && this.password === 'Admin123.') ||
-      (this.gmail === 'usuario@gmail.com' && this.password === 'Usuario123.')) {
-      this.rol = (this.gmail === 'admin@gmail.com') ? 2 : 1;
-      this.irADatosPersonales(this.gmail);
-    } else {
-      this.play();
-      this.presentToast();
-      return;
-    }
-  }
+    this.bd.verificarCredenciales(this.gmail, this.password)
+      .then(usuarioValido => {
+        console.log('Usuario válido:', usuarioValido); // Agrega este console.log
+        if (usuarioValido) {
+          const correo = this.gmail;
 
-  irADatosPersonales(correo: string) {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        roles: this.rol,
-        correo: correo,
-      },
-    };
-    this.router.navigate(['/tienda'], navigationExtras);
+          this.bd.obtenerRolPorCorreo(correo)
+            .then(idRol => {
+              console.log('ID de rol:', idRol); // Agrega este console.log
+              if (idRol !== null) {
+                // Ir directamente a la página de tienda
+                this.router.navigate(['/tienda']);
+              } else {
+                this.presentToast(); // El correo no está en la base de datos
+              }
+            });
+        } else {
+          this.play();
+          this.presentToast();
+        }
+      });
   }
-}  
+}

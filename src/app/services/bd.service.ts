@@ -7,6 +7,7 @@ import { Pregunta } from './pregunta';
 import { Detalle } from './detalle';
 import { Producto } from './producto';
 import { Categoria } from './categoria';
+import { Storage } from '@ionic/storage-angular';
 
 
 @Injectable({
@@ -78,8 +79,9 @@ export class BdserviceService {
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   //CONSTRUCTOR
-  constructor(private alertController: AlertController, private sqlite: SQLite, private platform: Platform) {
+  constructor(private alertController: AlertController, private sqlite: SQLite, private platform: Platform, private storage: Storage) {
     this.crearBD();
+    this.initStorage();
   }
 
   //funciones para subscribirme al observable
@@ -363,4 +365,79 @@ export class BdserviceService {
 
     await alert.present();
   }
+
+   //LOGICA DE REGISTRO DE USUARIO
+   guardarUsuario(usuario: any) {
+    return this.storage.set('usuarioRegistrado', usuario)
+      .then(() => {
+        this.buscarUsuario();
+        this.mostrarAlerta('Usuario agregado con éxito');
+      })
+      .catch(e => {
+        this.presentAlert("Error al guardar usuario: " + e);
+      });
+  }
+
+  async mostrarAlerta(mensaje: string) {
+    const alert = await this.alertController.create({
+      header: 'Éxito',
+      message: mensaje,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+  //LOGICA INICIO DE SESION
+  verificarCredenciales(correo: string, contrasena: string): Promise<boolean> {
+    return this.database.executeSql('SELECT * FROM usuario WHERE correoU = ? AND contrasenaU = ?', [correo, contrasena])
+      .then(res => {
+        if (res.rows.length > 0) {
+          return true; // Credenciales válidas
+        } else {
+          // Las credenciales no coinciden
+          this.mostrarErrorAlert('Credenciales inválidas');
+          return false;
+        }
+      })
+      .catch(e => {
+        this.presentAlert("Error al verificar credenciales: " + e);
+        return false;
+      });
+  }
+
+  async mostrarErrorAlert(mensaje: string) {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: mensaje,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+
+  obtenerRolPorCorreo(correo: string): Promise<number> {
+    return this.database.executeSql('SELECT idRol FROM usuario WHERE correoU = ?', [correo])
+      .then(res => {
+        if (res.rows.length > 0) {
+          return res.rows.item(0).idRol;
+        } else {
+          return null;
+        }
+      })
+      .catch(e => {
+        this.presentAlert("Error al obtener rol por correo: " + e);
+        return null;
+      });
+  }
+  //ALMACENAMIENTO LOCAL
+
+  async initStorage() {
+    await this.storage.create();
+  }
+
+  async getUsuarioRegistrado() {
+    await this.initStorage();
+    return this.storage.get('usuarioRegistrado');
+  }
+
 }
+
