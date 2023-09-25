@@ -10,22 +10,6 @@ import { BdserviceService } from 'src/app/services/bd.service';
 })
 export class TiendaPage implements OnInit {
   rol: number = 0;
-  //esto es de las pipes:
-  dinero = 50000;
-  dinero2 = 75000;
-  dinero3 = 35000;
-  dinero4 = 39990;
-  dinero5 = 42000;
-  dinero6 = 269000;
-  dinero7 = 119000;
-  dinero8 = 194990;
-  dinero9 = 289000;
-  dinero10 = 61990;
-  dinero11 = 54000;
-  dinero12 = 194550;
-  dinero13 = 139000;
-  dinero14 = 240000;
-  dinero15 = 360000;
   //
   //ARREGLO DE LOS PRODUCTOS
   arregloProductos: any = [
@@ -43,12 +27,7 @@ export class TiendaPage implements OnInit {
   constructor(private activeRoute: ActivatedRoute, private router: Router, private bd: BdserviceService) {
 
   }
-  verDetalles(idProducto: number) {
-    // Redirige a la página de detalles del producto con el idProducto proporcionado
-    this.router.navigate(['/ag3', idProducto]);
-  }
-
-
+  
   ngOnInit() {
     this.activeRoute.queryParams.subscribe((param) => {
       this.rol = this.router.getCurrentNavigation()?.extras?.state?.['roles'];

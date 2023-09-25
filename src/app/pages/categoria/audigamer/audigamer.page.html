@@ -9,41 +9,15 @@
     <ion-card-title>Audífonos Gamers</ion-card-title>
     <!--PRIMER PRODUCTO-->
     <ion-row>
-      <p [routerLink]="['/ag3']">
-        <ion-card>
-          <ion-img src="assets/AUDIFONOS GAMERS/ag3.webp" alt="aqui habia una imagen"></ion-img>
-          <ion-card-header>
-            <ion-card-title class="ion-title">Audífonos gamers<br>rojos con negro</ion-card-title>
-            <ion-card-content>
-              <p>$50.000</p>
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </p>
-      <!--SEGUNDA PRODUCTO-->
-      <p [routerLink]="['/ag4']">
-        <ion-card>
-          <ion-img src="assets/AUDIFONOS GAMERS/ag4.jpeg" alt="aqui habia una imagen"></ion-img>
-          <ion-card-header>
-            <ion-card-title class="ion-title">Audífonos gamers<br>negro con naranja</ion-card-title>
-            <ion-card-content>
-              <p>$44.000</p>
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </p>
-      <!--TERCER PRODUCTO-->
-      <p [routerLink]="['/ag5']">
-        <ion-card>
-          <ion-img src="assets/AUDIFONOS GAMERS/ag5.jpeg" alt="aqui habia una imagen"></ion-img>
-          <ion-card-header>
-            <ion-card-title class="ion-title">Audífonos gamers<br>lila con blanco</ion-card-title>
-            <ion-card-content>
-              <p>$139.000</p>
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card><br><br>
-      </p>
+      <ion-card *ngFor="let producto of ArregloMostrar">
+        <ion-img [src]="producto.foto" alt="aqui habia una imagen"></ion-img>
+        <ion-card-header>
+          <ion-card-title class="ion-title">{{ producto.nombreProducto }}</ion-card-title>
+          <ion-card-content>
+            <p>${{ producto.precio }}</p>
+          </ion-card-content>
+        </ion-card-header>
+      </ion-card>
     </ion-row>
   </ion-grid>
   <app-componente2></app-componente2>

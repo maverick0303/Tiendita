@@ -8,6 +8,7 @@ import { Detalle } from './detalle';
 import { Producto } from './producto';
 import { Categoria } from './categoria';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -45,31 +46,32 @@ export class BdserviceService {
   registroCategoria5: string = "INSERT Or IGNORE into categoria(idCategoria, nombreCategoria) VALUES (5,'Reloj smartwatch');";
 
   //variable de Productos:
-  prod1: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (1,'Audífonos gamers rojos con negro', 'Auriculares gamer rojos con diseño llamativo y elegante, brindando sonido inmersivo y comodidad en sus oidos.', 50.000, 10, 4, 'assets/AUDIFONOS GAMERS/ag3.webp');";
-  prod2: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (2,'Audífonos gamers negro con naranja', 'Auriculares gamer en negro con toques anaranjados que ofrecen sonido envolvente, comodidad ergonómica y estilo llamativo', 75.000, 7, 4, 'assets/AUDIFONOS GAMERS/ag4.jpeg');";
-  prod3: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (3,'Audífonos gamers lila con blanco','Estos audífonos con diseño atractivo, audio inmersivo,comodidad asegurada,son perfectos para quienes buscan rendimiento y estilo en un solo paquete.',35.000,10,4,'assets/AUDIFONOS GAMERS/ag5.jpeg');";
+  prod1: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (1,'Audífonos gamers rojos con negro', 'Auriculares gamer rojos con diseño llamativo y elegante, brindando sonido inmersivo y comodidad en sus oidos.', 50000, 10, 4, 'assets/AUDIFONOS GAMERS/ag3.webp');";
+  prod2: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (2,'Audífonos gamers negro con naranja', 'Auriculares gamer en negro con toques anaranjados que ofrecen sonido envolvente, comodidad ergonómica y estilo llamativo', 75000, 7, 4, 'assets/AUDIFONOS GAMERS/ag4.jpeg');";
+  prod3: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (3,'Audífonos gamers lila con blanco','Estos audífonos con diseño atractivo, audio inmersivo,comodidad asegurada,son perfectos para quienes buscan rendimiento y estilo en un solo paquete.',35000,10,4,'assets/AUDIFONOS GAMERS/ag5.jpeg');";
   //audifonos inalambricos:
-  prod4: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (4,'Audífonos Bluetooth morados','Estos audifonos con tono morado,ofrecen conectividad sin cables con estilo.Perfectos para quienes buscan comodidad y libertad en su experiencia auditiva.',39.990, 10,3,'assets/AUDIFONOS BLUTU/a1.jpg');";
-  prod5: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (5,'Audífonos Bluetooth azules','Estos audífonos en tono azul,ofrecen conectividad inalámbrica con un toque de frescura. Ideales para quienes buscan comodidad y estilo en su experiencia auditiva sin necesidad de cables.',42.000,6,3,'assets/AUDIFONOS BLUTU/a4.jpg');";
-  prod6: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (6,'Audífonos Bluetooth verde','Estos audífonos, brindan conectividad inalámbrica con un toque de naturaleza. Perfectos para quienes desean comodidad y un estilo distintivo en sus dispositivos de audio.',269.000,12,3,'assets/AUDIFONOS BLUTU/a6.jpg');";
+  prod4: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (4,'Audífonos Bluetooth morados','Estos audifonos con tono morado,ofrecen conectividad sin cables con estilo.Perfectos para quienes buscan comodidad y libertad en su experiencia auditiva.',39990, 10,3,'assets/AUDIFONOS BLUTU/a1.jpg');";
+  prod5: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (5,'Audífonos Bluetooth azules','Estos audífonos en tono azul,ofrecen conectividad inalámbrica con un toque de frescura. Ideales para quienes buscan comodidad y estilo en su experiencia auditiva sin necesidad de cables.',42000,6,3,'assets/AUDIFONOS BLUTU/a4.jpg');";
+  prod6: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (6,'Audífonos Bluetooth verde','Estos audífonos, brindan conectividad inalámbrica con un toque de naturaleza. Perfectos para quienes desean comodidad y un estilo distintivo en sus dispositivos de audio.',269000,12,3,'assets/AUDIFONOS BLUTU/a6.jpg');";
   //relojes analogicos
-  prod7: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (7,'Reloj Analógico Negro con azules','Este reloj negro con acentos en azul, une elegancia y modernidad. Perfecto para quienes buscan un estilo sofisticado con un toque de color audaz en su reloj de pulsera.',119.000,12,2,'assets/RELOJES ANALOGO/r3.webp');";
-  prod8: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (8,'Reloj Analógico negro fondo azul','Este reloj con esfera en tono negro y fondo azul, fusiona elegancia y un toque de originalidad. Ideal para aquellos que buscan un reloj clásico pero con un detalle único que resalta su estilo.',194.990,8,2,'assets/RELOJES ANALOGO/r4.jpeg');";
-  prod9: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (9,'Reloj Analógico amarillo con negro','Reloj analógico en amarillo con fondo negro, aporta un contraste audaz y llamativo. Perfecto para quienes quieran destacar con un toque de color vibrante en su muñeca, sin dejar de ser elegante.',289.000,10,2,'assets/RELOJES ANALOGO/r5.jpg');";
+  prod7: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (7,'Reloj Analógico Negro con azules','Este reloj negro con acentos en azul, une elegancia y modernidad. Perfecto para quienes buscan un estilo sofisticado con un toque de color audaz en su reloj de pulsera.',119000,12,2,'assets/RELOJES ANALOGO/r3.webp');";
+  prod8: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (8,'Reloj Analógico negro fondo azul','Este reloj con esfera en tono negro y fondo azul, fusiona elegancia y un toque de originalidad. Ideal para aquellos que buscan un reloj clásico pero con un detalle único que resalta su estilo.',194990,8,2,'assets/RELOJES ANALOGO/r4.jpeg');";
+  prod9: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (9,'Reloj Analógico amarillo con negro','Reloj analógico en amarillo con fondo negro, aporta un contraste audaz y llamativo. Perfecto para quienes quieran destacar con un toque de color vibrante en su muñeca, sin dejar de ser elegante.',289000,10,2,'assets/RELOJES ANALOGO/r5.jpg');";
   //relojes digitales
-  prod10: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (10,'Reloj Digital negro con borde azul','Reloj digital en negro con borde azul, fusiona elegancia con un toque de estilo contemporáneo.',61.990,5,1,'assets/digitales/rd2.jpeg');";
-  prod11: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (11,'Reloj Digital negro','Reloj digital en negro, brinda una estética moderna y minimalista. Ideal para quienes buscan simplicidad y funcionalidad en la visualización de la hora, manteniendo un estilo elegante.',54.000,11,1,'assets/digitales/rd5.jpg');";
-  prod12: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (12,'Reloj Digital blanco','Reloj digital blanco, combina estilo y funcionalidad de manera moderna. Perfecto para quienes buscan un reloj que resalte con un toque de color y una pantalla clara.',194.990,5,1,'assets/digitales/rd6.jpeg');";
+  prod10: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (10,'Reloj Digital negro con borde azul','Reloj digital en negro con borde azul, fusiona elegancia con un toque de estilo contemporáneo.',61990,5,1,'assets/digitales/rd2.jpeg');";
+  prod11: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (11,'Reloj Digital negro','Reloj digital en negro, brinda una estética moderna y minimalista. Ideal para quienes buscan simplicidad y funcionalidad en la visualización de la hora, manteniendo un estilo elegante.',54000,11,1,'assets/digitales/rd5.jpg');";
+  prod12: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (12,'Reloj Digital blanco','Reloj digital blanco, combina estilo y funcionalidad de manera moderna. Perfecto para quienes buscan un reloj que resalte con un toque de color y una pantalla clara.',194990,5,1,'assets/digitales/rd6.jpeg');";
   //relojes smartwatch
-  prod13: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (13,'Reloj Smartwatch azul','Este Smartwatch es un reloj moderno con funciones inteligentes. Con pantalla táctil y conexión al teléfono, muestra notificaciones y rastrea la salud. Diseño atractivo y personalizable.',139.990,8,5,'assets/SMARTWATCH/rs1.webp');";
-  prod14: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (14,'Reloj smartwatch naranja','Este reloj combina estilo y tecnología, se enlaza con tu  teléfono para notificaciones y  seguimiento de salud. Su llamativo  color naranja y opciones de personalización  lo hace muy moderno.',240.000,10,5,'assets/SMARTWATCH/rs2.jpeg');";
-  prod15: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (15,'Reloj Smartwatch morado','Este reloj fusiona moda y funcionalidad, se conecta a tu teléfono para notificaciones y monitoreo de salud. Su color y sus opciones de personalización lo convierten en un reloj elegante y útil.',360.000,12,5,'assets/SMARTWATCH/rs3.jpeg');";
+  prod13: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (13,'Reloj Smartwatch azul','Este Smartwatch es un reloj moderno con funciones inteligentes. Con pantalla táctil y conexión al teléfono, muestra notificaciones y rastrea la salud. Diseño atractivo y personalizable.',139990,8,5,'assets/SMARTWATCH/rs1.webp');";
+  prod14: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (14,'Reloj smartwatch naranja','Este reloj combina estilo y tecnología, se enlaza con tu  teléfono para notificaciones y  seguimiento de salud. Su llamativo  color naranja y opciones de personalización  lo hace muy moderno.',240000,10,5,'assets/SMARTWATCH/rs2.jpeg');";
+  prod15: string = "INSERT or IGNORE into producto(idProducto,nombreProducto, descripcion, precio, stock, nombreCategoria, foto) VALUES (15,'Reloj Smartwatch morado','Este reloj fusiona moda y funcionalidad, se conecta a tu teléfono para notificaciones y monitoreo de salud. Su color y sus opciones de personalización lo convierten en un reloj elegante y útil.',360000,12,5,'assets/SMARTWATCH/rs3.jpeg');";
   //variables Observables para las consultas en las tablas
   listaUsuario = new BehaviorSubject([]);
   listaDetalle = new BehaviorSubject([]);
   listaProducto = new BehaviorSubject([]);
   listaPregunta = new BehaviorSubject([]);
   listaCategoria = new BehaviorSubject([]);
+  listaMostrarProducto = new BehaviorSubject([]);
 
 
   //variable para manipulación del estatus de la BD
@@ -100,6 +102,10 @@ export class BdserviceService {
   fetchCategoria(): Observable<Categoria[]> {
     return this.listaCategoria.asObservable();
   }
+  fecthMostrarProducto(): Observable<Producto[]> {
+    return this.listaMostrarProducto.asObservable();
+  }
+
 
   buscarUsuario() {
     return this.database.executeSql('SELECT * FROM usuario', []).then(res => {
@@ -128,6 +134,33 @@ export class BdserviceService {
 
     })
   }
+
+  mostrarCategoria(idCategoria: number) {
+    return this.database.executeSql('SELECT * FROM producto WHERE nombreCategoria = ?', [idCategoria]).then(res => {
+      //variable para almacenar la consulta
+      let items: Producto[] = [];
+      //validar si existen registros
+      if (res.rows.length > 0) {
+        //procedo a recorrer y guardar
+        for (var i = 0; i < res.rows.length; i++) {
+          //agrego los datos a mi variable
+          items.push({
+            idProducto: res.rows.item(i).idProducto,
+            nombreProducto: res.rows.item(i).nombreProducto,
+            descripcion: res.rows.item(i).descripcion,
+            precio: res.rows.item(i).precio,
+            stock: res.rows.item(i).stock,
+            foto: res.rows.item(i).foto,
+          })
+        }
+      }
+      //actualizar mi observable
+      this.listaMostrarProducto.next(items as any);
+    }).catch(e => {
+      this.presentAlert("Error en mostrar productos por categoría: " + e);
+    })
+  }
+  
 
   buscarPregunta() {
     return this.database.executeSql('SELECT * FROM pregunta', []).then(res => {
@@ -200,7 +233,10 @@ export class BdserviceService {
 
     })
   }
+  //
 
+
+  //
   buscarCategoria() {
     return this.database.executeSql('SELECT * FROM categoria', []).then(res => {
       //variable para almacenar la consulta
@@ -243,7 +279,6 @@ export class BdserviceService {
       this.buscarProducto();
     })
   }
-
 
   //funcion para crear la BD
   crearBD() {
@@ -289,21 +324,21 @@ export class BdserviceService {
       await this.database.executeSql(this.registroCategoria4, []);
 
       //REGISTROS DE PRODUCTOS
-      await this.database.executeSql(this.prod1,[]);
-      await this.database.executeSql(this.prod2,[]);
-      await this.database.executeSql(this.prod3,[]);
-      await this.database.executeSql(this.prod4,[]);
-      await this.database.executeSql(this.prod5,[]);
-      await this.database.executeSql(this.prod6,[]);
-      await this.database.executeSql(this.prod7,[]);
-      await this.database.executeSql(this.prod8,[]);
-      await this.database.executeSql(this.prod9,[]);
-      await this.database.executeSql(this.prod10,[]);
-      await this.database.executeSql(this.prod11,[]);
-      await this.database.executeSql(this.prod12,[]);
-      await this.database.executeSql(this.prod13,[]);
-      await this.database.executeSql(this.prod14,[]);
-      await this.database.executeSql(this.prod15,[]);
+      await this.database.executeSql(this.prod1, []);
+      await this.database.executeSql(this.prod2, []);
+      await this.database.executeSql(this.prod3, []);
+      await this.database.executeSql(this.prod4, []);
+      await this.database.executeSql(this.prod5, []);
+      await this.database.executeSql(this.prod6, []);
+      await this.database.executeSql(this.prod7, []);
+      await this.database.executeSql(this.prod8, []);
+      await this.database.executeSql(this.prod9, []);
+      await this.database.executeSql(this.prod10, []);
+      await this.database.executeSql(this.prod11, []);
+      await this.database.executeSql(this.prod12, []);
+      await this.database.executeSql(this.prod13, []);
+      await this.database.executeSql(this.prod14, []);
+      await this.database.executeSql(this.prod15, []);
 
       //actualizar el estatus de la BD
       this.isDBReady.next(true);
@@ -312,6 +347,7 @@ export class BdserviceService {
       this.buscarDetalle();
       this.buscarPregunta();
       this.buscarCategoria();
+
     } catch (e) {
       //capturamos y mostramos el error en la creacion de las tablas
       this.presentAlert("Error en Crear Tablas: " + e);

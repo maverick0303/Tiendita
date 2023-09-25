@@ -29,7 +29,7 @@
           <ion-card-title class="ion-title">{{ producto.nombreProducto }}</ion-card-title>
           <ion-card-content>
             <td>${{ producto.precio }}</td>
-            <ion-button class="center-buttons" *ngIf="rol == 1" >Ver detalles</ion-button>
+            <ion-button class="center-buttons" [routerLink]="['/ag3', producto.idProducto]">Ver detalles</ion-button>
             <ion-button class="center-buttons" *ngIf="rol == 2" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
             <ion-button class="borrar" *ngIf="rol == 2" >Eliminar</ion-button>
           </ion-card-content>
