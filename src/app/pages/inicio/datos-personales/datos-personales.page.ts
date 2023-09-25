@@ -15,11 +15,7 @@ export class DatosPersonalesPage implements OnInit {
   rutEnviado: string = '';
 
   constructor(private route: ActivatedRoute,private bdService: BdserviceService) { }
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> parent of 7d49329 (OTRO CAMBIO)
   ngOnInit() {
     this.bdService.getUsuarioRegistrado().then(usuario => {
       if (usuario) {
