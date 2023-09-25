@@ -75,11 +75,6 @@ export class InicioSesionPage {
         console.log('Usuario válido:', usuarioValido); // Agrega este console.log
         if (usuarioValido) {
           const correo = this.gmail;
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> parent of 7d49329 (OTRO CAMBIO)
           this.bd.obtenerRolPorCorreo(correo)
             .then(idRol => {
               console.log('ID de rol:', idRol); // Agrega este console.log

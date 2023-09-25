@@ -32,8 +32,4 @@ export class DatosPersonalesPage implements OnInit {
       event.preventDefault();
     }
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> parent of 7d49329 (OTRO CAMBIO)
