@@ -3,47 +3,21 @@
 </ion-header>
 <!--################################################PRODUCTOS########################################-->
 <ion-content [fullscreen]="true">
-  
   <ion-grid>
     <ion-card-title>Relojes Analógicos</ion-card-title>
     <!--PRIMER PRODUCTO-->
     <ion-row>
-    <p [routerLink]="['/r3']">
-      <ion-card>
-        <ion-img src="assets/RELOJES ANALOGO/r3.webp" alt="aqui habia una imagen"></ion-img>
+      <ion-card *ngFor="let producto of ArregloMostrar">
+        <ion-img [src]="producto.foto" alt="aqui habia una imagen"></ion-img>
         <ion-card-header>
-          <ion-card-title class="ion-title">Reloj Analógico<br>negro con azules</ion-card-title>
+          <ion-card-title class="ion-title">{{ producto.nombreProducto }}</ion-card-title>
           <ion-card-content>
-            <p>$119.000</p>
+            <p>${{ producto.precio }}</p>
           </ion-card-content>
         </ion-card-header>
       </ion-card>
-    </p>
-      <!--SEGUNDO PRODUCTO-->
-      <p [routerLink]="['/r4']">
-      <ion-card>
-        <ion-img src="assets/RELOJES ANALOGO/r4.jpeg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title class="ion-title">Reloj Analógico  <br>negro fondo azul</ion-card-title>
-          <ion-card-content>
-            <p>$194.990</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
-    </p>
-      <!--TERCER PRODUCTO-->
-      <p [routerLink]="['/r5']">
-      <ion-card>
-        <ion-img src="assets/RELOJES ANALOGO/r5.jpg" alt="aqui habia una imagen"></ion-img>
-        <ion-card-header>
-          <ion-card-title class="ion-title">Reloj Analógico <br>amarillo con negro</ion-card-title>
-          <ion-card-content>
-            <p>$289.000</p>
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card><br><br>
-    </p>
     </ion-row>
   </ion-grid>
+  <br><br><br>
   <app-componente2></app-componente2>
 </ion-content>
