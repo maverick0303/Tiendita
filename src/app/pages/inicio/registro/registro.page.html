@@ -1,4 +1,4 @@
-<!--<ion-content class="fondo" [fullscreen]="true">
+<ion-content class="fondo" [fullscreen]="true">
   <ion-grid>
     <ion-row class="center-row">
       <ion-card class="input-card">
@@ -6,71 +6,71 @@
           <form id="registration-form">
             <ion-card-title>Registro:</ion-card-title><br>
             <div class="input-row">
-               NOMBRE 
+              <!-- NOMBRE -->
               <ion-input label="Nombre:" type="text" label-placement="floating" fill="outline" placeholder="Mario"
                 name="nombreU" required [(ngModel)]="nombreUValue" (ionBlur)="verificarFormulario()"
                 (keydown)="valiNombre($event)">
               </ion-input>
-               VALIDACION 
+              <!-- VALIDACION -->
               <div class="error-message" *ngIf="errors.nombreU">{{ errors.nombreU }}</div>
             </div>
-             APELLIDO
+            <!-- APELLIDO -->
             <ion-input label="Apellido:" type="text" label-placement="floating" fill="outline" placeholder="Lopez"
               name="apellidoU" required [(ngModel)]="apellidoUValue" (ionBlur)="verificarFormulario()"
               (keydown)="ValiApellido($event)">
             </ion-input>
-            VALIDACION 
+            <!-- VALIDACION -->
             <div class="error-message" *ngIf="errors.apellidoU">{{ errors.apellidoU }}</div>
-            RUT 
+            <!-- RUT -->
             <ion-input label="RUT:" type="text" label-placement="floating" fill="outline" placeholder="25.345.678-2"
               name="rut" required [(ngModel)]="rutValue" (ionBlur)="verificarFormulario()" (keydown)="valiRut($event)">
             </ion-input>
-            VALIDACION 
+            <!-- VALIDACION -->
             <div class="error-message" *ngIf="errors.rut">{{ errors.rut }}</div>
-             EMAIL
+            <!-- EMAIL -->
             <ion-input label="Email:" type="text" label-placement="floating" fill="outline"
               placeholder="correo@example.com" name="email" required [(ngModel)]="emailValue"
               (ionBlur)="verificarFormulario()" (keydown)="valiEmail($event)">
             </ion-input>
-             VALIDACION EMAIL 
+            <!-- VALIDACION EMAIL -->
             <div class="error-message" *ngIf="errors.email">{{ errors.email }}</div>
-             CONTRASEÑA 
+            <!-- CONTRASEÑA -->
             <ion-input label="Contraseña:" type="password" label-placement="floating" fill="outline"
               placeholder="M1@password" name="password" required [(ngModel)]="passwordValue"
               (ionBlur)="verificarFormulario()" (keydown)="valiPassword($event)">
             </ion-input>
-             VALIDACION CONTRASEÑA 
+            <!-- VALIDACION CONTRASEÑA -->
             <div class="error-message" *ngIf="errors.password">{{ errors.password }}</div>
-             CONFIRMAR CONTRASEÑA 
+            <!-- CONFIRMAR CONTRASEÑA -->
             <ion-input label="Confirmar Contraseña:" type="password" label-placement="floating" fill="outline"
               placeholder="Confirmar contraseña" name="confirmPassword" required [(ngModel)]="confirmPasswordValue"
               (ionBlur)="verificarFormulario()">
             </ion-input>
-             VALIDACION 
+            <!-- VALIDACION -->
             <div class="error-message" *ngIf="errors.confirmPassword">{{ errors.confirmPassword }}</div>
 
-             Pregunta de seguridad 
+            <!-- Pregunta de seguridad -->
             <ion-select label="Pregunta de Seguridad" label-placement="floating" fill="outline"
               [(ngModel)]="preguntaSeguridad" required >
               <ion-select-option *ngFor="let pregunta of arregloPreguntas" value="{{ pregunta.idPregunta }}" >{{ pregunta.nombrePregunta }}</ion-select-option>
             </ion-select><br>
-            VALIDACION DE LA PREGUNTA
+            <!--VALIDACION DE LA PREGUNTA-->
             <div class="error-message" *ngIf="errors.preguntaSeguridad">{{ errors.preguntaSeguridad }}</div>
 
-             Respuesta a la pregunta de seguridad 
+            <!-- Respuesta a la pregunta de seguridad -->
             <ion-input label="Respuesta" type="text" label-placement="floating"
               fill="outline" placeholder="Respuesta" name="respuestaSeguridad" [(ngModel)]="respuestaSeguridad" (ionBlur)="verificarFormulario()"
               required>
             </ion-input>
-             VALIDACION 
+            <!-- VALIDACION -->
             <div class="error-message" *ngIf="errors.respuestaSeguridad">{{ errors.respuestaSeguridad }}</div>
-            BOTON
+            <!--BOTON-->
             <ion-button  (click)="irAPaginaSiguiente()" [disabled]="!formularioValido">Registrarse</ion-button>
-            MENSAJITO
+            <!--MENSAJITO-->
             <p style="text-align: center;">¿Tiene una cuenta?<a [routerLink]="['/inicio-sesion']">Inicie sesión</a></p>
           </form>
         </ion-card-content>
       </ion-card>
     </ion-row>
   </ion-grid> 
-</ion-content>-->
+</ion-content>
