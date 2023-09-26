@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
 import { Storage } from '@ionic/storage-angular';
+import { Usuario } from 'src/app/services/usuario';
 
 
 @Component({
@@ -10,6 +11,9 @@ import { Storage } from '@ionic/storage-angular';
   styleUrls: ['./registro.page.scss'],
 })
 export class RegistroPage implements OnInit {
+
+
+  usuarios: Usuario[] = [];
 
   nombreUValue: string = '';
   apellidoUValue: string = '';
@@ -52,6 +56,9 @@ export class RegistroPage implements OnInit {
         })
       }
     })
+    this.bd.fetchUsuario().subscribe(usuarios => {
+      this.usuarios = usuarios; // Actualizo la lista de usuarios
+    });
 
   }
 
@@ -210,36 +217,8 @@ export class RegistroPage implements OnInit {
  irAPaginaSiguiente() {
     if (this.formularioValido) {
       // Guardar datos del usuario en la base de datos
-      this.bd.guardarUsuario({
-        nombreU: this.nombreUValue,
-        apellidoU: this.apellidoUValue,
-        rutU: this.rutValue,
-        correoU: this.emailValue,
-        contrasenaU: this.passwordValue,
-        idVenta: this.idVenta,
-        idRol: this.idRol,
-        nombrePregunta: this.preguntaSeguridad
-      });
-      // Guardar datos del usuario en el almacenamiento local
-      this.guardarUsuarioEnStorage({
-        nombreU: this.nombreUValue,
-        apellidoU: this.apellidoUValue,
-        rutU: this.rutValue,
-        correoU: this.emailValue,
-        contrasenaU: this.passwordValue,
-        idVenta: this.idVenta,
-        idRol: this.idRol,
-        nombrePregunta: this.preguntaSeguridad
-      });
-
+      this.bd.insertarUsuario(this.nombreUValue,this.apellidoUValue,this.rutValue,this.emailValue,this.passwordValue ,this.idRol,this.respuestaSeguridad, this.preguntaSeguridad,this.idVenta)
       this.router.navigate(['/tienda']);
     }
-    
   }
-  async guardarUsuarioEnStorage(usuario: any) {
-    await this.storage.create();
-    await this.storage.set('usuarioRegistrado', usuario);
-  }
-
-  
 }

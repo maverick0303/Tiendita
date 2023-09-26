@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MenuAdminPageRoutingModule } from './menu-admin-routing.module';
+import { ListaregistrosPageRoutingModule } from './listaregistros-routing.module';
 
-import { MenuAdminPage } from './menu-admin.page';
+import { ListaRegistrosPage } from './listaregistros.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MenuAdminPageRoutingModule
+    ListaregistrosPageRoutingModule
   ],
-  declarations: [MenuAdminPage]
+  declarations: [ListaRegistrosPage]
 })
-export class MenuAdminPageModule {}
+export class ListaregistrosPageModule {}

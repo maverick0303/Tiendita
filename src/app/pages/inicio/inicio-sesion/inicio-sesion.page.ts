@@ -91,4 +91,26 @@ export class InicioSesionPage {
         }
       });
   }
+
+  inicio_sesion1() {
+    if ((this.gmail === 'admin@gmail.com' && this.password === 'Admin123.') ||
+      (this.gmail === 'usuario@gmail.com' && this.password === 'Usuario123.')) {
+      this.rol = (this.gmail === 'admin@gmail.com') ? 2 : 1;
+      this.irADatosPersonales(this.gmail);
+    } else {
+      this.play();
+      this.presentToast();
+      return;
+    }
+  }
+
+  irADatosPersonales(correo: string) {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        roles: this.rol,
+        correo: correo,
+      },
+    };
+    this.router.navigate(['/tienda'], navigationExtras);
+  }
 }

@@ -31,10 +31,11 @@ export class BdserviceService {
 
   tablaVenta: string = "CREATE TABLE IF NOT EXISTS venta (idVenta integer primary key autoincrement, totalV integer not null, carritoV VARCHAR(25) not null, fechaV VARCHAR(25) not null , idDetalle not null, FOREIGN KEY (idDetalle) REFERENCES detalle(idDetalle));";
 
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (idUsuario integer primary key autoincrement, nombreU VARCHAR(25) not null, apellidoU VARCHAR(25) not null, rutU VARCHAR(13) not null, correoU VARCHAR(25) not null, contrasenaU VARCHAR(15) not null, idRol not null, nombrePregunta not null, idVenta not null, FOREIGN KEY (idRol) REFERENCES rol(idRol), FOREIGN KEY (nombrePregunta) REFERENCES pregunta(idPregunta), FOREIGN KEY (idVenta) REFERENCES venta(idVenta));";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (idUsuario integer primary key autoincrement, nombreU VARCHAR(25) not null, apellidoU VARCHAR(25) not null, rutU VARCHAR(13) not null, correoU VARCHAR(25) not null, contrasenaU VARCHAR(15) not null, idRol not null, respuestaU VARCHAR(15) not null, nombrePregunta not null, idVenta not null, FOREIGN KEY (idRol) REFERENCES rol(idRol), FOREIGN KEY (nombrePregunta) REFERENCES pregunta(idPregunta), FOREIGN KEY (idVenta) REFERENCES venta(idVenta));";
 
   //variables de insert en las tablas de registros iniciales
   registroUsuario: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU) VALUES (1,'Alfredo','Estay','211266813','alfr.estay@duocuc.cl','Alfredo123@');";
+
   registroPregunta1: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (1,'¿Cuál es el nombre de tu mascota?');";
   registroPregunta2: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (2,'¿Cuál es tu pelicula favorita?');";
   registroPregunta3: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (3,'¿Cuál es tu fruta favorita?');";
@@ -126,8 +127,10 @@ export class BdserviceService {
             correoU: res.rows.item(i).correoU,
             claveU: res.rows.item(i).clave,
             idRol: res.rows.item(i).idRol,
+            respuestaU: res.rows.item(i).respuestaU,
             nombrePregunta: res.rows.item(i).nombrePregunta,
             idVenta: res.rows.item(i).idVenta
+            
           })
         }
       }
@@ -261,6 +264,26 @@ export class BdserviceService {
   }
 
   //FUNCIONES PARA INSERTAR EN LAS TABLAS
+
+
+  //FUNCIONES DE USUARIOS
+
+  insertarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any,  respuestaU: any,nombrePregunta: any,  idVenta: any ) {
+    return this.database.executeSql('INSERT INTO usuario(nombreU,apellidoU ,rutU , correoU ,contrasenaU, idRol, respuestaU, nombrePregunta, idVenta ) VALUES (?,?,?,?,?,?,?,?,?,?)', [nombreU, apellidoU, rutU, correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta]).then(res => {
+      this.buscarUsuario();
+    })
+  }
+  actualizarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any, nombrePregunta: any, idVenta: any ) {
+    return this.database.executeSql('UPDATE usuario set nombreU = ?, apellidoU = ? ,rutU = ? , correoU = ? ,contrasenaU = ?, idRol = ?, nombrePregunta = ?, idVenta = ? where idUsuario = ?' ,[nombreU, apellidoU, rutU, correoU, contrasenaU, idRol, nombrePregunta, idVenta]).then(res => {
+      this.buscarUsuario();
+    })
+  }
+  eliminarUsuario(idUsuario: any ) {
+    return this.database.executeSql('DELETE FROM usuario WHERE idUsuario = ?', [idUsuario]).then(res => {
+      this.buscarUsuario();
+    })
+  }
+
   //INSERTAR
   insertarProducto(nombreProducto: any, descripcion: any, precio: any, stock: any, foto: any) {
     return this.database.executeSql('INSERT INTO producto(nombreProducto,descripcion,precio,stock,foto) VALUES (?,?,?,?,?)', [nombreProducto, descripcion, precio, stock, foto]).then(res => {
@@ -366,18 +389,6 @@ export class BdserviceService {
     await alert.present();
   }
 
-  //LOGICA DE REGISTRO DE USUARIO
-  guardarUsuario(usuario: any) {
-    return this.storage.set('usuarioRegistrado', usuario)
-      .then(() => {
-        this.buscarUsuario();
-        this.mostrarAlerta('Usuario agregado con éxito');
-      })
-      .catch(e => {
-        this.presentAlert("Error al guardar usuario: " + e);
-      });
-  }
-
   async mostrarAlerta(mensaje: string) {
     const alert = await this.alertController.create({
       header: 'Éxito',
@@ -438,4 +449,6 @@ export class BdserviceService {
     await this.initStorage();
     return this.storage.get('usuarioRegistrado');
   }
+
+  
 }
