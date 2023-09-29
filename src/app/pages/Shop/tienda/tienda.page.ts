@@ -12,6 +12,11 @@ import { Usuario } from 'src/app/services/usuario';
 export class TiendaPage implements OnInit {
   rol: number = 0;
   usuarios: Usuario[] = [];
+  mostrarUsuarios: boolean = false;
+
+  mostrarListaUsuarios() {
+    this.mostrarUsuarios = true;
+  }
 
   //
   //ARREGLO DE LOS PRODUCTOS
