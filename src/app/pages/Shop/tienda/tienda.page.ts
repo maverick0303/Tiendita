@@ -10,6 +10,7 @@ import { BdserviceService } from 'src/app/services/bd.service';
 })
 export class TiendaPage implements OnInit {
   rol: number = 0;
+
   //
   //ARREGLO DE LOS PRODUCTOS
   arregloProductos: any = [
@@ -40,7 +41,19 @@ export class TiendaPage implements OnInit {
         })
       }
     })
+    this.activeRoute.queryParams.subscribe((param) => {
+      this.rol = this.router.getCurrentNavigation()?.extras?.state?.['roles'];
+    });
+  
+    // Obtener el usuario autenticado desde el almacenamiento local
+    this.bd.getUsuarioAutenticado().then(usuario => {
+      if (usuario) {
+        this.rol = parseInt(usuario.idRol, 10); // Convertir a número entero
+      }
+    });
   }
+  
+  
 }
 
 

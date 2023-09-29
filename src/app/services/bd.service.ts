@@ -430,12 +430,16 @@ export class BdserviceService {
 
   async iniciarSesion(correo: string, contrasena: string): Promise<boolean> {
     const usuario = await this.buscarUsuarioPorCorreoYContrasena(correo, contrasena);
-
+  
     if (usuario) {
-      await this.storage.set('usuarioRegistrado', usuario);
-
+      await this.storage.set('usuarioRegistrado', {
+        idUsuario: usuario.idUsuario,
+        nombreU: usuario.nombreU,
+        idRol: usuario.idRol,
+      });
+  
       this.isDBReady.next(true);
-
+  
       return true; // Inicio de sesión exitoso
     } else {
       return false; // Credenciales inválidas
@@ -448,6 +452,7 @@ export class BdserviceService {
         return {
           idUsuario: res.rows.item(0).idUsuario,
           nombreU: res.rows.item(0).nombreU,
+          idRol: res.rows.item(0).idRol,
         } as Usuario;
       } else {
         return null;
