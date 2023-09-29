@@ -133,7 +133,7 @@ export class BdserviceService {
             respuestaU: res.rows.item(i).respuestaU,
             nombrePregunta: res.rows.item(i).nombrePregunta,
             idVenta: res.rows.item(i).idVenta
-
+            
           })
         }
       }
@@ -168,7 +168,7 @@ export class BdserviceService {
       this.presentAlert("Error en mostrar productos por categoría: " + e);
     })
   }
-
+  
 
   buscarPregunta() {
     return this.database.executeSql('SELECT * FROM pregunta', []).then(res => {
@@ -271,17 +271,17 @@ export class BdserviceService {
 
   //FUNCIONES DE USUARIOS
 
-  insertarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any, respuestaU: any, nombrePregunta: any, idVenta: any) {
-    return this.database.executeSql('INSERT INTO usuario(nombreU,apellidoU ,rutU , correoU ,contrasenaU, idRol, respuestaU, nombrePregunta, idVenta ) VALUES (?,?,?,?,?,?,?,?,?,?)', [nombreU, apellidoU, rutU, correoU, contrasenaU, idRol, respuestaU, nombrePregunta, idVenta]).then(res => {
+  insertarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any,  respuestaU: any,nombrePregunta: any,  idVenta: any ) {
+    return this.database.executeSql('INSERT INTO usuario(nombreU,apellidoU ,rutU , correoU ,contrasenaU, idRol, respuestaU, nombrePregunta, idVenta ) VALUES (?,?,?,?,?,?,?,?,?,?)', [nombreU, apellidoU, rutU, correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta]).then(res => {
       this.buscarUsuario();
     })
   }
-  actualizarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any, nombrePregunta: any, idVenta: any) {
-    return this.database.executeSql('UPDATE usuario set nombreU = ?, apellidoU = ? ,rutU = ? , correoU = ? ,contrasenaU = ?, idRol = ?, nombrePregunta = ?, idVenta = ? where idUsuario = ?', [nombreU, apellidoU, rutU, correoU, contrasenaU, idRol, nombrePregunta, idVenta]).then(res => {
+  actualizarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any, nombrePregunta: any, idVenta: any ) {
+    return this.database.executeSql('UPDATE usuario set nombreU = ?, apellidoU = ? ,rutU = ? , correoU = ? ,contrasenaU = ?, idRol = ?, nombrePregunta = ?, idVenta = ? where idUsuario = ?' ,[nombreU, apellidoU, rutU, correoU, contrasenaU, idRol, nombrePregunta, idVenta]).then(res => {
       this.buscarUsuario();
     })
   }
-  eliminarUsuario(idUsuario: any) {
+  eliminarUsuario(idUsuario: any ) {
     return this.database.executeSql('DELETE FROM usuario WHERE idUsuario = ?', [idUsuario]).then(res => {
       this.buscarUsuario();
     })
@@ -404,23 +404,28 @@ export class BdserviceService {
     });
     await alert.present();
   }
+  
 
+  async mostrarErrorAlert(mensaje: string) {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: mensaje,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
   //ALMACENAMIENTO LOCAL
+
   async initStorage() {
     await this.storage.create();
   }
 
-
-  //----------------------------------------------------------------------------------------------//
-  //LOGICA DE INICIO DE SESION Y SESIONES//
-
-  private isUsuarioAutenticadovariable: BehaviorSubject<boolean> = new BehaviorSubject(false);
-
-  isUsuarioAutenticado(): Observable<boolean> {
-    return this.isUsuarioAutenticadovariable.asObservable();
+  async getUsuarioRegistrado() {
+    await this.initStorage();
+    return this.storage.get('usuarioRegistrado');
   }
 
-
+  
 
 
   async iniciarSesion(correo: string, contrasena: string): Promise<boolean> {
@@ -434,15 +439,12 @@ export class BdserviceService {
       });
   
       this.isDBReady.next(true);
-      this.isUsuarioAutenticadovariable.next(true); // Indicar que el usuario está autenticado
   
       return true; // Inicio de sesión exitoso
     } else {
       return false; // Credenciales inválidas
     }
   }
-  
-
 
   async buscarUsuarioPorCorreoYContrasena(correo: string, contrasena: string): Promise<Usuario | null> {
     return this.database.executeSql('SELECT * FROM usuario WHERE correoU = ? AND contrasenaU = ?', [correo, contrasena]).then(res => {
@@ -462,9 +464,7 @@ export class BdserviceService {
     // Limpiar el almacenamiento local y restablecer el estado de autenticación
     await this.storage.remove('usuarioRegistrado');
     this.isDBReady.next(false);
-    this.isUsuarioAutenticadovariable.next(false); // Indicar que el usuario ya no está autenticado
   }
-
 
   async getUsuarioAutenticado(): Promise<Usuario | null> {
     return this.storage.get('usuarioRegistrado');
