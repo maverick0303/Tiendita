@@ -35,7 +35,9 @@ export class BdserviceService {
   tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (idUsuario integer primary key autoincrement, nombreU VARCHAR(25) not null, apellidoU VARCHAR(25) not null, rutU VARCHAR(13) not null, correoU VARCHAR(25) not null, contrasenaU VARCHAR(15) not null, idRol not null, respuestaU VARCHAR(15) not null, nombrePregunta not null, idVenta not null, FOREIGN KEY (idRol) REFERENCES rol(idRol), FOREIGN KEY (nombrePregunta) REFERENCES pregunta(idPregunta), FOREIGN KEY (idVenta) REFERENCES venta(idVenta));";
 
   //variables de insert en las tablas de registros iniciales
-  registroUsuario: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU) VALUES (1,'Alfredo','Estay','211266813','alfr.estay@duocuc.cl','Alfredo123@');";
+  registroUsuario: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta) VALUES (1,'Alfredo','Estay','211266813','alfr.estay@duocuc.cl','Alfredo123@',1,'respuesta1',3,3);";
+  registroUsuarioPredeterminado1: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta) VALUES (2,'Admin','Admin','123456789','admin@gmail.com','Admin123@',2,'Respuesta1',1,1);";
+  registroUsuarioPredeterminado2: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta) VALUES (3,'Usuario','Usuario','987654321','usuario@gmail.com','Usuario123@',1,'Respuesta2',2,2);";
 
   registroPregunta1: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (1,'¿Cuál es el nombre de tu mascota?');";
   registroPregunta2: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (2,'¿Cuál es tu pelicula favorita?');";
@@ -337,8 +339,12 @@ export class BdserviceService {
       await this.database.executeSql(this.tablaVenta, []);
       await this.database.executeSql(this.tablaUsuario, []);
 
-      //ejecuto los registros
+      //ejecuto los registros de usuarios
       await this.database.executeSql(this.registroUsuario, []);
+      await this.database.executeSql(this.registroUsuarioPredeterminado1, []);
+      await this.database.executeSql(this.registroUsuarioPredeterminado2, []);
+
+      //registros de preguntas
       await this.database.executeSql(this.registroPregunta1, []);
       await this.database.executeSql(this.registroPregunta2, []);
       await this.database.executeSql(this.registroPregunta3, []);
@@ -398,23 +404,7 @@ export class BdserviceService {
     });
     await alert.present();
   }
-  //LOGICA INICIO DE SESION
-  verificarCredenciales(correo: string, contrasena: string): Promise<boolean> {
-    return this.database.executeSql('SELECT * FROM usuario WHERE correoU = ? AND contrasenaU = ?', [correo, contrasena])
-      .then(res => {
-        if (res.rows.length > 0) {
-          return true; // Credenciales válidas
-        } else {
-          // Las credenciales no coinciden
-          this.mostrarErrorAlert('Credenciales inválidas');
-          return false;
-        }
-      })
-      .catch(e => {
-        this.presentAlert("Error al verificar credenciales: " + e);
-        return false;
-      });
-  }
+  
 
   async mostrarErrorAlert(mensaje: string) {
     const alert = await this.alertController.create({
@@ -423,22 +413,6 @@ export class BdserviceService {
       buttons: ['OK']
     });
     await alert.present();
-  }
-
-
-  obtenerRolPorCorreo(correo: string): Promise<number> {
-    return this.database.executeSql('SELECT idRol FROM usuario WHERE correoU = ?', [correo])
-      .then(res => {
-        if (res.rows.length > 0) {
-          return res.rows.item(0).idRol;
-        } else {
-          return null;
-        }
-      })
-      .catch(e => {
-        this.presentAlert("Error al obtener rol por correo: " + e);
-        return null;
-      });
   }
   //ALMACENAMIENTO LOCAL
 
@@ -452,4 +426,42 @@ export class BdserviceService {
   }
 
   
+
+
+  async iniciarSesion(correo: string, contrasena: string): Promise<boolean> {
+    const usuario = await this.buscarUsuarioPorCorreoYContrasena(correo, contrasena);
+
+    if (usuario) {
+      await this.storage.set('usuarioRegistrado', usuario);
+
+      this.isDBReady.next(true);
+
+      return true; // Inicio de sesión exitoso
+    } else {
+      return false; // Credenciales inválidas
+    }
+  }
+
+  async buscarUsuarioPorCorreoYContrasena(correo: string, contrasena: string): Promise<Usuario | null> {
+    return this.database.executeSql('SELECT * FROM usuario WHERE correoU = ? AND contrasenaU = ?', [correo, contrasena]).then(res => {
+      if (res.rows.length > 0) {
+        return {
+          idUsuario: res.rows.item(0).idUsuario,
+          nombreU: res.rows.item(0).nombreU,
+        } as Usuario;
+      } else {
+        return null;
+      }
+    });
+  }
+
+  async cerrarSesion() {
+    // Limpiar el almacenamiento local y restablecer el estado de autenticación
+    await this.storage.remove('usuarioRegistrado');
+    this.isDBReady.next(false);
+  }
+
+  async getUsuarioAutenticado(): Promise<Usuario | null> {
+    return this.storage.get('usuarioRegistrado');
+  }
 }

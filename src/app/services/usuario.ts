@@ -5,7 +5,7 @@ export class Usuario {
     rutU = "";
     correoU = "";
     claveU = "";
-    idRol = 1;
+    idRol = "";
     respuestaU = "";
     nombrePregunta = "";
     idVenta = 1;

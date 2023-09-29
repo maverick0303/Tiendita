@@ -8,6 +8,7 @@ import { Animation } from '@ionic/angular';
 import { IonCard } from '@ionic/angular';
 import { BdserviceService } from 'src/app/services/bd.service';
 
+
 @Component({
   selector: 'app-inicio-sesion',
   templateUrl: './inicio-sesion.page.html',
@@ -23,7 +24,7 @@ export class InicioSesionPage {
   @ViewChildren(IonCard, { read: ElementRef }) cardElements!: QueryList<ElementRef<HTMLIonCardElement>>;
   private animation: Animation | null = null;
 
-  constructor(private router: Router, private toastController: ToastController, private animationCtrl: AnimationController, private bd: BdserviceService) { }
+  constructor(private router: Router, private toastController: ToastController, private animationCtrl: AnimationController, private bdService: BdserviceService) { }
 
   ngAfterViewInit() {
     const card = this.animationCtrl
@@ -69,41 +70,38 @@ export class InicioSesionPage {
     await toast.present();
   }
 
-  inicio_sesion() {
-    this.bd.verificarCredenciales(this.gmail, this.password)
-      .then(usuarioValido => {
-        console.log('Usuario válido:', usuarioValido); // Agrega este console.log
-        if (usuarioValido) {
-          const correo = this.gmail;
-          this.bd.obtenerRolPorCorreo(correo)
-            .then(idRol => {
-              console.log('ID de rol:', idRol); // Agrega este console.log
-              if (idRol !== null) {
-                // Ir directamente a la página de tienda
-                this.router.navigate(['/tienda']);
-              } else {
-                this.presentToast(); // El correo no está en la base de datos
-              }
-            });
-        } else {
-          this.play();
-          this.presentToast();
-        }
+  async iniciarSesion() {
+    const correo = this.gmail; 
+    const contrasena = this.password; 
+  
+    const inicioSesionExitoso = await this.bdService.iniciarSesion(correo, contrasena);
+  
+    if (inicioSesionExitoso) {
+      console.log('Inicio de sesión exitoso');
+  
+      const toast = await this.toastController.create({
+        message: 'Inicio de sesión exitoso',
+        duration: 2000, 
+        position: 'middle'
       });
-  }
-
-  inicio_sesion1() {
-    if ((this.gmail === 'admin@gmail.com' && this.password === 'Admin123.') ||
-      (this.gmail === 'usuario@gmail.com' && this.password === 'Usuario123.')) {
-      this.rol = (this.gmail === 'admin@gmail.com') ? 2 : 1;
-      this.irADatosPersonales(this.gmail);
+  
+      await toast.present();
+  
+      this.irADatosPersonales(correo);
     } else {
-      this.play();
-      this.presentToast();
-      return;
+      console.log('Credenciales incorrectas');
+  
+      const toast = await this.toastController.create({
+        message: 'Credenciales incorrectas',
+        duration: 2000, 
+        position: 'middle'
+      });
+  
+      await toast.present();
     }
   }
-
+  
+  
   irADatosPersonales(correo: string) {
     const navigationExtras: NavigationExtras = {
       state: {
