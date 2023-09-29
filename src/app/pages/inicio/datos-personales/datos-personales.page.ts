@@ -17,6 +17,14 @@ export class DatosPersonalesPage implements OnInit {
   constructor(private route: ActivatedRoute,private bdService: BdserviceService) { }
 
   ngOnInit() {
+    this.bdService.getUsuarioRegistrado().then(usuario => {
+      if (usuario) {
+        this.nombreEnviado = usuario.nombreU;
+        this.apellidoEnviado = usuario.apellidoU;
+        this.emailEnviado = usuario.correoU;
+        this.rutEnviado = usuario.rutU;
+      }
+    });
   }
 
   onKeyDown(event: KeyboardEvent) {
@@ -27,6 +35,4 @@ export class DatosPersonalesPage implements OnInit {
   get imageData(): any {
     return this.bdService.imageData;
   }
-
-  
 }

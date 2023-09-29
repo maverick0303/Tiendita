@@ -10,20 +10,13 @@
     <ion-row>
       <ion-card>
         <ion-card-title style="font-size: 40px;">Bienvenido Administrador</ion-card-title>
-        <ion-row *ngIf="usuarios.length > 0">
-          <ion-col *ngFor="let usuario of usuarios">
-            {{ usuario.nombreU }} {{ usuario.apellidoU }} - {{ usuario.correoU }}
-          </ion-col>
-        </ion-row>
         <ion-row>
           <ion-button class="center-buttons" shape="round" [routerLink]="['./tienda']">Ver usuarios</ion-button>
-          <ion-button class="center-buttons" shape="round" [routerLink]="['/agregar-p-admin']">Agregar
-            productos</ion-button>
+          <ion-button class="center-buttons" shape="round" [routerLink]="['/agregar-p-admin']">Agregar productos</ion-button>
         </ion-row>
       </ion-card>
     </ion-row>
   </ion-grid>
-
   <!--VISTA DEL USUARIO-->
   <ion-grid>
     <ion-card-title>TimeTech Audible</ion-card-title>
@@ -37,15 +30,14 @@
           <ion-card-content>
             <td>${{ producto.precio }}</td>
             <ion-button class="center-buttons" [routerLink]="['/ag3', producto.idProducto]">Ver detalles</ion-button>
-            <ion-button class="center-buttons" *ngIf="rol == 2"
-              [routerLink]="['/editar-p-admin']">Modificar</ion-button>
-            <ion-button class="borrar" *ngIf="rol == 2">Eliminar</ion-button>
+            <ion-button class="center-buttons" *ngIf="rol == 2" [routerLink]="['/editar-p-admin']">Modificar</ion-button>
+            <ion-button class="borrar" *ngIf="rol == 2" >Eliminar</ion-button>
           </ion-card-content>
         </ion-card-header>
-      </ion-card>
+      </ion-card>      
     </ion-row>
   </ion-grid>
-  <br><br><br>
+<br><br><br>
   <app-componente2></app-componente2>
 
 </ion-content>
