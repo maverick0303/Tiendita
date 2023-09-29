@@ -5,6 +5,10 @@
 <!--#############################################PRODUCTOS################################################-->
 
 <ion-content class="fondo" [fullscreen]="true">
+  <div class="circle">
+    <ion-img src="https://cdn-icons-png.flaticon.com/512/4645/4645949.png" alt=""></ion-img>
+  </div>
+  <br><br><br>
   <ion-grid>
     <ion-row>
       <ion-card>
@@ -14,23 +18,23 @@
           <div class="input-row">
             <ion-input label="Nombre:" type="text" name="nombre" minlength="3" maxlength="15" required
               (keydown)="onKeyDown($event)" [(ngModel)]="nombreEnviado" #nombreEnviadoModel="ngModel"
-              label-placement="floating" fill="outline" [value]="nombreEnviado">
+              label-placement="floating" fill="outline" [value]="nombreEnviado" disabled>
             </ion-input>
           </div>
           <br>
           <!--APELLIDO-->
           <ion-input label="Apellido:" type="text" name="apellido" minlength="3" maxlength="15" required
             (keydown)="onKeyDown($event)" [(ngModel)]="apellidoEnviado" #apellidoEnviadoModel="ngModel"
-            label-placement="floating" fill="outline" [value]="apellidoEnviado">
+            label-placement="floating" fill="outline" [value]="apellidoEnviado" disabled>
           </ion-input>
           <br>
           <!--CORREO-->
           <ion-input label="Correo electrónico:" type="email" label-placement="floating" required readonly
-            fill="outline" placeholder="profeponga7@gmail.com" [value]="emailEnviado"></ion-input>
+            fill="outline" placeholder="profeponga7@gmail.com" [value]="emailEnviado" disabled></ion-input>
           <br>
           <!--RUT-->
           <ion-input label="Rut:" type="text" label-placement="floating" fill="outline" [value]="rutEnviado" required
-            readonly placeholder="26.098.098-2"></ion-input>
+            readonly placeholder="26.098.098-2" disabled></ion-input>
           <br>
           <!--BOTON-->
           <ion-button expand="50px" style="align-content: center;align-items: center;display: flex;"

@@ -5,6 +5,11 @@
 <!--#############################################PRODUCTOS################################################-->
 
 <ion-content class="fondo" [fullscreen]="true">
+    <div class="circle">
+    <ion-img src="https://cdn-icons-png.flaticon.com/512/4645/4645949.png" alt=""></ion-img>
+  </div>
+  <ion-button class="edit"><ion-icon name="create-outline"></ion-icon></ion-button>
+  <br><br>
   <ion-grid>
     <ion-row>
       <ion-card>
@@ -33,10 +38,17 @@
           <!-- EMAIL -->
           <ion-input label="Email:" type="text" label-placement="floating" fill="outline" name="email"
             [(ngModel)]="emailEnviado" disabled></ion-input><br>
+            <!--MENSAJE DE ADVERTENCIA-->
+            <div class="icon-text-container">
+              <ion-icon style="font-size: 55px;color: rgb(95, 94, 94); margin-right: 10px;" name="alert-circle-outline"></ion-icon>
+              <p style="color: rgb(95, 94, 94); font-size: 12px;">
+                Por seguridad no puede cambiar ni su correo ni su rut, si requiere de cambio cree otra cuenta.
+              </p>
+            </div>
           <!--BOTON-->
-          <ion-button expand="50px" style="align-content: center;align-items: center;display: flex;"
+          <ion-button expand="50px" style="align-items: center;display: flex;"
             [disabled]="!formularioValido">Guardar cambios</ion-button>
-
+            
         </ion-card-content>
       </ion-card>
     </ion-row>

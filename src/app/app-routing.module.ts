@@ -7,7 +7,7 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: '',
+    path: 'ho',
     redirectTo: 'home',
     pathMatch: 'full'
   },
@@ -32,7 +32,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/Shop/tienda/tienda.module').then( m => m.TiendaPageModule)
   },
   {
-    path: 'datos-personales',
+    path: '',
     loadChildren: () => import('./pages/inicio/datos-personales/datos-personales.module').then( m => m.DatosPersonalesPageModule)
   },
   {

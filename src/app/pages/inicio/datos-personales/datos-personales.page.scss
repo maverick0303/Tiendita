@@ -53,6 +53,35 @@ ion-card-title {
   margin-top: 5px;
 }
 
+.circle {
+  margin: 20px auto; /* Centra el círculo horizontalmente y añade espacio arriba */
+  width: 150px; /* Ancho del círculo */
+  height: 150px; /* Altura del círculo */
+  background-color: #ffffff; /* Color de fondo del círculo */
+  border-radius: 50%; /* Hace que el elemento sea un círculo */
+  position: absolute; /* Colocación absoluta para superponer */
+  top: 17%; /* Centra verticalmente el círculo en el medio de la pantalla */
+  left: 50%; /* Centra el círculo horizontalmente */
+  transform: translate(-50%, -50%); /* Centra horizontal y verticalmente el círculo */
+  z-index: 1; /* Asegura que esté por encima del contenido */
+  border: 2px solid white; /* Borde blanco de 2 píxeles */
+}
+
+.circle-inner {
+  width: 100%; /* Ancho completo del círculo interno */
+  height: 100%; /* Altura completa del círculo interno */
+  overflow: hidden; /* Oculta el contenido que se desborde del círculo */
+  border-radius: 50%; /* Asegura que el contenido siga siendo circular */
+}
+
+ion-img {
+  border-radius: 50%; /* Hace que el elemento sea un círculo */
+  width: 100%; /* Asegura que la imagen ocupe todo el espacio disponible */
+  height: 100%; /* Asegura que la imagen ocupe todo el espacio disponible */
+  object-fit: cover; /* Ajusta la imagen para que se ajuste al círculo sin deformación */
+}
+
+
 /* Ajustes para dispositivos específicos */
 @media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px) {
   ion-card-title {

@@ -12,7 +12,7 @@ ion-content {
     box-shadow: 2px 2px 2px #79F2E6;
     border-radius: 16px;
     background-color: #010626;
-    height: 460px;
+    height: 650px;
     max-width: 350px;
     margin: 160px auto; /* Esto centrará horizontalmente la tarjeta */
   }
@@ -52,8 +52,61 @@ ion-content {
     font-size: 14px;
     margin-top: 5px;
   }
-  
-  /* Ajustes para dispositivos específicos */
+
+  .circle {
+  margin: 20px auto; /* Centra el círculo horizontalmente y añade espacio arriba */
+  width: 150px; /* Ancho del círculo */
+  height: 150px; /* Altura del círculo */
+  background-color: #ffffff; /* Color de fondo del círculo */
+  border-radius: 50%; /* Hace que el elemento sea un círculo */
+  position: absolute; /* Colocación absoluta para superponer */
+  top: 17%; /* Centra verticalmente el círculo en el medio de la pantalla */
+  left: 50%; /* Centra el círculo horizontalmente */
+  transform: translate(-50%, -50%); /* Centra horizontal y verticalmente el círculo */
+  z-index: 1; /* Asegura que esté por encima del contenido */
+  border: 2px solid white; /* Borde blanco de 2 píxeles */
+}
+
+.circle-inner {
+  width: 100%; /* Ancho completo del círculo interno */
+  height: 100%; /* Altura completa del círculo interno */
+  overflow: hidden; /* Oculta el contenido que se desborde del círculo */
+  border-radius: 50%; /* Asegura que el contenido siga siendo circular */
+}
+
+ion-img {
+  border-radius: 50%; /* Hace que el elemento sea un círculo */
+  width: 100%; /* Asegura que la imagen ocupe todo el espacio disponible */
+  height: 100%; /* Asegura que la imagen ocupe todo el espacio disponible */
+  object-fit: cover; /* Ajusta la imagen para que se ajuste al círculo sin deformación */
+}
+
+.edit {
+  width: 45px; /* Ancho del círculo */
+  height: 45px;
+  border-radius: 50%; /* Asegura que el elemento sea un círculo */
+  position: absolute; /* Colocación absoluta para posicionar al lado del círculo */
+  top: 20%; /* Mismo valor que el círculo para centrar verticalmente */
+  left: calc(50% + 55px); /* Coloca el elemento 75px a la derecha del centro del círculo */
+  z-index: 2; /* Asegura que esté por encima del círculo */
+  display: flex; /* Utiliza un contenedor flex para alinear el icono verticalmente */
+  align-items: center; /* Centra verticalmente el contenido dentro del contenedor flex */
+  justify-content: center; /* Centra horizontalmente el contenido dentro del contenedor flex */
+  --background:#79F2E6;  
+}
+
+ion-icon{
+  font-size: 55px;
+  color: black;
+}
+
+.icon-text-container {
+  display: flex; /* Utiliza un contenedor flex para alinear los elementos en línea */
+  align-items: center; /* Centra verticalmente los elementos */
+}
+
+
+/* Ajustes para dispositivos específicos */
   @media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px) {
     ion-card-title {
       font-size: 30px;
