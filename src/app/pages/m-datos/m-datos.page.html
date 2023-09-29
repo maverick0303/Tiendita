@@ -5,9 +5,9 @@
 <!--#############################################PRODUCTOS################################################-->
 
 <ion-content class="fondo" [fullscreen]="true">
-    <div class="circle">
-    <ion-img [src]="image" alt="image"></ion-img>
-  </div>
+  <ion-avatar class="circle">
+    <img [src]="bd.imageData" />
+  </ion-avatar>
   <ion-button (click)="takePicture()" class="edit"><ion-icon name="create-outline"></ion-icon></ion-button>
   <br><br>
   <ion-grid>

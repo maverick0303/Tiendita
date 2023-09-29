@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Camera, CameraResultType } from '@capacitor/camera';
   import { BdserviceService } from 'src/app/services/bd.service';
@@ -23,7 +23,7 @@ export class MDatosPage implements OnInit {
   formularioValido: boolean = false;
 
 
-  constructor(private route: ActivatedRoute,private bd: BdserviceService) { }
+  constructor(private route: ActivatedRoute,public bd: BdserviceService,private cdr: ChangeDetectorRef) { }
   ngOnInit() {
     // Access the state property directly
     this.route.paramMap.subscribe(params => {
@@ -105,6 +105,9 @@ export class MDatosPage implements OnInit {
       resultType: CameraResultType.DataUrl
     });
      this.bd.imageData = image2.dataUrl;
+     this.cdr.detectChanges();
   };
+  
+
 }
 
