@@ -11,14 +11,12 @@ import { Usuario } from 'src/app/services/usuario';
 })
 export class TiendaPage implements OnInit {
   rol: number = 0;
-
   usuarios: Usuario[] = [];
   mostrarUsuarios: boolean = false;
 
   mostrarListaUsuarios() {
     this.mostrarUsuarios = true;
   }
-
 
   //
   //ARREGLO DE LOS PRODUCTOS
@@ -37,32 +35,38 @@ export class TiendaPage implements OnInit {
   constructor(private activeRoute: ActivatedRoute, private router: Router, private bd: BdserviceService) {
 
   }
-
+  
   ngOnInit() {
+
+    
+    //lista de usuarios
+    this.bd.fetchUsuario().subscribe(usuarios => {
+      this.usuarios = usuarios;
+    });
+
     this.activeRoute.queryParams.subscribe((param) => {
       this.rol = this.router.getCurrentNavigation()?.extras?.state?.['roles'];
     });
-    //subscribo al observable de la BD
+  
+    // Obtener el usuario autenticado desde el almacenamiento local
+    this.bd.getUsuarioAutenticado().then(usuario => {
+      if (usuario) {
+        this.rol = parseInt(usuario.idRol, 10); 
+      }
+    });
+  
+    // Suscribirse al estado de la BD
     this.bd.dbState().subscribe(res => {
       if (res) {
         this.bd.fetchProducto().subscribe(datos => {
           this.arregloProductos = datos;
         })
       }
-    })
-    this.activeRoute.queryParams.subscribe((param) => {
-      this.rol = this.router.getCurrentNavigation()?.extras?.state?.['roles'];
-    });
-
-    // Obtener el usuario autenticado desde el almacenamiento local
-    this.bd.getUsuarioAutenticado().then(usuario => {
-      if (usuario) {
-        this.rol = parseInt(usuario.idRol, 10); // Convertir a número entero
-      }
     });
   }
-
-
+  
+  
+  
 }
 
 
