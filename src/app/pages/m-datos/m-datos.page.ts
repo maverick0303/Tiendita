@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Camera, CameraResultType } from '@capacitor/camera';
+  import { BdserviceService } from 'src/app/services/bd.service';
+
+
 @Component({
   selector: 'app-m-datos',
   templateUrl: './m-datos.page.html',
   styleUrls: ['./m-datos.page.scss'],
 })
 export class MDatosPage implements OnInit {
+  image: any;
   nombreEnviado: string = '';
   apellidoEnviado: string = '';
   emailEnviado: string = '';
@@ -18,7 +23,7 @@ export class MDatosPage implements OnInit {
   formularioValido: boolean = false;
 
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,private bd: BdserviceService) { }
   ngOnInit() {
     // Access the state property directly
     this.route.paramMap.subscribe(params => {
@@ -90,4 +95,16 @@ export class MDatosPage implements OnInit {
 
     this.formularioValido = !hasError;
   }
+
+  //ESTO ES DE LA FOTO:
+
+  takePicture = async () => {
+    const image2 = await Camera.getPhoto({
+      quality:90,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl
+    });
+     this.bd.imageData = image2.dataUrl;
+  };
 }
+

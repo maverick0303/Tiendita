@@ -17,6 +17,7 @@ export class BdserviceService {
 
   //Variable para manipular la conexión a la BD
   public database!: SQLiteObject;
+  public imageData: any;
 
   //variables para la creación de tablas
   tablaCategoria: string = "CREATE TABLE IF NOT EXISTS categoria (idCategoria integer primary key autoincrement,  nombreCategoria VARCHAR(25) not null);";

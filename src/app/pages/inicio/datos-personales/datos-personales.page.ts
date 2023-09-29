@@ -32,4 +32,7 @@ export class DatosPersonalesPage implements OnInit {
       event.preventDefault();
     }
   }
+  get imageData(): any {
+    return this.bdService.imageData;
+  }
 }

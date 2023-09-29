@@ -6,9 +6,9 @@
 
 <ion-content class="fondo" [fullscreen]="true">
     <div class="circle">
-    <ion-img src="https://cdn-icons-png.flaticon.com/512/4645/4645949.png" alt=""></ion-img>
+    <ion-img [src]="image" alt="image"></ion-img>
   </div>
-  <ion-button class="edit"><ion-icon name="create-outline"></ion-icon></ion-button>
+  <ion-button (click)="takePicture()" class="edit"><ion-icon name="create-outline"></ion-icon></ion-button>
   <br><br>
   <ion-grid>
     <ion-row>
