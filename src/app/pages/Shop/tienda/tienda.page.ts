@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
+import { Usuario } from 'src/app/services/usuario';
 
 
 @Component({
@@ -10,6 +11,7 @@ import { BdserviceService } from 'src/app/services/bd.service';
 })
 export class TiendaPage implements OnInit {
   rol: number = 0;
+  usuarios: Usuario[] = [];
 
   //
   //ARREGLO DE LOS PRODUCTOS
@@ -30,17 +32,13 @@ export class TiendaPage implements OnInit {
   }
   
   ngOnInit() {
-    this.activeRoute.queryParams.subscribe((param) => {
-      this.rol = this.router.getCurrentNavigation()?.extras?.state?.['roles'];
+
+    
+    //lista de usuarios
+    this.bd.fetchUsuario().subscribe(usuarios => {
+      this.usuarios = usuarios;
     });
-    //subscribo al observable de la BD
-    this.bd.dbState().subscribe(res => {
-      if (res) {
-        this.bd.fetchProducto().subscribe(datos => {
-          this.arregloProductos = datos;
-        })
-      }
-    })
+
     this.activeRoute.queryParams.subscribe((param) => {
       this.rol = this.router.getCurrentNavigation()?.extras?.state?.['roles'];
     });
@@ -48,10 +46,20 @@ export class TiendaPage implements OnInit {
     // Obtener el usuario autenticado desde el almacenamiento local
     this.bd.getUsuarioAutenticado().then(usuario => {
       if (usuario) {
-        this.rol = parseInt(usuario.idRol, 10); // Convertir a número entero
+        this.rol = parseInt(usuario.idRol, 10); 
+      }
+    });
+  
+    // Suscribirse al estado de la BD
+    this.bd.dbState().subscribe(res => {
+      if (res) {
+        this.bd.fetchProducto().subscribe(datos => {
+          this.arregloProductos = datos;
+        })
       }
     });
   }
+  
   
   
 }

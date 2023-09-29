@@ -48,6 +48,7 @@ export class RegistroPage implements OnInit {
 
   constructor(private router: Router, private bd: BdserviceService, private storage: Storage) { }
   ngOnInit() {
+
     //subscribo al observable de la BD
     this.bd.dbState().subscribe(res => {
       if (res) {
