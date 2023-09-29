@@ -1,0 +1,31 @@
+
+
+/* Estilos para los títulos y textos */
+@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Tilt+Prism&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+
+ion-list{
+    width:auto;
+}
+
+ion-card-title {
+    border-color: #532473;
+    color: white;
+    font-size: 35px;
+    margin: 2px;
+    text-align: center;
+    font-family: 'DM Serif Display', serif;
+}
+
+.ion-title {
+    color: white;
+    font-family: 'DM Serif Display', serif;
+    font-size: 25px;
+    text-align: left;
+    margin: 3px;
+}
+
+/* Estilos para el fondo */
+ion-content {
+    --background: url(https://w0.peakpx.com/wallpaper/955/141/HD-wallpaper-purple-science-tech.jpg);
+}

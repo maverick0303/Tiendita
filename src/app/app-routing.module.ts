@@ -135,9 +135,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/Shop/historial/historial.module').then( m => m.HistorialPageModule)
   },
   {
-    path: 'listaregistros',
-    loadChildren: () => import('./listaregistros/listaregistros.module').then( m => m.ListaregistrosPageModule)
+    path: 'lista-usuario',
+    loadChildren: () => import('./pages/admin/lista-usuario/lista-usuario.module').then( m => m.ListaUsuarioPageModule)
   },
+
 
 
 
