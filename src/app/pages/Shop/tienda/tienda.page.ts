@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 
 @Component({
@@ -25,10 +26,10 @@ export class TiendaPage implements OnInit {
     }
   ]
 
-  constructor(private activeRoute: ActivatedRoute, private router: Router, private bd: BdserviceService) {
+  constructor(private activeRoute: ActivatedRoute, private router: Router, private bd: BdserviceService,) {
 
   }
-  
+
   ngOnInit() {
     this.activeRoute.queryParams.subscribe((param) => {
       this.rol = this.router.getCurrentNavigation()?.extras?.state?.['roles'];
@@ -44,7 +45,7 @@ export class TiendaPage implements OnInit {
     this.activeRoute.queryParams.subscribe((param) => {
       this.rol = this.router.getCurrentNavigation()?.extras?.state?.['roles'];
     });
-  
+
     // Obtener el usuario autenticado desde el almacenamiento local
     this.bd.getUsuarioAutenticado().then(usuario => {
       if (usuario) {
@@ -52,13 +53,27 @@ export class TiendaPage implements OnInit {
       }
     });
   }
-  eliminar(producto:any){
+  eliminar(producto: any) {
     this.bd.eliminarProducto(producto.idProducto);
     this.bd.presentAlert("Producto Eliminado");
 
   }
+modificar(producto: any) {
+  let navigationExtras: NavigationExtras = {
+    state: {
+      idEnviado: producto.idProducto,
+      nombreEnviado: producto.nombreProducto,
+      descripcionEnviado: producto.descripcion,
+      precioEnviado: producto.precio,
+      stockEnviado: producto.stock,
+      fotoEnviado: producto.foto,
+      nombreCategoriaEnviado: producto.nombreCategoria,
+    }
+  };
+  this.router.navigate(['/editar-p-admin'], navigationExtras);
+}
 
-  
+
 }
 
 

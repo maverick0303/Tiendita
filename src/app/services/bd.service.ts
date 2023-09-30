@@ -296,8 +296,8 @@ export class BdserviceService {
   
 
   //ACTUALIZAR TABLAS
-  actualizarProducto(idProducto: any, nombreProducto: any, descripcion: any, precio: any, stock: any, foto: any) {
-    return this.database.executeSql('UPDATE producto SET nombreProducto = ?, descripcion = ?, precio = ?, stock = ?, foto = ? WHERE idProducto = ?', [nombreProducto, descripcion, precio, stock, foto, idProducto]).then(res => {
+  actualizarProducto(idProducto: any, nombreProducto: any, descripcion: any, precio: any, stock: any, foto: any,idCategoria:any) {
+    return this.database.executeSql('UPDATE producto SET nombreProducto = ?, descripcion = ?, precio = ?, stock = ?, foto = ?, nombreCategoria = ?  WHERE idProducto = ?', [nombreProducto, descripcion, precio, stock, foto, idProducto,idCategoria]).then(res => {
       this.buscarProducto();
     })
   }
