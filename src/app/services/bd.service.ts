@@ -355,6 +355,7 @@ export class BdserviceService {
       await this.database.executeSql(this.registroCategoria2, []);
       await this.database.executeSql(this.registroCategoria3, []);
       await this.database.executeSql(this.registroCategoria4, []);
+      await this.database.executeSql(this.registroCategoria5, []);
 
       //REGISTROS DE PRODUCTOS
       await this.database.executeSql(this.prod1, []);
