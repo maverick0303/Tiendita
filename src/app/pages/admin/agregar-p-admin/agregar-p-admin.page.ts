@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
-
+import { Camera, CameraResultType } from '@capacitor/camera';
 @Component({
   selector: 'app-agregar-p-admin',
   templateUrl: './agregar-p-admin.page.html',
   styleUrls: ['./agregar-p-admin.page.scss'],
 })
 export class AgregarPAdminPage implements OnInit {
+  image2: any;
   nombrePValue: string = '';
   descripcionPValue: string = '';
   precioPValue: number = 1;
   stockPValue: number = 1;
-  imagenPValue: File | undefined;
+  imagenPValue: any;
   categoriaPValue: string = '';
 
   arregloCategoria: any = [
@@ -22,19 +23,22 @@ export class AgregarPAdminPage implements OnInit {
     }
   ]
 
-  constructor(private router:Router, private db: BdserviceService) { }
+  constructor(private router:Router, private db: BdserviceService,private cdr: ChangeDetectorRef) { }
   insertar() {
-    const selectedCategoryId = this.categoriaPValue;
-  
-    this.db.insertarProducto(
-      this.nombrePValue,
-      this.descripcionPValue,
-      this.precioPValue,
-      this.stockPValue,
-      selectedCategoryId,
-      this.imagenPValue
-    );
-  }
+  // Make sure to replace 'selectedCategoryId' with the actual value you want to assign to 'idCategoria'.
+  const selectedCategoryId = this.categoriaPValue;
+
+  this.db.insertarProducto(
+    
+    this.nombrePValue,
+    this.descripcionPValue,
+    this.precioPValue,
+    this.stockPValue,
+    this.imagenPValue,
+    selectedCategoryId
+  );
+}
+
   
 
   ngOnInit() {
@@ -65,6 +69,20 @@ export class AgregarPAdminPage implements OnInit {
     }
     if (firstDigit === '-') {
       this.precioPValue = 1;
+    }
+  }
+  async takePicture() {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.DataUrl,
+      });
+
+      this.imagenPValue = image.dataUrl;
+      this.cdr.detectChanges(); // Esto actualiza la vista para que se muestre la imagen
+    } catch (error) {
+      console.error('Error al tomar la foto:', error);
     }
   }
 }

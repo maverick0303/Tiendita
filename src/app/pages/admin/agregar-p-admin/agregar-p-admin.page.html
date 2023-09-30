@@ -69,15 +69,12 @@
           *ngIf="categoriaPModel.invalid && (categoriaPModel.dirty || categoriaPModel.touched)">
           <p *ngIf="categoriaPModel.errors?.['required']">La categoría es obligatoria.</p>
         </div>
+        <ion-button (click)="takePicture()" expand="full" color="dark">Tomar Foto</ion-button>
 
-        <ion-item>
-          <ion-label position="floating">Imagen(es) del producto</ion-label>
-          <br>
-          <ion-input type="file" name="imagenP" required [(ngModel)]="imagenPValue" #imagenPModel="ngModel"></ion-input>
+        <ion-item *ngIf="imagenPValue">
+          <img [src]="imagenPValue" alt="Imagen del producto">
         </ion-item>
-        <div class="error-message" *ngIf="imagenPModel.invalid && (imagenPModel.dirty ||imagenPModel.touched)">
-          <p *ngIf="imagenPModel.errors?.['required']">La foto del producto es obligatoria.</p>
-        </div>
+        
         <ion-item>
           <ion-label position="floating">Stock:</ion-label>
           <ion-input type="number" name="stockP" min="0" required [(ngModel)]="stockPValue"
@@ -90,9 +87,9 @@
 
 
         <ion-button expand="full" color="dark" (click)="insertar()" [routerLink]="['/tienda']"
-          [disabled]="!nombrePModel.valid || !descripcionPModel.valid || !precioPModel.valid  || !categoriaPModel.valid ||!imagenPModel.valid ">
+          [disabled]="!nombrePModel.valid || !descripcionPModel.valid || !precioPModel.valid  || !categoriaPModel.valid ||!imagenPValue ">
           Guardar</ion-button>
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
       </ion-card-content>
     </ion-card>
