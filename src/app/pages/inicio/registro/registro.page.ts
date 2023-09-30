@@ -214,11 +214,17 @@ export class RegistroPage implements OnInit {
     this.formularioValido = !hasError;
   }
 
- irAPaginaSiguiente() {
-    if (this.formularioValido) {
-      // Guardar datos del usuario en la base de datos
-      this.bd.insertarUsuario(this.nombreUValue,this.apellidoUValue,this.rutValue,this.emailValue,this.passwordValue ,this.idRol,this.respuestaSeguridad, this.preguntaSeguridad,this.idVenta)
-      this.router.navigate(['/tienda']);
-    }
+  insertar() {
+    this.bd.insertarUsuario(
+      this.nombreUValue,
+      this.apellidoUValue,
+      this.rutValue,
+      this.emailValue,
+      this.passwordValue,
+      this.idRol,
+      this.respuestaSeguridad,
+      this.preguntaSeguridad,
+      this.idVenta
+    );
   }
 }

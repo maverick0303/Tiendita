@@ -65,7 +65,7 @@
             <!-- VALIDACION -->
             <div class="error-message" *ngIf="errors.respuestaSeguridad">{{ errors.respuestaSeguridad }}</div>
             <!--BOTON-->
-            <ion-button  (click)="irAPaginaSiguiente()" [disabled]="!formularioValido">Registrarse</ion-button>
+            <ion-button  (click)="insertar()" [routerLink]="['/tienda']" [disabled]="!formularioValido">Registrarse</ion-button>
             <!--MENSAJITO-->
             <p style="text-align: center;">¿Tiene una cuenta?<a [routerLink]="['/inicio-sesion']">Inicie sesión</a></p>
           </form>
