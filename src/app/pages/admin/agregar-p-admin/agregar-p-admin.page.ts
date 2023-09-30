@@ -23,10 +23,19 @@ export class AgregarPAdminPage implements OnInit {
   ]
 
   constructor(private router:Router, private db: BdserviceService) { }
+  insertar() {
+    const selectedCategoryId = this.categoriaPValue;
   
-  InjectSetupWrapper(){
-    this.db.insertarProducto(this.nombrePValue,this.descripcionPValue,this.precioPValue,this.stockPValue,this.imagenPValue)
+    this.db.insertarProducto(
+      this.nombrePValue,
+      this.descripcionPValue,
+      this.precioPValue,
+      this.stockPValue,
+      selectedCategoryId,
+      this.imagenPValue
+    );
   }
+  
 
   ngOnInit() {
     //subscribo al observable de la BD

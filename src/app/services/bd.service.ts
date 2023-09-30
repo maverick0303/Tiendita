@@ -288,11 +288,12 @@ export class BdserviceService {
   }
 
   //INSERTAR
-  insertarProducto(nombreProducto: any, descripcion: any, precio: any, stock: any, foto: any) {
-    return this.database.executeSql('INSERT INTO producto(nombreProducto,descripcion,precio,stock,foto) VALUES (?,?,?,?,?)', [nombreProducto, descripcion, precio, stock, foto]).then(res => {
+  insertarProducto(nombreProducto: any, descripcion: any, precio: any, stock: any, foto: any, idCategoria: any) {
+    return this.database.executeSql('INSERT INTO producto(nombreProducto, descripcion, precio, stock, foto, nombreCategoria) VALUES (?,?,?,?,?,?)', [nombreProducto, descripcion, precio, stock, foto, idCategoria]).then(res => {
       this.buscarProducto();
-    })
+    });
   }
+  
 
   //ACTUALIZAR TABLAS
   actualizarProducto(idProducto: any, nombreProducto: any, descripcion: any, precio: any, stock: any, foto: any) {
