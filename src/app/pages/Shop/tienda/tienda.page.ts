@@ -52,7 +52,12 @@ export class TiendaPage implements OnInit {
       }
     });
   }
-  
+  eliminar(producto:any){
+    this.bd.eliminarProducto(producto.idProducto);
+    this.bd.presentAlert("Producto Eliminado");
+
+  }
+
   
 }
 
