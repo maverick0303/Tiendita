@@ -1,86 +1,46 @@
+/*fondo*/
 ion-content {
-    --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
+  --background: url(https://w0.peakpx.com/wallpaper/955/141/HD-wallpaper-purple-science-tech.jpg);
 }
-  ion-searchbar {
-    width: 400px;
-    text-align: left;
+/*boton*/
+ion-button{
+  --background: #7630D9;
 }
-  ion-card {
-  height: 715px;
-  width: 500px;
-  background: #222222;
+.guardar{
+  --background: rgb(255, 0, 128);
 }
 
-/* Importar fuente */
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+/* Estilo para los mensajes de error */
+.error-message {
+color: red;
+font-size: 14px;
+margin-top: 5px;
+}
+
+/*card*/
+ion-card {
+  box-shadow: 6px 2px 6px #79F2E6;
+  background-color: #010626;
+  margin: 10px ;
+
+}
+
+img {
+  width: auto;
+  height: auto;
+}
+ion-grid ion-card {
+  margin: 15px;
+}
+@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Tilt+Prism&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+
 
 ion-card-title {
+  border-color: #532473;
   color: white;
-  font-family: 'Abril Fatface', cursive;
-  font-size: 50px;
-  display: flex;
-  justify-content: center;
-
-
-}
-
-.ion-card-content {
-  font-family: 'Abril Fatface', cursive;
-  font-size: 30px;
-  display: flex;
-  justify-content: center;
-
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-  /* Alineación horizontal al centro */
-  align-items: center;
-  /* Alineación vertical al centro */
-}
-
-//cuando este pequeña la pantalla:
-@media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px){
-  ion-card {
-    margin: auto 50px;
-    height: 770px;
-    width: 600px;
-    background: #222222;
-  }
-  ion-card-title{
-    font-size: 25px;
-    justify-content: center;
-  }
-}
-
-
-/*este es el fondo*/
-ion-content {
-  --background: url(https://i.pinimg.com/originals/77/42/0d/77420df3f9e33db5b79ee25455d3340e.png);
-}
-
-//correo=
-.example-container mat-form-field+mat-form-field {
-  margin-left: 8px;
-}
-
-//clave=
-.example-container mat-form-field+mat-form-field {
-  margin-left: 8px;
-}
-
-.example-right-align {
-  text-align: right;
-}
-
-input.example-right-align::-webkit-outer-spin-button,
-input.example-right-align::-webkit-inner-spin-button {
-  display: none;
-}
- /* Estilo para los mensajes de error */
- .error-message {
-  color: red;
-  font-size: 14px;
-  margin-top: 5px;
+  font-size: 35px;
+  margin: 8px;
+  text-align: center;
+  font-family: 'DM Serif Display', serif;
 }

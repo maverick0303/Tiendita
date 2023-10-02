@@ -2,98 +2,76 @@
   <app-componente1></app-componente1>
 </ion-header>
 
-
 <!--#############################################PRODUCTOS################################################-->
 
-
-
 <ion-content class="fondo" [fullscreen]="true">
-  <div class="container">
+  <ion-card-title>Editar producto</ion-card-title>
+  <br>
+  <ion-grid>
     <ion-card>
-      <ion-card-header>
-      </ion-card-header>
+      <!--AQUI VA LA FOTO-->
+      <ion-item *ngIf="imagenPValue">
+        <img [src]="imagenPValue" alt="Imagen del producto">
+      </ion-item>
+      <!--esto es del nombre del producto-->
       <ion-card-content>
-
-        <ion-item>
-          <ion-label position="floating">Id del producto</ion-label>
-          <ion-input type="text" name="id" required readonly class="readonly-input"></ion-input>
-        </ion-item>
-        <!--El required es para que solo se pueda ver y no cambiar el campo que ya esta escrito-->
-        <!--Validación para nombre del producto-->
-        <ion-item>
-          <ion-label position="floating">Nombre para el producto: </ion-label>
-          <ion-input type="text" name="nombreP" minlength="3" maxlength="15" required [(ngModel)]="nombrePValue"
-            #nombrePModel="ngModel">
-          </ion-input>
-        </ion-item>
+        <ion-input label="Nombre del producto:" label-placement="floating" fill="outline" type="text" name="nombreP"
+          minlength="3" maxlength="15" required [(ngModel)]="nombrePValue" #nombrePModel="ngModel"></ion-input><br>
+        <!--VALIDACION-->
         <div class="error-message" *ngIf="nombrePModel.invalid && (nombrePModel.dirty || nombrePModel.touched)">
           <p *ngIf="nombrePModel.errors?.['required']">El nombre del producto es obligatorio.</p>
           <p *ngIf="nombrePModel.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</p>
           <p *ngIf="nombrePModel.errors?.['maxlength']">El nombre no debe exceder los 15 caracteres.</p>
         </div>
-
-
-        <ion-item>
-          <ion-label position="floating" onlyread>Descripción del producto</ion-label>
-          <ion-input type="text" name="descripcionP" minlength="3" maxlength="50" required
-            [(ngModel)]="descripcionPValue" #descripcionPModel="ngModel">
-          </ion-input>
-        </ion-item>
+        <!--esto es de la descripcion del producto-->
+        <ion-textarea label="Descripcion:" labelPlacement="floating" fill="outline" type="text" name="descripcionP"
+          minlength="3" maxlength="150" required [(ngModel)]="descripcionPValue"
+          #descripcionPModel="ngModel"></ion-textarea><br>
+        <!--VALIDACION-->
         <div class="error-message"
           *ngIf="descripcionPModel.invalid && (descripcionPModel.dirty || descripcionPModel.touched)">
           <p *ngIf="descripcionPModel.errors?.['required']">La descripción del producto es obligatorio.</p>
           <p *ngIf="descripcionPModel.errors?.['minlength']">La descripción debe tener al menos 3 caracteres.</p>
           <p *ngIf="descripcionPModel.errors?.['maxlength']">La descripción no debe exceder los 15 caracteres.</p>
         </div>
-
-        <ion-item>
-          <ion-label position="floating">Precio:</ion-label>
-          <ion-input type="number" name="precioP" min="1000" required [(ngModel)]="precioPValue" #precioPModel="ngModel"
-            (input)="limitarLongitudPrecio($event); validatePrecio(precioPValue)"></ion-input>
-        </ion-item>
+        <!--precio del producto:-->
+        <ion-input label="Precio del producto:" label-placement="floating" fill="outline" type="number" name="precioP"
+          min="1000" required [(ngModel)]="precioPValue" #precioPModel="ngModel"
+          (input)="limitarLongitudPrecio($event); validatePrecio(precioPValue)"></ion-input><br>
+        <!--VALIDACION-->
         <div class="error-message" *ngIf="!precioPModel.valid && (precioPModel.dirty || precioPModel.touched)">
           <p *ngIf="precioPModel.errors?.['required']">El precio del producto es obligatorio.</p>
           <p *ngIf="precioPModel.errors?.['nocero']">El primer dígito no puede ser 0.</p>
         </div>
-
-
-        <ion-item>
-          <ion-label position="floating">Categoría para el producto</ion-label>
-          <ion-select required name="categoriaP" [(ngModel)]="categoriaPValue" #categoriaPModel="ngModel">
-            <ion-select-option *ngFor="let categoria of arregloCategoria" value="{{ categoria.idCategoria }}">{{
-              categoria.nombreCategoria }} </ion-select-option>
-
-          </ion-select>
-        </ion-item>
+        <!--categoria del producto:-->
+        <ion-select label="Categorias" label-placement="floating" fill="outline" required name="categoriaP"
+          [(ngModel)]="categoriaPValue" #categoriaPModel="ngModel">
+          <ion-select-option *ngFor="let categoria of arregloCategoria"
+            value="{{ categoria.idCategoria }}">{{categoria.nombreCategoria}}
+          </ion-select-option>
+        </ion-select><br>
+        <!--VALIDACION-->
         <div class="error-message"
           *ngIf="categoriaPModel.invalid && (categoriaPModel.dirty || categoriaPModel.touched)">
           <p *ngIf="categoriaPModel.errors?.['required']">La categoría es obligatoria.</p>
         </div>
-        <ion-button (click)="takePicture()" expand="full" color="dark">Tomar Foto</ion-button>
-
-        <ion-item *ngIf="imagenPValue">
-          <img [src]="imagenPValue" alt="Imagen del producto">
-        </ion-item>
-        
-        <ion-item>
-          <ion-label position="floating">Stock:</ion-label>
-          <ion-input type="number" name="stockP" min="0" required [(ngModel)]="stockPValue"
-            #stockPModel="ngModel"></ion-input>
-        </ion-item>
+        <!--STOCK DEL PRODUCTO-->
+        <ion-input label="Stock del producto:" label-placement="floating" fill="outline" type="number" name="stockP"
+          min="0" required [(ngModel)]="stockPValue" #stockPModel="ngModel"></ion-input><br>
+        <!--VALIDACION-->
         <div class="error-message" *ngIf="!stockPModel.valid && (stockPModel.dirty || stockPModel.touched)">
           <p *ngIf="stockPModel.errors?.['required']">El stock del producto es obligatorio.</p>
           <p *ngIf="stockPModel.errors?.['min']">El stock debe ser mayor o igual a 0.</p>
         </div>
-
-
-        <ion-button expand="full" color="dark" (click)="editar()" [routerLink]="['/tienda']"
+        <!--tomar la foto-->
+        <ion-button (click)="takePicture()" expand="full" >Tomar/subir Foto</ion-button>
+        <!--boton-->
+        <ion-button expand="full" class="guardar" (click)="editar()" [routerLink]="['/tienda']"
           [disabled]="!nombrePModel.valid || !descripcionPModel.valid || !precioPModel.valid  || !categoriaPModel.valid ||!imagenPValue ">
-          Guardar</ion-button>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+          agregar producto</ion-button>
       </ion-card-content>
     </ion-card>
-  </div>
+  </ion-grid>
+  <br><br><br><br>
   <app-componente2></app-componente2>
-
 </ion-content>
