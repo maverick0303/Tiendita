@@ -272,18 +272,16 @@ export class BdserviceService {
   //FUNCIONES DE USUARIOS
 
   insertarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any,  respuestaU: any,nombrePregunta: any,  idVenta: any ) {
-    //this.presentAlert("3");
     return this.database.executeSql('INSERT INTO usuario(nombreU,apellidoU ,rutU , correoU ,contrasenaU, idRol, respuestaU, nombrePregunta, idVenta ) VALUES (?,?,?,?,?,?,?,?,?)', [nombreU, apellidoU, rutU, correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta]).then(res => {
-      this.presentAlert("2");
       this.buscarUsuario();
     })
   }
-  actualizarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, idUsuario: any) {
-    this.presentAlert("3");
-    return this.database.executeSql('UPDATE usuario set nombreU = ?, apellidoU = ? ,rutU = ? , correoU = ? where idUsuario = ?' ,[nombreU, apellidoU, rutU, correoU, idUsuario]).then(res => {
-      
-      
+  actualizarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any, respuestaU: any, nombrePregunta: any, idVenta: any, idUsuario: any) {
+    this.presentAlert("1");
+    return this.database.executeSql('UPDATE usuario set nombreU = ?, apellidoU = ? ,rutU = ? , correoU = ?,contrasenaU = ?, idRol = ?, respuestaU = ?, nombrePregunta = ?, idVenta = ? where idUsuario = ?' ,[nombreU, apellidoU, rutU, correoU,contrasenaU,idRol, respuestaU,nombrePregunta,idVenta,idUsuario ]).then(res => {
+      this.presentAlert("2");
       this.buscarUsuario();
+      this.presentAlert("3");
     })
   }
   eliminarUsuario(idUsuario: any ) {

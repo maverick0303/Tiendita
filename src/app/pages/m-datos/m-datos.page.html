@@ -47,7 +47,7 @@
             </div>
           <!--BOTON-->
           <ion-button expand="50px" style="align-items: center;display: flex;"
-            [disabled]="!formularioValido" click="editar()" [routerLink]="['/tienda']">Guardar cambios</ion-button>
+            [disabled]="!formularioValido" class="guardar" (click)="editar()" [routerLink]="['/datos-personales']">Guardar cambios</ion-button>
             
         </ion-card-content>
       </ion-card>

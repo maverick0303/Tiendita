@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { BdserviceService } from 'src/app/services/bd.service';
-import { Usuario } from 'src/app/services/usuario';
 
 
 @Component({
@@ -17,6 +16,11 @@ export class MDatosPage implements OnInit {
   apellidoEnviado: string = '';
   emailEnviado: string = '';
   rutEnviado: string = '';
+  contrasenaEnviada: string = '';
+  idRolEnviado: string = '';
+  respuestaEnviada: string = '';
+  nombrePreguntaEnviada: string = '';
+  idVentaEnviada: string = '';
   //mensaje de error:
   errors = {
     nombreEnviado: '',
@@ -25,19 +29,40 @@ export class MDatosPage implements OnInit {
   formularioValido: boolean = false;
 
 
-  constructor(private router: Router,private activedRouter: ActivatedRoute,public bd: BdserviceService,private cdr: ChangeDetectorRef) { 
-  this.activedRouter.queryParams.subscribe(res => {
-    if (this.router.getCurrentNavigation()?.extras.state) {
-      this.idUsuario = this.router.getCurrentNavigation()?.extras?.state?.['idUsuario']
-      this.nombreEnviado = this.router.getCurrentNavigation()?.extras?.state?.['nombreEnviado']
-      this.apellidoEnviado = this.router.getCurrentNavigation()?.extras?.state?.['apellidoEnviado']
-      this.emailEnviado = this.router.getCurrentNavigation()?.extras?.state?.['emailEnviado']
-      this.rutEnviado = this.router.getCurrentNavigation()?.extras?.state?.['rutEnviado']
+  constructor(private router: Router, private activedRouter: ActivatedRoute, public bd: BdserviceService, private cdr: ChangeDetectorRef) {
+    this.activedRouter.queryParams.subscribe(res => {
+      if (this.router.getCurrentNavigation()?.extras.state) {
+        this.idUsuario = this.router.getCurrentNavigation()?.extras?.state?.['idUsuario']
+        this.nombreEnviado = this.router.getCurrentNavigation()?.extras?.state?.['nombreEnviado']
+        this.apellidoEnviado = this.router.getCurrentNavigation()?.extras?.state?.['apellidoEnviado']
+        this.emailEnviado = this.router.getCurrentNavigation()?.extras?.state?.['emailEnviado']
+        this.rutEnviado = this.router.getCurrentNavigation()?.extras?.state?.['rutEnviado']
+        this.contrasenaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['contrasenaEnviada']
+        this.idRolEnviado = this.router.getCurrentNavigation()?.extras?.state?.['idRolEnviado']
+        this.respuestaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['respuestaEnviada']
+        this.nombrePreguntaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['nombrePreguntaEnviada']
+        this.idVentaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['idVentaEnviada']
 
-    }
-  })
-}
-  
+      }
+    })
+  }
+  editar() {
+    this.bd.actualizarUsuario(
+      this.idUsuario,
+      this.nombreEnviado,
+      this.apellidoEnviado,
+      this.emailEnviado,
+      this.rutEnviado,
+      this.contrasenaEnviada,
+      this.idRolEnviado,
+      this.respuestaEnviada,
+      this.nombrePreguntaEnviada,
+      this.idVentaEnviada
+    );
+    this.bd.presentAlert("Usuario actualizado con exito")
+    this.router.navigate(['/tienda']);
+  }
+
   ngOnInit() {
     this.bd.getUsuarioAutenticadoDesdeBD().then(usuario => {
       if (usuario) {
@@ -49,17 +74,7 @@ export class MDatosPage implements OnInit {
     });
   }
 
-  editar(){
-    this.bd.actualizarUsuario(
 
-      this.idUsuario,
-      this.nombreEnviado,
-      this.apellidoEnviado,
-      this.emailEnviado,
-      this.rutEnviado
-    );
-    this.bd.presentAlert("Usuario actualizado con exito")
-  }
 
   onKeyDown(event: KeyboardEvent) {
     if (event.key === ' ') {
@@ -126,14 +141,14 @@ export class MDatosPage implements OnInit {
 
   takePicture = async () => {
     const image2 = await Camera.getPhoto({
-      quality:90,
+      quality: 90,
       allowEditing: false,
       resultType: CameraResultType.DataUrl
     });
-     this.bd.imageData = image2.dataUrl;
-     this.cdr.detectChanges();
+    this.bd.imageData = image2.dataUrl;
+    this.cdr.detectChanges();
   };
-  
+
 
 }
 
