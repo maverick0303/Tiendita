@@ -272,7 +272,9 @@ export class BdserviceService {
   //FUNCIONES DE USUARIOS
 
   insertarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any,  respuestaU: any,nombrePregunta: any,  idVenta: any ) {
-    return this.database.executeSql('INSERT INTO usuario(nombreU,apellidoU ,rutU , correoU ,contrasenaU, idRol, respuestaU, nombrePregunta, idVenta ) VALUES (?,?,?,?,?,?,?,?,?,?)', [nombreU, apellidoU, rutU, correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta]).then(res => {
+    this.presentAlert("3");
+    return this.database.executeSql('INSERT INTO usuario(nombreU,apellidoU ,rutU , correoU ,contrasenaU, idRol, respuestaU, nombrePregunta, idVenta ) VALUES (?,?,?,?,?,?,?,?,?)', [nombreU, apellidoU, rutU, correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta]).then(res => {
+      this.presentAlert("2");
       this.buscarUsuario();
     })
   }
