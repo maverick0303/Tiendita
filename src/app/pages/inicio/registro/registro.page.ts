@@ -217,7 +217,6 @@ export class RegistroPage implements OnInit {
   }
 
   insertar() {
-    this.bd.presentAlert("1");
     this.bd.insertarUsuario(
       this.nombreUValue,
       this.apellidoUValue,

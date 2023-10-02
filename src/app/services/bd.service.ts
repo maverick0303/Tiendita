@@ -272,14 +272,17 @@ export class BdserviceService {
   //FUNCIONES DE USUARIOS
 
   insertarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any,  respuestaU: any,nombrePregunta: any,  idVenta: any ) {
-    this.presentAlert("3");
+    //this.presentAlert("3");
     return this.database.executeSql('INSERT INTO usuario(nombreU,apellidoU ,rutU , correoU ,contrasenaU, idRol, respuestaU, nombrePregunta, idVenta ) VALUES (?,?,?,?,?,?,?,?,?)', [nombreU, apellidoU, rutU, correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta]).then(res => {
       this.presentAlert("2");
       this.buscarUsuario();
     })
   }
-  actualizarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any, nombrePregunta: any, idVenta: any ) {
-    return this.database.executeSql('UPDATE usuario set nombreU = ?, apellidoU = ? ,rutU = ? , correoU = ? ,contrasenaU = ?, idRol = ?, nombrePregunta = ?, idVenta = ? where idUsuario = ?' ,[nombreU, apellidoU, rutU, correoU, contrasenaU, idRol, nombrePregunta, idVenta]).then(res => {
+  actualizarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, idUsuario: any) {
+    this.presentAlert("3");
+    return this.database.executeSql('UPDATE usuario set nombreU = ?, apellidoU = ? ,rutU = ? , correoU = ? where idUsuario = ?' ,[nombreU, apellidoU, rutU, correoU, idUsuario]).then(res => {
+      
+      
       this.buscarUsuario();
     })
   }
@@ -424,13 +427,34 @@ export class BdserviceService {
     await this.storage.create();
   }
 
-  async getUsuarioRegistrado() {
-    await this.initStorage();
-    return this.storage.get('usuarioRegistrado');
+  async getUsuarioAutenticadoDesdeBD(): Promise<Usuario | null> {
+    const usuarioRegistrado = await this.getUsuarioAutenticado();
+    
+    if (usuarioRegistrado) {
+      return this.database.executeSql('SELECT * FROM usuario WHERE idUsuario = ?', [usuarioRegistrado.idUsuario]).then(res => {
+        if (res.rows.length > 0) {
+          return {
+            idUsuario: res.rows.item(0).idUsuario,
+            nombreU: res.rows.item(0).nombreU,
+            apellidoU: res.rows.item(0).apellidoU,
+            rutU: res.rows.item(0).rutU,
+            correoU: res.rows.item(0).correoU,
+            claveU: res.rows.item(0).claveU,
+            idRol: res.rows.item(0).idRol,
+            respuestaU: res.rows.item(0).respuestaU,
+            nombrePregunta: res.rows.item(0).nombrePregunta,
+            idVenta: res.rows.item(0).idVenta
+          } as Usuario;
+        } else {
+          return null;
+        }
+      });
+    } else {
+      return null;
+    }
   }
-
   
-
+  
 
   async iniciarSesion(correo: string, contrasena: string): Promise<boolean> {
     const usuario = await this.buscarUsuarioPorCorreoYContrasena(correo, contrasena);

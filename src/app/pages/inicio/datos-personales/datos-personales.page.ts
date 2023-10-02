@@ -9,6 +9,7 @@ import { BdserviceService } from 'src/app/services/bd.service';
   styleUrls: ['./datos-personales.page.scss'],
 })
 export class DatosPersonalesPage implements OnInit {
+  idUsuario: string = '';
   nombreEnviado: string = '';
   apellidoEnviado: string = '';
   emailEnviado: string = '';
@@ -17,8 +18,9 @@ export class DatosPersonalesPage implements OnInit {
   constructor(private route: ActivatedRoute,private bdService: BdserviceService) { }
 
   ngOnInit() {
-    this.bdService.getUsuarioRegistrado().then(usuario => {
+    this.bdService.getUsuarioAutenticadoDesdeBD().then(usuario => {
       if (usuario) {
+        this.idUsuario = usuario.idUsuario;
         this.nombreEnviado = usuario.nombreU;
         this.apellidoEnviado = usuario.apellidoU;
         this.emailEnviado = usuario.correoU;
@@ -26,6 +28,7 @@ export class DatosPersonalesPage implements OnInit {
       }
     });
   }
+  
 
   onKeyDown(event: KeyboardEvent) {
     if (event.key === ' ') {

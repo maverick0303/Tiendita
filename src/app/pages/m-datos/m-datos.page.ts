@@ -1,7 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Camera, CameraResultType } from '@capacitor/camera';
-  import { BdserviceService } from 'src/app/services/bd.service';
+import { BdserviceService } from 'src/app/services/bd.service';
+import { Usuario } from 'src/app/services/usuario';
 
 
 @Component({
@@ -10,6 +11,7 @@ import { Camera, CameraResultType } from '@capacitor/camera';
   styleUrls: ['./m-datos.page.scss'],
 })
 export class MDatosPage implements OnInit {
+  idUsuario = "";
   image: any;
   nombreEnviado: string = '';
   apellidoEnviado: string = '';
@@ -23,16 +25,40 @@ export class MDatosPage implements OnInit {
   formularioValido: boolean = false;
 
 
-  constructor(private route: ActivatedRoute,public bd: BdserviceService,private cdr: ChangeDetectorRef) { }
+  constructor(private router: Router,private activedRouter: ActivatedRoute,public bd: BdserviceService,private cdr: ChangeDetectorRef) { 
+  this.activedRouter.queryParams.subscribe(res => {
+    if (this.router.getCurrentNavigation()?.extras.state) {
+      this.idUsuario = this.router.getCurrentNavigation()?.extras?.state?.['idUsuario']
+      this.nombreEnviado = this.router.getCurrentNavigation()?.extras?.state?.['nombreEnviado']
+      this.apellidoEnviado = this.router.getCurrentNavigation()?.extras?.state?.['apellidoEnviado']
+      this.emailEnviado = this.router.getCurrentNavigation()?.extras?.state?.['emailEnviado']
+      this.rutEnviado = this.router.getCurrentNavigation()?.extras?.state?.['rutEnviado']
+
+    }
+  })
+}
+  
   ngOnInit() {
-    // Access the state property directly
-    this.route.paramMap.subscribe(params => {
-      const state = window.history.state;
-      this.nombreEnviado = state.nombreEnviado;
-      this.apellidoEnviado = state.apellidoEnviado;
-      this.rutEnviado = state.rutEnviado;
-      this.emailEnviado = state.emailEnviado;
+    this.bd.getUsuarioAutenticadoDesdeBD().then(usuario => {
+      if (usuario) {
+        this.nombreEnviado = usuario.nombreU;
+        this.apellidoEnviado = usuario.apellidoU;
+        this.emailEnviado = usuario.correoU;
+        this.rutEnviado = usuario.rutU;
+      }
     });
+  }
+
+  editar(){
+    this.bd.actualizarUsuario(
+
+      this.idUsuario,
+      this.nombreEnviado,
+      this.apellidoEnviado,
+      this.emailEnviado,
+      this.rutEnviado
+    );
+    this.bd.presentAlert("Usuario actualizado con exito")
   }
 
   onKeyDown(event: KeyboardEvent) {
