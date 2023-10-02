@@ -13,7 +13,7 @@ import { Usuario } from 'src/app/services/usuario';
 export class RegistroPage implements OnInit {
 
 
-  usuarios: Usuario[] = [];
+  usuarios: any;
 
   nombreUValue: string = '';
   apellidoUValue: string = '';
@@ -53,12 +53,14 @@ export class RegistroPage implements OnInit {
       if (res) {
         this.bd.fetchPregunta().subscribe(datos => {
           this.arregloPreguntas = datos;
-        })
+        });
+        this.bd.fetchUsuario().subscribe(data => {
+          this.usuarios = data; // Actualizo la lista de usuarios
+        });
       }
-    })
-    this.bd.fetchUsuario().subscribe(usuarios => {
-      this.usuarios = usuarios; // Actualizo la lista de usuarios
     });
+
+
 
   }
 
@@ -215,6 +217,7 @@ export class RegistroPage implements OnInit {
   }
 
   insertar() {
+    this.bd.presentAlert("1");
     this.bd.insertarUsuario(
       this.nombreUValue,
       this.apellidoUValue,

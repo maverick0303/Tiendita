@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./lista-usuario.page.scss'],
 })
 export class ListaUsuarioPage implements OnInit {
-  usuarios: Usuario[] = [];
+  usuarios: any;
   rol = 1;
   constructor(private activeRoute: ActivatedRoute, private router: Router, private bd: BdserviceService) { }
 
@@ -23,8 +23,8 @@ export class ListaUsuarioPage implements OnInit {
     });
     //lista de usuarios
 
-    this.bd.fetchUsuario().subscribe(usuarios => {
-      this.usuarios = usuarios;
+    this.bd.fetchUsuario().subscribe(data => {
+      this.usuarios = data;
     });
 
     // Obtener el usuario autenticado desde el almacenamiento local
