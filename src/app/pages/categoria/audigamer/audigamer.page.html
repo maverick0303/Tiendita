@@ -14,7 +14,7 @@
         <ion-card-header>
           <ion-card-title class="ion-title">{{ producto.nombreProducto }}</ion-card-title>
           <ion-card-content>
-            <p>${{ producto.precio }}</p>
+            <td>${{ producto.precio | currency:'CL':true:'4.0-0' }}</td>
           </ion-card-content>
         </ion-card-header>
       </ion-card>
