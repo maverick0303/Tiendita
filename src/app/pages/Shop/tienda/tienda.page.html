@@ -32,6 +32,7 @@
             <ion-button class="center-buttons" [routerLink]="['/ag3', producto.idProducto]">Ver detalles</ion-button>
             <ion-button class="center-buttons" *ngIf="rol == 2" (click)="modificar(producto)">Modificar</ion-button>
             <ion-button class="borrar" *ngIf="rol == 2" (click)="eliminar(producto)" >Eliminar</ion-button>
+            <ion-button (click)="agregarAlCarrito(producto)">Agregar al carrito</ion-button>
           </ion-card-content>
         </ion-card-header>
       </ion-card>      

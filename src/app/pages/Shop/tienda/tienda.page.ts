@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
 import { NavigationExtras, Router } from '@angular/router';
-
+import { CarritoService } from 'src/app/services/carrito.service';
 
 @Component({
   selector: 'app-tienda',
@@ -26,7 +26,7 @@ export class TiendaPage implements OnInit {
     }
   ]
 
-  constructor(private activeRoute: ActivatedRoute, private router: Router, private bd: BdserviceService,) {
+  constructor(private activeRoute: ActivatedRoute, private router: Router, private bd: BdserviceService,private carritoService: CarritoService) {
 
   }
 
@@ -72,7 +72,11 @@ export class TiendaPage implements OnInit {
     };
     this.router.navigate(['/editar-p-admin'], navigationExtras);
   }
-
+  agregarAlCarrito(producto: any) {
+    this.carritoService.agregarProducto(producto);
+    // Puedes mostrar una notificación o mensaje aquí si lo deseas
+    this.bd.presentAlert("Producto agregado al carrito");
+  }
 
 }
 
