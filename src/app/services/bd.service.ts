@@ -276,14 +276,17 @@ export class BdserviceService {
       this.buscarUsuario();
     })
   }
-  actualizarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any, respuestaU: any, nombrePregunta: any, idVenta: any, idUsuario: any) {
-    this.presentAlert("1");
-    return this.database.executeSql('UPDATE usuario set nombreU = ?, apellidoU = ? ,rutU = ? , correoU = ?,contrasenaU = ?, idRol = ?, respuestaU = ?, nombrePregunta = ?, idVenta = ? where idUsuario = ?' ,[nombreU, apellidoU, rutU, correoU,contrasenaU,idRol, respuestaU,nombrePregunta,idVenta,idUsuario ]).then(res => {
-      this.presentAlert("2");
-      this.buscarUsuario();
-      this.presentAlert("3");
-    })
-  }
+  actualizarUsuario(idUsuario: any, nombreU: any, apellidoU: any, rutU: any, correoU: any) {
+  console.log("Actualizando usuario:", idUsuario, nombreU, apellidoU, rutU, correoU);
+
+  return this.database.executeSql('UPDATE usuario SET nombreU = ?, apellidoU = ?, rutU = ?, correoU = ? WHERE idUsuario = ?', [nombreU, apellidoU, rutU, correoU, idUsuario]).then(res => {
+    console.log("Usuario actualizado:", res);
+    this.buscarUsuario();
+  });
+}
+
+  
+  
   eliminarUsuario(idUsuario: any ) {
     return this.database.executeSql('DELETE FROM usuario WHERE idUsuario = ?', [idUsuario]).then(res => {
       this.buscarUsuario();

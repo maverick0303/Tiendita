@@ -10,7 +10,7 @@ import { BdserviceService } from 'src/app/services/bd.service';
   styleUrls: ['./m-datos.page.scss'],
 })
 export class MDatosPage implements OnInit {
-  idUsuario = "";
+  
   image: any;
   nombreEnviado: string = '';
   apellidoEnviado: string = '';
@@ -21,6 +21,7 @@ export class MDatosPage implements OnInit {
   respuestaEnviada: string = '';
   nombrePreguntaEnviada: string = '';
   idVentaEnviada: string = '';
+  idUsuario = "";
   //mensaje de error:
   errors = {
     nombreEnviado: '',
@@ -32,44 +33,45 @@ export class MDatosPage implements OnInit {
   constructor(private router: Router, private activedRouter: ActivatedRoute, public bd: BdserviceService, private cdr: ChangeDetectorRef) {
     this.activedRouter.queryParams.subscribe(res => {
       if (this.router.getCurrentNavigation()?.extras.state) {
-        this.idUsuario = this.router.getCurrentNavigation()?.extras?.state?.['idUsuario']
-        this.nombreEnviado = this.router.getCurrentNavigation()?.extras?.state?.['nombreEnviado']
-        this.apellidoEnviado = this.router.getCurrentNavigation()?.extras?.state?.['apellidoEnviado']
-        this.emailEnviado = this.router.getCurrentNavigation()?.extras?.state?.['emailEnviado']
-        this.rutEnviado = this.router.getCurrentNavigation()?.extras?.state?.['rutEnviado']
-        this.contrasenaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['contrasenaEnviada']
-        this.idRolEnviado = this.router.getCurrentNavigation()?.extras?.state?.['idRolEnviado']
-        this.respuestaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['respuestaEnviada']
-        this.nombrePreguntaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['nombrePreguntaEnviada']
-        this.idVentaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['idVentaEnviada']
-
+        this.idUsuario = this.router.getCurrentNavigation()?.extras?.state?.['idUsuario']; 
+        this.nombreEnviado = this.router.getCurrentNavigation()?.extras?.state?.['nombreEnviado'];
+        this.apellidoEnviado = this.router.getCurrentNavigation()?.extras?.state?.['apellidoEnviado'];
+        this.rutEnviado = this.router.getCurrentNavigation()?.extras?.state?.['rutEnviado'];
+        this.emailEnviado = this.router.getCurrentNavigation()?.extras?.state?.['emailEnviado'];
+        this.contrasenaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['contrasenaEnviada'];
+        this.idRolEnviado = this.router.getCurrentNavigation()?.extras?.state?.['idRolEnviado'];
+        this.respuestaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['respuestaEnviada'];
+        this.nombrePreguntaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['nombrePreguntaEnviada'];
+        this.idVentaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['idVentaEnviada'];
+        
       }
     })
   }
   editar() {
+    console.log("Datos a actualizar:", this.idUsuario, this.nombreEnviado, this.apellidoEnviado, this.rutEnviado, this.emailEnviado);
+  
     this.bd.actualizarUsuario(
       this.idUsuario,
       this.nombreEnviado,
       this.apellidoEnviado,
-      this.emailEnviado,
       this.rutEnviado,
-      this.contrasenaEnviada,
-      this.idRolEnviado,
-      this.respuestaEnviada,
-      this.nombrePreguntaEnviada,
-      this.idVentaEnviada
+      this.emailEnviado
     );
-    this.bd.presentAlert("Usuario actualizado con exito")
-    this.router.navigate(['/tienda']);
+  
+    this.bd.presentAlert("Usuario actualizado con éxito")
+    this.router.navigate(['/datos-personales']);
   }
+  
 
   ngOnInit() {
     this.bd.getUsuarioAutenticadoDesdeBD().then(usuario => {
       if (usuario) {
+        this.idUsuario = usuario.idUsuario;
         this.nombreEnviado = usuario.nombreU;
         this.apellidoEnviado = usuario.apellidoU;
         this.emailEnviado = usuario.correoU;
         this.rutEnviado = usuario.rutU;
+        
       }
     });
   }

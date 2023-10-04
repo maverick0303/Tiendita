@@ -9,48 +9,58 @@ import { BdserviceService } from 'src/app/services/bd.service';
   styleUrls: ['./datos-personales.page.scss'],
 })
 export class DatosPersonalesPage implements OnInit {
-  idUsuario: string = '';
+  idEnviado: string = '';
   nombreEnviado: string = '';
   apellidoEnviado: string = '';
-  rutEnviado: string = '';
   emailEnviado: string = '';
+  rutEnviado: string = '';
   contrasenaEnviado: string = '';
   idRolEnviado: string = '';
   respuestaEnviada: string = '';
   nombrePreguntaEnviada: string = '';
   idVentaEnviada: string = '';
+  
 
   constructor(private router: Router,private bdService: BdserviceService) { }
 
   ngOnInit() {
     this.bdService.getUsuarioAutenticadoDesdeBD().then(usuario => {
       if (usuario) {
-        this.idUsuario = usuario.idUsuario;
+        this.idEnviado = usuario.idUsuario;
         this.nombreEnviado = usuario.nombreU;
         this.apellidoEnviado = usuario.apellidoU;
         this.emailEnviado = usuario.correoU;
         this.rutEnviado = usuario.rutU;
+        
       }
     });
+    
   }
-  modificar(usuario: any) {
+
+  async modificar() {
+    let usuario = {
+      idUsuario: this.idEnviado,
+      nombreU: this.nombreEnviado,
+      apellidoU: this.apellidoEnviado,
+      correoU: this.emailEnviado,
+      rutU: this.rutEnviado
+      
+    };
+  
+    await this.bdService.actualizarUsuario(usuario.idUsuario,usuario.nombreU, usuario.apellidoU, usuario.rutU, usuario.correoU);
+
     let navigationExtras: NavigationExtras = {
       state: {
-        idEnviado: usuario.idUsuario,
-        nombreEnviado: usuario.nombreEnviado,
-        apellidoEnviado: usuario.apellidoEnviado,
-        rutEnviado: usuario.rutEnviado,
-        emailEnviado: usuario.emailEnviado,
-        contrasenaEnviada: usuario.contrasenaEnviada,
-        idRolEnviado: usuario.idRolEnviado,
-        respuestaEnviada: usuario.respuestaEnviada,
-        nombrePreguntaEnviada: usuario.nombrePreguntaEnviada,
-        idVentaEnviada: usuario.idVentaEnviada
+        idEnviado: this.idEnviado,
+        nombreEnviado: this.nombreEnviado,
+        apellidoEnviado: this.apellidoEnviado,
+        rutEnviado: this.rutEnviado,
+        emailEnviado: this.emailEnviado,
       }
     };
+
     this.router.navigate(['/m-datos'], navigationExtras);
   }
-  
 
   onKeyDown(event: KeyboardEvent) {
     if (event.key === ' ') {
