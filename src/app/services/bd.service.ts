@@ -111,6 +111,16 @@ export class BdserviceService {
   fecthMostrarProducto(): Observable<Producto[]> {
     return this.listaMostrarProducto.asObservable();
   }
+  //carrito:
+  insertarDetalle(nombreProducto: string, cantidadProducto: number, subtotalD: number) {
+    return this.database.executeSql('INSERT INTO detalle (nombreProducto, cantidadProducto, subtotalD) VALUES (?, ?, ?)', [nombreProducto, cantidadProducto, subtotalD])
+      .then(res => {
+        console.log('Producto insertado en detalle: ', nombreProducto);
+      })
+      .catch(error => {
+        console.error('Error al insertar producto en detalle: ', error);
+      });
+  }
 
 
   buscarUsuario() {
@@ -133,7 +143,7 @@ export class BdserviceService {
             respuestaU: res.rows.item(i).respuestaU,
             nombrePregunta: res.rows.item(i).nombrePregunta,
             idVenta: res.rows.item(i).idVenta
-            
+
           })
         }
       }
@@ -168,7 +178,7 @@ export class BdserviceService {
       this.presentAlert("Error en mostrar productos por categoría: " + e);
     })
   }
-  
+
 
   buscarPregunta() {
     return this.database.executeSql('SELECT * FROM pregunta', []).then(res => {
@@ -271,23 +281,23 @@ export class BdserviceService {
 
   //FUNCIONES DE USUARIOS
 
-  insertarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any,  respuestaU: any,nombrePregunta: any,  idVenta: any ) {
-    return this.database.executeSql('INSERT INTO usuario(nombreU,apellidoU ,rutU , correoU ,contrasenaU, idRol, respuestaU, nombrePregunta, idVenta ) VALUES (?,?,?,?,?,?,?,?,?)', [nombreU, apellidoU, rutU, correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta]).then(res => {
+  insertarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any, respuestaU: any, nombrePregunta: any, idVenta: any) {
+    return this.database.executeSql('INSERT INTO usuario(nombreU,apellidoU ,rutU , correoU ,contrasenaU, idRol, respuestaU, nombrePregunta, idVenta ) VALUES (?,?,?,?,?,?,?,?,?)', [nombreU, apellidoU, rutU, correoU, contrasenaU, idRol, respuestaU, nombrePregunta, idVenta]).then(res => {
       this.buscarUsuario();
     })
   }
   actualizarUsuario(idUsuario: any, nombreU: any, apellidoU: any, rutU: any, correoU: any) {
-  console.log("Actualizando usuario:", idUsuario, nombreU, apellidoU, rutU, correoU);
+    console.log("Actualizando usuario:", idUsuario, nombreU, apellidoU, rutU, correoU);
 
-  return this.database.executeSql('UPDATE usuario SET nombreU = ?, apellidoU = ?, rutU = ?, correoU = ? WHERE idUsuario = ?', [nombreU, apellidoU, rutU, correoU, idUsuario]).then(res => {
-    console.log("Usuario actualizado:", res);
-    this.buscarUsuario();
-  });
-}
+    return this.database.executeSql('UPDATE usuario SET nombreU = ?, apellidoU = ?, rutU = ?, correoU = ? WHERE idUsuario = ?', [nombreU, apellidoU, rutU, correoU, idUsuario]).then(res => {
+      console.log("Usuario actualizado:", res);
+      this.buscarUsuario();
+    });
+  }
 
-  
-  
-  eliminarUsuario(idUsuario: any ) {
+
+
+  eliminarUsuario(idUsuario: any) {
     return this.database.executeSql('DELETE FROM usuario WHERE idUsuario = ?', [idUsuario]).then(res => {
       this.buscarUsuario();
     })
@@ -299,11 +309,11 @@ export class BdserviceService {
       this.buscarProducto();
     });
   }
-  
+
 
   //ACTUALIZAR TABLAS
-  actualizarProducto(idProducto: any, nombreProducto: any, descripcion: any, precio: any, stock: any, foto: any,idCategoria:any) {
-    return this.database.executeSql('UPDATE producto SET nombreProducto = ?, descripcion = ?, precio = ?, stock = ?, foto = ?, nombreCategoria = ?  WHERE idProducto = ?', [nombreProducto, descripcion, precio, stock, foto,idCategoria, idProducto]).then(res => {
+  actualizarProducto(idProducto: any, nombreProducto: any, descripcion: any, precio: any, stock: any, foto: any, idCategoria: any) {
+    return this.database.executeSql('UPDATE producto SET nombreProducto = ?, descripcion = ?, precio = ?, stock = ?, foto = ?, nombreCategoria = ?  WHERE idProducto = ?', [nombreProducto, descripcion, precio, stock, foto, idCategoria, idProducto]).then(res => {
       this.buscarProducto();
     })
   }
@@ -412,7 +422,7 @@ export class BdserviceService {
     });
     await alert.present();
   }
-  
+
 
   async mostrarErrorAlert(mensaje: string) {
     const alert = await this.alertController.create({
@@ -430,7 +440,7 @@ export class BdserviceService {
 
   async getUsuarioAutenticadoDesdeBD(): Promise<Usuario | null> {
     const usuarioRegistrado = await this.getUsuarioAutenticado();
-    
+
     if (usuarioRegistrado) {
       return this.database.executeSql('SELECT * FROM usuario WHERE idUsuario = ?', [usuarioRegistrado.idUsuario]).then(res => {
         if (res.rows.length > 0) {
@@ -454,21 +464,21 @@ export class BdserviceService {
       return null;
     }
   }
-  
-  
+
+
 
   async iniciarSesion(correo: string, contrasena: string): Promise<boolean> {
     const usuario = await this.buscarUsuarioPorCorreoYContrasena(correo, contrasena);
-  
+
     if (usuario) {
       await this.storage.set('usuarioRegistrado', {
         idUsuario: usuario.idUsuario,
         nombreU: usuario.nombreU,
         idRol: usuario.idRol,
       });
-  
+
       this.isDBReady.next(true);
-  
+
       return true; // Inicio de sesión exitoso
     } else {
       return false; // Credenciales inválidas

@@ -20,6 +20,9 @@
     </ion-card-content>
   </ion-card>
 
+  <!-- Verificar si el carrito está vacío y mostrar mensaje de advertencia -->
+  <ion-toast *ngIf="productosEnCarrito.length === 0" color="warning" message="El carrito está vacío. Agregue productos antes de finalizar la compra." duration="3000"></ion-toast>
+
   <!--ESTO ES DE LA COMPRA FINAL-->
   <div class="card-container">
     <ion-card class="custom-card">
@@ -28,7 +31,7 @@
         <p class="subti" style="font-size: 30px;">$ {{ calcularTotal() }}</p>
         <!--BOTONES-->
         <ion-button color="danger" (click)="vaciarCarrito()"><ion-icon name="trash-bin-outline"></ion-icon></ion-button>
-        <ion-button [routerLink]="['/carrito']">Finalizar compra</ion-button>
+        <ion-button (click)="finalizarCompra()">Finalizar compra</ion-button>
       </ion-card-content>
     </ion-card>
   </div>
