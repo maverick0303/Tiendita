@@ -10,7 +10,7 @@ import { CarritoService } from 'src/app/services/carrito.service';
   styleUrls: ['./tienda.page.scss'],
 })
 export class TiendaPage implements OnInit {
-  rol: number = 0;
+  rol: number;
 
   //
   //ARREGLO DE LOS PRODUCTOS
@@ -27,13 +27,11 @@ export class TiendaPage implements OnInit {
   ]
 
   constructor(private activeRoute: ActivatedRoute, private router: Router, private bd: BdserviceService,private carritoService: CarritoService) {
-
+  this.rol = parseInt(localStorage.getItem('idRol')!);
   }
 
   ngOnInit() {
-    this.activeRoute.queryParams.subscribe((param) => {
-      this.rol = this.router.getCurrentNavigation()?.extras?.state?.['roles'];
-    });
+
     //subscribo al observable de la BD
     this.bd.dbState().subscribe(res => {
       if (res) {
@@ -42,16 +40,7 @@ export class TiendaPage implements OnInit {
         })
       }
     })
-    this.activeRoute.queryParams.subscribe((param) => {
-      this.rol = this.router.getCurrentNavigation()?.extras?.state?.['roles'];
-    });
-
-    // Obtener el usuario autenticado desde el almacenamiento local
-    this.bd.getUsuarioAutenticado().then(usuario => {
-      if (usuario) {
-        this.rol = parseInt(usuario.idRol, 10); // Convertir a número entero
-      }
-    });
+    
   }
   eliminar(producto: any) {
     this.bd.eliminarProducto(producto.idProducto);

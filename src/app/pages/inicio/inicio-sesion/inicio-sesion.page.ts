@@ -7,6 +7,7 @@ import { QueryList } from '@angular/core';
 import { Animation } from '@ionic/angular';
 import { IonCard } from '@ionic/angular';
 import { BdserviceService } from 'src/app/services/bd.service';
+import { Usuario } from 'src/app/services/usuario';
 
 
 @Component({
@@ -16,8 +17,8 @@ import { BdserviceService } from 'src/app/services/bd.service';
 })
 export class InicioSesionPage {
   rol: number = 0;
-  gmail: string = '';
-  password: string = '';
+  correo: string = '';
+  contrasena: string = '';
   hide = true;
   email = new FormControl('', [Validators.required, Validators.email]);
 
@@ -70,38 +71,36 @@ export class InicioSesionPage {
     await toast.present();
   }
 
-  async iniciarSesion() {
-    const correo = this.gmail; 
-    const contrasena = this.password; 
-  
-    const inicioSesionExitoso = await this.bdService.iniciarSesion(correo, contrasena);
-  
-    if (inicioSesionExitoso) {
-      console.log('Inicio de sesión exitoso');
-  
-      const toast = await this.toastController.create({
-        message: 'Inicio de sesión exitoso',
-        duration: 2000, 
-        position: 'middle'
-      });
-  
-      await toast.present();
-  
-      this.irADatosPersonales(correo);
+
+  async iniciarSesion(correo: string, contrasena: string): Promise<void> {
+    const usuario = await this.bdService.buscarUsuarioPorCorreoYContrasena(correo, contrasena);
+
+    if (usuario) {
+      localStorage.setItem('idUsuario', usuario.idUsuario.toString());
+      localStorage.setItem('nombreU', usuario.nombreU);
+      localStorage.setItem('idRol', usuario.idRol.toString());
+
+      this.bdService.isDBReady.next(true);
+
+      this.mostrarMensaje('Inicio de sesión exitoso');
     } else {
-      console.log('Credenciales incorrectas');
-  
-      const toast = await this.toastController.create({
-        message: 'Credenciales incorrectas',
-        duration: 2000, 
-        position: 'middle'
-      });
-  
-      await toast.present();
+      
+      this.mostrarMensaje('Credenciales inválidas');
     }
+    this.router.navigate(['/tienda'])
   }
-  
-  
+
+  async mostrarMensaje(mensaje: string): Promise<void> {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000, // Duración en milisegundos
+      position: 'top' // Posición en la pantalla
+    });
+    await toast.present();
+  }
+
+
+
   irADatosPersonales(correo: string) {
     const navigationExtras: NavigationExtras = {
       state: {

@@ -80,7 +80,7 @@ export class BdserviceService {
 
 
   //variable para manipulación del estatus de la BD
-  private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   //CONSTRUCTOR
   constructor(private alertController: AlertController, private sqlite: SQLite, private platform: Platform, private storage: Storage) {
@@ -465,25 +465,6 @@ export class BdserviceService {
     }
   }
 
-
-
-  async iniciarSesion(correo: string, contrasena: string): Promise<boolean> {
-    const usuario = await this.buscarUsuarioPorCorreoYContrasena(correo, contrasena);
-
-    if (usuario) {
-      await this.storage.set('usuarioRegistrado', {
-        idUsuario: usuario.idUsuario,
-        nombreU: usuario.nombreU,
-        idRol: usuario.idRol,
-      });
-
-      this.isDBReady.next(true);
-
-      return true; // Inicio de sesión exitoso
-    } else {
-      return false; // Credenciales inválidas
-    }
-  }
 
   async buscarUsuarioPorCorreoYContrasena(correo: string, contrasena: string): Promise<Usuario | null> {
     return this.database.executeSql('SELECT * FROM usuario WHERE correoU = ? AND contrasenaU = ?', [correo, contrasena]).then(res => {
