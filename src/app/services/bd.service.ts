@@ -28,9 +28,9 @@ export class BdserviceService {
 
   tablaProducto: string = "CREATE TABLE IF NOT EXISTS producto (idProducto integer primary key autoincrement, nombreProducto VARCHAR(25) not null, descripcion VARCHAR(100) not null, precio integer not null, stock integer not null, nombreCategoria varchar(50) not null, foto TEXT not null, FOREIGN KEY (nombreCategoria) REFERENCES categoria(idCategoria));";
 
-  tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle (idDetalle integer primary key autoincrement, cantidadProducto integer not null, subtotalD integer not null,nombreProducto not null, FOREIGN KEY (nombreProducto) REFERENCES producto(idProducto));";
+  tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle (idDetalle integer primary key autoincrement, cantidadProducto integer not null, subtotalD integer not null,idProducto integer not null,idVenta integer not null,  FOREIGN KEY (idProducto) REFERENCES producto(idProducto), FOREIGN KEY (idVenta) REFERENCES venta(idVenta));";
 
-  tablaVenta: string = "CREATE TABLE IF NOT EXISTS venta (idVenta integer primary key autoincrement, totalV integer not null, carritoV VARCHAR(25) not null, fechaV VARCHAR(25) not null , idDetalle not null, FOREIGN KEY (idDetalle) REFERENCES detalle(idDetalle));";
+  tablaVenta: string = "CREATE TABLE IF NOT EXISTS venta (idVenta integer primary key autoincrement, totalV integer not null, carritoV VARCHAR(25) not null, fechaV VARCHAR(25) not null , idUsuario not null, FOREIGN KEY (idUsuario) REFERENCES usuario (idUsuario));";
 
   tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (idUsuario integer primary key autoincrement, nombreU VARCHAR(25) not null, apellidoU VARCHAR(25) not null, rutU VARCHAR(13) not null, correoU VARCHAR(25) not null, contrasenaU VARCHAR(15) not null, idRol not null, respuestaU VARCHAR(15) not null, nombrePregunta not null, idVenta not null, FOREIGN KEY (idRol) REFERENCES rol(idRol), FOREIGN KEY (nombrePregunta) REFERENCES pregunta(idPregunta), FOREIGN KEY (idVenta) REFERENCES venta(idVenta));";
 
@@ -112,10 +112,10 @@ export class BdserviceService {
     return this.listaMostrarProducto.asObservable();
   }
   //carrito:
-  insertarDetalle(nombreProducto: string, cantidadProducto: number, subtotalD: number) {
-    return this.database.executeSql('INSERT INTO detalle (nombreProducto, cantidadProducto, subtotalD) VALUES (?, ?, ?)', [nombreProducto, cantidadProducto, subtotalD])
+  insertarDetalle(idProducto: number, cantidadProducto: number, subtotalD: number, idVenta: any) {
+    return this.database.executeSql('INSERT INTO detalle (idProducto, cantidadProducto, subtotalD,idVenta) VALUES (?, ?, ?,?)', [idProducto, cantidadProducto, subtotalD, idVenta])
       .then(res => {
-        console.log('Producto insertado en detalle: ', nombreProducto);
+        console.log('Producto insertado en detalle: ', idProducto);
       })
       .catch(error => {
         console.error('Error al insertar producto en detalle: ', error);
@@ -239,8 +239,8 @@ export class BdserviceService {
           //agrego los datos a mi variable
           items.push({
             idDetalle: res.rows.item(i).idDetalle,
-            cantidad: res.rows.item(i).cantidad,
-            subtotal: res.rows.item(i).subtotal,
+            cantidad: res.rows.item(i).cantidadProducto,
+            subtotal: res.rows.item(i).subtotalD,
             precio: res.rows.item(i).precio,
             stock: res.rows.item(i).stock
           })
@@ -331,7 +331,7 @@ export class BdserviceService {
     this.platform.ready().then(() => {
       //crear la BD
       this.sqlite.create({
-        name: 'bdtiendita2.db',
+        name: 'bdtiendita3.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         //guardamos la conexión en mi variable global
@@ -352,8 +352,8 @@ export class BdserviceService {
       await this.database.executeSql(this.tablaRol, []);
       await this.database.executeSql(this.tablaPregunta, []);
       await this.database.executeSql(this.tablaProducto, []);
-      await this.database.executeSql(this.tablaDetalle, []);
       await this.database.executeSql(this.tablaVenta, []);
+      await this.database.executeSql(this.tablaDetalle, []);
       await this.database.executeSql(this.tablaUsuario, []);
 
       //ejecuto los registros de usuarios

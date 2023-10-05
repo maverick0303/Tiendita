@@ -113,8 +113,9 @@ export class CarritoPage implements OnInit {
   
     for (const producto of productosEnCarrito) {
       // Inserta el producto en detalle utilizando los datos correctos.
-      this.bd.insertarDetalle(producto.nombreProducto, producto.cantidad, producto.precioTotal);
+      this.bd.insertarDetalle(producto.idProducto, producto.cantidad, producto.precioTotal,producto.idVenta);
     }
+    
   
     // Muestra un mensaje de compra finalizada.
     this.mostrarMensajeCompraFinalizada();
