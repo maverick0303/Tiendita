@@ -37,6 +37,9 @@
     <ion-card-title>TimeTech Audible</ion-card-title>
     
     <br>
+    <!-- Mostrar mensaje de error si no se encuentran productos -->
+    <div *ngIf="noProductFound()" class="no-product-message">No existe ese producto</div>
+
     <!-- PRIMER PRODUCTO -->
     <ion-row>
       <ion-card *ngFor="let producto of arregloProductosResultado">
@@ -57,3 +60,4 @@
   <br><br><br>
   <app-componente2></app-componente2>
 </ion-content>
+

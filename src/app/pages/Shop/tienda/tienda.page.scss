@@ -127,3 +127,11 @@ ion-button{
   ion-toolbar {
     --background: #79F2E6;
   }
+
+  .no-product-message {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+    margin-top: 2px;
+    font-size: 35px;
+  }

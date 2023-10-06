@@ -15,11 +15,7 @@ export class TiendaPage implements OnInit {
   searchTerm: string = '';
   arregloProductosResultado: Producto[] = []; // Nueva propiedad
 
-
-
-
-  //
-  //ARREGLO DE LOS PRODUCTOS
+  // ARREGLO DE LOS PRODUCTOS
   arregloProductos: any = [
     {
       idProducto: '',
@@ -32,13 +28,17 @@ export class TiendaPage implements OnInit {
     }
   ]
 
-  constructor(private activeRoute: ActivatedRoute, private router: Router, private bd: BdserviceService, private carritoService: CarritoService) {
+  constructor(
+    private activeRoute: ActivatedRoute,
+    private router: Router,
+    private bd: BdserviceService,
+    private carritoService: CarritoService
+  ) {
     this.rol = parseInt(localStorage.getItem('idRol')!);
   }
 
   ngOnInit() {
-
-    //subscribo al observable de la BD
+    // Subscribo al observable de la BD
     this.bd.dbState().subscribe(res => {
       if (res) {
         this.bd.fetchProducto().subscribe(datos => {
@@ -49,11 +49,12 @@ export class TiendaPage implements OnInit {
     })
     this.loadProducts();
   }
+
   eliminar(producto: any) {
     this.bd.eliminarProducto(producto.idProducto);
     this.bd.presentAlert("Producto Eliminado");
-
   }
+
   modificar(producto: any) {
     let navigationExtras: NavigationExtras = {
       state: {
@@ -68,11 +69,12 @@ export class TiendaPage implements OnInit {
     };
     this.router.navigate(['/editar-p-admin'], navigationExtras);
   }
+
   agregarAlCarrito(producto: any) {
     this.carritoService.agregarProducto(producto);
-    // Puedes mostrar una notificación o mensaje aquí si lo deseas
     this.bd.presentAlert("Producto agregado al carrito");
   }
+
   loadProducts() {
     // Llama a la función para cargar productos (deberías tener esta función en tu servicio)
     this.bd.fetchProducto().subscribe((productos) => {
@@ -96,5 +98,9 @@ export class TiendaPage implements OnInit {
       this.arregloProductosResultado = this.arregloProductos;
     }
   }
-}
 
+  // Función para verificar si no se encontraron resultados en la búsqueda
+  noProductFound(): boolean {
+    return this.searchTerm.trim() !== '' && this.arregloProductosResultado.length === 0;
+  }
+}
