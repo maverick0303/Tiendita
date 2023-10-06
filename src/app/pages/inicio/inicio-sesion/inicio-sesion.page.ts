@@ -72,23 +72,30 @@ export class InicioSesionPage {
   }
 
 
-  async iniciarSesion(correo: string, contrasena: string): Promise<void> {
-    const usuario = await this.bdService.buscarUsuarioPorCorreoYContrasena(correo, contrasena);
-
-    if (usuario) {
-      localStorage.setItem('idUsuario', usuario.idUsuario.toString());
-      localStorage.setItem('nombreU', usuario.nombreU);
-      localStorage.setItem('idRol', usuario.idRol.toString());
-
-      this.bdService.isDBReady.next(true);
-
-      this.mostrarMensaje('Inicio de sesión exitoso');
-    } else {
-      
-      this.mostrarMensaje('Credenciales inválidas');
+  async iniciarSesion(): Promise<void> {
+    if (!this.correo || !this.contrasena) {
+      this.mostrarMensaje('Por favor, ingrese correo y contraseña');
+      return;
     }
-    this.router.navigate(['/tienda'])
+  
+    const usuario = await this.bdService.buscarUsuarioPorCorreoYContrasena(this.correo, this.contrasena);
+  
+    if (!usuario) {
+      this.mostrarMensaje('Credenciales inválidas');
+      return; 
+    }
+  
+    localStorage.setItem('idUsuario', usuario.idUsuario.toString());
+    localStorage.setItem('nombreU', usuario.nombreU);
+    localStorage.setItem('idRol', usuario.idRol.toString());
+  
+    this.bdService.isDBReady.next(true);
+  
+    this.mostrarMensaje('Inicio de sesión exitoso');
+    this.router.navigate(['/tienda']);
   }
+  
+  
 
   async mostrarMensaje(mensaje: string): Promise<void> {
     const toast = await this.toastController.create({
