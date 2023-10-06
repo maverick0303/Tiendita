@@ -121,7 +121,34 @@ export class BdserviceService {
         console.error('Error al insertar producto en detalle: ', error);
       });
   }
-
+  buscarProductoPorNombre(nombre: string): Promise<Producto[]> {
+    return this.database.executeSql('SELECT * FROM producto WHERE nombreProducto LIKE ?', ['%' + nombre + '%']).then(res => {
+      // Variable para almacenar la consulta
+      let items: Producto[] = [];
+      // Validar si existen registros
+      if (res.rows.length > 0) {
+        // Procedo a recorrer y guardar
+        for (var i = 0; i < res.rows.length; i++) {
+          // Agrego los datos a mi variable
+          items.push({
+            idProducto: res.rows.item(i).idProducto,
+            nombreProducto: res.rows.item(i).nombreProducto,
+            descripcion: res.rows.item(i).descripcion,
+            precio: res.rows.item(i).precio,
+            stock: res.rows.item(i).stock,
+            foto: res.rows.item(i).foto,
+          });
+        }
+      }
+      // Actualizar mi observable
+      this.listaMostrarProducto.next(items as any);
+      return items;
+    }).catch(error => {
+      console.error('Error al buscar producto por nombre: ', error);
+      return [];
+    });
+  }
+  
 
   buscarUsuario() {
     return this.database.executeSql('SELECT * FROM usuario', []).then(res => {

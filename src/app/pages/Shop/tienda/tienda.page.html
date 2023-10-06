@@ -1,11 +1,26 @@
 <ion-header [translucent]="true">
-  <app-componente1></app-componente1>
+  <ion-toolbar>
+    <!-- LOGO DEL CARRITO -->
+    <div class="demo-section" slot="end">
+      <mat-icon [matBadge]="0" matBadgeColor="primary" [routerLink]="['/carrito']" aria-hidden="false">
+        <ion-icon style="width: 30px; height: 30px; margin-right: 80px; color: #0D0D0D;;" name="cart-outline"></ion-icon>
+      </mat-icon>
+    </div>
+  
+    <!-- MENÚ DE BÚSQUEDA -->
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #0D0D0D;;"></ion-menu-button>
+    </ion-buttons>
+  
+    <!-- EL BUSCADOR -->
+    <div class="search-container">
+      <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="searchProducts()"></ion-searchbar>
+    </div>
+  </ion-toolbar>
 </ion-header>
 
-
 <ion-content [fullscreen]="true">
-
-  <!--VISTA DEL ADMIN-->
+  <!-- Vista del ADMIN -->
   <ion-grid class="ion-grid" *ngIf="rol == 2">
     <ion-row>
       <ion-card>
@@ -17,13 +32,14 @@
       </ion-card>
     </ion-row>
   </ion-grid>
-  <!--VISTA DEL USUARIO-->
+  <!-- Vista del USUARIO -->
   <ion-grid>
     <ion-card-title>TimeTech Audible</ion-card-title>
+    
     <br>
-    <!--PRIMER PRODUCTO-->
+    <!-- PRIMER PRODUCTO -->
     <ion-row>
-      <ion-card *ngFor="let producto of arregloProductos">
+      <ion-card *ngFor="let producto of arregloProductosResultado">
         <ion-img [src]="producto.foto" alt="aqui habia una imagen"></ion-img>
         <ion-card-header>
           <ion-card-title class="ion-title">{{ producto.nombreProducto }}</ion-card-title>
@@ -38,7 +54,6 @@
       </ion-card>      
     </ion-row>
   </ion-grid>
-<br><br><br>
+  <br><br><br>
   <app-componente2></app-componente2>
-
 </ion-content>

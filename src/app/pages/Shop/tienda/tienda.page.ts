@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
 import { NavigationExtras, Router } from '@angular/router';
 import { CarritoService } from 'src/app/services/carrito.service';
+import { Producto } from 'src/app/services/producto';
 
 @Component({
   selector: 'app-tienda',
@@ -11,6 +12,11 @@ import { CarritoService } from 'src/app/services/carrito.service';
 })
 export class TiendaPage implements OnInit {
   rol: number;
+  searchTerm: string = '';
+  arregloProductosResultado: Producto[] = []; // Nueva propiedad
+
+
+
 
   //
   //ARREGLO DE LOS PRODUCTOS
@@ -26,8 +32,8 @@ export class TiendaPage implements OnInit {
     }
   ]
 
-  constructor(private activeRoute: ActivatedRoute, private router: Router, private bd: BdserviceService,private carritoService: CarritoService) {
-  this.rol = parseInt(localStorage.getItem('idRol')!);
+  constructor(private activeRoute: ActivatedRoute, private router: Router, private bd: BdserviceService, private carritoService: CarritoService) {
+    this.rol = parseInt(localStorage.getItem('idRol')!);
   }
 
   ngOnInit() {
@@ -37,10 +43,11 @@ export class TiendaPage implements OnInit {
       if (res) {
         this.bd.fetchProducto().subscribe(datos => {
           this.arregloProductos = datos;
+          this.arregloProductosResultado = datos;
         })
       }
     })
-    
+    this.loadProducts();
   }
   eliminar(producto: any) {
     this.bd.eliminarProducto(producto.idProducto);
@@ -66,7 +73,28 @@ export class TiendaPage implements OnInit {
     // Puedes mostrar una notificación o mensaje aquí si lo deseas
     this.bd.presentAlert("Producto agregado al carrito");
   }
+  loadProducts() {
+    // Llama a la función para cargar productos (deberías tener esta función en tu servicio)
+    this.bd.fetchProducto().subscribe((productos) => {
+      this.arregloProductos = productos;
+    });
+  }
 
+  searchProducts() {
+    if (this.searchTerm.trim() !== '') {
+      // Utiliza la función buscarProductoPorNombre para buscar productos
+      this.bd
+        .buscarProductoPorNombre(this.searchTerm.trim())
+        .then((productos) => {
+          this.arregloProductosResultado = productos;
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    } else {
+      // Si el término de búsqueda está vacío, muestra todos los productos
+      this.arregloProductosResultado = this.arregloProductos;
+    }
+  }
 }
-
 
