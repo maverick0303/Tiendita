@@ -8,7 +8,8 @@ export class Usuario {
     idRol = "";
     respuestaU = "";
     nombrePregunta = "";
-    idVenta = 1;
+    idVenta = "";
+    fotoU = "";
     
     
     

@@ -32,7 +32,7 @@ export class BdserviceService {
 
   tablaVenta: string = "CREATE TABLE IF NOT EXISTS venta (idVenta integer primary key autoincrement, totalV integer not null, carritoV VARCHAR(25) not null, fechaV VARCHAR(25) not null , idUsuario not null, FOREIGN KEY (idUsuario) REFERENCES usuario (idUsuario));";
 
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (idUsuario integer primary key autoincrement, nombreU VARCHAR(25) not null, apellidoU VARCHAR(25) not null, rutU VARCHAR(13) not null, correoU VARCHAR(25) not null, contrasenaU VARCHAR(15) not null, idRol not null, respuestaU VARCHAR(15) not null, nombrePregunta not null, idVenta not null, FOREIGN KEY (idRol) REFERENCES rol(idRol), FOREIGN KEY (nombrePregunta) REFERENCES pregunta(idPregunta), FOREIGN KEY (idVenta) REFERENCES venta(idVenta));";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (idUsuario integer primary key autoincrement, nombreU VARCHAR(25) not null, apellidoU VARCHAR(25) not null, rutU VARCHAR(13) not null, correoU VARCHAR(25) not null, contrasenaU VARCHAR(15) not null, idRol not null, respuestaU VARCHAR(15) not null, nombrePregunta not null, idVenta not null, fotoU TEXT, FOREIGN KEY (idRol) REFERENCES rol(idRol), FOREIGN KEY (nombrePregunta) REFERENCES pregunta(idPregunta), FOREIGN KEY (idVenta) REFERENCES venta(idVenta));";
 
   //variables de insert en las tablas de registros iniciales
   registroUsuario: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta) VALUES (1,'Alfredo','Estay','211266813','alfr.estay@duocuc.cl','Alfredo123@',1,'respuesta1',3,3);";
@@ -142,7 +142,8 @@ export class BdserviceService {
             idRol: res.rows.item(i).idRol,
             respuestaU: res.rows.item(i).respuestaU,
             nombrePregunta: res.rows.item(i).nombrePregunta,
-            idVenta: res.rows.item(i).idVenta
+            idVenta: res.rows.item(i).idVenta,
+            fotoU: res.rows.item(i).fotoU
 
           })
         }
@@ -281,21 +282,19 @@ export class BdserviceService {
 
   //FUNCIONES DE USUARIOS
 
-  insertarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any, respuestaU: any, nombrePregunta: any, idVenta: any) {
-    return this.database.executeSql('INSERT INTO usuario(nombreU,apellidoU ,rutU , correoU ,contrasenaU, idRol, respuestaU, nombrePregunta, idVenta ) VALUES (?,?,?,?,?,?,?,?,?)', [nombreU, apellidoU, rutU, correoU, contrasenaU, idRol, respuestaU, nombrePregunta, idVenta]).then(res => {
+  insertarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any, respuestaU: any, nombrePregunta: any, idVenta: any, fotoU: any) {
+    return this.database.executeSql('INSERT INTO usuario(nombreU,apellidoU ,rutU , correoU ,contrasenaU, idRol, respuestaU, nombrePregunta, idVenta, fotoU ) VALUES (?,?,?,?,?,?,?,?,?,?)', [nombreU, apellidoU, rutU, correoU, contrasenaU, idRol, respuestaU, nombrePregunta, idVenta, fotoU]).then(res => {
       this.buscarUsuario();
     })
   }
-  actualizarUsuario(idUsuario: any, nombreU: any, apellidoU: any, rutU: any, correoU: any) {
-    console.log("Actualizando usuario:", idUsuario, nombreU, apellidoU, rutU, correoU);
+  actualizarUsuario(idUsuario: any, nombreU: any, apellidoU: any, rutU: any, correoU: any, fotoU: any) {
+    console.log("Actualizando usuario:", idUsuario, nombreU, apellidoU, rutU, correoU, fotoU);
 
-    return this.database.executeSql('UPDATE usuario SET nombreU = ?, apellidoU = ?, rutU = ?, correoU = ? WHERE idUsuario = ?', [nombreU, apellidoU, rutU, correoU, idUsuario]).then(res => {
+    return this.database.executeSql('UPDATE usuario SET nombreU = ?, apellidoU = ?, rutU = ?, correoU = ?, fotoU = ? WHERE idUsuario = ?', [nombreU, apellidoU, rutU, correoU, idUsuario, fotoU]).then(res => {
       console.log("Usuario actualizado:", res);
       this.buscarUsuario();
     });
   }
-
-
 
   eliminarUsuario(idUsuario: any) {
     return this.database.executeSql('DELETE FROM usuario WHERE idUsuario = ?', [idUsuario]).then(res => {
@@ -331,7 +330,7 @@ export class BdserviceService {
     this.platform.ready().then(() => {
       //crear la BD
       this.sqlite.create({
-        name: 'bdtiendita3.db',
+        name: 'bdtiendita7.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         //guardamos la conexión en mi variable global
@@ -437,10 +436,11 @@ export class BdserviceService {
   async initStorage() {
     await this.storage.create();
   }
+  
 
   async getUsuarioAutenticadoDesdeBD(): Promise<Usuario | null> {
     const usuarioRegistrado = await this.getUsuarioAutenticado();
-
+  
     if (usuarioRegistrado) {
       return this.database.executeSql('SELECT * FROM usuario WHERE idUsuario = ?', [usuarioRegistrado.idUsuario]).then(res => {
         if (res.rows.length > 0) {
@@ -450,11 +450,13 @@ export class BdserviceService {
             apellidoU: res.rows.item(0).apellidoU,
             rutU: res.rows.item(0).rutU,
             correoU: res.rows.item(0).correoU,
-            claveU: res.rows.item(0).claveU,
+            contrasenaU: res.rows.item(0).contrasenaU,
             idRol: res.rows.item(0).idRol,
+            claveU: res.rows.item(0).claveU,
             respuestaU: res.rows.item(0).respuestaU,
             nombrePregunta: res.rows.item(0).nombrePregunta,
-            idVenta: res.rows.item(0).idVenta
+            idVenta: res.rows.item(0).idVenta,
+            fotoU: res.rows.item(0).fotoU
           } as Usuario;
         } else {
           return null;
@@ -464,6 +466,7 @@ export class BdserviceService {
       return null;
     }
   }
+  
 
 
   async buscarUsuarioPorCorreoYContrasena(correo: string, contrasena: string): Promise<Usuario | null> {

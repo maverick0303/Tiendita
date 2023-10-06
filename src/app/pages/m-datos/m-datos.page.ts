@@ -22,6 +22,7 @@ export class MDatosPage implements OnInit {
   nombrePreguntaEnviada: string = '';
   idVentaEnviada: string = '';
   idUsuario = "";
+  fotoUEnviada: string = '';
   //mensaje de error:
   errors = {
     nombreEnviado: '',
@@ -43,19 +44,21 @@ export class MDatosPage implements OnInit {
         this.respuestaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['respuestaEnviada'];
         this.nombrePreguntaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['nombrePreguntaEnviada'];
         this.idVentaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['idVentaEnviada'];
+        this.fotoUEnviada = this.router.getCurrentNavigation()?.extras?.state?.['fotoUEnviada']
         
       }
     })
   }
   editar() {
-    console.log("Datos a actualizar:", this.idUsuario, this.nombreEnviado, this.apellidoEnviado, this.rutEnviado, this.emailEnviado);
+    console.log("Datos a actualizar:", this.idUsuario, this.nombreEnviado, this.apellidoEnviado, this.rutEnviado, this.emailEnviado,  this.fotoUEnviada);
   
     this.bd.actualizarUsuario(
       this.idUsuario,
       this.nombreEnviado,
       this.apellidoEnviado,
       this.rutEnviado,
-      this.emailEnviado
+      this.emailEnviado,
+      this.fotoUEnviada
     );
   
     this.bd.presentAlert("Usuario actualizado con éxito")

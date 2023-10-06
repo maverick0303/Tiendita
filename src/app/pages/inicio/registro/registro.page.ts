@@ -25,6 +25,7 @@ export class RegistroPage implements OnInit {
   respuestaSeguridad: string = '';
   idRol = 1;
   idVenta = 1;
+  fotoU: string = '';
 
   errors = {
     nombreU: '',
@@ -226,7 +227,8 @@ export class RegistroPage implements OnInit {
       this.idRol,
       this.respuestaSeguridad,
       this.preguntaSeguridad,
-      this.idVenta
+      this.idVenta,
+      this.fotoU
     );
   }
 }

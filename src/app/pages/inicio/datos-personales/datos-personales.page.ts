@@ -19,6 +19,7 @@ export class DatosPersonalesPage implements OnInit {
   respuestaEnviada: string = '';
   nombrePreguntaEnviada: string = '';
   idVentaEnviada: string = '';
+  fotoUEnviada: string = '';
   
 
   constructor(private router: Router,private bdService: BdserviceService) { }
@@ -31,6 +32,7 @@ export class DatosPersonalesPage implements OnInit {
         this.apellidoEnviado = usuario.apellidoU;
         this.emailEnviado = usuario.correoU;
         this.rutEnviado = usuario.rutU;
+        this.fotoUEnviada = usuario.fotoU;
         
       }
     });
@@ -43,11 +45,12 @@ export class DatosPersonalesPage implements OnInit {
       nombreU: this.nombreEnviado,
       apellidoU: this.apellidoEnviado,
       correoU: this.emailEnviado,
-      rutU: this.rutEnviado
+      rutU: this.rutEnviado,
+      fotoU: this.fotoUEnviada
       
     };
   
-    await this.bdService.actualizarUsuario(usuario.idUsuario,usuario.nombreU, usuario.apellidoU, usuario.rutU, usuario.correoU);
+    await this.bdService.actualizarUsuario(usuario.idUsuario,usuario.nombreU, usuario.apellidoU, usuario.rutU, usuario.correoU, usuario.fotoU);
 
     let navigationExtras: NavigationExtras = {
       state: {
