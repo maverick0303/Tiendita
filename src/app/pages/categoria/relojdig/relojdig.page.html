@@ -1,13 +1,34 @@
 <ion-header [translucent]="true">
-  <app-componente1></app-componente1>
+  <ion-toolbar>
+    <!-- LOGO DEL CARRITO -->
+    <div class="demo-section" slot="end">
+      <mat-icon [matBadge]="0" matBadgeColor="primary" [routerLink]="['/carrito']" aria-hidden="false">
+        <ion-icon style="width: 30px; height: 30px; margin-right: 80px; color: #0D0D0D;;" name="cart-outline"></ion-icon>
+      </mat-icon>
+    </div>
+  
+    <!-- MENÚ DE BÚSQUEDA -->
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #0D0D0D;;"></ion-menu-button>
+    </ion-buttons>
+  
+    <!-- EL BUSCADOR -->
+    <div class="search-container">
+      <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="searchProducts()"></ion-searchbar>
+    </div>
+  </ion-toolbar>
 </ion-header>
+
 <!--################################################PRODUCTOS########################################-->
 <ion-content [fullscreen]="true">
+
   <ion-grid>
     <ion-card-title>Relojes Digitales</ion-card-title>
+    <!-- Mostrar mensaje de error si no se encuentran productos -->
+    <div *ngIf="noProductFound()" class="no-product-message">No existe ese producto</div>
     <!--PRIMER PRODUCTO-->
     <ion-row>
-      <ion-card *ngFor="let producto of ArregloMostrar">
+      <ion-card *ngFor="let producto of arregloProductosResultado">
         <ion-img [src]="producto.foto" alt="aqui habia una imagen"></ion-img>
         <ion-card-header>
           <ion-card-title class="ion-title">{{ producto.nombreProducto }}</ion-card-title>
