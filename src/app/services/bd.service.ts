@@ -502,13 +502,41 @@ export class BdserviceService {
         return {
           idUsuario: res.rows.item(0).idUsuario,
           nombreU: res.rows.item(0).nombreU,
-          idRol: res.rows.item(0).idRol,
-        } as Usuario;
+          apellidoU: res.rows.item(0).apellidoU,
+          correoU: res.rows.item(0).correoU,
+          rutU: res.rows.item(0).rutU,
+          idRol: res.rows.item(0).idRol
+       } as Usuario;
       } else {
         return null;
       }
     });
   }
+
+  // ...
+
+buscarUsuarioPorId(idUsuario: number) {
+  return this.database.executeSql('SELECT * FROM usuario WHERE idUsuario = ?', [idUsuario]).then(res => {
+    if (res.rows.length > 0) {
+      return {
+        idUsuario: res.rows.item(0).idUsuario,
+        nombreU: res.rows.item(0).nombreU,
+        apellidoU: res.rows.item(0).apellidoU,
+        rutU: res.rows.item(0).rutU,
+        correoU: res.rows.item(0).correoU,
+        claveU: res.rows.item(0).contrasenaU,
+        idRol: res.rows.item(0).idRol,
+        respuestaU: res.rows.item(0).respuestaU,
+        nombrePregunta: res.rows.item(0).nombrePregunta,
+        idVenta: res.rows.item(0).idVenta,
+        fotoU: res.rows.item(0).fotoU
+      } as Usuario;
+    } else {
+      return null;
+    }
+  });
+}
+
 
   async cerrarSesion() {
     // Limpiar el almacenamiento local y restablecer el estado de autenticación

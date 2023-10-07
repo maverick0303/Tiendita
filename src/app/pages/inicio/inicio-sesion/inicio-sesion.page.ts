@@ -87,6 +87,10 @@ export class InicioSesionPage {
   
     localStorage.setItem('idUsuario', usuario.idUsuario.toString());
     localStorage.setItem('nombreU', usuario.nombreU);
+    localStorage.setItem('apellidoU', usuario.apellidoU);
+    localStorage.setItem('correo', usuario.correoU);
+    localStorage.setItem('rutU', usuario.rutU);
+    localStorage.setItem('fotoU', usuario.fotoU);
     localStorage.setItem('idRol', usuario.idRol.toString());
   
     this.bdService.isDBReady.next(true);

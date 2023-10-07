@@ -14,11 +14,6 @@ export class DatosPersonalesPage implements OnInit {
   apellidoEnviado: string = '';
   emailEnviado: string = '';
   rutEnviado: string = '';
-  contrasenaEnviado: string = '';
-  idRolEnviado: string = '';
-  respuestaEnviada: string = '';
-  nombrePreguntaEnviada: string = '';
-  idVentaEnviada: string = '';
   fotoUEnviada: string = '';
 
   arregloProductosResultado: Producto[] = []; // Nueva propiedad
@@ -36,20 +31,16 @@ export class DatosPersonalesPage implements OnInit {
   ]
 
 
-  constructor(private router: Router, private bdService: BdserviceService) { }
+  constructor(private router: Router, private bdService: BdserviceService) {
+    this.idEnviado = localStorage.getItem('idUsuario')!;
+    this.nombreEnviado = localStorage.getItem('nombreU')!;
+    this.apellidoEnviado = localStorage.getItem('apellidoU')!;
+    this.rutEnviado = localStorage.getItem('rutU')!;
+    this.emailEnviado = localStorage.getItem('emailU')!;
+    this.fotoUEnviada = localStorage.getItem('fotoU')!;
+   }
 
   ngOnInit() {
-    this.bdService.getUsuarioAutenticadoDesdeBD().then(usuario => {
-      if (usuario) {
-        this.idEnviado = usuario.idUsuario;
-        this.nombreEnviado = usuario.nombreU;
-        this.apellidoEnviado = usuario.apellidoU;
-        this.emailEnviado = usuario.correoU;
-        this.rutEnviado = usuario.rutU;
-        this.fotoUEnviada = usuario.fotoU;
-
-      }
-    });
     // Subscribo al observable de la BD
     this.bdService.dbState().subscribe(res => {
       if (res) {
