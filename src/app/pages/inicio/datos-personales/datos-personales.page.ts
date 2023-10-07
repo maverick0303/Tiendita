@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
-
+import { Producto } from 'src/app/services/producto';
 
 @Component({
   selector: 'app-datos-personales',
@@ -20,9 +20,23 @@ export class DatosPersonalesPage implements OnInit {
   nombrePreguntaEnviada: string = '';
   idVentaEnviada: string = '';
   fotoUEnviada: string = '';
-  
 
-  constructor(private router: Router,private bdService: BdserviceService) { }
+  arregloProductosResultado: Producto[] = []; // Nueva propiedad
+  searchTerm: string = '';
+  arregloProductos: any = [
+    {
+      idProducto: '',
+      nombreProducto: '',
+      descripcion: '',
+      precio: '',
+      stock: '',
+      nombreCategoria: '',
+      foto: ''
+    }
+  ]
+
+
+  constructor(private router: Router, private bdService: BdserviceService) { }
 
   ngOnInit() {
     this.bdService.getUsuarioAutenticadoDesdeBD().then(usuario => {
@@ -33,10 +47,20 @@ export class DatosPersonalesPage implements OnInit {
         this.emailEnviado = usuario.correoU;
         this.rutEnviado = usuario.rutU;
         this.fotoUEnviada = usuario.fotoU;
-        
+
       }
     });
-    
+    // Subscribo al observable de la BD
+    this.bdService.dbState().subscribe(res => {
+      if (res) {
+        this.bdService.fetchProducto().subscribe(datos => {
+          this.arregloProductos = datos;
+          this.arregloProductosResultado = datos;
+        })
+      }
+    })
+    this.loadProducts();
+
   }
 
   async modificar() {
@@ -47,10 +71,10 @@ export class DatosPersonalesPage implements OnInit {
       correoU: this.emailEnviado,
       rutU: this.rutEnviado,
       fotoU: this.fotoUEnviada
-      
+
     };
-  
-    await this.bdService.actualizarUsuario(usuario.idUsuario,usuario.nombreU, usuario.apellidoU, usuario.rutU, usuario.correoU, usuario.fotoU);
+
+    await this.bdService.actualizarUsuario(usuario.idUsuario, usuario.nombreU, usuario.apellidoU, usuario.rutU, usuario.correoU, usuario.fotoU);
 
     let navigationExtras: NavigationExtras = {
       state: {
@@ -73,4 +97,33 @@ export class DatosPersonalesPage implements OnInit {
   get imageData(): any {
     return this.bdService.imageData;
   }
+  loadProducts() {
+    // Llama a la función para cargar productos (deberías tener esta función en tu servicio)
+    this.bdService.fetchProducto().subscribe((productos) => {
+      this.arregloProductos = productos;
+    });
+  }
+
+  searchProducts() {
+    if (this.searchTerm.trim() !== '') {
+      // Utiliza la función buscarProductoPorNombre para buscar productos
+      this.bdService
+        .buscarProductoPorNombre(this.searchTerm.trim())
+        .then((productos) => {
+          this.arregloProductosResultado = productos;
+
+          // Redirige al usuario a la página de la tienda con el término de búsqueda como parámetro de consulta
+          this.router.navigate(['/tienda'], {
+            queryParams: { searchTerm: this.searchTerm.trim() }
+          });
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    } else {
+      // Si el término de búsqueda está vacío, muestra todos los productos
+      this.arregloProductosResultado = this.arregloProductos;
+    }
+  }
 }
+

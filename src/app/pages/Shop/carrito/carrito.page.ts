@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { BdserviceService } from 'src/app/services/bd.service';
 import { ToastController } from '@ionic/angular';
+import { Producto } from 'src/app/services/producto';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,13 +14,37 @@ import { ToastController } from '@ionic/angular';
 export class CarritoPage implements OnInit {
   productosEnCarrito: any[] = [];
   cantidad: number = 1;
+  searchTerm: string = '';
+  arregloProductosResultado: Producto[] = []; // Nueva propiedad
+   // ARREGLO DE LOS PRODUCTOS
+   arregloProductos: any = [
+    {
+      idProducto: '',
+      nombreProducto: '',
+      descripcion: '',
+      precio: '',
+      stock: '',
+      nombreCategoria: '',
+      foto: ''
+    }
+  ]
 
-  constructor(private bd: BdserviceService, private carritoService: CarritoService, private toastController: ToastController) { }
+  constructor(private bd: BdserviceService, private carritoService: CarritoService, private toastController: ToastController,private router: Router,) { }
 
 
   ngOnInit() {
     this.productosEnCarrito = this.carritoService.getProductosEnCarrito();
     this.cantidad = this.carritoService.getCantidad();
+     // Subscribo al observable de la BD
+     this.bd.dbState().subscribe(res => {
+      if (res) {
+        this.bd.fetchProducto().subscribe(datos => {
+          this.arregloProductos = datos;
+          this.arregloProductosResultado = datos;
+        })
+      }
+    })
+    this.loadProducts();
   }
 
   calcularTotal(): number {
@@ -151,7 +177,39 @@ export class CarritoPage implements OnInit {
     });
     toast.present();
   }
+  loadProducts() {
+    // Llama a la función para cargar productos (deberías tener esta función en tu servicio)
+    this.bd.fetchProducto().subscribe((productos) => {
+      this.arregloProductos = productos;
+    });
+  }
+
+  searchProducts() {
+    if (this.searchTerm.trim() !== '') {
+      // Utiliza la función buscarProductoPorNombre para buscar productos
+      this.bd
+        .buscarProductoPorNombre(this.searchTerm.trim())
+        .then((productos) => {
+          this.arregloProductosResultado = productos;
+
+          // Redirige al usuario a la página de la tienda con el término de búsqueda como parámetro de consulta
+          this.router.navigate(['/tienda'], {
+            queryParams: { searchTerm: this.searchTerm.trim() }
+          });
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    } else {
+      // Si el término de búsqueda está vacío, muestra todos los productos
+      this.arregloProductosResultado = this.arregloProductos;
+    }
+  }
 }
+
+
+
+
 
   
 

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
 import { Usuario } from 'src/app/services/usuario';
 import { FormsModule } from '@angular/forms';
+import { Producto } from 'src/app/services/producto';
 
 
 @Component({
@@ -11,6 +12,20 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./lista-usuario.page.scss'],
 })
 export class ListaUsuarioPage implements OnInit {
+  arregloProductosResultado: Producto[] = []; // Nueva propiedad
+  searchTerm: string = '';
+  arregloProductos: any = [
+    {
+      idProducto: '',
+      nombreProducto: '',
+      descripcion: '',
+      precio: '',
+      stock: '',
+      nombreCategoria: '',
+      foto: ''
+    }
+  ]
+
   usuarios: any;
   rol = 1;
   constructor(private activeRoute: ActivatedRoute, private router: Router, private bd: BdserviceService) { }
@@ -56,9 +71,38 @@ export class ListaUsuarioPage implements OnInit {
       }
     });
   }
+  loadProducts() {
+    // Llama a la función para cargar productos (deberías tener esta función en tu servicio)
+    this.bd.fetchProducto().subscribe((productos) => {
+      this.arregloProductos = productos;
+    });
+  }
 
+  searchProducts() {
+    if (this.searchTerm.trim() !== '') {
+      // Utiliza la función buscarProductoPorNombre para buscar productos
+      this.bd
+        .buscarProductoPorNombre(this.searchTerm.trim())
+        .then((productos) => {
+          this.arregloProductosResultado = productos;
 
+          // Redirige al usuario a la página de la tienda con el término de búsqueda como parámetro de consulta
+          this.router.navigate(['/tienda'], {
+            queryParams: { searchTerm: this.searchTerm.trim() }
+          });
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    } else {
+      // Si el término de búsqueda está vacío, muestra todos los productos
+      this.arregloProductosResultado = this.arregloProductos;
+    }
+  }
 }
+
+
+
 
 
 

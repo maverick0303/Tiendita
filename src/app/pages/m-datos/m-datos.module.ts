@@ -8,6 +8,9 @@ import { MDatosPageRoutingModule } from './m-datos-routing.module';
 
 import { MDatosPage } from './m-datos.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   imports: [
@@ -15,7 +18,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
     FormsModule,
     IonicModule,
     MDatosPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,MatBadgeModule, MatButtonModule, MatIconModule,
   ],
   declarations: [MDatosPage]
 })

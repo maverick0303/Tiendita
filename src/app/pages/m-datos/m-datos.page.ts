@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { BdserviceService } from 'src/app/services/bd.service';
-
+import { Producto } from 'src/app/services/producto';
 
 @Component({
   selector: 'app-m-datos',
@@ -10,6 +10,19 @@ import { BdserviceService } from 'src/app/services/bd.service';
   styleUrls: ['./m-datos.page.scss'],
 })
 export class MDatosPage implements OnInit {
+  arregloProductosResultado: Producto[] = []; // Nueva propiedad
+  searchTerm: string = '';
+  arregloProductos: any = [
+    {
+      idProducto: '',
+      nombreProducto: '',
+      descripcion: '',
+      precio: '',
+      stock: '',
+      nombreCategoria: '',
+      foto: ''
+    }
+  ]
   
   image: any;
   nombreEnviado: string = '';
@@ -77,6 +90,16 @@ export class MDatosPage implements OnInit {
         
       }
     });
+    // Subscribo al observable de la BD
+    this.bd.dbState().subscribe(res => {
+      if (res) {
+        this.bd.fetchProducto().subscribe(datos => {
+          this.arregloProductos = datos;
+          this.arregloProductosResultado = datos;
+        })
+      }
+    })
+    this.loadProducts();
   }
 
 
@@ -153,7 +176,34 @@ export class MDatosPage implements OnInit {
     this.bd.imageData = image2.dataUrl;
     this.cdr.detectChanges();
   };
+  loadProducts() {
+    // Llama a la función para cargar productos (deberías tener esta función en tu servicio)
+    this.bd.fetchProducto().subscribe((productos) => {
+      this.arregloProductos = productos;
+    });
+  }
 
+  searchProducts() {
+    if (this.searchTerm.trim() !== '') {
+      // Utiliza la función buscarProductoPorNombre para buscar productos
+      this.bd
+        .buscarProductoPorNombre(this.searchTerm.trim())
+        .then((productos) => {
+          this.arregloProductosResultado = productos;
 
+          // Redirige al usuario a la página de la tienda con el término de búsqueda como parámetro de consulta
+          this.router.navigate(['/tienda'], {
+            queryParams: { searchTerm: this.searchTerm.trim() }
+          });
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    } else {
+      // Si el término de búsqueda está vacío, muestra todos los productos
+      this.arregloProductosResultado = this.arregloProductos;
+    }
+  }
 }
+
 

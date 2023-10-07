@@ -1,8 +1,24 @@
-<!-- carrito.page.html -->
 <ion-header [translucent]="true">
-  <app-componente1></app-componente1>
+  <ion-toolbar>
+    <!-- LOGO DEL CARRITO -->
+    <div class="demo-section" slot="end">
+      <mat-icon [matBadge]="0" matBadgeColor="primary" [routerLink]="['/carrito']" aria-hidden="false">
+        <ion-icon style="width: 30px; height: 30px; margin-right: 80px; color: #0D0D0D;;" name="cart-outline"></ion-icon>
+      </mat-icon>
+    </div>
+  
+    <!-- MENÚ DE BÚSQUEDA -->
+    <ion-buttons slot="start">
+      <ion-menu-button style="color: #0D0D0D;;"></ion-menu-button>
+    </ion-buttons>
+  
+    <!-- EL BUSCADOR -->
+    <div class="search-container">
+      <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchProducts()"></ion-searchbar>
+    </div>
+  </ion-toolbar>
 </ion-header>
-
+<!--#######################################################################################################-->
 <ion-content class="ion-padding" [fullscreen]="true">
   <!-- Mostrar los productos en el carrito -->
   <ion-card class="custom-card" *ngFor="let producto of productosEnCarrito">
