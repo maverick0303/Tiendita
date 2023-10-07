@@ -36,7 +36,7 @@ export class DatosPersonalesPage implements OnInit {
     this.nombreEnviado = localStorage.getItem('nombreU')!;
     this.apellidoEnviado = localStorage.getItem('apellidoU')!;
     this.rutEnviado = localStorage.getItem('rutU')!;
-    this.emailEnviado = localStorage.getItem('emailU')!;
+    this.emailEnviado = localStorage.getItem('correoU')!;
     this.fotoUEnviada = localStorage.getItem('fotoU')!;
    }
 
@@ -74,6 +74,7 @@ export class DatosPersonalesPage implements OnInit {
         apellidoEnviado: this.apellidoEnviado,
         rutEnviado: this.rutEnviado,
         emailEnviado: this.emailEnviado,
+        fotoUEnviada: this.fotoUEnviada
       }
     };
 

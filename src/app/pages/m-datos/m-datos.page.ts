@@ -23,7 +23,7 @@ export class MDatosPage implements OnInit {
       foto: ''
     }
   ]
-  
+
   image: any;
   nombreEnviado: string = '';
   apellidoEnviado: string = '';
@@ -45,26 +45,19 @@ export class MDatosPage implements OnInit {
 
 
   constructor(private router: Router, private activedRouter: ActivatedRoute, public bd: BdserviceService, private cdr: ChangeDetectorRef) {
-    this.activedRouter.queryParams.subscribe(res => {
-      if (this.router.getCurrentNavigation()?.extras.state) {
-        this.idUsuario = this.router.getCurrentNavigation()?.extras?.state?.['idUsuario']; 
-        this.nombreEnviado = this.router.getCurrentNavigation()?.extras?.state?.['nombreEnviado'];
-        this.apellidoEnviado = this.router.getCurrentNavigation()?.extras?.state?.['apellidoEnviado'];
-        this.rutEnviado = this.router.getCurrentNavigation()?.extras?.state?.['rutEnviado'];
-        this.emailEnviado = this.router.getCurrentNavigation()?.extras?.state?.['emailEnviado'];
-        this.contrasenaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['contrasenaEnviada'];
-        this.idRolEnviado = this.router.getCurrentNavigation()?.extras?.state?.['idRolEnviado'];
-        this.respuestaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['respuestaEnviada'];
-        this.nombrePreguntaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['nombrePreguntaEnviada'];
-        this.idVentaEnviada = this.router.getCurrentNavigation()?.extras?.state?.['idVentaEnviada'];
-        this.fotoUEnviada = this.router.getCurrentNavigation()?.extras?.state?.['fotoUEnviada']
-        
-      }
-    })
+      
+        this.idUsuario = localStorage.getItem('idUsuario')!;
+        this.nombreEnviado = localStorage.getItem('nombreU')!;
+        this.apellidoEnviado = localStorage.getItem('apellidoU')!;
+        this.rutEnviado = localStorage.getItem('rutU')!;
+        this.emailEnviado = localStorage.getItem('correoU')!;
+        this.fotoUEnviada = localStorage.getItem('fotoU')!;
+      
+   
   }
   editar() {
-    console.log("Datos a actualizar:", this.idUsuario, this.nombreEnviado, this.apellidoEnviado, this.rutEnviado, this.emailEnviado,  this.fotoUEnviada);
-  
+    console.log("Datos a actualizar:", this.idUsuario, this.nombreEnviado, this.apellidoEnviado, this.rutEnviado, this.emailEnviado, this.fotoUEnviada);
+
     this.bd.actualizarUsuario(
       this.idUsuario,
       this.nombreEnviado,
@@ -73,11 +66,11 @@ export class MDatosPage implements OnInit {
       this.emailEnviado,
       this.fotoUEnviada
     );
-  
+
     this.bd.presentAlert("Usuario actualizado con éxito")
     this.router.navigate(['/datos-personales']);
   }
-  
+
 
   ngOnInit() {
     this.bd.getUsuarioAutenticadoDesdeBD().then(usuario => {
@@ -87,7 +80,7 @@ export class MDatosPage implements OnInit {
         this.apellidoEnviado = usuario.apellidoU;
         this.emailEnviado = usuario.correoU;
         this.rutEnviado = usuario.rutU;
-        
+
       }
     });
     // Subscribo al observable de la BD

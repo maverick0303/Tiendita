@@ -7,7 +7,6 @@ import { QueryList } from '@angular/core';
 import { Animation } from '@ionic/angular';
 import { IonCard } from '@ionic/angular';
 import { BdserviceService } from 'src/app/services/bd.service';
-import { Usuario } from 'src/app/services/usuario';
 
 
 @Component({
@@ -88,7 +87,7 @@ export class InicioSesionPage {
     localStorage.setItem('idUsuario', usuario.idUsuario.toString());
     localStorage.setItem('nombreU', usuario.nombreU);
     localStorage.setItem('apellidoU', usuario.apellidoU);
-    localStorage.setItem('correo', usuario.correoU);
+    localStorage.setItem('correoU', usuario.correoU);
     localStorage.setItem('rutU', usuario.rutU);
     localStorage.setItem('fotoU', usuario.fotoU);
     localStorage.setItem('idRol', usuario.idRol.toString());
@@ -110,15 +109,4 @@ export class InicioSesionPage {
     await toast.present();
   }
 
-
-
-  irADatosPersonales(correo: string) {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        roles: this.rol,
-        correo: correo,
-      },
-    };
-    this.router.navigate(['/tienda'], navigationExtras);
-  }
 }

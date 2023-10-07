@@ -505,7 +505,8 @@ export class BdserviceService {
           apellidoU: res.rows.item(0).apellidoU,
           correoU: res.rows.item(0).correoU,
           rutU: res.rows.item(0).rutU,
-          idRol: res.rows.item(0).idRol
+          idRol: res.rows.item(0).idRol,
+          fotoU: res.rows.item(0).fotoU
        } as Usuario;
       } else {
         return null;
@@ -515,34 +516,15 @@ export class BdserviceService {
 
   // ...
 
-buscarUsuarioPorId(idUsuario: number) {
-  return this.database.executeSql('SELECT * FROM usuario WHERE idUsuario = ?', [idUsuario]).then(res => {
-    if (res.rows.length > 0) {
-      return {
-        idUsuario: res.rows.item(0).idUsuario,
-        nombreU: res.rows.item(0).nombreU,
-        apellidoU: res.rows.item(0).apellidoU,
-        rutU: res.rows.item(0).rutU,
-        correoU: res.rows.item(0).correoU,
-        claveU: res.rows.item(0).contrasenaU,
-        idRol: res.rows.item(0).idRol,
-        respuestaU: res.rows.item(0).respuestaU,
-        nombrePregunta: res.rows.item(0).nombrePregunta,
-        idVenta: res.rows.item(0).idVenta,
-        fotoU: res.rows.item(0).fotoU
-      } as Usuario;
-    } else {
-      return null;
-    }
-  });
-}
-
 
   async cerrarSesion() {
     // Limpiar el almacenamiento local y restablecer el estado de autenticación
-    await this.storage.remove('usuarioRegistrado');
+    const keysToDelete = ['idUsuario', 'nombreU', 'apellidoU', 'rutU', 'correoU', 'fotoU']; // Agrega todas las claves relacionadas con el usuario
+    keysToDelete.forEach(key => localStorage.removeItem(key));
+  
     this.isDBReady.next(false);
   }
+  
 
   async getUsuarioAutenticado(): Promise<Usuario | null> {
     return this.storage.get('usuarioRegistrado');
