@@ -21,13 +21,13 @@
 <!--################################################PRODUCTOS########################################-->
   <ion-content class="ion-padding">
     <div class="card-container">
-      <ion-card class="custom-card" *ngFor="let producto of arregloProductos">
-        <img [src]="producto.foto" alt="" class="card-image">
+      <ion-card class="custom-card">
+        <img   [src]="imagenPValue" alt="" class="card-image">
         <ion-card-content class="card-content">
-          <ion-card-title class="titulo">{{ producto.nombreProducto }}</ion-card-title>
-          <p class="subti" style="font-size: 25px;">Precio: ${{ producto.precio }}</p>
+          <ion-card-title class="titulo">{{ nombrePValue }}</ion-card-title>
+          <p class="subti" style="font-size: 25px;">Precio: ${{ precioPValue }}</p>
           <p class="subti">Descripción:</p>
-          <p>${{ producto.descripcion }}</p>
+          <p>{{ descripcionPValue }}</p>
           <ion-button [routerLink]="['/carrito']">Agregar al carrito</ion-button>
         </ion-card-content>
       </ion-card>

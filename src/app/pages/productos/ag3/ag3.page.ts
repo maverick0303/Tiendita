@@ -23,12 +23,32 @@ export class Ag3Page implements OnInit {
     }
   ]
 
-  constructor(private activeRoute: ActivatedRoute, private router: Router, private bd: BdserviceService) {
 
+  idProducto = "";
+  image2: any;
+  nombrePValue: string = '';
+  descripcionPValue: string = '';
+  precioPValue: number = 1;
+  stockPValue: number = 1;
+  imagenPValue: any;
+  categoriaPValue: string = '';
+
+  constructor(private activedRouter: ActivatedRoute, private router: Router, private bd: BdserviceService) {
+    this.activedRouter.queryParams.subscribe(res => {
+      if (this.router.getCurrentNavigation()?.extras.state) {
+        this.idProducto = this.router.getCurrentNavigation()?.extras?.state?.['idEnviado']
+        this.nombrePValue = this.router.getCurrentNavigation()?.extras?.state?.['nombreEnviado'];
+        this.descripcionPValue = this.router.getCurrentNavigation()?.extras?.state?.['descripcionEnviado'];
+        this.precioPValue = this.router.getCurrentNavigation()?.extras?.state?.['precioEnviado'];
+        this.stockPValue = this.router.getCurrentNavigation()?.extras?.state?.['stockEnviado'];
+        this.imagenPValue = this.router.getCurrentNavigation()?.extras?.state?.['fotoEnviado'];
+        this.categoriaPValue = this.router.getCurrentNavigation()?.extras?.state?.['nombreCategoriaEnviado'];
+      }
+    })
   }
 
   ngOnInit() {
-   //subscribo al observable de la BD
+    //subscribo al observable de la BD
     this.bd.dbState().subscribe(res => {
       if (res) {
         this.bd.fetchProducto().subscribe(datos => {

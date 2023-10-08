@@ -53,8 +53,8 @@ export class EditarPAdminPage implements OnInit {
         this.categoriaPValue = this.router.getCurrentNavigation()?.extras?.state?.['nombreCategoriaEnviado'];
       }
     })
-
   }
+  
   editar() {
     this.db.actualizarProducto(
       this.idProducto, // Agrega el idProducto

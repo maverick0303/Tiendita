@@ -70,6 +70,21 @@ export class TiendaPage implements OnInit {
     this.router.navigate(['/editar-p-admin'], navigationExtras);
   }
 
+  detalle(producto: any){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        idEnviado: producto.idProducto,
+        nombreEnviado: producto.nombreProducto,
+        descripcionEnviado: producto.descripcion,
+        precioEnviado: producto.precio,
+        stockEnviado: producto.stock,
+        fotoEnviado: producto.foto,
+        nombreCategoriaEnviado: producto.nombreCategoria,
+      }
+    };
+    this.router.navigate(['/ag3'], navigationExtras);
+  }
+
   agregarAlCarrito(producto: any) {
     this.carritoService.agregarProducto(producto);
     this.bd.presentAlert("Producto agregado al carrito");

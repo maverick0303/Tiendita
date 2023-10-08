@@ -68,67 +68,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/categoria/audigamer/audigamer.module').then( m => m.AudigamerPageModule)
   },
   {
-    path: 'ag3/:idProducto',
+    path: 'ag3',
     loadChildren: () => import('./pages/productos/ag3/ag3.module').then( m => m.Ag3PageModule)
-  },
-  {
-    path: 'ag4',
-    loadChildren: () => import('./pages/productos/ag4/ag4.module').then( m => m.Ag4PageModule)
-  },
-  {
-    path: 'ag5',
-    loadChildren: () => import('./pages/productos/ag5/ag5.module').then( m => m.Ag5PageModule)
-  },
-  {
-    path: 'ai1',
-    loadChildren: () => import('./pages/productos/ai1/ai1.module').then( m => m.Ai1PageModule)
-  },
-  {
-    path: 'ai4',
-    loadChildren: () => import('./pages/productos/ai4/ai4.module').then( m => m.Ai4PageModule)
-  },
-
-  {
-    path: 'ai6',
-    loadChildren: () => import('./pages/productos/ai6/ai6.module').then( m => m.Ai6PageModule)
-  },
-  {
-    path: 'rd2',
-    loadChildren: () => import('./pages/productos/rd2/rd2.module').then( m => m.Rd2PageModule)
-  },
-  {
-    path: 'rd5',
-    loadChildren: () => import('./pages/productos/rd5/rd5.module').then( m => m.Rd5PageModule)
-  },
-  {
-    path: 'rd6',
-    loadChildren: () => import('./pages/productos/rd6/rd6.module').then( m => m.Rd6PageModule)
-  },
-  {
-    path: 'r3',
-    loadChildren: () => import('./pages/productos/r3/r3.module').then( m => m.R3PageModule)
-  },
-  {
-    path: 'r4',
-    loadChildren: () => import('./pages/productos/r4/r4.module').then( m => m.R4PageModule)
-  },
-  {
-    path: 'r5',
-    loadChildren: () => import('./pages/productos/r5/r5.module').then( m => m.R5PageModule)
-  },
-  {
-    path: 'rs1',
-    loadChildren: () => import('./pages/productos/rs1/rs1.module').then( m => m.Rs1PageModule)
-  },
-
-  {
-    path: 'rs3',
-    loadChildren: () => import('./pages/productos/rs3/rs3.module').then( m => m.Rs3PageModule)
-  },
-
-  {
-    path: 'rs5',
-    loadChildren: () => import('./pages/productos/rs5/rs5.module').then( m => m.Rs5PageModule)
   },
   {
     path: 'historial',
@@ -138,10 +79,6 @@ const routes: Routes = [
     path: 'lista-usuario',
     loadChildren: () => import('./pages/admin/lista-usuario/lista-usuario.module').then( m => m.ListaUsuarioPageModule)
   },
-
-
-
-
 ];
 
 @NgModule({
