@@ -25,12 +25,14 @@
         <img   [src]="imagenPValue" alt="" class="card-image">
         <ion-card-content class="card-content">
           <ion-card-title class="titulo">{{ nombrePValue }}</ion-card-title>
-          <p class="subti" style="font-size: 25px;">Precio: ${{ precioPValue }}</p>
+          <p class="subti" style="font-size: 25px;">Precio: {{ precioPValue | currency:'$':true:'4.0-0' }}</p>
           <p class="subti">Descripción:</p>
           <p>{{ descripcionPValue }}</p>
           <ion-button [routerLink]="['/carrito']">Agregar al carrito</ion-button>
         </ion-card-content>
       </ion-card>
+      <br><br><br>
     </div>
+    <br><br><br>
     <app-componente2></app-componente2>
   </ion-content>

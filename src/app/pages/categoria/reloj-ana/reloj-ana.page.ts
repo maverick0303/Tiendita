@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
 import { Producto } from 'src/app/services/producto';
 @Component({
@@ -20,7 +21,23 @@ export class RelojAnaPage implements OnInit {
     }
   ]
 
-  constructor(private bd: BdserviceService) { }
+  constructor(private activedRouter: ActivatedRoute, private router: Router, private bd: BdserviceService) {}
+
+  ver(producto: any){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        idEnviado: producto.idProducto,
+        nombreEnviado: producto.nombreProducto,
+        descripcionEnviado: producto.descripcion,
+        precioEnviado: producto.precio,
+        stockEnviado: producto.stock,
+        fotoEnviado: producto.foto,
+        nombreCategoriaEnviado: producto.nombreCategoria,
+      }
+    };
+    this.router.navigate(['/ag3'], navigationExtras);
+  }
+
 
   ngOnInit() {
     //subscribo al observable de la BD
