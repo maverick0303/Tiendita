@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
 import { Producto } from 'src/app/services/producto';
+import { CarritoService } from 'src/app/services/carrito.service';
+
 
 @Component({
   selector: 'app-ag3',
@@ -33,7 +35,7 @@ export class Ag3Page implements OnInit {
   imagenPValue: any;
   categoriaPValue: string = '';
 
-  constructor(private activedRouter: ActivatedRoute, private router: Router, private bd: BdserviceService) {
+  constructor(private activedRouter: ActivatedRoute, private router: Router, private bd: BdserviceService, private carritoService: CarritoService) {
     this.activedRouter.queryParams.subscribe(res => {
       if (this.router.getCurrentNavigation()?.extras.state) {
         this.idProducto = this.router.getCurrentNavigation()?.extras?.state?.['idEnviado']
@@ -59,6 +61,25 @@ export class Ag3Page implements OnInit {
     })
     this.loadProducts();
   }
+
+  // En tu componente Ag3Page
+// En tu componente Ag3Page
+agregarAlCarrito() {
+  const producto = {
+    idProducto: this.idProducto,
+    nombreProducto: this.nombrePValue,
+    foto: this.imagenPValue,
+    precio: this.precioPValue,
+    stock: this.stockPValue
+    // Agrega otras propiedades según sea necesario
+  };
+
+  this.carritoService.agregarProducto(producto);
+  this.bd.presentAlert("Producto agregado al carrito");
+}
+
+
+
   loadProducts() {
     // Llama a la función para cargar productos (deberías tener esta función en tu servicio)
     this.bd.fetchProducto().subscribe((productos) => {

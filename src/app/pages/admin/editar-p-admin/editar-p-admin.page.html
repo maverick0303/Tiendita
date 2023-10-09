@@ -33,7 +33,7 @@
       <!--esto es del nombre del producto-->
       <ion-card-content>
         <ion-input label="Nombre del producto:" label-placement="floating" fill="outline" type="text" name="nombreP"
-          minlength="3" maxlength="15" required [(ngModel)]="nombrePValue" #nombrePModel="ngModel"></ion-input><br>
+          minlength="3" maxlength="150" required [(ngModel)]="nombrePValue" #nombrePModel="ngModel"></ion-input><br>
         <!--VALIDACION-->
         <div class="error-message" *ngIf="nombrePModel.invalid && (nombrePModel.dirty || nombrePModel.touched)">
           <p *ngIf="nombrePModel.errors?.['required']">El nombre del producto es obligatorio.</p>
