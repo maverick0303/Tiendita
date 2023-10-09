@@ -27,7 +27,7 @@
     <ion-card-content class="card-content">
       <ion-card-title class="titulo" style="font-size: 25px;">{{ producto.nombreProducto }}</ion-card-title>
       <br>
-      <p class="subti" style="font-size: 25px;">Precio: ${{ producto.precioTotal }}</p>
+      <p class="subti" style="font-size: 25px;">Precio: ${{ producto.precio }}</p>
       <!-- Otras propiedades del producto -->
       <p>Cantidad: {{ cantidad }}</p>
       <ion-button class="btn" shape="round" (click)="aumentarCantidad(producto)">+</ion-button>

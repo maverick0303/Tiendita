@@ -20,17 +20,21 @@
 </ion-header>
 <!--################################################PRODUCTOS########################################-->
 
-
 <ion-content class="ion-padding">
   <div class="card-container">
-    <ion-card class="custom-card">
-      <img src="assets/AUDIFONOS GAMERS/ag4.jpeg" alt="" class="card-image">
+    <!-- Utiliza *ngFor para recorrer arregloProductosResultado y mostrar cada venta -->
+    <ion-card *ngFor="let venta of arregloProductosResultado" class="custom-card">
+      <!-- Asegúrate de ajustar los siguientes campos según la estructura de tu objeto de venta -->
       <ion-card-content class="card-content">
-        <ion-card-title class="titulo">Audifonos gamers negro con naranja</ion-card-title>
-        <br>
-        <p class="subti" style="font-size: 25px;">Precio: $70.000</p>
+        <ion-card-title class="titulo">ID Venta: {{ venta.idVenta }}</ion-card-title>
+        <p class="subti">Total: ${{ venta.totalV }}</p>
+        <p class="subti">Carrito: {{ venta.carritoV }}</p>
+        <p class="subti">Fecha: {{ venta.fechaV }}</p>
+        <p class="subti">ID Usuario: {{ venta.idUsuario }}</p>
       </ion-card-content>
     </ion-card>
   </div>
   <app-componente2></app-componente2>
 </ion-content>
+
+

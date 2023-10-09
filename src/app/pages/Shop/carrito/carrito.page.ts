@@ -123,8 +123,21 @@ export class CarritoPage implements OnInit {
     // Actualiza la cantidad en el servicio
     this.carritoService.setCantidad(this.cantidad);
   }
-  finalizarCompra() {
+
+  recopilarDatosCompra(): any {
     const productosEnCarrito = this.carritoService.getProductosEnCarrito();
+    const totalVenta = this.calcularTotal();
+    const idUsuarioVenta = 1; // Cambia el ID del usuario según sea necesario
+  
+    return {
+      productosEnCarrito,
+      totalVenta,
+      idUsuarioVenta
+    };
+  }
+
+  finalizarCompra() {
+    const { productosEnCarrito, totalVenta, idUsuarioVenta } = this.recopilarDatosCompra();
   
     // Verifica si hay productos en el carrito antes de finalizar la compra
     if (productosEnCarrito.length === 0) {
@@ -133,30 +146,28 @@ export class CarritoPage implements OnInit {
       return; // Sal de la función
     }
   
-    // Implementa la lógica para insertar los datos en detalle.
-    // Por ejemplo, podrías recorrer los productos y llamar a un servicio
-    // para insertar cada producto en detalle.
+    // Inserta la venta en la base de datos
+    this.bd.insertarVenta(totalVenta, JSON.stringify(productosEnCarrito), idUsuarioVenta)
+      .then(() => {
+        // Muestra un mensaje de compra finalizada.
+        this.mostrarMensajeCompraFinalizada();
   
-    for (const producto of productosEnCarrito) {
-      // Inserta el producto en detalle utilizando los datos correctos.
-      this.bd.insertarDetalle(producto.idProducto, producto.cantidad, producto.precioTotal,producto.idVenta);
-    }
-    
+        // Luego de insertar la venta, puedes redirigir al usuario
+        // a la página de confirmación o agradecimiento.
   
-    // Muestra un mensaje de compra finalizada.
-    this.mostrarMensajeCompraFinalizada();
+        // Finalmente, puedes vaciar el carrito si es necesario.
+        this.carritoService.vaciarCarrito();
   
-    // Luego de insertar los datos en detalle, puedes redirigir al usuario
-    // a la página de confirmación o agradecimiento.
-  
-    // Finalmente, puedes vaciar el carrito si es necesario.
-    this.carritoService.vaciarCarrito();
-  
-    // Redirigir al usuario a la página de confirmación o agradecimiento
-    // utilizando el enrutador de Angular (router).
-    // Ejemplo:
-    // this.router.navigate(['/confirmacion']);
+        // Redirigir al usuario a la página de confirmación o agradecimiento
+        // utilizando el enrutador de Angular (router).
+        // Ejemplo:
+        // this.router.navigate(['/confirmacion']);
+      })
+      .catch(error => {
+        console.error('Error al insertar venta: ', error);
+      });
   }
+  
   
   async mostrarMensajeCompraFinalizada() {
     const toast = await this.toastController.create({

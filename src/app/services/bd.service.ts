@@ -112,15 +112,42 @@ export class BdserviceService {
     return this.listaMostrarProducto.asObservable();
   }
   //carrito:
-  insertarDetalle(idProducto: number, cantidadProducto: number, subtotalD: number, idVenta: any) {
-    return this.database.executeSql('INSERT INTO detalle (idProducto, cantidadProducto, subtotalD,idVenta) VALUES (?, ?, ?,?)', [idProducto, cantidadProducto, subtotalD, idVenta])
+  insertarVenta(totalV: number, carritoV: string, idUsuario: number) {
+    const fechaActual = new Date().toLocaleDateString(); // Obtiene la fecha actual en formato de cadena (por ejemplo, "10/09/2023")
+    
+    return this.database.executeSql('INSERT INTO venta (totalV, carritoV, fechaV, idUsuario) VALUES (?, ?, ?, ?)', [totalV, carritoV, fechaActual, idUsuario])
       .then(res => {
-        console.log('Producto insertado en detalle: ', idProducto);
+        console.log('Venta insertada: ', res);
       })
       .catch(error => {
-        console.error('Error al insertar producto en detalle: ', error);
+        console.error('Error al insertar venta: ', error);
       });
   }
+
+  obtenerDatosVentas(): Promise<any[]> {
+    return this.database.executeSql('SELECT * FROM venta', []).then(res => {
+      let ventas: any[] = [];
+  
+      if (res.rows.length > 0) {
+        for (let i = 0; i < res.rows.length; i++) {
+          ventas.push({
+            idVenta: res.rows.item(i).idVenta,
+            totalV: res.rows.item(i).totalV,
+            carritoV: res.rows.item(i).carritoV,
+            fechaV: res.rows.item(i).fechaV,
+            idUsuario: res.rows.item(i).idUsuario,
+          });
+        }
+      }
+  
+      return ventas;
+    }).catch(error => {
+      console.error('Error al obtener datos de ventas: ', error);
+      return [];
+    });
+  }
+  
+  
   buscarProductoPorNombre(nombre: string): Promise<Producto[]> {
     return this.database.executeSql('SELECT * FROM producto WHERE nombreProducto LIKE ?', ['%' + nombre + '%']).then(res => {
       // Variable para almacenar la consulta
