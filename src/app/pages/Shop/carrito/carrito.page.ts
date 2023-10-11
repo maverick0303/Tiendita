@@ -148,12 +148,29 @@ export class CarritoPage implements OnInit {
   
     // Inserta la venta en la base de datos
     this.bd.insertarVenta(totalVenta, JSON.stringify(productosEnCarrito), idUsuarioVenta)
-      .then(() => {
+      .then((res) => {
         // Muestra un mensaje de compra finalizada.
         this.mostrarMensajeCompraFinalizada();
   
         // Luego de insertar la venta, puedes redirigir al usuario
         // a la página de confirmación o agradecimiento.
+  
+        // Insertar detalles en la tabla "detalle"
+        res.insertId; // Este es el ID de la venta recién insertada
+  
+        for (const producto of productosEnCarrito) {
+          // Aquí debes calcular subtotalD basado en el precio del producto y la cantidad
+          const subtotalD = producto.precio * producto.cantidad;
+  
+          // Llama a la función para insertar un detalle
+          this.bd.insertarDetalle(producto.cantidad, subtotalD, producto.id, res.insertId)
+            .then(() => {
+              console.log('Detalle insertado');
+            })
+            .catch(error => {
+              console.error('Error al insertar detalle: ', error);
+            });
+        }
   
         // Finalmente, puedes vaciar el carrito si es necesario.
         this.carritoService.vaciarCarrito();
@@ -167,7 +184,7 @@ export class CarritoPage implements OnInit {
         console.error('Error al insertar venta: ', error);
       });
   }
-  
+    
   
   async mostrarMensajeCompraFinalizada() {
     const toast = await this.toastController.create({

@@ -6,35 +6,36 @@
         <ion-icon style="width: 30px; height: 30px; margin-right: 80px; color: #0D0D0D;;" name="cart-outline"></ion-icon>
       </mat-icon>
     </div>
-  
+
     <!-- MENÚ DE BÚSQUEDA -->
     <ion-buttons slot="start">
       <ion-menu-button style="color: #0D0D0D;;"></ion-menu-button>
     </ion-buttons>
-  
+
     <!-- EL BUSCADOR -->
     <div class="search-container">
       <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchProducts()"></ion-searchbar>
     </div>
   </ion-toolbar>
 </ion-header>
-<!--################################################PRODUCTOS########################################-->
+<!--################################################HISTORIAL DE VENTAS CON DETALLES########################################-->
 
 <ion-content class="ion-padding">
   <div class="card-container">
     <!-- Utiliza *ngFor para recorrer arregloProductosResultado y mostrar cada venta -->
     <ion-card *ngFor="let venta of arregloProductosResultado" class="custom-card">
-      <!-- Asegúrate de ajustar los siguientes campos según la estructura de tu objeto de venta -->
+      <!-- Muestra la foto del producto -->
+      <img [src]="venta.foto" alt="Foto del producto" class="product-image">
+      
       <ion-card-content class="card-content">
+        <!-- Ajusta los campos según tu estructura de datos -->
         <ion-card-title class="titulo">ID Venta: {{ venta.idVenta }}</ion-card-title>
+        <p class="subti">Cantidad: {{ venta.cantidadProducto }}</p>
         <p class="subti">Total: ${{ venta.totalV }}</p>
-        <p class="subti">Carrito: {{ venta.carritoV }}</p>
+        <p class="subti">Subtotal: ${{ venta.subtotalD }}</p>
         <p class="subti">Fecha: {{ venta.fechaV }}</p>
-        <p class="subti">ID Usuario: {{ venta.idUsuario }}</p>
       </ion-card-content>
     </ion-card>
   </div>
   <app-componente2></app-componente2>
 </ion-content>
-
-

@@ -114,20 +114,66 @@ export class BdserviceService {
   //carrito:
   insertarVenta(totalV: number, carritoV: string, idUsuario: number) {
     const fechaActual = new Date().toLocaleDateString(); // Obtiene la fecha actual en formato de cadena (por ejemplo, "10/09/2023")
-    
+
     return this.database.executeSql('INSERT INTO venta (totalV, carritoV, fechaV, idUsuario) VALUES (?, ?, ?, ?)', [totalV, carritoV, fechaActual, idUsuario])
       .then(res => {
         console.log('Venta insertada: ', res);
+        // Retorna el ID de la venta recién insertada
+        return res.insertId;
       })
       .catch(error => {
         console.error('Error al insertar venta: ', error);
+        throw error;
       });
   }
+
+  insertarDetalle(cantidadProducto: number, subtotalD: number, idProducto: number, idVenta: number) {
+    return this.database.executeSql('INSERT INTO detalle (cantidadProducto, subtotalD, idProducto, idVenta) VALUES (?, ?, ?, ?)', [cantidadProducto, subtotalD, idProducto, idVenta])
+      .then(res => {
+        console.log('Detalle insertado: ', res);
+      })
+      .catch(error => {
+        console.error('Error al insertar detalle: ', error);
+      });
+  }
+
+  getVentasConDetalles(): Promise<any[]> {
+    // Realiza una consulta SQL que une las tablas "venta" y "detalle" para obtener la información requerida
+    const query = 'SELECT ' +
+      'venta.idVenta, ' +
+      'venta.totalV, ' +
+      'venta.fechaV, ' +
+      'venta.idUsuario, ' +
+      'detalle.cantidadProducto, ' +
+      'detalle.subtotalD, ' +
+      'producto.foto ' + // Asegúrate de que esta sea la columna que almacena las fotos de los productos
+      'FROM venta ' +
+      'INNER JOIN detalle ON venta.idVenta = detalle.idVenta ' +
+      'INNER JOIN producto ON detalle.idProducto = producto.idProducto';
+
+    return this.database.executeSql(query, [])
+      .then(data => {
+        const ventasConDetalles = [];
+        if (data.rows.length > 0) {
+          for (let i = 0; i < data.rows.length; i++) {
+            ventasConDetalles.push(data.rows.item(i));
+          }
+        }
+        console.log('Ventas con detalles:', ventasConDetalles); // Agrega esta línea
+        return ventasConDetalles;
+      })
+      .catch(error => {
+        console.error('Error al obtener ventas con detalles: ', error);
+        throw error;
+      });
+  }
+
+
 
   obtenerDatosVentas(): Promise<any[]> {
     return this.database.executeSql('SELECT * FROM venta', []).then(res => {
       let ventas: any[] = [];
-  
+
       if (res.rows.length > 0) {
         for (let i = 0; i < res.rows.length; i++) {
           ventas.push({
@@ -139,15 +185,15 @@ export class BdserviceService {
           });
         }
       }
-  
+
       return ventas;
     }).catch(error => {
       console.error('Error al obtener datos de ventas: ', error);
       return [];
     });
   }
-  
-  
+
+
   buscarProductoPorNombre(nombre: string): Promise<Producto[]> {
     return this.database.executeSql('SELECT * FROM producto WHERE nombreProducto LIKE ?', ['%' + nombre + '%']).then(res => {
       // Variable para almacenar la consulta
@@ -175,7 +221,7 @@ export class BdserviceService {
       return [];
     });
   }
-  
+
 
   buscarUsuario() {
     return this.database.executeSql('SELECT * FROM usuario', []).then(res => {
@@ -490,11 +536,11 @@ export class BdserviceService {
   async initStorage() {
     await this.storage.create();
   }
-  
+
 
   async getUsuarioAutenticadoDesdeBD(): Promise<Usuario | null> {
     const usuarioRegistrado = await this.getUsuarioAutenticado();
-  
+
     if (usuarioRegistrado) {
       return this.database.executeSql('SELECT * FROM usuario WHERE idUsuario = ?', [usuarioRegistrado.idUsuario]).then(res => {
         if (res.rows.length > 0) {
@@ -520,7 +566,7 @@ export class BdserviceService {
       return null;
     }
   }
-  
+
 
 
   async buscarUsuarioPorCorreoYContrasena(correo: string, contrasena: string): Promise<Usuario | null> {
@@ -534,7 +580,7 @@ export class BdserviceService {
           rutU: res.rows.item(0).rutU,
           idRol: res.rows.item(0).idRol,
           fotoU: res.rows.item(0).fotoU
-       } as Usuario;
+        } as Usuario;
       } else {
         return null;
       }
@@ -548,10 +594,10 @@ export class BdserviceService {
     // Limpiar el almacenamiento local y restablecer el estado de autenticación
     const keysToDelete = ['idUsuario', 'nombreU', 'apellidoU', 'rutU', 'correoU', 'fotoU']; // Agrega todas las claves relacionadas con el usuario
     keysToDelete.forEach(key => localStorage.removeItem(key));
-  
+
     this.isDBReady.next(false);
   }
-  
+
 
   async getUsuarioAutenticado(): Promise<Usuario | null> {
     return this.storage.get('usuarioRegistrado');
