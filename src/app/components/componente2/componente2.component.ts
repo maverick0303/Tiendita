@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Usuario } from 'src/app/services/usuario';
 
 @Component({
   selector: 'app-componente2',
@@ -8,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 export class Componente2Component  implements OnInit {
   idRol: number;
 
-  constructor() {this.idRol = parseInt(localStorage.getItem('idRol')!);}
+  constructor(private router: Router) {this.idRol = parseInt(localStorage.getItem('idRol')!);}
 
   ngOnInit() {}
+  datosPersonales(){
+  this.router.navigate(['/datos-personales',{idRol: this.idRol}]);
+  }
+
+  tienda(){
+    this.router.navigate(['/tienda',{idRol: this.idRol}]);
+      }
+
+  historial(){
+    this.router.navigate(['/historial',{idRol: this.idRol}]);
+      }
+
   cerrarSesion() {
     window.location.href = 'tienda  '; 
     localStorage.clear(); // Limpiar el localStorage

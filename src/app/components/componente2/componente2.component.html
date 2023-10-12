@@ -3,21 +3,21 @@
   <ion-tabs>
     <!--PERFIL DE USUARIO-->
     <ion-tab-bar slot="bottom">
-      <p [routerLink]="['/datos-personales']">
+      <p (click)="datosPersonales()">
         <ion-tab-button>
           <ion-icon name="person-circle-outline"></ion-icon>
           Mi perfil
         </ion-tab-button>
       </p>
       <!--INICIO DE LA TIENDA-->
-      <p [routerLink]="['/tienda']">
+      <p (click)="tienda()">
         <ion-tab-button>
           <ion-icon name="home-outline"></ion-icon>
           Inicio
         </ion-tab-button>
       </p>
       <!--HISTORIAL-->
-      <p [routerLink]="['/historial']">
+      <p (click)="historial()" >
         <ion-tab-button>
           <ion-icon name="document-text-outline"></ion-icon>
           Mis compras
