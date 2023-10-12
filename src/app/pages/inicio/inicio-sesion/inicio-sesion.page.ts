@@ -15,7 +15,7 @@ import { BdserviceService } from 'src/app/services/bd.service';
   styleUrls: ['./inicio-sesion.page.scss'],
 })
 export class InicioSesionPage {
-  rol: number;
+  rol: number = 0;
   correo: string = '';
   contrasena: string = '';
   hide = true;
@@ -97,8 +97,9 @@ export class InicioSesionPage {
     localStorage.setItem('fotoU', usuario.fotoU);
     this.bdService.isDBReady.next(true);
     this.mostrarMensaje('Inicio de sesión exitoso');
-    this.router.navigate(['/tienda']);
+    this.router.navigate(['/tienda', { idRol: usuario.idRol }]);
   }
+  
 
 
 

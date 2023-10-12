@@ -42,9 +42,11 @@ export class DatosPersonalesPage implements OnInit {
     {
       this.rol = parseInt(localStorage.getItem('idRol')!);
       if (this.rol !== 1 && this.rol !== 2) {
-        this.router.navigate(['/inicio-sesion']);
+        this.router.navigate(['/tienda']);
+        setTimeout(() => {
+          alert('Debe iniciar sesión para acceder a esta página.');
+        }, 1); }
       }
-    }
   }
 
   ngOnInit() {

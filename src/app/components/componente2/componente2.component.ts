@@ -12,8 +12,9 @@ export class Componente2Component  implements OnInit {
 
   ngOnInit() {}
   cerrarSesion() {
+    window.location.href = 'tienda  '; 
     localStorage.clear(); // Limpiar el localStorage
-    window.location.href = '/'; // Redirigir a la página principal
+    
   }
   
 

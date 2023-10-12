@@ -20,9 +20,15 @@ export class HistorialPage implements OnInit {
     private router: Router,
     private bd: BdserviceService
   ) {this.rol = parseInt(localStorage.getItem('idRol')!);
-  if (this.rol !== 1 && this.rol !== 2) {
-    this.router.navigate(['/inicio-sesion']); 
-  } }
+  {
+    this.rol = parseInt(localStorage.getItem('idRol')!);
+    if (this.rol !== 1 && this.rol !== 2) {
+      this.router.navigate(['/tienda']);
+      setTimeout(() => {
+        alert('Debe iniciar sesión para acceder a esta página.');
+      }, 1); }
+    } 
+  }
 
   ngOnInit() {
     // Subscribo al observable de la BD

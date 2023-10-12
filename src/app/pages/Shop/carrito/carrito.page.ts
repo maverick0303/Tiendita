@@ -32,9 +32,15 @@ export class CarritoPage implements OnInit {
 
   constructor(private bd: BdserviceService, private carritoService: CarritoService, private toastController: ToastController,private router: Router,) 
   {this.rol = parseInt(localStorage.getItem('idRol')!);
-  if (this.rol !== 1 && this.rol !== 2) {
-    this.router.navigate(['/inicio-sesion']); 
-  } }
+  {
+    this.rol = parseInt(localStorage.getItem('idRol')!);
+    if (this.rol !== 1 && this.rol !== 2) {
+      this.router.navigate(['/tienda']);
+      setTimeout(() => {
+        alert('Debe iniciar sesión para acceder a esta página.');
+      }, 1); }
+    }
+   }
 
 
   ngOnInit() {

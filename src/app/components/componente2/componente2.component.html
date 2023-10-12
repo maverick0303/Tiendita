@@ -24,15 +24,21 @@
         </ion-tab-button>
       </p>
       <!--CERRAR LA SESION-->
-      <p (click)="cerrarSesion()">
-        <ion-tab-button >
+      <p *ngIf="idRol === 1 || idRol === 2" (click)="cerrarSesion()">
+        <ion-tab-button>
           <ion-icon name="log-out-outline"></ion-icon>
           Cerrar sesión
         </ion-tab-button>
       </p>
       <!--Inicio de sesion-->
-
+      <p *ngIf="idRol !== 1 && idRol !== 2" [routerLink]="['/inicio-sesion']">
+        <ion-tab-button>
+          <ion-icon name="log-out-outline"></ion-icon>
+          Iniciar Sesión
+        </ion-tab-button>
+      </p>
       
+
     </ion-tab-bar>
   </ion-tabs>
 </div>
