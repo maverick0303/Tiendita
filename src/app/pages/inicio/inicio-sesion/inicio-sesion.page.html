@@ -18,14 +18,13 @@
     <div class="example-container2">
       <mat-form-field>
         <mat-label>Ingresa tu contraseña:</mat-label>
-        <input matInput [type]="hide ? 'contrasena' : 'text'" placeholder="*********" name="contrasena"
-          [(ngModel)]="contrasena" >
-        <button style="color: white;" mat-icon-button matSuffix (click)="hide = !hide"
-          [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <input matInput [type]="hide ? 'password' : 'text'" placeholder="*********" name="contrasena" [(ngModel)]="contrasena" >
+        <button style="color: white;" mat-icon-button matSuffix (click)="toggleHide()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
       </mat-form-field>
     </div>
+    
     <!--BOTON-->
     <ion-button (click)="iniciarSesion()">Iniciar sesión</ion-button>
     <!--MENSAJITO PARA SABER SI TIENE O NO UNA CUENTA-->

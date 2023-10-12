@@ -55,6 +55,11 @@ export class InicioSesionPage {
       this.animation.play();
     }
   }
+  
+  toggleHide() {
+    this.hide = !this.hide;
+  }
+  
 
   getErrorMessage() {
     if (this.email.hasError('required')) {

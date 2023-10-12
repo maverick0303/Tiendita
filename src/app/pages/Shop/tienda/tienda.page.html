@@ -49,9 +49,9 @@
           <ion-card-content>
             <td>{{ producto.precio | currency:'$':true:'4.0-0' }}</td>
             <ion-button class="center-buttons" (click)="detalle(producto)">Detalles</ion-button>
-            <ion-button class="center-buttons" *ngIf="rol == 2" (click)="modificar(producto)">Modificar</ion-button>
-            <ion-button class="borrar" *ngIf="rol == 2" (click)="eliminar(producto)" >Eliminar</ion-button>
-            <ion-button *ngIf="rol == 1"  (click)="agregarAlCarrito(producto)">Agregar</ion-button>
+            <ion-button class="center-buttons" *ngIf="rol === 2" (click)="modificar(producto)">Modificar</ion-button>
+            <ion-button class="borrar" *ngIf="rol === 2" (click)="eliminar(producto)" >Eliminar</ion-button>
+            <ion-button *ngIf="rol === 1"  (click)="agregarAlCarrito(producto)">Agregar</ion-button>
           </ion-card-content>
         </ion-card-header>
       </ion-card>      
