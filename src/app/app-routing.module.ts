@@ -79,6 +79,11 @@ const routes: Routes = [
     path: 'lista-usuario',
     loadChildren: () => import('./pages/admin/lista-usuario/lista-usuario.module').then( m => m.ListaUsuarioPageModule)
   },
+  {
+    path: 'modificar-clave',
+    loadChildren: () => import('./pages/inicio/modificar-clave/modificar-clave.module').then( m => m.ModificarClavePageModule)
+  },
+
 ];
 
 @NgModule({
