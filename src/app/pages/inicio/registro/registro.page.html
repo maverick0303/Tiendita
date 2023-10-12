@@ -22,7 +22,7 @@
             <!-- VALIDACION -->
             <div class="error-message" *ngIf="errors.apellidoU">{{ errors.apellidoU }}</div>
             <!-- RUT -->
-            <ion-input label="RUT:" type="text" label-placement="floating" fill="outline" placeholder="253456782"
+            <ion-input label="RUT:(si es k presione 0 dos veces)" type="text" label-placement="floating" fill="outline" placeholder="11.111.111-1"
               name="rut" required [(ngModel)]="rutValue" (ionBlur)="verificarFormulario()" (keydown)="valiRut($event)"
               inputmode="decimal">
             </ion-input>
