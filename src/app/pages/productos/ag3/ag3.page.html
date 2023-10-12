@@ -30,7 +30,7 @@
         <p class="subti">Descripción:</p>
         <p>{{ descripcionPValue }}</p>
         <!-- En tu plantilla HTML -->
-        <ion-button (click)="agregarAlCarrito()">Agregar al carrito</ion-button>
+        <ion-button *ngIf="idRol === 1" (click)="agregarAlCarrito()">Agregar al carrito</ion-button>
       </ion-card-content>
     </ion-card>
     <br><br><br>

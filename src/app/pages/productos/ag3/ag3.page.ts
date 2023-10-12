@@ -11,6 +11,7 @@ import { CarritoService } from 'src/app/services/carrito.service';
   styleUrls: ['./ag3.page.scss'],
 })
 export class Ag3Page implements OnInit {
+  idRol: number;
   searchTerm: string = '';
   arregloProductosResultado: Producto[] = []; // Nueva propiedad
   arregloProductos: any = [
@@ -36,6 +37,7 @@ export class Ag3Page implements OnInit {
   categoriaPValue: string = '';
 
   constructor(private activedRouter: ActivatedRoute, private router: Router, private bd: BdserviceService, private carritoService: CarritoService) {
+    this.idRol = parseInt(localStorage.getItem('idRol')!);
     this.activedRouter.queryParams.subscribe(res => {
       if (this.router.getCurrentNavigation()?.extras.state) {
         this.idProducto = this.router.getCurrentNavigation()?.extras?.state?.['idEnviado']
