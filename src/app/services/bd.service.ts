@@ -522,10 +522,26 @@ export class BdserviceService {
     await alert.present();
   }
 
-
   async mostrarErrorAlert(mensaje: string) {
     const alert = await this.alertController.create({
       header: 'Error',
+      message: mensaje,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  async carritoBien(mensaje: string) {
+    const alert = await this.alertController.create({
+      header: 'Éxito',
+      message: mensaje,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  async carritoMal(mensaje: string) {
+    const alert = await this.alertController.create({
       message: mensaje,
       buttons: ['OK']
     });

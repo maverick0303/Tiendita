@@ -50,10 +50,7 @@ export class TiendaPage implements OnInit {
     this.loadProducts();
   }
 
-  eliminar(producto: any) {
-    this.bd.eliminarProducto(producto.idProducto);
-    this.bd.presentAlert("Producto Eliminado");
-  }
+  
 
   modificar(producto: any) {
     let navigationExtras: NavigationExtras = {
@@ -87,7 +84,12 @@ export class TiendaPage implements OnInit {
 
   agregarAlCarrito(producto: any) {
     this.carritoService.agregarProducto(producto);
-    this.bd.presentAlert("Producto agregado al carrito");
+    this.bd.carritoBien("Producto agregado al carrito");
+  }
+
+  eliminar(producto: any) {
+    this.bd.eliminarProducto(producto.idProducto);
+    this.bd.carritoMal("Producto Eliminado");
   }
 
   loadProducts() {
@@ -119,4 +121,6 @@ searchProducts() {
   noProductFound(): boolean {
     return this.searchTerm.trim() !== '' && this.arregloProductosResultado.length === 0;
   }
+
+  
 }
