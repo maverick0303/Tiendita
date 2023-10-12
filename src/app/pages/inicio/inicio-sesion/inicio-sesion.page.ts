@@ -15,7 +15,7 @@ import { BdserviceService } from 'src/app/services/bd.service';
   styleUrls: ['./inicio-sesion.page.scss'],
 })
 export class InicioSesionPage {
-  rol: number = 0;
+  rol: number;
   correo: string = '';
   contrasena: string = '';
   hide = true;
@@ -24,7 +24,9 @@ export class InicioSesionPage {
   @ViewChildren(IonCard, { read: ElementRef }) cardElements!: QueryList<ElementRef<HTMLIonCardElement>>;
   private animation: Animation | null = null;
 
-  constructor(private router: Router, private toastController: ToastController, private animationCtrl: AnimationController, private bdService: BdserviceService) { }
+  constructor(private router: Router, private toastController: ToastController, private animationCtrl: AnimationController, private bdService: BdserviceService) {
+    this.rol = parseInt(localStorage.getItem('idRol')!);
+  }
 
   ngAfterViewInit() {
     const card = this.animationCtrl
@@ -76,29 +78,24 @@ export class InicioSesionPage {
       this.mostrarMensaje('Por favor, ingrese correo y contraseña');
       return;
     }
-  
     const usuario = await this.bdService.buscarUsuarioPorCorreoYContrasena(this.correo, this.contrasena);
-  
     if (!usuario) {
       this.mostrarMensaje('Credenciales inválidas');
-      return; 
+      return;
     }
-  
     localStorage.setItem('idUsuario', usuario.idUsuario.toString());
     localStorage.setItem('nombreU', usuario.nombreU);
     localStorage.setItem('apellidoU', usuario.apellidoU);
     localStorage.setItem('correoU', usuario.correoU);
     localStorage.setItem('rutU', usuario.rutU);
-    localStorage.setItem('fotoU', usuario.fotoU);
     localStorage.setItem('idRol', usuario.idRol.toString());
-  
+    localStorage.setItem('fotoU', usuario.fotoU);
     this.bdService.isDBReady.next(true);
-  
     this.mostrarMensaje('Inicio de sesión exitoso');
     this.router.navigate(['/tienda']);
   }
-  
-  
+
+
 
   async mostrarMensaje(mensaje: string): Promise<void> {
     const toast = await this.toastController.create({
