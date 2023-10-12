@@ -587,17 +587,6 @@ export class BdserviceService {
     });
   }
 
-  // ...
-
-
-  async cerrarSesion() {
-    // Limpiar el almacenamiento local y restablecer el estado de autenticación
-    const keysToDelete = ['idUsuario', 'nombreU', 'apellidoU', 'rutU', 'correoU', 'fotoU']; // Agrega todas las claves relacionadas con el usuario
-    keysToDelete.forEach(key => localStorage.removeItem(key));
-
-    this.isDBReady.next(false);
-  }
-
 
   async getUsuarioAutenticado(): Promise<Usuario | null> {
     return this.storage.get('usuarioRegistrado');

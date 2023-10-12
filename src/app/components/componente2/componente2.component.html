@@ -24,12 +24,15 @@
         </ion-tab-button>
       </p>
       <!--CERRAR LA SESION-->
-      <p [routerLink]="['/home']">
+      <p (click)="cerrarSesion()">
         <ion-tab-button >
           <ion-icon name="log-out-outline"></ion-icon>
           Cerrar sesión
         </ion-tab-button>
       </p>
+      <!--Inicio de sesion-->
+
+      
     </ion-tab-bar>
   </ion-tabs>
 </div>
