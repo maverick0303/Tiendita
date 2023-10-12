@@ -93,35 +93,36 @@ export class RegistroPage implements OnInit {
 
   valiRut(event: KeyboardEvent) {
     const input = event.key;
-
+  
     // Verifica si el input es un número o una 'k' (puede ser minúscula o mayúscula)
     const regex = /^[0-9kK]$/i;
-
-    if (!regex.test(input)) {
-      event.preventDefault(); // No permite caracteres no válidos
-    } else {
-      // Comprueba si el input es un número o una 'k' para agregar punto y guión automáticamente
+  
+    if (!regex.test(input) && input !== 'Backspace') {
+      event.preventDefault(); // No permite caracteres no válidos excepto Backspace
+    } else if (input !== 'Backspace') {
       if (input.match(/[0-9kK]/i)) {
-        if (this.rutValue.length === 1) {
+        if (this.rutValue.length === 2 || this.rutValue.length === 6) {
           this.rutValue = this.rutValue + '.';
-        } else if (this.rutValue.length === 5 || this.rutValue.length === 9) {
-          this.rutValue = this.rutValue + '.';
-        } else if (this.rutValue.length === 13) {
+        } else if (this.rutValue.length === 10) {
           this.rutValue = this.rutValue + '-';
+        }
+  
+        if (this.rutValue.length > 11) {
+          event.preventDefault(); // No permite más caracteres después de la posición 11
+        }
+        if (this.rutValue.length === 12 && input === '0') {
+          this.rutValue = this.rutValue.slice(0, -1) + 'k';
+          event.preventDefault(); 
         }
       }
     }
-    this.autoCompleteRut();
   }
+  
+  
+  
+  
+  
 
-  autoCompleteRut() {
-    // Formatea el RUT con puntos y guión si es válido
-    const rutRegex = /^(\d{1,2}(\.\d{3}){2})-([\dkK])$/i;
-    if (rutRegex.test(this.rutValue)) {
-      this.rutValue = this.rutValue.replace(/(\d{1,2})(\d{3})(\d{3})-([\dkK])/i, '$1.$2.$3-$4');
-    }
-    this.verificarFormulario();
-  }
 
   valiEmail(event: KeyboardEvent) {
     const input = event.key;
