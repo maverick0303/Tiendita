@@ -9,6 +9,7 @@ import { Producto } from 'src/app/services/producto';
   styleUrls: ['./datos-personales.page.scss'],
 })
 export class DatosPersonalesPage implements OnInit {
+  rol: number;
   idEnviado: string = '';
   nombreEnviado: string = '';
   apellidoEnviado: string = '';
@@ -38,7 +39,13 @@ export class DatosPersonalesPage implements OnInit {
     this.rutEnviado = localStorage.getItem('rutU')!;
     this.emailEnviado = localStorage.getItem('correoU')!;
     this.fotoUEnviada = localStorage.getItem('fotoU')!;
-   }
+    {
+      this.rol = parseInt(localStorage.getItem('idRol')!);
+      if (this.rol !== 1 && this.rol !== 2) {
+        this.router.navigate(['/inicio-sesion']);
+      }
+    }
+  }
 
   ngOnInit() {
     // Subscribo al observable de la BD
