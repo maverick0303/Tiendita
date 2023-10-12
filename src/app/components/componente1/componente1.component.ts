@@ -7,10 +7,11 @@ import { CarritoService } from 'src/app/services/carrito.service';
   styleUrls: ['./componente1.component.scss'],
 })
 export class Componente1Component implements OnInit {
+  idRol: number;
   productosEnCarrito: any[] = [];
   cantidad: number = 0; // Inicializa la cantidad en 0
 
-  constructor(private carritoService: CarritoService) {}
+  constructor(private carritoService: CarritoService) {this.idRol = parseInt(localStorage.getItem('idRol')!);}
 
   ngOnInit() {
     this.productosEnCarrito = this.carritoService.getProductosEnCarrito();

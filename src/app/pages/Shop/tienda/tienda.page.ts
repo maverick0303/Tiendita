@@ -35,6 +35,8 @@ export class TiendaPage implements OnInit {
     private carritoService: CarritoService
   ) {
     this.rol = parseInt(localStorage.getItem('idRol')!);
+
+    
   }
 
   ngOnInit() {

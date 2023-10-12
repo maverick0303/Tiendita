@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./carrito.page.scss'],
 })
 export class CarritoPage implements OnInit {
+  rol: number;
   productosEnCarrito: any[] = [];
   cantidad: number = 1;
   searchTerm: string = '';
@@ -29,7 +30,11 @@ export class CarritoPage implements OnInit {
     }
   ]
 
-  constructor(private bd: BdserviceService, private carritoService: CarritoService, private toastController: ToastController,private router: Router,) { }
+  constructor(private bd: BdserviceService, private carritoService: CarritoService, private toastController: ToastController,private router: Router,) 
+  {this.rol = parseInt(localStorage.getItem('idRol')!);
+  if (this.rol !== 1 && this.rol !== 2) {
+    this.router.navigate(['/inicio-sesion']); 
+  } }
 
 
   ngOnInit() {
