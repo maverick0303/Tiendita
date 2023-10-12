@@ -9,6 +9,7 @@ import { Producto } from 'src/app/services/producto';
   styleUrls: ['./historial.page.scss'],
 })
 export class HistorialPage implements OnInit {
+  rol: number;
   searchTerm: string = '';
   arregloProductosResultado: any[] = [];
   ventasConDetalles: any[] = [];
@@ -18,7 +19,10 @@ export class HistorialPage implements OnInit {
     private activeRoute: ActivatedRoute,
     private router: Router,
     private bd: BdserviceService
-  ) { }
+  ) {this.rol = parseInt(localStorage.getItem('idRol')!);
+  if (this.rol !== 1 && this.rol !== 2) {
+    this.router.navigate(['/inicio-sesion']); 
+  } }
 
   ngOnInit() {
     // Subscribo al observable de la BD
