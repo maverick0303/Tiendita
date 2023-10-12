@@ -83,6 +83,11 @@ const routes: Routes = [
     path: 'modificar-clave',
     loadChildren: () => import('./pages/inicio/modificar-clave/modificar-clave.module').then( m => m.ModificarClavePageModule)
   },
+  {
+    path: 'correo',
+    loadChildren: () => import('./pages/inicio/correo/correo.module').then( m => m.CorreoPageModule)
+  },
+
 
 ];
 

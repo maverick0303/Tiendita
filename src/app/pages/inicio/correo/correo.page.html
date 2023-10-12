@@ -1,0 +1,21 @@
+<ion-content class="fondo" [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="center-row">
+      <ion-card class="input-card">
+        <ion-card-content class="input-container">
+          <ion-card-title>Recuperar clave:</ion-card-title><br>
+          <div class="input-row">
+            <ion-icon name="bulb-outline"></ion-icon>
+            <p>ingrese su correo electrónico y mas adelante se le entregaran mas instrucciones</p>
+            <!-- EMAIL -->
+            <ion-input label="Email:" type="text" label-placement="floating" fill="outline"
+              placeholder="correo@example.com" name="email">
+            </ion-input>
+            <ion-button expand="50px" style="align-content: center;align-items: center;display: flex;"
+              [routerLink]="['/recuperar-clave']">ir</ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+</ion-content>
