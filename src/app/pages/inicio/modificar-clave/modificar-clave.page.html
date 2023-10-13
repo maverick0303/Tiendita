@@ -29,18 +29,22 @@
         <ion-card-content>
           <!--NOMBRE-->
   
-          <!--clave-->
-          <ion-input label="contraseña:" type="password" label-placement="floating" required readonly
-            fill="outline" ></ion-input>
-          <br>
-          <!--repetir clave-->
-          <ion-input label="Repetir clave:" type="password" label-placement="floating" required readonly
-            fill="outline" ></ion-input>
-          <br>
-
+          <!-- CONTRASEÑA -->
+          <ion-input label="Contraseña:" type="password" label-placement="floating" fill="outline"
+          placeholder="M1@password" name="contrasena1" required [(ngModel)]="contrasena1"
+          (ionBlur)="verificarFormulario()" (keydown)="valiPassword($event)">
+        </ion-input>
+        <!-- VALIDACION CONTRASEÑA -->
+        <div class="error-message" *ngIf="errors.password">{{ errors.password }}</div>
+        <br><br>
+        <!-- CONFIRMAR CONTRASEÑA -->
+        <ion-input label="Confirmar Contraseña:" type="password" label-placement="floating" fill="outline"
+          placeholder="Confirmar contraseña" name="contrasena2" required [(ngModel)]="contrasena2"
+          (ionBlur)="verificarFormulario()">
+      </ion-input>
           <!--BOTON-->
-          <ion-button expand="50px" style="align-content: center;align-items: center;display: flex;"
-           [routerLink]="['/modificar-clave']">Guardar</ion-button>
+          <ion-button (click)="insertar()" [routerLink]="['/inicio-sesion']"
+            [disabled]="!formularioValido">Cambiar la contraseña</ion-button>
         </ion-card-content>
       </ion-card>
     </ion-row>

@@ -382,6 +382,12 @@ export class BdserviceService {
 
   //FUNCIONES DE USUARIOS
 
+  claveNueva(idUsuario: any , contrasenaU: any) {
+    return this.database.executeSql('update usuario set contrasenaU = ? where idUsuario = ?', [contrasenaU, idUsuario]).then(res => {
+      this.buscarUsuario();
+    });
+  }
+
   insertarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any, respuestaU: any, nombrePregunta: any, idVenta: any, fotoU: any) {
     return this.database.executeSql('INSERT INTO usuario(nombreU,apellidoU ,rutU , correoU ,contrasenaU, idRol, respuestaU, nombrePregunta, idVenta, fotoU ) VALUES (?,?,?,?,?,?,?,?,?,?)', [nombreU, apellidoU, rutU, correoU, contrasenaU, idRol, respuestaU, nombrePregunta, idVenta, fotoU]).then(res => {
       this.buscarUsuario();
@@ -399,7 +405,7 @@ export class BdserviceService {
   eliminarUsuario(idUsuario: any) {
     return this.database.executeSql('DELETE FROM usuario WHERE idUsuario = ?', [idUsuario]).then(res => {
       this.buscarUsuario();
-    })
+    });
   }
 
   //INSERTAR
@@ -564,27 +570,27 @@ export class BdserviceService {
   }
 
 
-  async getUsuarioAutenticadoDesdeBD(id:any): Promise<Usuario | null> {
-      return this.database.executeSql('SELECT * FROM usuario WHERE idUsuario = ?', [id]).then(res => {
-        if (res.rows.length > 0) {
-          return {
-            idUsuario: res.rows.item(0).idUsuario,
-            nombreU: res.rows.item(0).nombreU,
-            apellidoU: res.rows.item(0).apellidoU,
-            rutU: res.rows.item(0).rutU,
-            correoU: res.rows.item(0).correoU,
-            contrasenaU: res.rows.item(0).contrasenaU,
-            idRol: res.rows.item(0).idRol,
-            claveU: res.rows.item(0).claveU,
-            respuestaU: res.rows.item(0).respuestaU,
-            nombrePregunta: res.rows.item(0).nombrePregunta,
-            idVenta: res.rows.item(0).idVenta,
-            fotoU: res.rows.item(0).fotoU
-          } as Usuario;
-        } else {
-          return null;
-        }
-      });
+  async getUsuarioAutenticadoDesdeBD(id: any): Promise<Usuario | null> {
+    return this.database.executeSql('SELECT * FROM usuario WHERE idUsuario = ?', [id]).then(res => {
+      if (res.rows.length > 0) {
+        return {
+          idUsuario: res.rows.item(0).idUsuario,
+          nombreU: res.rows.item(0).nombreU,
+          apellidoU: res.rows.item(0).apellidoU,
+          rutU: res.rows.item(0).rutU,
+          correoU: res.rows.item(0).correoU,
+          contrasenaU: res.rows.item(0).contrasenaU,
+          idRol: res.rows.item(0).idRol,
+          claveU: res.rows.item(0).claveU,
+          respuestaU: res.rows.item(0).respuestaU,
+          nombrePregunta: res.rows.item(0).nombrePregunta,
+          idVenta: res.rows.item(0).idVenta,
+          fotoU: res.rows.item(0).fotoU
+        } as Usuario;
+      } else {
+        return null;
+      }
+    });
   }
 
 

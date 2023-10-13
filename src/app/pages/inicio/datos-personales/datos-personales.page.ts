@@ -101,6 +101,7 @@ export class DatosPersonalesPage implements OnInit {
 
     this.router.navigate(['/m-datos'], navigationExtras);
   }
+  
 
   onKeyDown(event: KeyboardEvent) {
     if (event.key === ' ') {
