@@ -23,6 +23,7 @@ export class MDatosPage implements OnInit {
       foto: ''
     }
   ]
+  iduser = "";
 
   image: any;
   nombreEnviado: string = '';
@@ -45,15 +46,7 @@ export class MDatosPage implements OnInit {
 
 
   constructor(private router: Router, private activedRouter: ActivatedRoute, public bd: BdserviceService, private cdr: ChangeDetectorRef) {
-      
-        this.idUsuario = localStorage.getItem('idUsuario')!;
-        this.nombreEnviado = localStorage.getItem('nombreU')!;
-        this.apellidoEnviado = localStorage.getItem('apellidoU')!;
-        this.rutEnviado = localStorage.getItem('rutU')!;
-        this.emailEnviado = localStorage.getItem('correoU')!;
-        this.fotoUEnviada = localStorage.getItem('fotoU')!;
-      
-   
+    this.iduser = localStorage.getItem('idUsuario')!;
   }
   editar() {
     console.log("Datos a actualizar:", this.idUsuario, this.nombreEnviado, this.apellidoEnviado, this.rutEnviado, this.emailEnviado, this.fotoUEnviada);
@@ -73,14 +66,14 @@ export class MDatosPage implements OnInit {
 
 
   ngOnInit() {
-    this.bd.getUsuarioAutenticadoDesdeBD().then(usuario => {
+    this.bd.getUsuarioAutenticadoDesdeBD(this.iduser).then(usuario => {
       if (usuario) {
         this.idUsuario = usuario.idUsuario;
         this.nombreEnviado = usuario.nombreU;
         this.apellidoEnviado = usuario.apellidoU;
         this.emailEnviado = usuario.correoU;
         this.rutEnviado = usuario.rutU;
-
+        this.fotoUEnviada = usuario.fotoU;
       }
     });
     // Subscribo al observable de la BD
@@ -158,8 +151,7 @@ export class MDatosPage implements OnInit {
     this.formularioValido = !hasError;
   }
 
-  //ESTO ES DE LA FOTO:
-
+  //ESTO ES DE LA FOTO    
   takePicture = async () => {
     const image2 = await Camera.getPhoto({
       quality: 90,

@@ -390,7 +390,7 @@ export class BdserviceService {
   actualizarUsuario(idUsuario: any, nombreU: any, apellidoU: any, rutU: any, correoU: any, fotoU: any) {
     console.log("Actualizando usuario:", idUsuario, nombreU, apellidoU, rutU, correoU, fotoU);
 
-    return this.database.executeSql('UPDATE usuario SET nombreU = ?, apellidoU = ?, rutU = ?, correoU = ?, fotoU = ? WHERE idUsuario = ?', [nombreU, apellidoU, rutU, correoU, idUsuario, fotoU]).then(res => {
+    return this.database.executeSql('UPDATE usuario SET nombreU = ?, apellidoU = ?, rutU = ?, correoU = ?, fotoU = ? WHERE idUsuario = ?', [nombreU, apellidoU, rutU, correoU, fotoU, idUsuario]).then(res => {
       console.log("Usuario actualizado:", res);
       this.buscarUsuario();
     });
@@ -554,11 +554,8 @@ export class BdserviceService {
   }
 
 
-  async getUsuarioAutenticadoDesdeBD(): Promise<Usuario | null> {
-    const usuarioRegistrado = await this.getUsuarioAutenticado();
-
-    if (usuarioRegistrado) {
-      return this.database.executeSql('SELECT * FROM usuario WHERE idUsuario = ?', [usuarioRegistrado.idUsuario]).then(res => {
+  async getUsuarioAutenticadoDesdeBD(id:any): Promise<Usuario | null> {
+      return this.database.executeSql('SELECT * FROM usuario WHERE idUsuario = ?', [id]).then(res => {
         if (res.rows.length > 0) {
           return {
             idUsuario: res.rows.item(0).idUsuario,
@@ -578,9 +575,6 @@ export class BdserviceService {
           return null;
         }
       });
-    } else {
-      return null;
-    }
   }
 
 

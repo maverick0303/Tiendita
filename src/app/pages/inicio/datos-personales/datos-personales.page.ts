@@ -32,7 +32,7 @@ export class DatosPersonalesPage implements OnInit {
   ]
 
 
-  constructor(private router: Router, private bdService: BdserviceService) {
+  constructor(private router: Router, private bd: BdserviceService) {
     this.idEnviado = localStorage.getItem('idUsuario')!;
     this.nombreEnviado = localStorage.getItem('nombreU')!;
     this.apellidoEnviado = localStorage.getItem('apellidoU')!;
@@ -50,10 +50,20 @@ export class DatosPersonalesPage implements OnInit {
   }
 
   ngOnInit() {
+    this.bd.getUsuarioAutenticadoDesdeBD(this.idEnviado).then(usuario => {
+      if (usuario) {
+        this.idEnviado = usuario.idUsuario;
+        this.nombreEnviado = usuario.nombreU;
+        this.apellidoEnviado = usuario.apellidoU;
+        this.emailEnviado = usuario.correoU;
+        this.rutEnviado = usuario.rutU;
+        this.fotoUEnviada = usuario.fotoU;
+      }
+    });
     // Subscribo al observable de la BD
-    this.bdService.dbState().subscribe(res => {
+    this.bd.dbState().subscribe(res => {
       if (res) {
-        this.bdService.fetchProducto().subscribe(datos => {
+        this.bd.fetchProducto().subscribe(datos => {
           this.arregloProductos = datos;
           this.arregloProductosResultado = datos;
         })
@@ -71,10 +81,11 @@ export class DatosPersonalesPage implements OnInit {
       correoU: this.emailEnviado,
       rutU: this.rutEnviado,
       fotoU: this.fotoUEnviada
+      
 
     };
 
-    await this.bdService.actualizarUsuario(usuario.idUsuario, usuario.nombreU, usuario.apellidoU, usuario.rutU, usuario.correoU, usuario.fotoU);
+    
 
     let navigationExtras: NavigationExtras = {
       state: {
@@ -85,6 +96,7 @@ export class DatosPersonalesPage implements OnInit {
         emailEnviado: this.emailEnviado,
         fotoUEnviada: this.fotoUEnviada
       }
+      
     };
 
     this.router.navigate(['/m-datos'], navigationExtras);
@@ -96,11 +108,11 @@ export class DatosPersonalesPage implements OnInit {
     }
   }
   get imageData(): any {
-    return this.bdService.imageData;
+    return this.bd.imageData;
   }
   loadProducts() {
     // Llama a la función para cargar productos (deberías tener esta función en tu servicio)
-    this.bdService.fetchProducto().subscribe((productos) => {
+    this.bd.fetchProducto().subscribe((productos) => {
       this.arregloProductos = productos;
     });
   }
@@ -108,7 +120,7 @@ export class DatosPersonalesPage implements OnInit {
   searchProducts() {
     if (this.searchTerm.trim() !== '') {
       // Utiliza la función buscarProductoPorNombre para buscar productos
-      this.bdService
+      this.bd
         .buscarProductoPorNombre(this.searchTerm.trim())
         .then((productos) => {
           this.arregloProductosResultado = productos;
