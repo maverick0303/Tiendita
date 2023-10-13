@@ -60,7 +60,7 @@ export class MDatosPage implements OnInit {
       this.fotoUEnviada
     );
 
-    this.bd.presentAlert("Usuario actualizado con éxito")
+    this.bd.presentAlertMD("Usuario actualizado con éxito")
     this.router.navigate(['/datos-personales']);
   }
 

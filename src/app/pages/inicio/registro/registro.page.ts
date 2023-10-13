@@ -126,15 +126,16 @@ export class RegistroPage implements OnInit {
 
   valiEmail(event: KeyboardEvent) {
     const input = event.key;
-
+  
     // Expresión regular para validar un correo electrónico
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-    if (!regex.test(input)) {
+  
+    if (input !== "Backspace" && !regex.test(input)) {
       event.preventDefault(); // No permite caracteres no válidos
     }
     this.verificarFormulario();
   }
+  
 
   valiPassword(event: KeyboardEvent) {
     const input = event.key;
@@ -142,7 +143,7 @@ export class RegistroPage implements OnInit {
     // Expresión regular para validar la contraseña permitiendo "."
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.]).{5,15}$/;
 
-    if (!passwordRegex.test(input)) {
+    if (input !== "Backspace" && !passwordRegex.test(input)) {
       event.preventDefault(); // No permite caracteres no válidos
     }
     this.verificarFormulario();

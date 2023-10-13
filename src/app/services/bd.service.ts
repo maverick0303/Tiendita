@@ -513,6 +513,16 @@ export class BdserviceService {
     await alert.present();
   }
 
+  async presentAlertMD(msj: string) {
+    const alert = await this.alertController.create({
+      header: 'Exito al modificar',
+      message: msj,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
   async mostrarAlerta(mensaje: string) {
     const alert = await this.alertController.create({
       header: 'Éxito',
