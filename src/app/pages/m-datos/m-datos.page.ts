@@ -12,6 +12,7 @@ import { Producto } from 'src/app/services/producto';
 export class MDatosPage implements OnInit {
   arregloProductosResultado: Producto[] = []; // Nueva propiedad
   searchTerm: string = '';
+  imageData: any;
   arregloProductos: any = [
     {
       idProducto: '',
@@ -152,15 +153,19 @@ export class MDatosPage implements OnInit {
   }
 
   //ESTO ES DE LA FOTO    
-  takePicture = async () => {
-    const image2 = await Camera.getPhoto({
+  async takePicture () {
+    try {
+      const image2 = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.DataUrl
     });
-    this.bd.imageData = image2.dataUrl;
+    this.image = image2.dataUrl;
     this.cdr.detectChanges();
-  };
+    } catch (error) {
+      console.error('Error al tomar la foto:', error); 
+  }
+}
   loadProducts() {
     // Llama a la función para cargar productos (deberías tener esta función en tu servicio)
     this.bd.fetchProducto().subscribe((productos) => {

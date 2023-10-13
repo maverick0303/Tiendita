@@ -71,6 +71,10 @@ export class ListaUsuarioPage implements OnInit {
       }
     });
   }
+
+
+
+  
   loadProducts() {
     // Llama a la función para cargar productos (deberías tener esta función en tu servicio)
     this.bd.fetchProducto().subscribe((productos) => {
