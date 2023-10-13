@@ -26,7 +26,6 @@ export class MDatosPage implements OnInit {
   ]
   iduser = "";
 
-  image: any;
   nombreEnviado: string = '';
   apellidoEnviado: string = '';
   emailEnviado: string = '';
@@ -37,7 +36,7 @@ export class MDatosPage implements OnInit {
   nombrePreguntaEnviada: string = '';
   idVentaEnviada: string = '';
   idUsuario = "";
-  fotoUEnviada: string = '';
+  fotoUEnviada: any;
   //mensaje de error:
   errors = {
     nombreEnviado: '',
@@ -160,7 +159,7 @@ export class MDatosPage implements OnInit {
       allowEditing: false,
       resultType: CameraResultType.DataUrl
     });
-    this.image = image2.dataUrl;
+    this.fotoUEnviada = image2.dataUrl;
     this.cdr.detectChanges();
     } catch (error) {
       console.error('Error al tomar la foto:', error); 
