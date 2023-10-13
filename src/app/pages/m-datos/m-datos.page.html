@@ -23,7 +23,7 @@
 <!--#############################################PRODUCTOS################################################-->
 
 <ion-content class="fondo" [fullscreen]="true">
-  <ion-avatar class="circle" *ngIf="fotoUEnviada">
+  <ion-avatar class="circle" name="fotoUEnviada">
     <img [src]="fotoUEnviada" />
   </ion-avatar>
   <ion-button (click)="takePicture()" class="edit"><ion-icon name="create-outline"></ion-icon></ion-button>
