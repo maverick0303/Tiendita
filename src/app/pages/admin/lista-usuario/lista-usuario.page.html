@@ -3,7 +3,7 @@
     <!-- LOGO DEL CARRITO -->
     <div class="demo-section" slot="end">
       <mat-icon [matBadge]="0" matBadgeColor="primary" [routerLink]="['/carrito']" aria-hidden="false">
-        <ion-icon style="width: 30px; height: 30px; margin-right: 80px; color: #0D0D0D;;" name="cart-outline"></ion-icon>
+        <ion-icon style="width: 30px; height: 30px; margin-right: 80px; color: #0D0D0D;" name="cart-outline"></ion-icon>
       </mat-icon>
     </div>
 
@@ -25,11 +25,15 @@
   <ion-grid>
     <ion-row *ngIf="usuarios.length > 0">
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let usuario of usuarios">
+        <div class="user-circle">
+          <img [src]="usuario.fotoU" />
+        </div>
         <ion-card>
-          <ion-card-content style="color: black;">
+          <ion-card-content style="color: black; text-align: center;">
             {{ usuario.nombreU }} {{ usuario.apellidoU }} - {{ usuario.correoU }}
           </ion-card-content>
         </ion-card>
+        <br><br><br>
       </ion-col>
     </ion-row>
   </ion-grid>
