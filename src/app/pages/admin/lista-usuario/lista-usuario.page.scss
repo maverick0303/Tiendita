@@ -1,77 +1,83 @@
 //esto es del toolbar:
 //COSA DEL CARRITO::after
 :host {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .demo-section+.demo-section {
-    margin-top: 16px;
-  }
-  
-  .demo-section {
-    margin-right: 20px;
-    /* Agrega margen al lado derecho del primer elemento */
-    display: flex;
-    /* Utiliza flexbox para alinear verticalmente los elementos */
-    align-items: center;
-    /* Centra verticalmente los elementos */
-  }
-  
-  //BUSQUEDA:
-  /* Estilos para el contenedor que contiene el ion-searchbar */
-  .search-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    --ion-background-color: #0D0D0D;
-  }
-  
-  ion-searchbar {
-    color: white;
-    width: 400px;
-    text-align: left;
-  }
-  
-  ion-toolbar {
-    --background: #79F2E6;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
-  .no-product-message {
-    text-align: center;
-    color: red;
-    font-weight: bold;
-    margin-top: 2px;
-    font-size: 35px;
-  }
+.demo-section+.demo-section {
+  margin-top: 16px;
+}
+
+.demo-section {
+  margin-right: 20px;
+  /* Agrega margen al lado derecho del primer elemento */
+  display: flex;
+  /* Utiliza flexbox para alinear verticalmente los elementos */
+  align-items: center;
+  /* Centra verticalmente los elementos */
+}
+
+//BUSQUEDA:
+/* Estilos para el contenedor que contiene el ion-searchbar */
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  --ion-background-color: #0D0D0D;
+}
+
+ion-searchbar {
+  color: white;
+  width: 400px;
+  text-align: left;
+}
+
+ion-toolbar {
+  --background: #79F2E6;
+}
+
+.no-product-message {
+  text-align: center;
+  color: red;
+  font-weight: bold;
+  margin-top: 2px;
+  font-size: 35px;
+}
 
 /* Estilos para los títulos y textos */
 @import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Tilt+Prism&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
 
-ion-list{
-    width:auto;
+ion-list {
+  width: auto;
 }
 
 ion-card-title {
-    border-color: #532473;
-    color: white;
-    font-size: 35px;
-    margin: 2px;
-    text-align: center;
-    font-family: 'DM Serif Display', serif;
+  border-color: #532473;
+  color: white;
+  font-size: 45px;
+  margin: 5px;
+  text-align: center;
+  font-family: 'DM Serif Display', serif;
 }
 
 .ion-title {
-    color: white;
-    font-family: 'DM Serif Display', serif;
-    font-size: 25px;
-    text-align: left;
-    margin: 3px;
+  color: white;
+  font-family: 'DM Serif Display', serif;
+  font-size: 25px;
+  text-align: left;
+  margin: 3px;
 }
 
 /* Estilos para el fondo */
 ion-content {
-    --background: url(https://w0.peakpx.com/wallpaper/955/141/HD-wallpaper-purple-science-tech.jpg);
+  --background: url(https://w0.peakpx.com/wallpaper/955/141/HD-wallpaper-purple-science-tech.jpg);
+}
+
+ion-card {
+  box-shadow: 6px 2px 6px #79F2E6;
+  margin: 5px;
+
 }

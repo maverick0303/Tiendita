@@ -17,7 +17,7 @@
         </ion-tab-button>
       </p>
       <!--HISTORIAL-->
-      <p (click)="historial()" >
+      <p (click)="historial()" *ngIf="idRol === 1" >
         <ion-tab-button>
           <ion-icon name="document-text-outline"></ion-icon>
           Mis compras

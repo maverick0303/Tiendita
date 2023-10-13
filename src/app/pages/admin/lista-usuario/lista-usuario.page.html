@@ -6,12 +6,12 @@
         <ion-icon style="width: 30px; height: 30px; margin-right: 80px; color: #0D0D0D;;" name="cart-outline"></ion-icon>
       </mat-icon>
     </div>
-  
+
     <!-- MENÚ DE BÚSQUEDA -->
     <ion-buttons slot="start">
-      <ion-menu-button style="color: #0D0D0D;;"></ion-menu-button>
+      <ion-menu-button style="color: #0D0D0D;"></ion-menu-button>
     </ion-buttons>
-  
+
     <!-- EL BUSCADOR -->
     <div class="search-container">
       <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="searchProducts()"></ion-searchbar>
@@ -21,14 +21,18 @@
 
 <ion-content [fullscreen]="true">
   <ion-card-title>TimeTecheros</ion-card-title>
-  <ion-list>
+
+  <ion-grid>
     <ion-row *ngIf="usuarios.length > 0">
-      <ion-col *ngFor="let usuario of usuarios">
-        {{ usuario.nombreU }} {{ usuario.apellidoU }} - {{ usuario.correoU }}
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let usuario of usuarios">
+        <ion-card>
+          <ion-card-content style="color: black;">
+            {{ usuario.nombreU }} {{ usuario.apellidoU }} - {{ usuario.correoU }}
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
-  </ion-list>
-  
+  </ion-grid>
 
   <!--MENU DOS-->
   <app-componente2></app-componente2>

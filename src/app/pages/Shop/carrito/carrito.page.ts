@@ -189,7 +189,7 @@ export class CarritoPage implements OnInit {
         // Redirigir al usuario a la página de confirmación o agradecimiento
         // utilizando el enrutador de Angular (router).
         // Ejemplo:
-        // this.router.navigate(['/confirmacion']);
+        this.router.navigate(['/tienda']);
       })
       .catch(error => {
         console.error('Error al insertar venta: ', error);
