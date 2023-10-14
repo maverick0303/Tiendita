@@ -32,15 +32,15 @@ export class BdserviceService {
 
   tablaVenta: string = "CREATE TABLE IF NOT EXISTS venta (idVenta integer primary key autoincrement, totalV integer not null, carritoV VARCHAR(25) not null, fechaV VARCHAR(25) not null , idUsuario not null, FOREIGN KEY (idUsuario) REFERENCES usuario (idUsuario));";
 
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (idUsuario integer primary key autoincrement, nombreU VARCHAR(25) not null, apellidoU VARCHAR(25) not null, rutU VARCHAR(13) not null, correoU VARCHAR(25) not null, contrasenaU VARCHAR(15) not null, idRol not null, respuestaU VARCHAR(15) not null, nombrePregunta not null, idVenta not null, fotoU TEXT, FOREIGN KEY (idRol) REFERENCES rol(idRol), FOREIGN KEY (nombrePregunta) REFERENCES pregunta(idPregunta), FOREIGN KEY (idVenta) REFERENCES venta(idVenta));";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (idUsuario integer primary key autoincrement, nombreU VARCHAR(25) not null, apellidoU VARCHAR(25) not null, rutU VARCHAR(13) not null, correoU VARCHAR(25) not null, contrasenaU VARCHAR(15) not null, idRol not null, respuestaU VARCHAR(15) not null, idVenta not null, fotoU TEXT, usuarioPregunta number not null, FOREIGN KEY (idRol) REFERENCES rol(idRol), FOREIGN KEY (idVenta) REFERENCES venta(idVenta), foreign key (usuarioPregunta) references pregunta(idPregunta));";
 
   //variables de insert en las tablas de registros iniciales
-  registroUsuario: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta) VALUES (1,'Alfredo','Estay','21.126.681-3','alfr.estay@duocuc.cl','Alfredo123@',1,'respuesta1','¿Cuál es tu película favorita?',3);";
+  registroUsuario: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU,idRol,respuestaU,idVenta,usuarioPregunta) VALUES (1,'Alfredo','Estay','21.126.681-3','alfr.estay@duocuc.cl','Alfredo123@',1,'r1',3,1);";
 
-  registroUsuarioPredeterminado1: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta) VALUES (2,'Admin','Admin','12.345.678-9','admin@gmail.com','Admin123@',2,'Respuesta1','¿Cuál es tu película favorita?',1);";
-  
-  registroUsuarioPredeterminado2: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta) VALUES (3,'Usuario','Usuario','9.876.543-2','usuario@gmail.com','Usuario123@',1,'Respuesta2','¿Cuál es tu película favorita?',2);";
-  
+  registroUsuarioPredeterminado1: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU,idRol,respuestaU,idVenta,usuarioPregunta) VALUES (2,'Admin','Admin','12.345.678-9','admin@gmail.com','Admin123@',2,'r1',1,1);";
+
+  registroUsuarioPredeterminado2: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU,idRol,respuestaU,idVenta,usuarioPregunta) VALUES (3,'Usuario','Usuario','9.876.543-2','usuario@gmail.com','Usuario123@',1,'r1',2,1);";
+
   registroPregunta2: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (1,'¿Cuál es tu pelicula favorita?');";
   registroPregunta1: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (2,'¿Cuál es el nombre de tu mascota?');";
   registroPregunta3: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (3,'¿Color favorito?');";
@@ -243,10 +243,9 @@ export class BdserviceService {
             claveU: res.rows.item(i).clave,
             idRol: res.rows.item(i).idRol,
             respuestaU: res.rows.item(i).respuestaU,
-            nombrePregunta: res.rows.item(i).nombrePregunta,
             idVenta: res.rows.item(i).idVenta,
-            fotoU: res.rows.item(i).fotoU
-
+            fotoU: res.rows.item(i).fotoU,
+            usuarioPregunta: res.rows.item(i).usuarioPregunta
           })
         }
       }
@@ -384,14 +383,14 @@ export class BdserviceService {
 
   //FUNCIONES DE USUARIOS
 
-  claveNueva(idUsuario: any , contrasenaU: any) {
+  claveNueva(idUsuario: any, contrasenaU: any) {
     return this.database.executeSql('update usuario set contrasenaU = ? where idUsuario = ?', [contrasenaU, idUsuario]).then(res => {
       this.buscarUsuario();
     });
   }
 
-  insertarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any, respuestaU: any, nombrePregunta: any, idVenta: any, fotoU: any) {
-    return this.database.executeSql('INSERT INTO usuario(nombreU,apellidoU ,rutU , correoU ,contrasenaU, idRol, respuestaU, nombrePregunta, idVenta, fotoU ) VALUES (?,?,?,?,?,?,?,?,?,?)', [nombreU, apellidoU, rutU, correoU, contrasenaU, idRol, respuestaU, nombrePregunta, idVenta, fotoU]).then(res => {
+  insertarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any, respuestaU: any, idVenta: any, fotoU: any, usuarioPregunta: any) {
+    return this.database.executeSql('INSERT INTO usuario(nombreU,apellidoU ,rutU , correoU ,contrasenaU, idRol, respuestaU, idVenta, fotoU,usuarioPregunta ) VALUES (?,?,?,?,?,?,?,?,?,?)', [nombreU, apellidoU, rutU, correoU, contrasenaU, idRol, respuestaU, idVenta, fotoU, usuarioPregunta]).then(res => {
       this.buscarUsuario();
     })
   }
@@ -438,7 +437,7 @@ export class BdserviceService {
     this.platform.ready().then(() => {
       //crear la BD
       this.sqlite.create({
-        name: 'bdtiendita7.db',
+        name: 'bdtiendita8.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         //guardamos la conexión en mi variable global
@@ -585,9 +584,9 @@ export class BdserviceService {
           idRol: res.rows.item(0).idRol,
           claveU: res.rows.item(0).claveU,
           respuestaU: res.rows.item(0).respuestaU,
-          nombrePregunta: res.rows.item(0).nombrePregunta,
           idVenta: res.rows.item(0).idVenta,
-          fotoU: res.rows.item(0).fotoU
+          fotoU: res.rows.item(0).fotoU,
+          usuarioPregunta: res.rows.item(0).usuarioPregunta
         } as Usuario;
       } else {
         return null;
@@ -617,43 +616,34 @@ export class BdserviceService {
 
 
   async buscarCorreo(correoU: string): Promise<Usuario | null> {
-    return this.database.executeSql('select * from usuario where correoU = ?', [correoU]).then(res =>{
-      if (res.rows.length > 0){
-        return{
+    return this.database.executeSql('select * from usuario where correoU = ?', [correoU]).then(res => {
+      if (res.rows.length > 0) {
+        return {
           idUsuario: res.rows.item(0).idUsuario,
           correoU: res.rows.item(0).correoU,
-          nombrePregunta: res.rows.item(0).idPregunta,
-          respuestaU: res.rows.item(0).respuestaU
+          respuestaU: res.rows.item(0).respuestaU,
+          usuarioPregunta: res.rows.item(0).usuarioPregunta
         } as Usuario;
-      }else{
+      } else {
         return null;
       }
     })
   }
-  
-  verificarRespuesta(idUsuario: any, respuestaUsuario: any) {
-    return this.database.executeSql('SELECT * FROM usuario WHERE idUsuario = ? AND respuestaU = ?', [idUsuario, respuestaUsuario]).then(res => {
-      return res.rows.length > 0;
-    }).catch(e => {
-      console.error('Error al verificar respuesta:', e);
-      throw e;
-    });
-  }
-  
-  verificarPregunta(idUsuario: any, nombrePregunta: any) {
-    return this.database.executeSql('SELECT * FROM usuario WHERE idUsuario = ? AND nombrePregunta = ?', [idUsuario, nombrePregunta]).then(res => {
-      return res.rows.length > 0; 
-    }).catch(e => {
-      console.error('Error al verificar pregunta:', e);
-      throw e;
-    });
-  }
-  
-  
- 
-  
 
-  
+  recuperarcontraE(correoU: any) {
+    return this.database.executeSql('SELECT usuarioPregunta FROM usuario WHERE correoU = ?', [correoU]).then(res => {
+      if (res.rows.length > 0) {
+        // Devolver el primer usuario encontrado (suponiendo que sea único)
+        return res.rows.item(0);
+      } else {
+        return null; // No se encontró ningún usuario
+      }
+    }).catch(e => {
+      this.presentAlert("Error en validar usuario: " + e);
+      return false;
+    }
+    )
+  }
 
 
   async getUsuarioAutenticado(): Promise<Usuario | null> {

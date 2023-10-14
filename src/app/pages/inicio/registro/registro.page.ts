@@ -21,12 +21,11 @@ export class RegistroPage implements OnInit {
   emailValue: string = '';
   passwordValue: string = '';
   confirmPasswordValue: string = '';
-  preguntaSeguridad: string = '';
   respuestaSeguridad: string = '';
   idRol = 1;
   idVenta = 1;
   fotoU: string = '';
-
+  usuarioPregunta: number = 0;
   errors = {
     nombreU: '',
     apellidoU: '',
@@ -34,8 +33,8 @@ export class RegistroPage implements OnInit {
     email: '',
     password: '',
     confirmPassword: '',
-    preguntaSeguridad: '',
     respuestaSeguridad: '',
+    usuarioPregunta: ''
   };
 
   arregloPreguntas: any = [
@@ -195,8 +194,8 @@ export class RegistroPage implements OnInit {
     }
 
     // Validación de la pregunta de seguridad
-    this.errors.preguntaSeguridad = this.preguntaSeguridad ? '' : 'La pregunta es obligatoria';
-    hasError = !this.preguntaSeguridad || hasError; // Agregar la condición aquí
+    this.errors.usuarioPregunta = this.usuarioPregunta ? '' : 'La pregunta es obligatoria';
+    hasError = !this.usuarioPregunta || hasError; // Agregar la condición aquí
 
     // Validación de la respuesta de seguridad
     this.errors.respuestaSeguridad = this.respuestaSeguridad ? '' : 'La respuesta es obligatoria.';
@@ -211,7 +210,7 @@ export class RegistroPage implements OnInit {
       !this.passwordValue ||
       !this.confirmPasswordValue ||
       !this.respuestaSeguridad ||
-      !this.preguntaSeguridad
+      !this.usuarioPregunta
     ) {
       hasError = true;
     }
@@ -228,9 +227,9 @@ export class RegistroPage implements OnInit {
       this.passwordValue,
       this.idRol,
       this.respuestaSeguridad,
-      this.preguntaSeguridad,
       this.idVenta,
-      this.fotoU
+      this.fotoU,
+      this.usuarioPregunta
     );
   }
 }

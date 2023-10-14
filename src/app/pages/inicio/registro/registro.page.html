@@ -53,12 +53,12 @@
 
             <!-- Pregunta de seguridad -->
             <ion-select label="Pregunta de Seguridad" label-placement="floating" fill="outline"
-              [(ngModel)]="preguntaSeguridad" required>
+              [(ngModel)]="usuarioPregunta" required>
               <ion-select-option *ngFor="let pregunta of arregloPreguntas" value="{{ pregunta.idPregunta }}">{{
                 pregunta.nombrePregunta }}</ion-select-option>
             </ion-select><br>
             <!--VALIDACION DE LA PREGUNTA-->
-            <div class="error-message" *ngIf="errors.preguntaSeguridad">{{ errors.preguntaSeguridad }}</div>
+            <div class="error-message" *ngIf="errors.usuarioPregunta">{{ errors.usuarioPregunta }}</div>
 
             <!-- Respuesta a la pregunta de seguridad -->
             <ion-input label="Respuesta" type="text" label-placement="floating" fill="outline" placeholder="Respuesta"

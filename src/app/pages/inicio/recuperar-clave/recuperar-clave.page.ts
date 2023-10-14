@@ -11,50 +11,46 @@ import { Usuario } from 'src/app/services/usuario';
 })
 export class RecuperarClavePage implements OnInit {
   correo: string = '';
-  pregunta: string = '';
+  pregunta: number = 0;
   respuesta: string = '';
+  usuarioPregunta: number = 0;
 
+  idPregunta: number = 0;
+  
+  arregloPreguntas: any = [
+    {
+      idPregunta: '',
+      nombrePregunta: ''
+    }
+  ]
   constructor(private router: Router, private toastController: ToastController, private bdService: BdserviceService) {
     this.correo = localStorage.getItem('correoUC')!;
-    
+    this.bdService.dbState().subscribe(res => {
+      if (res) {
+        this.bdService.fetchPregunta().subscribe(datos => {
+          this.arregloPreguntas = datos;
+        });
+      }
+    });
   }
 
   ngOnInit() {
   }
+  
   async validarPregunta() {
     try {
-      const usuario: Usuario | null = await this.bdService.buscarCorreo(this.correo);
-      if (usuario !== null) {
-        if (usuario.nombrePregunta === this.pregunta) {
+      const e = await this.bdService.buscarCorreo(this.correo);
+      
+      if (e) {
+        const datosUsuario = await this.bdService.recuperarcontraE(this.correo);
+        this.idPregunta = datosUsuario.usuariopregunta;
+        
+        if (this.idPregunta == this.pregunta) {
           this.bdService.isDBReady.next(true);
-          this.mostrarMensaje('Pregunta correcta');
-        } else {
-          this.mostrarMensaje('La pregunta es incorrecta');
-        }
-      } else {
-        this.mostrarMensaje('No se encontró un usuario con ese correo');
-      }
-    } catch (error) {
-      console.error('error al verificar la base de datos', error);
-      this.mostrarMensaje('Ocurrió un error al verificar la base de datos');
-    }
-  }
-  
-
-  async validarRes() {
-    try {
-      // Buscar el usuario por correo electrónico
-      const usuario: Usuario | null = await this.bdService.buscarCorreo(this.correo);
-  
-      if (usuario !== null) {
-        // Si se encontró el usuario, comparar la respuesta
-        if (usuario.respuestaU === this.respuesta) {
-          // Respuesta correcta
-          this.bdService.isDBReady.next(true);
-          this.mostrarMensaje('Respuesta correcta');
+          this.mostrarMensaje('Pregunta buena');
         } else {
           // Respuesta incorrecta
-          this.mostrarMensaje('La respuesta es incorrecta');
+          this.mostrarMensaje('La pregunta es incorrecta');
         }
       } else {
         // No se encontró el usuario
@@ -62,6 +58,26 @@ export class RecuperarClavePage implements OnInit {
       }
     } catch (error) {
       // Manejar errores
+      console.error('Error al verificar la base de datos', error);
+      this.mostrarMensaje('Ocurrió un error al verificar la base de datos');
+    }
+  }
+  
+  
+  async validarRes() {
+    try {
+      const usuario: Usuario | null = await this.bdService.buscarCorreo(this.correo);
+      if (usuario !== null) {
+        if (usuario.respuestaU === this.respuesta) {
+          this.bdService.isDBReady.next(true);
+          this.mostrarMensaje('Respuesta correcta');
+        } else {
+          this.mostrarMensaje('La respuesta es incorrecta');
+        }
+      } else {
+        this.mostrarMensaje('No se encontró un usuario con ese correo');
+      }
+    } catch (error) {
       console.error('Error al verificar la base de datos', error);
       this.mostrarMensaje('Ocurrió un error al verificar la base de datos');
     }

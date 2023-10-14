@@ -30,7 +30,7 @@ export class CorreoPage implements OnInit {
       if (usuario !== null) {
         this.correoEncontrado = true;
         localStorage.setItem('correoUC', usuario.correoU);
-        localStorage.setItem('respuestaU', usuario.respuestaU)
+        localStorage.setItem('respuestaU', usuario.respuestaU);
         this.bdService.isDBReady.next(true);
         this.router.navigate(['/recuperar-clave']);
       } else {
