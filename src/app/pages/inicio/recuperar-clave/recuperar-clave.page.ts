@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
-import { FormControl, Validators } from '@angular/forms';
+import { Usuario } from 'src/app/services/usuario';
 
 @Component({
   selector: 'app-recuperar-clave',
@@ -13,13 +13,6 @@ export class RecuperarClavePage implements OnInit {
   correo: string = '';
   pregunta: string = '';
   respuesta: string = '';
-  preguntaEncontrada: boolean = false;
-
-  preguntasSeguridad: string[] = [
-    "¿Cuál es tu película favorita?",
-    "¿Nombre de tu mascota?",
-    "¿Color favorito?"
-  ];
 
   constructor(private router: Router, private toastController: ToastController, private bdService: BdserviceService) {
     this.correo = localStorage.getItem('correoUC')!;
@@ -28,43 +21,52 @@ export class RecuperarClavePage implements OnInit {
 
   ngOnInit() {
   }
-
-  validarPreguntaSeguridad() {
-    if (this.preguntasSeguridad.includes(this.pregunta)) {
-      this.preguntaEncontrada = true;
-      // Llamar al servicio de base de datos para verificar la pregunta
-      this.bdService.verificarPregunta(this.correo, this.pregunta)
-        .then(preguntaValida => {
-          if (preguntaValida) {
-            this.mostrarMensaje('La pregunta coincide');
-          } else {
-            this.mostrarMensaje('La pregunta proporcionada no es válida');
-          }
-        })
-        .catch(error => {
-          console.error('Error al verificar la pregunta en la base de datos', error);
-          this.mostrarMensaje('Ocurrió un error al verificar la pregunta');
-        });
-    } else {
-      this.mostrarMensaje('La pregunta seleccionada no es válida');
+  async validarPregunta() {
+    try {
+      const usuario: Usuario | null = await this.bdService.buscarCorreo(this.correo);
+      if (usuario !== null) {
+        if (usuario.nombrePregunta === this.pregunta) {
+          this.bdService.isDBReady.next(true);
+          this.mostrarMensaje('Pregunta correcta');
+        } else {
+          this.mostrarMensaje('La pregunta es incorrecta');
+        }
+      } else {
+        this.mostrarMensaje('No se encontró un usuario con ese correo');
+      }
+    } catch (error) {
+      console.error('error al verificar la base de datos', error);
+      this.mostrarMensaje('Ocurrió un error al verificar la base de datos');
     }
   }
   
 
-  validarRespuesta() {
-    this.bdService.verificarRespuesta(this.respuesta,this.correo)
-      .then(respuestaValida => {
-        if (respuestaValida) {
-          this.mostrarMensaje('La respuesta coincide')
+  async validarRes() {
+    try {
+      // Buscar el usuario por correo electrónico
+      const usuario: Usuario | null = await this.bdService.buscarCorreo(this.correo);
+  
+      if (usuario !== null) {
+        // Si se encontró el usuario, comparar la respuesta
+        if (usuario.respuestaU === this.respuesta) {
+          // Respuesta correcta
+          this.bdService.isDBReady.next(true);
+          this.mostrarMensaje('Respuesta correcta');
         } else {
-          this.mostrarMensaje('La respuesta proporcionada no es válida');
+          // Respuesta incorrecta
+          this.mostrarMensaje('La respuesta es incorrecta');
         }
-      })
-      .catch(error => {
-        console.error('Error al verificar la respuesta en la base de datos', error);
-        this.mostrarMensaje('Ocurrió un error al verificar la respuesta');
-      });
+      } else {
+        // No se encontró el usuario
+        this.mostrarMensaje('No se encontró un usuario con ese correo');
+      }
+    } catch (error) {
+      // Manejar errores
+      console.error('Error al verificar la base de datos', error);
+      this.mostrarMensaje('Ocurrió un error al verificar la base de datos');
+    }
   }
+  
 
 
   async mostrarMensaje(mensaje: string): Promise<void> {

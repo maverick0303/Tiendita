@@ -35,15 +35,15 @@ export class BdserviceService {
   tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (idUsuario integer primary key autoincrement, nombreU VARCHAR(25) not null, apellidoU VARCHAR(25) not null, rutU VARCHAR(13) not null, correoU VARCHAR(25) not null, contrasenaU VARCHAR(15) not null, idRol not null, respuestaU VARCHAR(15) not null, nombrePregunta not null, idVenta not null, fotoU TEXT, FOREIGN KEY (idRol) REFERENCES rol(idRol), FOREIGN KEY (nombrePregunta) REFERENCES pregunta(idPregunta), FOREIGN KEY (idVenta) REFERENCES venta(idVenta));";
 
   //variables de insert en las tablas de registros iniciales
-  registroUsuario: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta) VALUES (1,'Alfredo','Estay','21.126.681-3','alfr.estay@duocuc.cl','Alfredo123@',1,'respuesta1',3,3);";
+  registroUsuario: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta) VALUES (1,'Alfredo','Estay','21.126.681-3','alfr.estay@duocuc.cl','Alfredo123@',1,'respuesta1','¿Cuál es tu película favorita?',3);";
 
-  registroUsuarioPredeterminado1: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta) VALUES (2,'Admin','Admin','12.345.678-9','admin@gmail.com','Admin123@',2,'Respuesta1',1,1);";
+  registroUsuarioPredeterminado1: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta) VALUES (2,'Admin','Admin','12.345.678-9','admin@gmail.com','Admin123@',2,'Respuesta1','¿Cuál es tu película favorita?',1);";
   
-  registroUsuarioPredeterminado2: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta) VALUES (3,'Usuario','Usuario','9.876.543-2','usuario@gmail.com','Usuario123@',1,'Respuesta2',2,2);";
-
-  registroPregunta1: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (1,'¿Cuál es el nombre de tu mascota?');";
-  registroPregunta2: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (2,'¿Cuál es tu pelicula favorita?');";
-  registroPregunta3: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (3,'¿Cuál es tu fruta favorita?');";
+  registroUsuarioPredeterminado2: string = "INSERT or IGNORE INTO usuario(idUsuario,nombreU,apellidoU,rutU,correoU,contrasenaU,idRol,respuestaU,nombrePregunta,idVenta) VALUES (3,'Usuario','Usuario','9.876.543-2','usuario@gmail.com','Usuario123@',1,'Respuesta2','¿Cuál es tu película favorita?',2);";
+  
+  registroPregunta2: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (1,'¿Cuál es tu pelicula favorita?');";
+  registroPregunta1: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (2,'¿Cuál es el nombre de tu mascota?');";
+  registroPregunta3: string = "INSERT or IGNORE INTO pregunta(idPregunta, nombrePregunta) VALUES (3,'¿Color favorito?');";
 
   //registro de categoria
   registroCategoria1: string = "INSERT Or IGNORE into categoria(idCategoria, nombreCategoria) VALUES (1,'Reloj digital');";
@@ -622,9 +622,8 @@ export class BdserviceService {
         return{
           idUsuario: res.rows.item(0).idUsuario,
           correoU: res.rows.item(0).correoU,
-          nombrePregunta: res.rows.item(0).nombrePregunta,
+          nombrePregunta: res.rows.item(0).idPregunta,
           respuestaU: res.rows.item(0).respuestaU
-
         } as Usuario;
       }else{
         return null;
@@ -641,8 +640,8 @@ export class BdserviceService {
     });
   }
   
-  verificarPregunta(idUsuario: any, respuestaUsuario: any) {
-    return this.database.executeSql('SELECT * FROM usuario WHERE idUsuario = ? AND respuestaU = ?', [idUsuario, respuestaUsuario]).then(res => {
+  verificarPregunta(idUsuario: any, nombrePregunta: any) {
+    return this.database.executeSql('SELECT * FROM usuario WHERE idUsuario = ? AND nombrePregunta = ?', [idUsuario, nombrePregunta]).then(res => {
       return res.rows.length > 0; 
     }).catch(e => {
       console.error('Error al verificar pregunta:', e);

@@ -8,16 +8,16 @@
           <ion-card-title>Recuperar Contraseña</ion-card-title>
           <form id="registration-form">
             <ion-select label="Pregunta de seguridad:" label-placement="floating" fill="outline" [(ngModel)]="pregunta">
-              <ion-select-option value="1">¿Cuál es tu película favorita?</ion-select-option>
-              <ion-select-option value="2">¿Nombre de tu mascota?</ion-select-option>
-              <ion-select-option value="3">¿Color favorito?</ion-select-option>
+              <ion-select-option value='¿Cuál es tu película favorita?'>¿Cuál es tu película favorita?</ion-select-option>
+              <ion-select-option value='¿Nombre de tu mascota?'>¿Nombre de tu mascota?</ion-select-option>
+              <ion-select-option value='¿Color favorito?'>¿Color favorito?</ion-select-option>
             </ion-select><br>
             
             <ion-input label="Respuesta:" type="text" label-placement="floating" fill="outline" placeholder="Respuesta" [(ngModel)]="respuesta"></ion-input>
             
-            <ion-button class="center-buttons" (click)="validarPreguntaSeguridad()">Validar Pregunta</ion-button>
+            <ion-button class="center-buttons" (click)="validarPregunta()">Validar Pregunta</ion-button>
 
-            <ion-button class="center-buttons" (click)="validarRespuesta()">Guardar contraseña</ion-button>
+            <ion-button class="center-buttons" (click)="validarRes()">Guardar contraseña</ion-button>
             
             <!--NUEVA-->
             <ion-input label="Nueva contraseña:" type="password" label-placement="floating" fill="outline"
