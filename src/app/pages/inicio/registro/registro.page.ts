@@ -3,6 +3,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
 import { Storage } from '@ionic/storage-angular';
 import { Usuario } from 'src/app/services/usuario';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -46,7 +47,7 @@ export class RegistroPage implements OnInit {
 
   formularioValido: boolean = false;
 
-  constructor(private router: Router, private bd: BdserviceService, private storage: Storage) { }
+  constructor(private alertController: AlertController,private router: Router, private bd: BdserviceService, private storage: Storage) { }
   ngOnInit() {
     //subscribo al observable de la BD
     this.bd.dbState().subscribe(res => {
@@ -117,23 +118,39 @@ export class RegistroPage implements OnInit {
     }
   }
   
-  
-  
-  
-  
-
-
-  valiEmail(event: KeyboardEvent) {
+  async valiEmail(event: KeyboardEvent) {
     const input = event.key;
   
-    // Expresión regular para validar un correo electrónico
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   
     if (input !== "Backspace" && !regex.test(input)) {
       event.preventDefault(); // No permite caracteres no válidos
     }
+  
+    // Si el input es un correo electrónico válido
+    if (regex.test(this.emailValue)) {
+      try {
+        const usuario = await this.bd.verificarCorreoExistente(this.emailValue);
+        if (usuario !== null) {
+          // El correo electrónico ya está registrado
+          this.mostrarAlerta('Correo ya registrado', 'El correo electrónico ya está asociado a una cuenta.');
+          this.formularioValido = false; // Desactivar el formulario
+        } else {
+          this.formularioValido = true; // Habilitar el formulario
+        }
+      } catch (error) {
+        console.error('Error al verificar la base de datos', error);
+        this.mostrarAlerta('Error', 'Ocurrió un error al verificar la base de datos');
+      }
+    } else {
+      this.formularioValido = false; // Desactivar el formulario si el correo no es válido
+    }
+  
     this.verificarFormulario();
   }
+  
+  
+  
   
 
   valiPassword(event: KeyboardEvent) {
@@ -231,5 +248,15 @@ export class RegistroPage implements OnInit {
       this.fotoU,
       this.usuarioPregunta
     );
+  }
+
+  async mostrarAlerta(titulo: string, mensaje: string) {
+    const alert = await this.alertController.create({
+      header: titulo,
+      message: mensaje,
+      buttons: ['OK']
+    });
+  
+    await alert.present();
   }
 }

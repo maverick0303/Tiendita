@@ -645,6 +645,12 @@ export class BdserviceService {
     )
   }
 
+  async verificarCorreoExistente(correo: string): Promise<boolean> {
+    return this.database.executeSql('SELECT COUNT(*) AS count FROM usuario WHERE correoU = ?', [correo]).then(res => {
+      return res.rows.item(0).count > 0;
+    });
+  }
+
 
   async getUsuarioAutenticado(): Promise<Usuario | null> {
     return this.storage.get('usuarioRegistrado');
