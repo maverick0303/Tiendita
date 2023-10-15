@@ -58,6 +58,7 @@
         <div class="error-message" *ngIf="!precioPModel.valid && (precioPModel.dirty || precioPModel.touched)">
           <p *ngIf="precioPModel.errors?.['required']">El precio del producto es obligatorio.</p>
           <p *ngIf="precioPModel.errors?.['nocero']">El primer dígito no puede ser 0.</p>
+          <p *ngIf="precioPModel.errors?.['minimo']">El precio no puede ser menor a $1.000. </p>
         </div>
         <!--categoria del producto:-->
         <ion-select label="Categorias" label-placement="floating" fill="outline" required name="categoriaP"

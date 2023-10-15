@@ -82,8 +82,13 @@ export class AgregarPAdminPage implements OnInit {
 
   limitarLongitudPrecio(event: any) {
     const maxLength = 10;
+    const minLength = 3;
     if (event.target.value.length > maxLength) {
       event.target.value = event.target.value.slice(0, maxLength);
+      this.precioPValue = parseInt(event.target.value, 10);
+    }
+    if (event.target.value.length < minLength) {
+      event.target.value = event.target.value.slice (0, minLength);
       this.precioPValue = parseInt(event.target.value, 10);
     }
   } 
