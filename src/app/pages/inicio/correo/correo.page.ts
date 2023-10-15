@@ -7,6 +7,7 @@ import { FormControl, Validators } from '@angular/forms';
 interface Usuario {
   respuestaU: string;
   correoU: string;
+  idUsuario: string;
 }
 
 @Component({
@@ -31,6 +32,7 @@ export class CorreoPage implements OnInit {
         this.correoEncontrado = true;
         localStorage.setItem('correoUC', usuario.correoU);
         localStorage.setItem('respuestaU', usuario.respuestaU);
+        localStorage.setItem('idUsuario1', usuario.idUsuario);
         this.bdService.isDBReady.next(true);
         this.router.navigate(['/recuperar-clave']);
       } else {

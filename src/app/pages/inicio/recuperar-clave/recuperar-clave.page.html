@@ -9,27 +9,32 @@
           <form id="registration-form">
 
             <!-- Pregunta de seguridad -->
-            <ion-select label="Pregunta de Seguridad" label-placement="floating" fill="outline"
-              [(ngModel)]="pregunta" required>
+            <ion-select label="Pregunta de Seguridad" label-placement="floating" fill="outline" [(ngModel)]="pregunta"
+              required>
               <ion-select-option *ngFor="let pregunta of arregloPreguntas" value="{{ pregunta.idPregunta }}">
                 {{pregunta.nombrePregunta }}</ion-select-option>
             </ion-select><br>
-            
+
             <ion-input label="Respuesta:" type="text" label-placement="floating" fill="outline" placeholder="Respuesta"
               [(ngModel)]="respuesta"></ion-input>
-
-            <ion-button class="center-buttons" (click)="validarPregunta()">Validar Pregunta</ion-button>
-
-            <ion-button class="center-buttons" (click)="validarRes()">Guardar contraseña</ion-button>
-
+              
             <!--NUEVA-->
-            <ion-input label="Nueva contraseña:" type="password" label-placement="floating" fill="outline"
-              placeholder="**************"></ion-input>
-            <!--REPETIR-->
-            <ion-input label="Repetir contraseña:" type="password" label-placement="floating" fill="outline"
-              placeholder="**************"></ion-input>
+            <!-- CONTRASEÑA -->
+            <ion-input label="Contraseña:" type="password" label-placement="floating" fill="outline"
+              placeholder="M1@password" name="contrasena1" required [(ngModel)]="contrasena1"
+              (ionBlur)="verificarFormulario()" (keydown)="valiPassword($event)">
+            </ion-input>
+            <!-- VALIDACION CONTRASEÑA -->
+            <div class="error-message" *ngIf="errors.password">{{ errors.password }}</div>
+            <br><br>
+            <!-- CONFIRMAR CONTRASEÑA -->
+            <ion-input label="Confirmar Contraseña:" type="password" label-placement="floating" fill="outline"
+              placeholder="Confirmar contraseña" name="contrasena2" required [(ngModel)]="contrasena2"
+              (ionBlur)="verificarFormulario()">
+            </ion-input>
             <!--BOTON-->
-            <ion-button class="center-buttons">Guardar contraseña</ion-button>
+            <ion-button (click)="insertarYValidarRes()" [routerLink]="['/inicio-sesion']"
+            [disabled]="!formularioValido">Cambiar la contraseña</ion-button>
           </form>
         </ion-card-content>
       </ion-card>

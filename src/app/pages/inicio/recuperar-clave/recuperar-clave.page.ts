@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
 import { Usuario } from 'src/app/services/usuario';
 
@@ -10,12 +10,24 @@ import { Usuario } from 'src/app/services/usuario';
   styleUrls: ['./recuperar-clave.page.scss'],
 })
 export class RecuperarClavePage implements OnInit {
-  correo: string = '';
+  idEnviado: string = '';
   pregunta: number = 0;
   respuesta: string = '';
   usuarioPregunta: number = 0;
+  correo: string = '';
+  idPregunta: string = '';
 
-  idPregunta: number = 0;
+  contrasenaN: string = '';
+  contrasena1: string = '';
+  contrasena2: string = '';
+  contrasena3: string = '';
+
+  errors = {
+    
+    password: '',
+    confirmPassword: ''
+  };
+  formularioValido: boolean = false;
   
   arregloPreguntas: any = [
     {
@@ -24,6 +36,7 @@ export class RecuperarClavePage implements OnInit {
     }
   ]
   constructor(private router: Router, private toastController: ToastController, private bdService: BdserviceService) {
+    this.idEnviado = localStorage.getItem('idUsuario1')!;
     this.correo = localStorage.getItem('correoUC')!;
     this.bdService.dbState().subscribe(res => {
       if (res) {
@@ -35,35 +48,83 @@ export class RecuperarClavePage implements OnInit {
   }
 
   ngOnInit() {
-  }
-  
-  async validarPregunta() {
-    try {
-      const e = await this.bdService.buscarCorreo(this.correo);
-      
-      if (e) {
-        const datosUsuario = await this.bdService.recuperarcontraE(this.correo);
-        this.idPregunta = datosUsuario.usuariopregunta;
-        
-        if (this.idPregunta == this.pregunta) {
-          this.bdService.isDBReady.next(true);
-          this.mostrarMensaje('Pregunta buena');
-        } else {
-          // Respuesta incorrecta
-          this.mostrarMensaje('La pregunta es incorrecta');
-        }
-      } else {
-        // No se encontró el usuario
-        this.mostrarMensaje('No se encontró un usuario con ese correo');
+    this.bdService.buscarCorreo(this.idEnviado).then(usuario => {
+      if ( usuario ){
+        this.idEnviado = usuario.correoU;
       }
-    } catch (error) {
-      // Manejar errores
-      console.error('Error al verificar la base de datos', error);
-      this.mostrarMensaje('Ocurrió un error al verificar la base de datos');
+    });
+  }
+  async modificarContrasena() {
+    let usuario = {
+      correoU: this.idEnviado,
+      contrasena: this.contrasenaN
+      
+
+    };
+
+    
+
+    let navigationExtras: NavigationExtras = {
+      state: {
+        idEnviado: this.idEnviado,
+        contrasena: this.contrasena3
+      }
+      
+    };
+
+    this.router.navigate(['/inicio-sesion'], navigationExtras);
+  }
+
+  valiPassword(event: KeyboardEvent) {
+    const input = event.key;
+
+    // Expresión regular para validar la contraseña permitiendo "."
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.]).{5,15}$/;
+
+    if (input !== "Backspace" && !passwordRegex.test(input)) {
+      event.preventDefault(); // No permite caracteres no válidos
     }
+    this.verificarFormulario();
+  }
+  verificarFormulario() {
+    let hasError = false;
+
+    // Validación de la contraseña
+    this.errors.password = '';
+    if (!/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{5,15}$/.test(this.contrasena1)) {
+      this.errors.password = 'La contraseña no cumple con los requisitos.';
+      hasError = true;
+    }
+
+    // Validación de la confirmación de contraseña
+    this.errors.confirmPassword = '';
+    if (this.contrasena1!== this.contrasena2) {
+      this.errors.confirmPassword = 'Las contraseñas no coinciden.';
+      hasError = true;
+    }
+
+    // Validación adicional para comprobar si todos los campos requeridos están llenos
+    if (
+      
+      !this.contrasena1 ||
+      !this.contrasena2
+    ) {
+      hasError = true;
+    }
+
+    this.formularioValido = !hasError;
+  }
+
+  insertar() {
+    this.bdService.claveNueva(
+      this.idEnviado,
+      this.contrasena1
+    );
   }
   
-  
+
+
+
   async validarRes() {
     try {
       const usuario: Usuario | null = await this.bdService.buscarCorreo(this.correo);
@@ -83,6 +144,10 @@ export class RecuperarClavePage implements OnInit {
     }
   }
   
+  async insertarYValidarRes() {
+    await this.insertar();
+    await this.validarRes();
+}
 
 
   async mostrarMensaje(mensaje: string): Promise<void> {
