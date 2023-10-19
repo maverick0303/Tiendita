@@ -154,14 +154,39 @@ export class NuevoAdminPage implements OnInit {
 
   valiPassword(event: KeyboardEvent) {
     const input = event.key;
-
-    // Expresión regular para validar la contraseña permitiendo "."
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.]).{5,15}$/;
-
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$#!/¡%*¿?&.(),-_]).{5,15}$/;
+  
     if (input !== "Backspace" && !passwordRegex.test(input)) {
-      event.preventDefault(); // No permite caracteres no válidos
+      event.preventDefault();
     }
+  
     this.verificarFormulario();
+  
+    const contrasena = (event.target as HTMLInputElement).value;
+    const errores = [];
+
+    if (contrasena.length < 5 || contrasena.length > 15) {
+      errores.push("La contraseña debe tener entre 5 y 15 caracteres.");
+      errores.push(""); 
+    }
+    
+    else if (!/(?=.*[A-Z])/.test(contrasena)) {
+      errores.push("La contraseña debe contener al menos una letra mayúscula.");
+      errores.push(""); 
+    }
+    
+    else if (!/(?=.*\d)/.test(contrasena)) {
+      errores.push("La contraseña debe contener al menos un número.");
+      errores.push(""); 
+    }
+    
+    else if (!/(?=.*[@$#!/¡%*¿?&.(),-_])/.test(contrasena)) {
+      errores.push("La contraseña debe contener al menos un carácter especial.");
+      errores.push(""); 
+    }
+    
+  
+    this.errors.password = errores.join(" ");
   }
 
   verificarFormulario() {
@@ -201,7 +226,7 @@ export class NuevoAdminPage implements OnInit {
       this.errors.password = 'La contraseña no cumple con los requisitos.';
       hasError = true;
     }
-
+    
     // Validación de la confirmación de contraseña
     this.errors.confirmPassword = '';
     if (this.passwordValue !== this.confirmPasswordValue) {
