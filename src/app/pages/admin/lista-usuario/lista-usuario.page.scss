@@ -73,13 +73,23 @@ ion-card-title {
 
 /* Estilos para el fondo */
 ion-content {
-  --background: url(https://img.freepik.com/fotos-premium/imagenes-colores-degradados-bandas-colores_975572-15291.jpg);
+  --background: url(https://w0.peakpx.com/wallpaper/939/832/HD-wallpaper-deep-purple-blue-design-pink-premium.jpg);
 }
 
 ion-card {
   box-shadow: 6px 2px 6px #79F2E6;
   margin: 5px;
+  background-color: #010626;
+  width: fit-content;
+  height: max-content;
 
+}
+.borrar{
+  --background: red;
+}
+
+ion-button{
+  --background: #7630D9;
 }
 
 .user-circle {
@@ -88,8 +98,13 @@ ion-card {
 }
 
 .user-circle img {
-  width: 100px; /* Ajusta el tamaño según tus preferencias */
-  height: 100px; /* Ajusta el tamaño según tus preferencias */
+  width: 250px; /* Ajusta el tamaño según tus preferencias */
+  height: 250px; /* Ajusta el tamaño según tus preferencias */
   border-radius: 50%;
-  border: 2px solid #ffffff; /* Puedes personalizar el color del borde */
+}
+
+.center-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
