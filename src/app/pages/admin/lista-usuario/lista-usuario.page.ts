@@ -49,6 +49,8 @@ export class ListaUsuarioPage implements OnInit {
       }
     });
 
+    //funcion de eliminar al usuario
+
     // Suscribirse al estado de la BD
 
     //subscribo al observable de la BD
@@ -72,8 +74,23 @@ export class ListaUsuarioPage implements OnInit {
     });
   }
 
+  eliminarUsuario(x: any) {
+    this.bd.eliminarUsuario(x.idUsuario);
+    this.bd.presentAlert("Usuario eliminado"); 
+  };
 
-
+  cambiarRol() {
+    this.rol = (this.rol === 1) ? 2 : 1;
+    this.rol = (this.rol === 2) ? 1 : 2;
+    this.bd.actualizarRol(this.usuarios.id, this.rol)
+      .then(() => {
+        this.bd.presentAlert("Rol cambiado")
+      })
+      .catch(error => {
+        this.bd.presentAlert("El rol no ha podido ser cambiado")
+      });
+  }
+  
   
   loadProducts() {
     // Llama a la función para cargar productos (deberías tener esta función en tu servicio)

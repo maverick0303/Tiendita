@@ -31,8 +31,8 @@
         <ion-card>
           <ion-card-content style="color: black; text-align: center;">
             {{ usuario.nombreU }} {{ usuario.apellidoU }} - {{ usuario.correoU }}
-            <ion-button>Cambiar rol</ion-button>
-            <ion-button>Eliminar usuario</ion-button>
+            <ion-button (click)="cambiarRol()">Cambiar Rol</ion-button>
+            <ion-button (click)="eliminarUsuario(usuario)">Eliminar usuario</ion-button>
           </ion-card-content>
         </ion-card>
         <br><br><br>

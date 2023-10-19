@@ -655,4 +655,17 @@ export class BdserviceService {
   async getUsuarioAutenticado(): Promise<Usuario | null> {
     return this.storage.get('usuarioRegistrado');
   }
+
+  actualizarRol(idUsuario: any, nuevoRol: number) {
+    return this.database.executeSql('UPDATE usuario SET rol = ? WHERE idUsuario = ?', [nuevoRol, idUsuario])
+      .then(res => {
+        console.log('Rol actualizado correctamente');
+        return res;
+      })
+      .catch(error => {
+        console.error('Error al actualizar el rol:', error);
+        throw error;
+      });
+  }
+  
 }
