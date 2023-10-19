@@ -21,6 +21,7 @@
 
 <ion-content [fullscreen]="true">
   <ion-card-title>TimeTecheros</ion-card-title>
+  <ion-button [routerLink]="['/nuevo-admin']">Agregar nuevo admin</ion-button>
 
   <ion-grid>
     <ion-row *ngIf="usuarios.length > 0">
@@ -31,7 +32,7 @@
         <ion-card>
           <ion-card-content style="color: black; text-align: center;">
             {{ usuario.nombreU }} {{ usuario.apellidoU }} - {{ usuario.correoU }}
-            <ion-button (click)="cambiarRol()">Cambiar Rol</ion-button>
+            
             <ion-button (click)="eliminarUsuario(usuario)">Eliminar usuario</ion-button>
           </ion-card-content>
         </ion-card>

@@ -87,6 +87,11 @@ const routes: Routes = [
     path: 'correo',
     loadChildren: () => import('./pages/inicio/correo/correo.module').then( m => m.CorreoPageModule)
   },
+  {
+    path: 'nuevo-admin',
+    loadChildren: () => import('./pages/admin/nuevo-admin/nuevo-admin.module').then( m => m.NuevoAdminPageModule)
+  },
+
 
 
 ];
