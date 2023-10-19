@@ -155,7 +155,8 @@ export class RecuperarClavePage implements OnInit {
     const toast = await this.toastController.create({
       message: mensaje,
       duration: 2000,
-      position: 'top'
+      position: 'middle',
+      color:'danger'
     });
     await toast.present();
   }

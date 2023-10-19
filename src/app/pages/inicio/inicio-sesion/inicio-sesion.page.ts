@@ -73,6 +73,7 @@ export class InicioSesionPage {
       message: 'La contraseña y el correo no son válidos',
       duration: 950,
       position: 'middle',
+      color:'danger'
     });
     await toast.present();
   }
@@ -101,13 +102,12 @@ export class InicioSesionPage {
   }
   
 
-
-
   async mostrarMensaje(mensaje: string): Promise<void> {
     const toast = await this.toastController.create({
       message: mensaje,
       duration: 2000, // Duración en milisegundos
-      position: 'top' // Posición en la pantalla
+      position: 'middle', // Posición en la pantalla
+      color: 'tertiary'
     });
     await toast.present();
   }
