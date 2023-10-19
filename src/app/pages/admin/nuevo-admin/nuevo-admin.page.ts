@@ -22,7 +22,7 @@ export class NuevoAdminPage implements OnInit {
   passwordValue: string = '';
   confirmPasswordValue: string = '';
   respuestaSeguridad: string = '';
-  idRol = 1;
+  idRol = 2;
   idVenta = 1;
   fotoU: string = '';
   usuarioPregunta: number = 0;
