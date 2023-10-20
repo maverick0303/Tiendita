@@ -40,29 +40,29 @@ export class AgregarPAdminPage implements OnInit {
     }
   ]
 
-  constructor(private router:Router, private db: BdserviceService,private cdr: ChangeDetectorRef) { }
+  constructor(private router: Router, private db: BdserviceService, private cdr: ChangeDetectorRef) { }
   insertar() {
-  // Make sure to replace 'selectedCategoryId' with the actual value you want to assign to 'idCategoria'.
-  const selectedCategoryId = this.categoriaPValue;
+    // Make sure to replace 'selectedCategoryId' with the actual value you want to assign to 'idCategoria'.
+    const selectedCategoryId = this.categoriaPValue;
 
-  this.db.insertarProducto(
-    
-    this.nombrePValue,
-    this.descripcionPValue,
-    this.precioPValue,
-    this.stockPValue,
-    this.imagenPValue,
-    selectedCategoryId
-  );
-}
+    this.db.insertarProducto(
 
-  
+      this.nombrePValue,
+      this.descripcionPValue,
+      this.precioPValue,
+      this.stockPValue,
+      this.imagenPValue,
+      selectedCategoryId
+    );
+  }
+
+
 
   ngOnInit() {
     //subscribo al observable de la BD
-    this.db.dbState().subscribe(res=>{
-      if(res){
-        this.db.fetchCategoria().subscribe(datos=>{
+    this.db.dbState().subscribe(res => {
+      if (res) {
+        this.db.fetchCategoria().subscribe(datos => {
           this.arregloCategoria = datos;
         })
       }
@@ -78,24 +78,20 @@ export class AgregarPAdminPage implements OnInit {
     this.loadProducts();
   }
 
-  
+
 
   limitarLongitudPrecio(event: any) {
     const maxLength = 10;
-    const minLength = 3;
     if (event.target.value.length > maxLength) {
       event.target.value = event.target.value.slice(0, maxLength);
       this.precioPValue = parseInt(event.target.value, 10);
     }
-    if (event.target.value.length < minLength) {
-      event.target.value = event.target.value.slice (0, minLength);
-      this.precioPValue = parseInt(event.target.value, 10);
-    }
-  } 
-  
+  }
+
+
   validatePrecio(precioValue: number) {
     const firstDigit = String(precioValue).charAt(0);
-  
+
     if (firstDigit === '0') {
       this.precioPValue = 1;
     }

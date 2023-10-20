@@ -38,18 +38,18 @@
         <div class="error-message" *ngIf="nombrePModel.invalid && (nombrePModel.dirty || nombrePModel.touched)">
           <p *ngIf="nombrePModel.errors?.['required']">El nombre del producto es obligatorio.</p>
           <p *ngIf="nombrePModel.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</p>
-          <p *ngIf="nombrePModel.errors?.['maxlength']">El nombre no debe exceder los 15 caracteres.</p>
+          <p *ngIf="nombrePModel.errors?.['maxlength']">El nombre no debe exceder los 150 caracteres.</p>
         </div>
         <!--esto es de la descripcion del producto-->
         <ion-textarea label="Descripcion:" labelPlacement="floating" fill="outline" type="text" name="descripcionP"
-          minlength="3" maxlength="150" required [(ngModel)]="descripcionPValue"
+          minlength="3" maxlength="1500" required [(ngModel)]="descripcionPValue"
           #descripcionPModel="ngModel"></ion-textarea><br>
         <!--VALIDACION-->
         <div class="error-message"
           *ngIf="descripcionPModel.invalid && (descripcionPModel.dirty || descripcionPModel.touched)">
           <p *ngIf="descripcionPModel.errors?.['required']">La descripción del producto es obligatorio.</p>
           <p *ngIf="descripcionPModel.errors?.['minlength']">La descripción debe tener al menos 3 caracteres.</p>
-          <p *ngIf="descripcionPModel.errors?.['maxlength']">La descripción no debe exceder los 15 caracteres.</p>
+          <p *ngIf="descripcionPModel.errors?.['maxlength']">La descripción no debe exceder los 1500 caracteres.</p>
         </div>
         <!--precio del producto:-->
         <ion-input label="Precio del producto:" label-placement="floating" fill="outline" type="number" name="precioP"
@@ -74,7 +74,7 @@
         </div>
         <!--STOCK DEL PRODUCTO-->
         <ion-input label="Stock del producto:" label-placement="floating" fill="outline" type="number" name="stockP"
-          min="0" required [(ngModel)]="stockPValue" #stockPModel="ngModel"></ion-input><br>
+          min="1" required [(ngModel)]="stockPValue" #stockPModel="ngModel"></ion-input><br>
         <!--VALIDACION-->
         <div class="error-message" *ngIf="!stockPModel.valid && (stockPModel.dirty || stockPModel.touched)">
           <p *ngIf="stockPModel.errors?.['required']">El stock del producto es obligatorio.</p>
