@@ -10,15 +10,19 @@
 }
 
 .fixed-bottom-menu ion-icon {
-  color: #0d0d0d;
   font-size: 25px; /* Ajusta el tamaño de los íconos según sea necesario */
-  margin-right: 10px; /* Espacio entre los íconos y el texto, ajusta según sea necesario */
+  margin-top: 7px;
+  margin-left: 15px;
+  margin-right: 25px;
 }
 
 ion-tab-button {
   font-size: 15px;
   color: #0d0d0d;
 }
-ion-tabs{
-  --ion-background-color:#79F2E6;
+
+ion-tabs {
+  --ion-background-color: white;
 }
+
+

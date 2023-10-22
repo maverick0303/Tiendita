@@ -1,110 +1,76 @@
 /* Estilos generales para las tarjetas */
 .card-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 20px;
-    /* Ajusta el margen de pantalla */
-  }
-  
-  .custom-card {
-    background: #010626;
-    box-shadow: 6px 2px 6px #79F2E6;
-    display: flex;
-    flex-direction: column; /* Coloca el contenido en columna */
-    align-items: center;
-    width: 90%; /* Aumenta el ancho de la tarjeta al 80% del contenedor */
-    text-align: center; /* Centra el texto horizontalmente */
-  }
-  
-  .card-image {
-    width: 100%;
-    max-width: 350px;
-    object-fit: cover;
-  }
-  
-  .card-content {
-    flex: 1; /* Ocupa el espacio restante */
-    padding: 20px;
-    text-align: left;
-    width: 100%; /* Ajusta el ancho del contenido */
-  }
-  
-  /* Estilos para los títulos y textos */
-  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Tilt+Prism&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
-  
-  p {
-    color: white;
-    font-size: 18px;
-    text-align: left;
-    font-family: 'ADLaM Display';
-  }
-  
-  .subti {
-    font-size: 18px;
-    font-family: 'Poppins', sans-serif;
-    color: white;
-  }
-  
-  .titulo {
-    color: white;
-    font-family: 'DM Serif Display', serif;
-    font-size: 25px;
-    text-align: left;
-    margin: 5px;
-  }
-  
- 
-  ion-content {
-    --background: url(https://w0.peakpx.com/wallpaper/939/832/HD-wallpaper-deep-purple-blue-design-pink-premium.jpg);
-
-  }
-  //esto es del toolbar:
-//COSA DEL CARRITO::after
-:host {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.demo-section+.demo-section {
-  margin-top: 16px;
-}
-
-.demo-section {
-  margin-right: 20px;
-  /* Agrega margen al lado derecho del primer elemento */
-  display: flex;
-  /* Utiliza flexbox para alinear verticalmente los elementos */
-  align-items: center;
-  /* Centra verticalmente los elementos */
-}
-
-//BUSQUEDA:
-/* Estilos para el contenedor que contiene el ion-searchbar */
-.search-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  --ion-background-color: #0D0D0D;
+  padding: 0 20px;
+  /* Ajusta el margen de pantalla */
 }
 
-ion-searchbar {
-  color: white;
-  width: 400px;
-  text-align: left;
+.custom-card {
+  background: #F3F2F0;
+  box-shadow:6px 2px 6px black;
+  display: flex;
+  flex-direction: column;
+  /* Coloca el contenido en columna */
+  align-items: center;
+  width: 90%;
+  /* Aumenta el ancho de la tarjeta al 80% del contenedor */
+  text-align: center;
+  /* Centra el texto horizontalmente */
 }
+
+.card-image {
+  width: 100%;
+  max-width: 350px;
+  object-fit: cover;
+}
+
+.card-content {
+  flex: 1;
+  /* Ocupa el espacio restante */
+  padding: 20px;
+  text-align: left;
+  width: 100%;
+  /* Ajusta el ancho del contenido */
+}
+
+/* Estilos para los títulos y textos */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Tilt+Prism&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+
+p {
+  color: black;
+  font-size: 18px;
+  text-align: left;
+  font-family: 'ADLaM Display';
+}
+
+.subti {
+  font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+  color: black;
+}
+
+.titulo {
+  color: black;
+  font-family: 'DM Serif Display', serif;
+  font-size: 25px;
+  text-align: left;
+  margin: 5px;
+}
+/*esto es el fondo de la pagina*/
+
+ion-content {
+  --background-color: #F3F2F0;
+}
+
+//esto es del toolbar:
 
 ion-toolbar {
-  --background: #79F2E6;
-}
+  --background-color: #F3F2F0;
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.2); /* Ajusta los valores según tus preferencias */
 
-.no-product-message {
-  text-align: center;
-  color: red;
-  font-weight: bold;
-  margin-top: 2px;
-  font-size: 35px;
+
 }

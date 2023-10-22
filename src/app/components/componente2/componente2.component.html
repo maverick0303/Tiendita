@@ -6,7 +6,7 @@
       <p (click)="datosPersonales()">
         <ion-tab-button>
           <ion-icon name="person-circle-outline"></ion-icon>
-          Mi perfil
+          Perfil
         </ion-tab-button>
       </p>
       <!--INICIO DE LA TIENDA-->
@@ -19,26 +19,31 @@
       <!--HISTORIAL-->
       <p (click)="historial()" *ngIf="idRol === 1" >
         <ion-tab-button>
-          <ion-icon name="document-text-outline"></ion-icon>
-          Mis compras
+          <ion-icon name="bag-handle-outline"></ion-icon>
+          Historial
+        </ion-tab-button>
+      </p>
+      <!--LOGO DE AGREGAR PRODUCTO-->
+      <p *ngIf=" idRol == 2" [routerLink]="['/agregar-p-admin']">
+        <ion-tab-button>
+          <ion-icon name="add-circle-outline"></ion-icon>
+          Agregar Prod.
         </ion-tab-button>
       </p>
       <!--CERRAR LA SESION-->
       <p *ngIf="idRol === 1 || idRol === 2" (click)="cerrarSesion()">
         <ion-tab-button>
           <ion-icon name="log-out-outline"></ion-icon>
-          Cerrar sesión
+          Salir
         </ion-tab-button>
       </p>
       <!--Inicio de sesion-->
       <p *ngIf="idRol !== 1 && idRol !== 2" [routerLink]="['/inicio-sesion']">
         <ion-tab-button>
-          <ion-icon name="log-out-outline"></ion-icon>
-          Iniciar Sesión
+          <ion-icon name="log-in-outline"></ion-icon>
+          Entrar
         </ion-tab-button>
       </p>
-      
-
     </ion-tab-bar>
   </ion-tabs>
 </div>
