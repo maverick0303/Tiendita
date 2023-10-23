@@ -1,93 +1,86 @@
-//esto es del toolbar:
-//COSA DEL CARRITO::after
-:host {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.demo-section+.demo-section {
-  margin-top: 16px;
-}
-
-.demo-section {
-  margin-right: 20px;
-  /* Agrega margen al lado derecho del primer elemento */
-  display: flex;
-  /* Utiliza flexbox para alinear verticalmente los elementos */
-  align-items: center;
-  /* Centra verticalmente los elementos */
-}
-
-//BUSQUEDA:
-/* Estilos para el contenedor que contiene el ion-searchbar */
-.search-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  --ion-background-color: #0D0D0D;
-}
-
-ion-searchbar {
-  color: white;
-  width: 400px;
-  text-align: left;
-}
-
-ion-toolbar {
-  --background: #79F2E6;
-}
-
-.no-product-message {
-  text-align: center;
-  color: red;
-  font-weight: bold;
-  margin-top: 2px;
-  font-size: 35px;
-}
-/*fondo*/
+/*FONDO*/
 ion-content {
-  --background: url(https://w0.peakpx.com/wallpaper/939/832/HD-wallpaper-deep-purple-blue-design-pink-premium.jpg);
-}
-/*boton*/
-ion-button{
-  --background: #7630D9;
-}
-.guardar{
-  --background: rgb(255, 0, 128);
+  --background: white;
 }
 
-/* Estilo para los mensajes de error */
+/*botones*/
+.btn {
+  --background: #3D2652;
+}
+
+ion-button {
+  --background: #0C909C;
+}
+
+ion-input {
+  font-size: 15px;
+  color: black;
+  font-family: 'Montserrat';
+
+  ion-input label {
+    font-weight: bold;
+  }
+}
+
+ion-textarea {
+  font-size: 15px;
+  color: black;
+  font-family: 'Montserrat';
+}
+
+ion-select {
+  font-size: 15px;
+  color: black;
+  font-family: 'Montserrat';
+}
+
+ion-select-option {
+  font-size: 15px;
+  color: black;
+  font-family: 'Montserrat';
+}
+
 .error-message {
-color: red;
-font-size: 14px;
-margin-top: 5px;
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
 }
 
-/*card*/
 ion-card {
-  box-shadow: 6px 2px 6px #79F2E6;
-  background-color: #010626;
-  margin: 10px ;
-
+  border-radius: 16px;
+  border: 3px solid #3D2652;
+  box-shadow: #3D2652;
+  width: 380px;
+  margin-top: 55px;
 }
 
-img {
-  width: auto;
-  height: auto;
+p {
+  font-size: 14px;
+  font-family: 'Montserrat';
+  font-weight: bold;
 }
-ion-grid ion-card {
-  margin: 15px;
-}
-@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Tilt+Prism&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
 
+/*titulos*/
+
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=DM+Serif+Display&family=Montserrat:wght@300&display=swap');
 
 ion-card-title {
-  border-color: #532473;
-  color: white;
-  font-size: 35px;
-  margin: 8px;
+  color: black;
   text-align: center;
-  font-family: 'DM Serif Display', serif;
+  margin: 5px;
+  font-family: 'Montserrat';
+}
+
+
+/* Ajustes para dispositivos específicos */
+@media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px) {
+  ion-card-title {
+    font-size: 30px;
+    /* Ajusta el tamaño del título para pantallas más pequeñas */
+  }
+
+  .ion-title {
+    font-size: 40px;
+    /* Ajusta el tamaño del título para pantallas más pequeñas */
+  }
 }
