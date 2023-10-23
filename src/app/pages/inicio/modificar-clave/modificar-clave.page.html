@@ -1,53 +1,42 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <!-- LOGO DEL CARRITO -->
-    <div class="demo-section" slot="end">
-      <mat-icon [matBadge]="0" matBadgeColor="primary" [routerLink]="['/carrito']" aria-hidden="false">
-        <ion-icon style="width: 30px; height: 30px; margin-right: 80px; color: #0D0D0D;;" name="cart-outline"></ion-icon>
-      </mat-icon>
-    </div>
-  
-    <!-- MENÚ DE BÚSQUEDA -->
-    <ion-buttons slot="start">
-      <ion-menu-button style="color: #0D0D0D;;"></ion-menu-button>
-    </ion-buttons>
-  
-    <!-- EL BUSCADOR -->
-    <div class="search-container">
-      <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchProducts()"></ion-searchbar>
-    </div>
+    <ion-card-title>Modificar contraseña</ion-card-title>
   </ion-toolbar>
 </ion-header>
 
 <!--#############################################PRODUCTOS################################################-->
 
 <ion-content class="fondo" [fullscreen]="true">
-  <ion-grid>
-    <ion-row>
-      <ion-card>
-        <ion-card-title>Modificar contraseña</ion-card-title>
-        <ion-card-content>
-          <!--NOMBRE-->
-  
-          <!-- CONTRASEÑA -->
-          <ion-input label="Contraseña:" type="password" label-placement="floating" fill="outline"
-          placeholder="M1@password" name="contrasena1" required [(ngModel)]="contrasena1"
-          (ionBlur)="verificarFormulario()" (keydown)="valiPassword($event)">
-        </ion-input>
-        <!-- VALIDACION CONTRASEÑA -->
-        <div class="error-message" *ngIf="errors.password">{{ errors.password }}</div>
-        <br><br>
-        <!-- CONFIRMAR CONTRASEÑA -->
-        <ion-input label="Confirmar Contraseña:" type="password" label-placement="floating" fill="outline"
-          placeholder="Confirmar contraseña" name="contrasena2" required [(ngModel)]="contrasena2"
-          (ionBlur)="verificarFormulario()">
+  <ion-card>
+    <ion-card-content>
+      <!-- CONTRASEÑA -->
+      <ion-input label="Contraseña:" type="password" label-placement="floating" fill="outline" placeholder="M1@password"
+        name="contrasena1" required [(ngModel)]="contrasena1" (ionBlur)="verificarFormulario()"
+        (keydown)="valiPassword($event)">
       </ion-input>
-          <!--BOTON-->
-          <ion-button (click)="insertar()" [routerLink]="['/inicio-sesion']"
-            [disabled]="!formularioValido">Cambiar la contraseña</ion-button>
-        </ion-card-content>
-      </ion-card>
-    </ion-row>
-  </ion-grid>
+      <!-- VALIDACION CONTRASEÑA -->
+      <div class="error-message" *ngIf="errors.password">{{ errors.password }}</div>
+      <br>
+      <!-- CONFIRMAR CONTRASEÑA -->
+      <ion-input label="Confirmar Contraseña:" type="password" label-placement="floating" fill="outline"
+        placeholder="Confirmar contraseña" name="contrasena2" required [(ngModel)]="contrasena2"
+        (ionBlur)="verificarFormulario()">
+      </ion-input>
+      <!-- VALIDACION CONTRASEÑA -->
+      <div class="error-message" *ngIf="errors.confirmPassword">{{ errors.confirmPassword }}</div>
+    </ion-card-content>
+  </ion-card>
+  <!--MENSAJE DE LAS CONDICIONES QUE REQUIERE LA CONTRASEÑA-->
+  <ion-card class="sin">
+    * Al menos 1 Mayuscula <br>
+    * Al menos un caracter especial <br>
+    * Al menos 1 minuscula <br>
+    * minimo 5 caracteres maximo 15 <br>
+  </ion-card>
+  <!--BOTON-->
+  <ion-button style="align-content: center;align-items: center;display: flex;"
+  (click)="insertar()" [routerLink]="['/inicio-sesion']" [disabled]="!formularioValido">Cambiar 
+    contraseña</ion-button>
+  <!--MENU DE ABAJO-->
   <app-componente2></app-componente2>
 </ion-content>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
-import { Producto } from 'src/app/services/producto';
+
 
 @Component({
   selector: 'app-datos-personales',
@@ -16,21 +16,6 @@ export class DatosPersonalesPage implements OnInit {
   emailEnviado: string = '';
   rutEnviado: string = '';
   fotoUEnviada: string = '';
-
-  arregloProductosResultado: Producto[] = []; // Nueva propiedad
-  searchTerm: string = '';
-  arregloProductos: any = [
-    {
-      idProducto: '',
-      nombreProducto: '',
-      descripcion: '',
-      precio: '',
-      stock: '',
-      nombreCategoria: '',
-      foto: ''
-    }
-  ]
-
 
   constructor(private router: Router, private bd: BdserviceService) {
     this.idEnviado = localStorage.getItem('idUsuario')!;
@@ -60,17 +45,6 @@ export class DatosPersonalesPage implements OnInit {
         this.fotoUEnviada = usuario.fotoU;
       }
     });
-    // Subscribo al observable de la BD
-    this.bd.dbState().subscribe(res => {
-      if (res) {
-        this.bd.fetchProducto().subscribe(datos => {
-          this.arregloProductos = datos;
-          this.arregloProductosResultado = datos;
-        })
-      }
-    })
-    this.loadProducts();
-
   }
 
   async modificar() {
@@ -81,11 +55,7 @@ export class DatosPersonalesPage implements OnInit {
       correoU: this.emailEnviado,
       rutU: this.rutEnviado,
       fotoU: this.fotoUEnviada
-      
-
     };
-
-    
 
     let navigationExtras: NavigationExtras = {
       state: {
@@ -96,13 +66,10 @@ export class DatosPersonalesPage implements OnInit {
         emailEnviado: this.emailEnviado,
         fotoUEnviada: this.fotoUEnviada
       }
-      
     };
-
     this.router.navigate(['/m-datos'], navigationExtras);
   }
   
-
   onKeyDown(event: KeyboardEvent) {
     if (event.key === ' ') {
       event.preventDefault();
@@ -111,33 +78,4 @@ export class DatosPersonalesPage implements OnInit {
   get imageData(): any {
     return this.bd.imageData;
   }
-  loadProducts() {
-    // Llama a la función para cargar productos (deberías tener esta función en tu servicio)
-    this.bd.fetchProducto().subscribe((productos) => {
-      this.arregloProductos = productos;
-    });
-  }
-
-  searchProducts() {
-    if (this.searchTerm.trim() !== '') {
-      // Utiliza la función buscarProductoPorNombre para buscar productos
-      this.bd
-        .buscarProductoPorNombre(this.searchTerm.trim())
-        .then((productos) => {
-          this.arregloProductosResultado = productos;
-
-          // Redirige al usuario a la página de la tienda con el término de búsqueda como parámetro de consulta
-          this.router.navigate(['/tienda'], {
-            queryParams: { searchTerm: this.searchTerm.trim() }
-          });
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    } else {
-      // Si el término de búsqueda está vacío, muestra todos los productos
-      this.arregloProductosResultado = this.arregloProductos;
-    }
-  }
 }
-
