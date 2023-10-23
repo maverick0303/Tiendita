@@ -1,29 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <!-- LOGO DEL CARRITO -->
-    <div class="demo-section" slot="end">
-      <mat-icon [matBadge]="0" matBadgeColor="primary" [routerLink]="['/carrito']" aria-hidden="false">
-        <ion-icon style="width: 30px; height: 30px; margin-right: 80px; color: #0D0D0D;;" name="cart-outline"></ion-icon>
-      </mat-icon>
-    </div>
-  
-    <!-- MENÚ DE BÚSQUEDA -->
-    <ion-buttons slot="start">
-      <ion-menu-button style="color: #0D0D0D;;"></ion-menu-button>
-    </ion-buttons>
-  
-    <!-- EL BUSCADOR -->
-    <div class="search-container">
-      <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="searchProducts()"></ion-searchbar>
-    </div>
+    <ion-card-title>Editar producto</ion-card-title>
   </ion-toolbar>
 </ion-header>
 
 <!--#############################################PRODUCTOS################################################-->
 
 <ion-content class="fondo" [fullscreen]="true">
-  <ion-card-title>Editar producto</ion-card-title>
-  <br>
   <ion-grid>
     <ion-card>
       <!--AQUI VA LA FOTO-->
@@ -81,14 +64,13 @@
           <p *ngIf="stockPModel.errors?.['min']">El stock debe ser mayor o igual a 0.</p>
         </div>
         <!--tomar la foto-->
-        <ion-button (click)="takePicture()" expand="full" >Tomar/subir Foto</ion-button>
+        <ion-button (click)="takePicture()" expand="full">Tomar/subir Foto</ion-button>
         <!--boton-->
-        <ion-button expand="full" class="guardar" (click)="editar()" [routerLink]="['/tienda']"
+        <ion-button expand="full" class="btn" (click)="editar()" [routerLink]="['/tienda']"
           [disabled]="!nombrePModel.valid || !descripcionPModel.valid || !precioPModel.valid  || !categoriaPModel.valid ||!imagenPValue ">
-          agregar producto</ion-button>
+          Modificar producto</ion-button>
       </ion-card-content>
     </ion-card>
   </ion-grid>
-  <br><br><br><br>
   <app-componente2></app-componente2>
 </ion-content>
