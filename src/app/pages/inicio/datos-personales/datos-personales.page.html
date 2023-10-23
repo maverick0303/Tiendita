@@ -1,66 +1,53 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <!-- LOGO DEL CARRITO -->
-    <div class="demo-section" slot="end">
-      <mat-icon [matBadge]="0" matBadgeColor="primary" [routerLink]="['/carrito']" aria-hidden="false">
-        <ion-icon style="width: 30px; height: 30px; margin-right: 80px; color: #0D0D0D;;" name="cart-outline"></ion-icon>
-      </mat-icon>
-    </div>
-  
-    <!-- MENÚ DE BÚSQUEDA -->
-    <ion-buttons slot="start">
-      <ion-menu-button style="color: #0D0D0D;;"></ion-menu-button>
-    </ion-buttons>
-  
-    <!-- EL BUSCADOR -->
-    <div class="search-container">
-      <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchProducts()"></ion-searchbar>
-    </div>
+    <ion-card-title style="text-align: center;">Mis datos</ion-card-title>
   </ion-toolbar>
 </ion-header>
 
 <!--#############################################PRODUCTOS################################################-->
 
 <ion-content class="fondo" [fullscreen]="true">
-  <ion-avatar class="circle">
-    <img  [src]="fotoUEnviada" />
-  </ion-avatar>
-  <br><br><br>
-  <ion-grid>
-    <ion-row>
-      <ion-card>
-        <ion-card-title>Datos personales</ion-card-title>
-        <ion-card-content>
-          <!--NOMBRE-->
-          <div class="input-row">
-            <ion-input label="Nombre:" type="text" name="nombre" minlength="3" maxlength="15" required
-              (keydown)="onKeyDown($event)" [(ngModel)]="nombreEnviado" #nombreEnviadoModel="ngModel"
-              label-placement="floating" fill="outline" [value]="nombreEnviado" disabled>
-            </ion-input>
-          </div>
-          <br>
-          <!--APELLIDO-->
-          <ion-input label="Apellido:" type="text" name="apellido" minlength="3" maxlength="15" required
-            (keydown)="onKeyDown($event)" [(ngModel)]="apellidoEnviado" #apellidoEnviadoModel="ngModel"
-            label-placement="floating" fill="outline" [value]="apellidoEnviado" disabled>
-          </ion-input>
-          <br>
-          <!--CORREO-->
-          <ion-input label="Correo electrónico:" type="email" label-placement="floating" required readonly
-            fill="outline" placeholder="profeponga7@gmail.com" [value]="emailEnviado" disabled></ion-input>
-          <br>
-          <!--RUT-->
-          <ion-input label="Rut:" type="text" label-placement="floating" fill="outline" [value]="rutEnviado" required
-            readonly placeholder="26.098.098-2" disabled></ion-input>
-          <br>
-          <!--BOTON-->
-          <ion-button expand="50px" style="align-content: center;align-items: center;display: flex;"
-           [routerLink]="['/modificar-clave']">Modificar contraseña</ion-button>
-          <ion-button expand="50px" style="align-content: center;align-items: center;display: flex;"
-          (click)="modificar()">Modificar datos</ion-button>
-        </ion-card-content>
-      </ion-card>
-    </ion-row>
-  </ion-grid>
+  <!--CARD DE LA FOTO-->
+  <ion-card class="sin">
+    <ion-avatar>
+      <img [src]="fotoUEnviada || 'https://ionicframework.com/docs/img/demos/avatar.svg'" />
+    </ion-avatar>
+    <!--MENSAJE DE BIENVENIDA Y CON EL NOMBRE DEL USUARIO: -->
+    <p>Hola querid@</p><br>
+  </ion-card>
+
+  <!--LOS DATOS DEL USUARIO-->
+  <ion-card>
+    <ion-card-content>
+      <!--NOMBRE-->
+      <div class="input-row">
+        <ion-input label="Nombre:" type="text" name="nombre" minlength="3" maxlength="15" 
+          (keydown)="onKeyDown($event)" [(ngModel)]="nombreEnviado" #nombreEnviadoModel="ngModel"
+          label-placement="floating" fill="outline" [value]="nombreEnviado" >
+        </ion-input>
+      </div>
+      <br>
+      <!--APELLIDO-->
+      <ion-input label="Apellido:" type="text" name="apellido" minlength="3" maxlength="15" 
+        (keydown)="onKeyDown($event)" [(ngModel)]="apellidoEnviado" #apellidoEnviadoModel="ngModel"
+        label-placement="floating" fill="outline" [value]="apellidoEnviado" >
+      </ion-input>
+      <br>
+      <!--CORREO-->
+      <ion-input label="Correo electrónico:" type="email" label-placement="floating"  readonly fill="outline"
+        [value]="emailEnviado" ></ion-input>
+      <br>
+      <!--RUT-->
+      <ion-input label="Rut:" type="text" label-placement="floating" fill="outline" [value]="rutEnviado" 
+        readonly placeholder="26.098.098-2" ></ion-input>
+      <br>
+      <!--BOTON-->
+      <ion-button  style="align-content: center;align-items: center;display: flex;"
+        [routerLink]="['/modificar-clave']">Modificar contraseña</ion-button>
+      <ion-button class="btn" style="align-content: center;align-items: center;display: flex;"
+        (click)="modificar()">Modificar datos</ion-button>
+    </ion-card-content>
+  </ion-card>
+  <!--MENU DE ABAJO-->
   <app-componente2></app-componente2>
 </ion-content>
