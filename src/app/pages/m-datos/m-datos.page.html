@@ -1,76 +1,54 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <!-- LOGO DEL CARRITO -->
-    <div class="demo-section" slot="end">
-      <mat-icon [matBadge]="0" matBadgeColor="primary" [routerLink]="['/carrito']" aria-hidden="false">
-        <ion-icon style="width: 30px; height: 30px; margin-right: 80px; color: #0D0D0D;;"
-          name="cart-outline"></ion-icon>
-      </mat-icon>
-    </div>
-
-    <!-- MENÚ DE BÚSQUEDA -->
-    <ion-buttons slot="start">
-      <ion-menu-button style="color: #0D0D0D;;"></ion-menu-button>
-    </ion-buttons>
-
-    <!-- EL BUSCADOR -->
-    <div class="search-container">
-      <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchProducts()"></ion-searchbar>
-    </div>
+    <ion-card-title>Modificar Datos</ion-card-title>
   </ion-toolbar>
 </ion-header>
 
 <!--#############################################PRODUCTOS################################################-->
 
 <ion-content class="fondo" [fullscreen]="true">
-  <ion-avatar class="circle" name="fotoUEnviada">
-    <img [src]="fotoUEnviada" />
-  </ion-avatar>
-  <ion-button (click)="takePicture()" class="edit"><ion-icon name="create-outline"></ion-icon></ion-button>
-  <br><br>
-  <ion-grid>
-    <ion-row>
-      <ion-card>
-        <ion-card-title>Datos personales</ion-card-title>
-        <ion-card-content>
-          <!-- NOMBRE -->
-          <div class="input-row">
-            <ion-input label="Nombre:" type="text" label-placement="floating" fill="outline" placeholder="Mario"
-              name="nombreEnviado" required [(ngModel)]="nombreEnviado" (ionBlur)="verificarFormulario()"
-              (keydown)="valiNombre($event)">
-            </ion-input>
-          </div>
-          <!-- VALIDACION -->
-          <div class="error-message" *ngIf="errors.nombreEnviado">{{ errors.nombreEnviado }}</div><br>
-          <!-- APELLIDO -->
-          <ion-input label="Apellido:" type="text" label-placement="floating" fill="outline" placeholder="Lopez"
-            name="apellidoEnviado" required [(ngModel)]="apellidoEnviado" (ionBlur)="verificarFormulario()"
-            (keydown)="ValiApellido($event)">
-          </ion-input>
-          <!-- VALIDACION -->
-          <div class="error-message" *ngIf="errors.apellidoEnviado">{{ errors.apellidoEnviado }}</div><br>
-          <!-- EMAIL -->
-          <ion-input label="Email:" type="text" label-placement="floating" fill="outline" name="email"
-            [(ngModel)]="emailEnviado" disabled></ion-input><br>
-          <!-- RUT -->
-          <ion-input label="RUT:" type="text" label-placement="floating" fill="outline" name="rut" disabled
-            [(ngModel)]="rutEnviado">
-          </ion-input><br>
-          <!--MENSAJE DE ADVERTENCIA-->
-          <div class="icon-text-container">
-            <ion-icon style="font-size: 55px;color: rgb(95, 94, 94); margin-right: 10px;"
-              name="alert-circle-outline"></ion-icon>
-            <p style="color: rgb(95, 94, 94); font-size: 12px;">
-              Por seguridad no puede cambiar ni su correo ni su rut, si requiere de cambio cree otra cuenta.
-            </p>
-          </div>
-          <!--BOTON-->
-          <ion-button expand="50px" style="align-items: center;display: flex;" [disabled]="!formularioValido"
-            class="guardar" (click)="editar()" [routerLink]="['/datos-personales']">Guardar cambios</ion-button>
+  <ion-card class="sin">
+    <ion-avatar>
+      <img [src]="fotoUEnviada || 'https://ionicframework.com/docs/img/demos/avatar.svg'" />
+    </ion-avatar>
+    <ion-button (click)="takePicture()" class="foto"><ion-icon name="camera-outline"></ion-icon></ion-button>
+  </ion-card>
 
-        </ion-card-content>
-      </ion-card>
-    </ion-row>
-  </ion-grid>
+  <ion-card>
+    <ion-card-content>
+      <!-- NOMBRE -->
+      <div class="input-row">
+        <ion-input label="Nombre:" type="text" label-placement="floating" fill="outline" placeholder="Mario"
+          name="nombreEnviado" required [(ngModel)]="nombreEnviado" (ionBlur)="verificarFormulario()"
+          (keydown)="valiNombre($event)">
+        </ion-input>
+      </div>
+      <!-- VALIDACION -->
+      <div class="error-message" *ngIf="errors.nombreEnviado">{{ errors.nombreEnviado }}</div><br>
+      <!-- APELLIDO -->
+      <ion-input label="Apellido:" type="text" label-placement="floating" fill="outline" placeholder="Lopez"
+        name="apellidoEnviado" required [(ngModel)]="apellidoEnviado" (ionBlur)="verificarFormulario()"
+        (keydown)="ValiApellido($event)">
+      </ion-input>
+      <!-- VALIDACION -->
+      <div class="error-message" *ngIf="errors.apellidoEnviado">{{ errors.apellidoEnviado }}</div><br>
+      <!-- EMAIL -->
+      <ion-input label="Email:" type="text" label-placement="floating" fill="outline" name="email"
+        [(ngModel)]="emailEnviado" disabled></ion-input><br>
+      <!-- RUT -->
+      <ion-input label="RUT:" type="text" label-placement="floating" fill="outline" name="rut" disabled
+        [(ngModel)]="rutEnviado">
+      </ion-input><br>
+      <!--MENSAJE DE ADVERTENCIA-->
+      <ion-icon class="aletar" name="alert-circle-outline"></ion-icon>
+      <p class="x">
+        Por seguridad no puede cambiar ni su correo ni su rut, si requiere de cambio cree otra cuenta.
+      </p>
+      <!--BOTON-->
+      <ion-button expand="50px" style="align-items: center;display: flex;" [disabled]="!formularioValido"
+        class="guardar" (click)="editar()" [routerLink]="['/datos-personales']">Guardar cambios</ion-button>
+
+    </ion-card-content>
+  </ion-card>
   <app-componente2></app-componente2>
 </ion-content>
