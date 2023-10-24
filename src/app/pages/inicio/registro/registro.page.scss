@@ -1,70 +1,97 @@
-/* este es el fondo */
+/*FONDO*/
 ion-content {
-  --background: url(https://w0.peakpx.com/wallpaper/939/832/HD-wallpaper-deep-purple-blue-design-pink-premium.jpg);
-
+  --background: white;
 }
 
-ion-input {
-  width: 100%;
-}
-
-/* Centrar el contenido verticalmente y horizontalmente */
-.fondo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  /* Color de fondo */
-}
-
-/* Estilo para las tarjetas de entrada */
-.input-card {
-  width: 80%;
-  max-width: 400px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 6px 2px 6px #79F2E6;
-  background-color: #222222;
-  margin: 35px auto 0 auto;
-  /* Margen superior de 40px, centrar horizontalmente */
-}
-
-/* Estilo para los mensajes de error */
-.error-message {
-  color: red;
-  font-size: 14px;
-  margin-top: 5px;
-}
-
-/* Personaliza el borde y el padding de los campos de entrada */
-ion-input {
-  --padding-start: 15px;
-  --padding-end: 15px;
-  --border-radius: 8px;
-  line-height: 2.5;
-  /* Ajusta el valor según tus preferencias */
-  margin-bottom: 10px;
-  background-color: #222222;
-}
-
-ion-card-title {
-  color: white;
-  text-align: center;
-  font-size: 40px;
-  /* Ajusta el tamaño del título según tus preferencias */
-}
-
-p {
-  text-align: justify;
-  color:white;
-}
-a{
-  color:white;
+/*botones*/
+.btn {
+  --background: #7CC9CF;
 }
 
 ion-button {
-  --background: #79F2E6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  --background: #0C909C;
+}
+
+ion-input {
+  font-size: 15px;
+  color: black;
+  font-family: 'Montserrat';
+  margin-bottom: 15px;
+
+  ion-input label {
+    font-weight: bold;
+  }
+}
+
+ion-select {
+  font-size: 15px;
+  color: black;
+  font-family: 'Montserrat';
+  margin-bottom: 15px;
+}
+
+ion-select-option {
+  font-size: 15px;
+  color: black;
+  font-family: 'Montserrat';
+  margin-bottom: 15px;
+}
+
+
+ion-card {
+  border-radius: 16px;
+  border: 3px solid #3D2652;
+  box-shadow: #3D2652;
+  width: 380px;
+  margin-top: 45px;
+  margin-bottom: 45px;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 15px;
+  font-family: 'Montserrat';
+}
+
+.x{
+  margin-left: 45px;
+  margin-top: -50px; 
+  font-family: 'Montserrat';
+  font-weight: bold;
+  color: rgb(95, 94, 94);
+  font-size: 12px; 
+}
+
+.sin {
+  border: none;
+  box-shadow: none;
+  height: 170px;
+}
+
+/*titulos*/
+
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=DM+Serif+Display&family=Montserrat:wght@300&display=swap');
+
+ion-card-title {
+  color: black;
+  text-align: center;
+  margin: 5px;
+  font-family: 'Montserrat';
+  font-size: 45px;
+}
+
+//el avatar del usuario:
+
+/* Ajustes para dispositivos específicos */
+@media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px) {
+  ion-card-title {
+    font-size: 30px;
+    /* Ajusta el tamaño del título para pantallas más pequeñas */
+  }
+
+  .ion-title {
+    font-size: 40px;
+    /* Ajusta el tamaño del título para pantallas más pequeñas */
+  }
 }
