@@ -1,22 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=DM+Serif+Display&family=Montserrat:wght@300&display=swap');
+
 ion-menu::part(backdrop) {
-  --ion-background-color: rgb(12, 6, 39);
+  background-color:#0C909C;
 }
 
 ion-menu::part(container) {
-  --ion-background-color: #222222;
-  box-shadow: 16px 16px 16px #F079F2;
+  border-radius: 0 20px 20px 0;
+
+  box-shadow: 4px 0px 16px #7CC9CF;
 }
 
 ion-item {
   ion-label{
-    color: white;
+    color: #050025;
+    font-family: 'Montserrat';
   }
   ion-icon{
-    color: white;
+    color: #050025;
   }
   
 }
 
+ion-toolbar{
+  --background: #050025;
+}
+
 ion-title{
   color: white;
+  font-family: 'Montserrat';
+  
 }
