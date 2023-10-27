@@ -1,153 +1,92 @@
-/* Estilos generales para las tarjetas */
+/* Estilos para pantallas grandes */
 .card-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 20px;
-    /* Ajusta el margen de pantalla */
-  }
-  
-  .custom-card {
-    background: #010626;
-    display: flex;
-    flex-direction: column; /* Coloca el contenido en columna */
-    align-items: center;
-    width: 90%; /* Aumenta el ancho de la tarjeta al 70% del contenedor */
-    text-align: center; /* Centra el texto horizontalmente */
-  }
-  
-  .card-image {
-    width: 100%;
-    max-width: 320px;
-    object-fit: cover;
-  }
-  
-  .card-content {
-    flex: 1; /* Ocupa el espacio restante */
-    padding: 20px;
-    text-align: left;
-    width: 100%; /* Ajusta el ancho del contenido */
-  }
-  
-  /* Estilos para los títulos y textos */
-  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Tilt+Prism&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
-  
-  p {
-    color: white;
-    font-size: 18px;
-    text-align: left;
-    font-family: 'ADLaM Display';
-  }
-  
-  .subti {
-    font-size: 18px;
-    font-family: 'Poppins', sans-serif;
-    color: white;
-  }
-  
-  .titulo {
-    color: white;
-    font-family: 'DM Serif Display', serif;
-    font-size: 55px;
-    text-align: left;
-    margin: 5px;
-  }
-  .btn{
-    --background: #79F2E6;
-    color: #0d0d0d;
-  }
-  
-  /* Ajustes para pantallas más pequeñas */
-  @media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px) {
-    .btn {
-      font-size: 25px;
-    }
-  
-    .custom-card {
-      align-items: center;
-      flex-direction: column;
-      width: 150%;
-    }
-  
-    .card-content {
-      text-align: left;
-      flex: 1;
-      padding: 20px;
-    }
-  
-    .card-image {
-      width: 100%;
-      max-width: 650px;
-      object-fit: cover;
-    }
-  
-    .titulo {
-      font-size: 30px; /* Ajusta el tamaño del título para pantallas más pequeñas */
-    }
-  
-    p {
-      font-size: 20px;
-    }
-    
-    .subti {
-      font-size: 20px;
-    }
-  }
-  
-  ion-card-title {
-    color: white;
-  }
-  
-  /* FONDO */
-  ion-content {
-    --background: url(https://w0.peakpx.com/wallpaper/939/832/HD-wallpaper-deep-purple-blue-design-pink-premium.jpg);
-  }
-  //esto es del toolbar:
-//COSA DEL CARRITO::after
-:host {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.demo-section+.demo-section {
-  margin-top: 16px;
-}
-
-.demo-section {
-  margin-right: 20px;
-  /* Agrega margen al lado derecho del primer elemento */
-  display: flex;
-  /* Utiliza flexbox para alinear verticalmente los elementos */
-  align-items: center;
-  /* Centra verticalmente los elementos */
-}
-
-//BUSQUEDA:
-/* Estilos para el contenedor que contiene el ion-searchbar */
-.search-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  --ion-background-color: #0D0D0D;
+  padding: 0 20px;
+  margin-bottom: 5px;
 }
 
-ion-searchbar {
-  color: white;
-  width: 400px;
+.custom-card {
+  border: 3px solid #050025;
+  background: #050025;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-left: auto;
+}
+
+.card-image {
+  width: 100%;
+  max-width: 500px;
+  object-fit: cover;
+}
+
+.card-content {
+  flex: 10;
+  padding: 20px;
   text-align: left;
+  align-self: flex-start;
 }
 
-ion-toolbar {
-  --background: #79F2E6;
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=DM+Serif+Display&family=Montserrat:wght@300&display=swap');
+p {
+  color: white;
+  font-size: 20px;
+  text-align: left;
+  font-family: 'Montserrat';
 }
 
-.no-product-message {
-  text-align: center;
-  color: red;
-  font-weight: bold;
-  margin-top: 2px;
-  font-size: 35px;
+.subti {
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+}
+
+.titulo {
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 20px;
+  text-align: left;
+  margin: 2px;
+}
+
+.btn {
+  --background: #7CC9CF;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  width: 25%;
+}
+
+ion-content {
+  --background: white;
+
+}
+
+/* Estilos para pantallas pequeñas (por ejemplo, cuando el ancho de la ventana es menor a 768px) */
+@media screen and (max-width: 480px) {
+  .custom-card {
+      flex-direction: column;
+      /* Cambia la dirección de flex para apilar contenido */
+      width: 100%;
+  }
+
+  .card-image {
+      width: 100%;
+      max-width: none;
+      /* Elimina la limitación del ancho máximo */
+  }
+
+  .card-content {
+      padding: 10px;
+      /* Reduce el espacio alrededor del contenido */
+      text-align: center;
+      /* Centra el texto en pantallas más pequeñas */
+  }
+
+  .titulo {
+      font-size: 25px;
+      /* Reduce el tamaño del título */
+  }
 }

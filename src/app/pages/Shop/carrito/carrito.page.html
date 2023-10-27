@@ -1,21 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <!-- LOGO DEL CARRITO -->
-    <div class="demo-section" slot="end">
-      <mat-icon [matBadge]="0" matBadgeColor="primary" [routerLink]="['/carrito']" aria-hidden="false">
-        <ion-icon style="width: 30px; height: 30px; margin-right: 80px; color: #0D0D0D;;" name="cart-outline"></ion-icon>
-      </mat-icon>
-    </div>
-  
-    <!-- MENÚ DE BÚSQUEDA -->
-    <ion-buttons slot="start">
-      <ion-menu-button style="color: #0D0D0D;;"></ion-menu-button>
-    </ion-buttons>
-  
-    <!-- EL BUSCADOR -->
-    <div class="search-container">
-      <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchProducts()"></ion-searchbar>
-    </div>
+    <ion-card-title class="titulo">Mi carrito</ion-card-title>
   </ion-toolbar>
 </ion-header>
 <!--#######################################################################################################-->
@@ -27,7 +12,7 @@
     <ion-card-content class="card-content">
       <ion-card-title class="titulo" style="font-size: 25px;">{{ producto.nombreProducto }}</ion-card-title>
       <br>
-      <p class="subti" style="font-size: 25px;">Precio: ${{ producto.precio }}</p>
+      <p class="subti" style="font-size: 25px;">Precio: {{ producto.precio | currency:'$':true:'4.0-0' }}</p>
       <!-- Otras propiedades del producto -->
       <p>Cantidad: {{ cantidad }}</p>
       <ion-button class="btn" shape="round" (click)="aumentarCantidad(producto)">+</ion-button>
@@ -37,14 +22,16 @@
   </ion-card>
 
   <!-- Verificar si el carrito está vacío y mostrar mensaje de advertencia -->
-  <ion-toast *ngIf="productosEnCarrito.length === 0" color="warning" message="El carrito está vacío. Agregue productos antes de finalizar la compra." duration="3000"></ion-toast>
+  <ion-toast *ngIf="productosEnCarrito.length === 0" color="warning"
+    message="El carrito está vacío. Agregue productos antes de finalizar la compra." duration="3000"></ion-toast>
 
   <!--ESTO ES DE LA COMPRA FINAL-->
   <div class="card-container">
     <ion-card class="custom-card">
       <ion-card-content class="card-content">
-        <ion-card-title style="font-size: 25px;">Total</ion-card-title>
-        <p class="subti" style="font-size: 30px;">$ {{ calcularTotal() }}</p>
+        <ion-card-title style="font-size: 25px; color:white; text-align: left;">Total</ion-card-title>
+        <p class="subti" style="font-size: 30px; text-align: center;"> {{ calcularTotal() | currency:'$':true:'4.0-0' }}
+        </p>
         <!--BOTONES-->
         <ion-button color="danger" (click)="vaciarCarrito()"><ion-icon name="trash-bin-outline"></ion-icon></ion-button>
         <ion-button (click)="finalizarCompra()">Finalizar compra</ion-button>
