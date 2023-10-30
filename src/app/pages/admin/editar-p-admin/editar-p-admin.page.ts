@@ -52,12 +52,12 @@ export class EditarPAdminPage implements OnInit {
         this.imagenPValue = this.router.getCurrentNavigation()?.extras?.state?.['fotoEnviado'];
         this.categoriaPValue = this.router.getCurrentNavigation()?.extras?.state?.['nombreCategoriaEnviado'];
       }
-    })
+    });
   }
   
   editar() {
     this.db.actualizarProducto(
-      this.idProducto, // Agrega el idProducto
+      this.idProducto,
       this.nombrePValue,
       this.descripcionPValue,
       this.precioPValue,
@@ -65,7 +65,7 @@ export class EditarPAdminPage implements OnInit {
       this.imagenPValue,
       this.categoriaPValue
     );
-    this.db.presentAlert("Producto Actualizado");
+    this.db.presentAlertMD("Producto Actualizado");
     this.router.navigate(['/tienda']);
   }
 

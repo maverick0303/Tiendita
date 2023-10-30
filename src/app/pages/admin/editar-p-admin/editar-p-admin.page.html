@@ -66,7 +66,7 @@
         <!--tomar la foto-->
         <ion-button (click)="takePicture()" expand="full">Tomar/subir Foto</ion-button>
         <!--boton-->
-        <ion-button expand="full" class="btn" (click)="editar()" [routerLink]="['/tienda']"
+        <ion-button expand="full" class="btn" (click)="editar()"
           [disabled]="!nombrePModel.valid || !descripcionPModel.valid || !precioPModel.valid  || !categoriaPModel.valid ||!imagenPValue ">
           Modificar producto</ion-button>
       </ion-card-content>

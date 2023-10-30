@@ -54,6 +54,8 @@ export class AgregarPAdminPage implements OnInit {
       this.imagenPValue,
       selectedCategoryId
     );
+    this.db.mostrarAlerta("Producto Agregado con exito");
+    this.router.navigate(['/tienda']);
   }
 
 

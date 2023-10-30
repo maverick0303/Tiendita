@@ -59,9 +59,6 @@ export class NuevoAdminPage implements OnInit {
         });
       }
     });
-
-
-
   }
 
   valiNombre(event: KeyboardEvent) {
