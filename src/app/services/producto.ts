@@ -5,4 +5,5 @@ export class Producto {
     precio = "";
     stock = "";
     foto = "";
+    idCategoria = "";
 }

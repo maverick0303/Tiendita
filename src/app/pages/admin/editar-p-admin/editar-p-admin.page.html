@@ -47,7 +47,7 @@
         <ion-select label="Categorias" label-placement="floating" fill="outline" required name="categoriaP"
           [(ngModel)]="categoriaPValue" #categoriaPModel="ngModel">
           <ion-select-option *ngFor="let categoria of arregloCategoria"
-            value="{{ categoria.idCategoria }}">{{categoria.nombreCategoria}}
+            [value]=" categoria.idCategoria ">{{categoria.nombreCategoria}}
           </ion-select-option>
         </ion-select><br>
         <!--VALIDACION-->

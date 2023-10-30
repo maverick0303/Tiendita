@@ -24,7 +24,8 @@ export class TiendaPage implements OnInit {
       precio: '',
       stock: '',
       nombreCategoria: '',
-      foto: ''
+      foto: '',
+      idCategoria: '',
     }
   ]
 
@@ -61,7 +62,7 @@ export class TiendaPage implements OnInit {
         precioEnviado: producto.precio,
         stockEnviado: producto.stock,
         fotoEnviado: producto.foto,
-        nombreCategoriaEnviado: producto.nombreCategoria,
+        nombreCategoriaEnviado: producto.idCategoria,
       }
     };
     this.router.navigate(['/editar-p-admin'], navigationExtras);

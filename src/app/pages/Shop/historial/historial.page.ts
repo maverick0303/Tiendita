@@ -74,12 +74,7 @@ export class HistorialPage implements OnInit {
     this.bd.obtenerDatosVentas().then((ventas) => {
       // Aquí tienes los datos de ventas (tabla "venta")
       this.arregloProductosResultado = ventas;
-      
-      // Llama a la función para obtener datos de ventas con detalles (tabla "detalle")
-      this.bd.getVentasConDetalles().then((ventasConDetalles) => {
-        // Combina los resultados de ambas consultas
-        this.arregloProductosResultado = this.arregloProductosResultado.concat(ventasConDetalles);
-      });
+
     });
   }
 }  
