@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
-  appName: 'Tienda',
+  appName: 'TimeTech ',
   webDir: 'www',
   server: {
     androidScheme: 'https'
