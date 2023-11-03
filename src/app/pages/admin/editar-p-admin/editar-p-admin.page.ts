@@ -33,7 +33,8 @@ export class EditarPAdminPage implements OnInit {
   stockPValue: number = 1;
   imagenPValue: any;
   categoriaPValue: string = '';
-
+  idRol: number;
+  idUsuario: number;
   arregloCategoria: any = [
     {
       idCategoria: '',
@@ -53,6 +54,8 @@ export class EditarPAdminPage implements OnInit {
         this.categoriaPValue = this.router.getCurrentNavigation()?.extras?.state?.['nombreCategoriaEnviado'];
       }
     });
+    this.idUsuario = parseInt(localStorage.getItem('idUsuario')!);
+    this.idRol = parseInt(localStorage.getItem('idRol')!);
   }
   
   editar() {

@@ -24,7 +24,8 @@ export class AgregarPAdminPage implements OnInit {
     }
   ]
 
-
+  idUsuario: number;
+  idRol: number;
   image2: any;
   nombrePValue: string = '';
   descripcionPValue: string = '';
@@ -40,7 +41,10 @@ export class AgregarPAdminPage implements OnInit {
     }
   ]
 
-  constructor(private router: Router, private db: BdserviceService, private cdr: ChangeDetectorRef) { }
+  constructor(private router: Router, private db: BdserviceService, private cdr: ChangeDetectorRef) {
+    this.idUsuario = parseInt(localStorage.getItem('idUsuario')!);
+    this.idRol = parseInt(localStorage.getItem('idRol')!);
+   }
   insertar() {
     // Make sure to replace 'selectedCategoryId' with the actual value you want to assign to 'idCategoria'.
     const selectedCategoryId = this.categoriaPValue;
