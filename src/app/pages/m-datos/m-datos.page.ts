@@ -10,20 +10,9 @@ import { Producto } from 'src/app/services/producto';
   styleUrls: ['./m-datos.page.scss'],
 })
 export class MDatosPage implements OnInit {
-  arregloProductosResultado: Producto[] = []; // Nueva propiedad
-  searchTerm: string = '';
+  
   imageData: any;
-  arregloProductos: any = [
-    {
-      idProducto: '',
-      nombreProducto: '',
-      descripcion: '',
-      precio: '',
-      stock: '',
-      nombreCategoria: '',
-      foto: ''
-    }
-  ]
+
   iduser = "";
 
   nombreEnviado: string = '';
@@ -76,18 +65,7 @@ export class MDatosPage implements OnInit {
         this.fotoUEnviada = usuario.fotoU;
       }
     });
-    // Subscribo al observable de la BD
-    this.bd.dbState().subscribe(res => {
-      if (res) {
-        this.bd.fetchProducto().subscribe(datos => {
-          this.arregloProductos = datos;
-          this.arregloProductosResultado = datos;
-        })
-      }
-    })
-    this.loadProducts();
   }
-
 
 
   onKeyDown(event: KeyboardEvent) {
@@ -165,34 +143,4 @@ export class MDatosPage implements OnInit {
       console.error('Error al tomar la foto:', error); 
   }
 }
-  loadProducts() {
-    // Llama a la función para cargar productos (deberías tener esta función en tu servicio)
-    this.bd.fetchProducto().subscribe((productos) => {
-      this.arregloProductos = productos;
-    });
-  }
-
-  searchProducts() {
-    if (this.searchTerm.trim() !== '') {
-      // Utiliza la función buscarProductoPorNombre para buscar productos
-      this.bd
-        .buscarProductoPorNombre(this.searchTerm.trim())
-        .then((productos) => {
-          this.arregloProductosResultado = productos;
-
-          // Redirige al usuario a la página de la tienda con el término de búsqueda como parámetro de consulta
-          this.router.navigate(['/tienda'], {
-            queryParams: { searchTerm: this.searchTerm.trim() }
-          });
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    } else {
-      // Si el término de búsqueda está vacío, muestra todos los productos
-      this.arregloProductosResultado = this.arregloProductos;
-    }
-  }
 }
-
-

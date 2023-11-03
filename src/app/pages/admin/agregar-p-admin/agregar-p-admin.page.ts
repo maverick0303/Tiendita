@@ -10,8 +10,7 @@ import { Producto } from 'src/app/services/producto';
   styleUrls: ['./agregar-p-admin.page.scss'],
 })
 export class AgregarPAdminPage implements OnInit {
-  arregloProductosResultado: Producto[] = []; // Nueva propiedad
-  searchTerm: string = '';
+  
   arregloProductos: any = [
     {
       idProducto: '',
@@ -73,15 +72,15 @@ export class AgregarPAdminPage implements OnInit {
         })
       }
     })
+    //Esto es de los productos:
     this.db.dbState().subscribe(res => {
       if (res) {
         this.db.fetchProducto().subscribe(datos => {
           this.arregloProductos = datos;
-          this.arregloProductosResultado = datos;
+          
         })
       }
     })
-    this.loadProducts();
   }
 
 
@@ -119,32 +118,5 @@ export class AgregarPAdminPage implements OnInit {
       console.error('Error al tomar la foto:', error);
     }
   }
-  loadProducts() {
-    // Llama a la función para cargar productos (deberías tener esta función en tu servicio)
-    this.db.fetchProducto().subscribe((productos) => {
-      this.arregloProductos = productos;
-    });
-  }
-
-  searchProducts() {
-    if (this.searchTerm.trim() !== '') {
-      // Utiliza la función buscarProductoPorNombre para buscar productos
-      this.db
-        .buscarProductoPorNombre(this.searchTerm.trim())
-        .then((productos) => {
-          this.arregloProductosResultado = productos;
-
-          // Redirige al usuario a la página de la tienda con el término de búsqueda como parámetro de consulta
-          this.router.navigate(['/tienda'], {
-            queryParams: { searchTerm: this.searchTerm.trim() }
-          });
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    } else {
-      // Si el término de búsqueda está vacío, muestra todos los productos
-      this.arregloProductosResultado = this.arregloProductos;
-    }
-  }
+  
 }
