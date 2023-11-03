@@ -11,14 +11,15 @@
     <ion-avatar>
       <img [src]="fotoUEnviada || 'https://ionicframework.com/docs/img/demos/avatar.svg'" />
     </ion-avatar>
+    <p>cambiar su fotito</p>
     <ion-button (click)="takePicture()" class="foto"><ion-icon name="camera-outline"></ion-icon></ion-button>
   </ion-card>
 
   <ion-card>
     <ion-card-content>
       <!-- NOMBRE -->
-      <div class="input-row">
-        <ion-input label="Nombre:" type="text" label-placement="floating" fill="outline" placeholder="Mario"
+      <div class="input-row" class="con">
+        <ion-input label="Nombre:"  type="text" label-placement="floating" fill="outline" placeholder="Mario"
           name="nombreEnviado" required [(ngModel)]="nombreEnviado" (ionBlur)="verificarFormulario()"
           (keydown)="valiNombre($event)">
         </ion-input>
@@ -26,7 +27,7 @@
       <!-- VALIDACION -->
       <div class="error-message" *ngIf="errors.nombreEnviado">{{ errors.nombreEnviado }}</div><br>
       <!-- APELLIDO -->
-      <ion-input label="Apellido:" type="text" label-placement="floating" fill="outline" placeholder="Lopez"
+      <ion-input label="Apellido:" class="con" type="text" label-placement="floating" fill="outline" placeholder="Lopez"
         name="apellidoEnviado" required [(ngModel)]="apellidoEnviado" (ionBlur)="verificarFormulario()"
         (keydown)="ValiApellido($event)">
       </ion-input>

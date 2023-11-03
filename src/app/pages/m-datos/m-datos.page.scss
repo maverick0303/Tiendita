@@ -22,16 +22,10 @@ ion-input {
   }
 }
 
-.foto{
-  margin-top: -60px;
-  margin-right: 120pxz;
-  --background:#3D2652;
-}
-
-.aletar{
-  font-size: 35px;
-  color: rgb(95, 94, 94);
-  margin-left: 5px ;
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
 }
 
 ion-card {
@@ -39,23 +33,21 @@ ion-card {
   border: 3px solid #3D2652;
   box-shadow: #3D2652;
   width: 380px;
-  margin-top: 10px;
-  margin-bottom: 65px;
+  margin-top: 35px;
 }
 
-.error-message {
-  color: red;
-  font-size: 14px;
-  margin-top: 5px;
-}
-
-.x{
-  margin-left: 45px;
+p {
+  font-size: 20px;
+  margin-left: 150px;
   margin-top: -50px; 
   font-family: 'Montserrat';
   font-weight: bold;
-  color: rgb(95, 94, 94);
-  font-size: 12px; 
+}
+
+.foto{
+  margin-left: 230px;
+  margin-top: -120px; 
+
 }
 
 .sin {
@@ -72,15 +64,28 @@ ion-card-title {
   color: black;
   text-align: center;
   margin: 5px;
-  font-family: 'Montserrat';
 }
+.x{
+  margin-left: 45px;
+  margin-top: -50px; 
+  font-family: 'Montserrat';
+  font-weight: bold;
+  color: rgb(95, 94, 94);
+  font-size: 12px; 
+}
+
+.aletar{
+  font-size: 35px;
+  color: rgb(95, 94, 94);
+  margin-left: 5px ;
+}
+
 
 //el avatar del usuario:
 ion-avatar {
   width: 150px;
   height: 150px;
   border: 5px solid #0C909C;
-  margin-left: 125px;
 
   ion-avatar img {
     width: 150px;
