@@ -9,6 +9,7 @@ import { Producto } from 'src/app/services/producto';
 })
 export class RelojsmaPage implements OnInit {
   searchTerm: string = '';
+  rol: number;
   arregloProductosResultado: Producto[] = []; // Nueva propiedad
   ArregloMostrar:  any =[
     {
@@ -21,7 +22,8 @@ export class RelojsmaPage implements OnInit {
   }
   ]
 
-  constructor(private activedRouter: ActivatedRoute, private router: Router, private bd: BdserviceService) {}
+  constructor(private activedRouter: ActivatedRoute, private router: Router, private bd: BdserviceService) 
+  {this.rol = parseInt(localStorage.getItem('idRol')!);}
 
   ngOnInit() {
    //subscribo al observable de la BD
@@ -79,6 +81,21 @@ searchProducts() {
   // Función para verificar si no se encontraron resultados en la búsqueda
   noProductFound(): boolean {
     return this.searchTerm.trim() !== '' && this.arregloProductosResultado.length === 0;
+  }
+
+  modificar(producto: any) {
+    let navigationExtras: NavigationExtras = {
+      state: {
+        idEnviado: producto.idProducto,
+        nombreEnviado: producto.nombreProducto,
+        descripcionEnviado: producto.descripcion,
+        precioEnviado: producto.precio,
+        stockEnviado: producto.stock,
+        fotoEnviado: producto.foto,
+        nombreCategoriaEnviado: producto.idCategoria,
+      }
+    };
+    this.router.navigate(['/editar-p-admin'], navigationExtras);
   }
 }
 

@@ -9,19 +9,40 @@ import { Producto } from 'src/app/services/producto';
 })
 export class RelojAnaPage implements OnInit {
   searchTerm: string = '';
+  rol: number;
   arregloProductosResultado: Producto[] = []; // Nueva propiedad
-  ArregloMostrar: any = [
+  ArregloMostrar:  any =[
     {
-      idProducto: '',
-      nombreProducto: '',
-      precio: '',
-      foto: '',
-      nombreCategoria: '',
-      idCategoria: '',
-    }
+    idProducto: '',
+    nombreProducto:'',
+    precio: '',
+    foto:'',
+    nombreCategoria:'',
+    idCategoria: '',
+  }
   ]
 
-  constructor(private activedRouter: ActivatedRoute, private router: Router, private bd: BdserviceService) {}
+  constructor(private activedRouter: ActivatedRoute, private router: Router, private bd: BdserviceService) 
+  {this.rol = parseInt(localStorage.getItem('idRol')!);}
+
+  ngOnInit() {
+   //subscribo al observable de la BD
+   this.bd.dbState().subscribe(res => {
+    if (res) {
+      this.bd.mostrarCategoria(2);
+      this.bd.fecthMostrarProducto().subscribe(datos => {
+        this.ArregloMostrar = datos;
+        this.arregloProductosResultado = datos;
+      })
+    }
+  })
+}
+  loadProducts() {
+    // Llama a la función para cargar productos (deberías tener esta función en tu servicio)
+    this.bd.fetchProducto().subscribe((productos) => {
+      this.ArregloMostrar = productos;
+    });
+  }
 
   ver(producto: any){
     let navigationExtras: NavigationExtras = {
@@ -38,25 +59,6 @@ export class RelojAnaPage implements OnInit {
     this.router.navigate(['/ag3'], navigationExtras);
   }
 
-
-  ngOnInit() {
-    //subscribo al observable de la BD
-    this.bd.dbState().subscribe(res => {
-      if (res) {
-        this.bd.mostrarCategoria(2);
-        this.bd.fecthMostrarProducto().subscribe(datos => {
-          this.ArregloMostrar = datos;
-          this.arregloProductosResultado = datos;
-        })
-      }
-    })
-  }
-  loadProducts() {
-    // Llama a la función para cargar productos (deberías tener esta función en tu servicio)
-    this.bd.fetchProducto().subscribe((productos) => {
-      this.ArregloMostrar = productos;
-    });
-  }
 
 searchProducts() {
   if (this.searchTerm.trim() !== '') {
@@ -80,4 +82,20 @@ searchProducts() {
   noProductFound(): boolean {
     return this.searchTerm.trim() !== '' && this.arregloProductosResultado.length === 0;
   }
+
+  modificar(producto: any) {
+    let navigationExtras: NavigationExtras = {
+      state: {
+        idEnviado: producto.idProducto,
+        nombreEnviado: producto.nombreProducto,
+        descripcionEnviado: producto.descripcion,
+        precioEnviado: producto.precio,
+        stockEnviado: producto.stock,
+        fotoEnviado: producto.foto,
+        nombreCategoriaEnviado: producto.idCategoria,
+      }
+    };
+    this.router.navigate(['/editar-p-admin'], navigationExtras);
+  }
 }
+

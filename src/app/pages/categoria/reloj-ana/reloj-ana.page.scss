@@ -33,16 +33,6 @@ ion-img.img-container {
 /* Estilos para los títulos y textos */
 @import url('https://fonts.googleapis.com/css2?family=Creepster&family=DM+Serif+Display&family=Montserrat:wght@300&display=swap');
 
-ion-card-content {
-  margin: auto;
-}
-.otro{
-  --background: #7CC9CF;
-}
-.otro2{
-  --background: #3D2652;
-}
-
 ion-card-title {
   color: black;
   font-size: 35px;
@@ -50,10 +40,6 @@ ion-card-title {
   margin-top: 5px;
   text-align: center;
   font-family: 'Montserrat';
-}
-
-.center-buttons {
-  margin-left: 130px;
 }
 
 .ion-title {
@@ -72,7 +58,7 @@ ion-content {
 /* Estilos para las pipes (tabla) */
 p{
   align-items: center;
-  text-align: center;
+  text-align: left;
   color: white;
   font-size: 30px;
   font-family: 'Montserrat';
@@ -80,11 +66,10 @@ p{
 
 //botones:
 ion-button {
-  --background: #0C909C;
-}
-
-.borrar {
-  --background: red;
+  --background: #7CC9CF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 //esto es del toolbar:
@@ -126,12 +111,4 @@ ion-searchbar {
 
 ion-toolbar {
   --background: #ffffff;
-}
-
-.no-product-message {
-  text-align: center;
-  color: red;
-  font-weight: bold;
-  margin-top: 2px;
-  font-size: 35px;
 }

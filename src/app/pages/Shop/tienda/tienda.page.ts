@@ -30,13 +30,8 @@ export class TiendaPage implements OnInit {
   ]
 
   constructor(
-    private activeRoute: ActivatedRoute,
-    private router: Router,
-    private bd: BdserviceService,
-    private carritoService: CarritoService
-  ) {
-    this.rol = parseInt(localStorage.getItem('idRol')!);
-  }
+    private activeRoute: ActivatedRoute,private router: Router,private bd: BdserviceService,private carritoService: CarritoService)
+    {this.rol = parseInt(localStorage.getItem('idRol')!);}
 
   ngOnInit() {
     // Subscribo al observable de la BD

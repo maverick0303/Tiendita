@@ -1,11 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    
     <!-- LOGO DEL CARRITO -->
-    <div class="demo-section" slot="end">
+    <div *ngIf="rol == 1" class="demo-section" slot="end">
       <ion-icon style="width: 35px; height: 35px; color: #050025;" name="cart-outline"
         [routerLink]="['/carrito']"></ion-icon>
     </div>
-
 
     <!-- MENÚ DE BÚSQUEDA -->
     <ion-buttons slot="start">
@@ -20,14 +20,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- Vista del ADMIN -->
-  <ion-card-title *ngIf="rol == 2" style="font-size: 40px;">Bienvenido Administrador</ion-card-title>
-  <ion-button *ngIf="rol == 2" class="center-buttons" [routerLink]="['/lista-usuario']">Ver usuarios</ion-button>
 
   <!-- Vista del USUARIO -->
   <ion-grid>
     <ion-card-title>TimeTech Audible</ion-card-title>
-    <br>
+    <ion-card-title *ngIf="rol == 2" style="font-size: 25px;">Bienvenido Administrador</ion-card-title>
+    <!-- Vista del ADMIN -->
+    <ion-button *ngIf="rol == 2" class="center-buttons" [routerLink]="['/lista-usuario']">Ver usuarios</ion-button>
     <!-- Mostrar mensaje de error si no se encuentran productos -->
     <div *ngIf="noProductFound()" class="no-product-message">No existe ese producto</div>
 
