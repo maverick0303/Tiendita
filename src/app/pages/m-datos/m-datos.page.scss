@@ -5,11 +5,11 @@ ion-content {
 
 /*botones*/
 .btn {
-  --background: #7CC9CF;
+  --background: #050025;
 }
 
 ion-button {
-  --background: #0C909C;
+  --background: #050025;
 }
 
 ion-input {
@@ -45,9 +45,11 @@ p {
 }
 
 .foto{
-  margin-left: 230px;
-  margin-top: -120px; 
-
+  font-size: 10px;
+  margin-left: 150px;
+  margin-top: -50px; 
+  font-family: 'Montserrat';
+  font-weight: bold;
 }
 
 .sin {
