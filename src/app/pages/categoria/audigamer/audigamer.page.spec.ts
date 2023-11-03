@@ -5,11 +5,11 @@ describe('AudigamerPage', () => {
   let component: AudigamerPage;
   let fixture: ComponentFixture<AudigamerPage>;
 
-  beforeEach(async(() => {
+  beforeEach(async() => {
     fixture = TestBed.createComponent(AudigamerPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
