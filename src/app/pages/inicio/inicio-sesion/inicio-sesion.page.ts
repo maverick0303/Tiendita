@@ -21,46 +21,14 @@ export class InicioSesionPage {
   hide = true;
   email = new FormControl('', [Validators.required, Validators.email]);
 
-  @ViewChildren(IonCard, { read: ElementRef }) cardElements!: QueryList<ElementRef<HTMLIonCardElement>>;
-  private animation: Animation | null = null;
-
   constructor(private router: Router, private toastController: ToastController, private animationCtrl: AnimationController, private bdService: BdserviceService) {
     this.rol = parseInt(localStorage.getItem('idRol')!);
   }
 
-  ngAfterViewInit() {
-    const card = this.animationCtrl
-      .create()
-      .addElement(this.cardElements.first.nativeElement)
-      .duration(750)
-      .beforeStyles({
-        filter: 'invert(75%)',
-      })
-      .beforeClearStyles(['box-shadow'])
-      .afterStyles({
-        'box-shadow': 'rgba(255, 0, 50, 0.4) 0px 4px 16px 6px',
-      })
-      .afterClearStyles(['filter'])
-      .keyframes([
-        { offset: 0, transform: 'scale(1)' },
-        { offset: 0.7, transform: 'scale(1.5)' },
-        { offset: 1, transform: 'scale(1)' },
-      ]);
-
-    this.animation = this.animationCtrl.create().duration(750).addAnimation([card]);
-  }
-
-  play() {
-    if (this.animation) {
-      this.animation.play();
-    }
-  }
-  
   toggleHide() {
     this.hide = !this.hide;
   }
   
-
   getErrorMessage() {
     if (this.email.hasError('required')) {
       return 'No debe quedar vacío el campo';
@@ -78,7 +46,6 @@ export class InicioSesionPage {
     await toast.present();
   }
 
-
   async iniciarSesion(): Promise<void> {
     if (!this.correo || !this.contrasena) {
       this.mostrarMensaje('Por favor, ingrese correo y contraseña');
@@ -89,6 +56,7 @@ export class InicioSesionPage {
       this.mostrarMensaje('Credenciales inválidas');
       return;
     }
+
     localStorage.setItem('idUsuario', usuario.idUsuario.toString());
     localStorage.setItem('nombreU', usuario.nombreU);
     localStorage.setItem('apellidoU', usuario.apellidoU);
@@ -101,7 +69,6 @@ export class InicioSesionPage {
     this.router.navigate(['/tienda', { idRol: usuario.idRol }]);
   }
   
-
   async mostrarMensaje(mensaje: string): Promise<void> {
     const toast = await this.toastController.create({
       message: mensaje,

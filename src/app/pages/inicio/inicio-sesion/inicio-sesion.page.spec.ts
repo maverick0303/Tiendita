@@ -1,4 +1,4 @@
-/*import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InicioSesionPage } from './inicio-sesion.page';
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -29,4 +29,4 @@ describe('InicioSesionPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});*/
+});
