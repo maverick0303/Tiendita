@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
 import { Producto } from 'src/app/services/producto';
 @Component({
@@ -22,7 +22,7 @@ export class AudiinaPage implements OnInit {
     }
   ]
 
-  constructor(private activedRouter: ActivatedRoute, private router: Router, private bd: BdserviceService) 
+  constructor(private router: Router, private bd: BdserviceService) 
   {{this.rol = parseInt(localStorage.getItem('idRol')!);}}
 
   ver(producto: any){
