@@ -3,5 +3,4 @@ export class Detalle {
     cantidad = "";
     subtotal = "";
     precio = "";
-    stock = "";
 }

@@ -7,6 +7,7 @@ import { Pregunta } from './pregunta';
 import { Detalle } from './detalle';
 import { Producto } from './producto';
 import { Categoria } from './categoria';
+import { Venta } from './venta';
 import { Storage } from '@ionic/storage-angular';
 
 
@@ -113,6 +114,37 @@ export class BdserviceService {
   fecthMostrarProducto(): Observable<Producto[]> {
     return this.listaMostrarProducto.asObservable();
   }
+  fetchCarrito(): Observable<Venta[]>{
+    return this.listaVenta.asObservable();
+  }
+
+  listaVenta = new BehaviorSubject([]);
+
+  Venta() {
+    return this.database.executeSql('SELECT * FROM Venta', []).then(res => {
+      //variable para almacenar la consulta
+      let items: Venta[] = [];
+      //validar si existen registros
+      if (res.rows.length > 0) {
+        //procedo a recorrer y guardar
+        for (var i = 0; i < res.rows.length; i++) {
+          //agrego los datos a mi variable
+          items.push({
+            idVenta: res.rows.item(i).idVenta,
+            totalV: res.rows.item(i).totalV,
+            carritoV: res.rows.item(i).carritoV,
+            fechaV: res.rows.item(i).fechaV,
+            idUsuario: res.rows.item(i).idUsuario
+          })
+        }
+      }
+      //actualizar mi observable
+      this.listaVenta.next(items as any);
+
+    })
+  }
+
+
   //carrito:
   insertarVenta(totalV: number, carritoV: string, idUsuario: number) {
     const fechaActual = new Date().toLocaleDateString(); // Obtiene la fecha actual en formato de cadena (por ejemplo, "10/09/2023")
@@ -302,7 +334,7 @@ export class BdserviceService {
   }
 
   buscarDetalle() {
-    return this.database.executeSql('SELECT * FROM detalle', []).then(res => {
+    return this.database.executeSql('SELECT * FROM detalle where idVenta = ?', []).then(res => {
       //variable para almacenar la consulta
       let items: Detalle[] = [];
       //validar si existen registros
@@ -314,8 +346,7 @@ export class BdserviceService {
             idDetalle: res.rows.item(i).idDetalle,
             cantidad: res.rows.item(i).cantidadProducto,
             subtotal: res.rows.item(i).subtotalD,
-            precio: res.rows.item(i).precio,
-            stock: res.rows.item(i).stock
+            precio: res.rows.item(i).precio
           })
         }
       }

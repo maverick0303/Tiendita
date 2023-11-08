@@ -3,9 +3,6 @@ import { Router, NavigationExtras } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { FormControl, Validators } from '@angular/forms';
 import { AnimationController } from '@ionic/angular';
-import { QueryList } from '@angular/core';
-import { Animation } from '@ionic/angular';
-import { IonCard } from '@ionic/angular';
 import { BdserviceService } from 'src/app/services/bd.service';
 
 
@@ -15,14 +12,16 @@ import { BdserviceService } from 'src/app/services/bd.service';
   styleUrls: ['./inicio-sesion.page.scss'],
 })
 export class InicioSesionPage {
+  idVenta: number = 0;
   rol: number = 0;
   correo: string = '';
   contrasena: string = '';
   hide = true;
   email = new FormControl('', [Validators.required, Validators.email]);
 
-  constructor(private router: Router, private toastController: ToastController, private animationCtrl: AnimationController, private bdService: BdserviceService) {
+  constructor(private router: Router, private toastController: ToastController, private bdService: BdserviceService) {
     this.rol = parseInt(localStorage.getItem('idRol')!);
+    this.idVenta = parseInt(localStorage.getItem('idVenta')!);
   }
 
   toggleHide() {
@@ -64,6 +63,7 @@ export class InicioSesionPage {
     localStorage.setItem('rutU', usuario.rutU);
     localStorage.setItem('idRol', usuario.idRol.toString());
     localStorage.setItem('fotoU', usuario.fotoU);
+    localStorage.setItem('idVenta', usuario.idVenta.toString());
     this.bdService.isDBReady.next(true);
     this.mostrarMensaje('Inicio de sesión exitoso');
     this.router.navigate(['/tienda', { idRol: usuario.idRol }]);
