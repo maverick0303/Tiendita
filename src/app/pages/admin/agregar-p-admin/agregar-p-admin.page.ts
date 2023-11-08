@@ -45,7 +45,7 @@ export class AgregarPAdminPage implements OnInit {
     this.idRol = parseInt(localStorage.getItem('idRol')!);
    }
   insertar() {
-    // Make sure to replace 'selectedCategoryId' with the actual value you want to assign to 'idCategoria'.
+    
     const selectedCategoryId = this.categoriaPValue;
 
     this.db.insertarProducto(
@@ -58,7 +58,18 @@ export class AgregarPAdminPage implements OnInit {
       selectedCategoryId
     );
     this.db.mostrarAlerta("Producto Agregado con exito");
-    this.router.navigate(['/tienda']);
+
+    const idRolActual = this.idRol; // Obtener el idRol actual
+    const idRolEnLocalStorage = parseInt(localStorage.getItem('idRol')!); // Obtener el idRol del localStorage
+  
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        idRol: idRolActual,
+        idRolEnLocalStorage: idRolEnLocalStorage // Agregar el idRol del localStorage como parámetro
+      }
+    };
+  
+    this.router.navigate(['/tienda'], navigationExtras);
   }
 
 

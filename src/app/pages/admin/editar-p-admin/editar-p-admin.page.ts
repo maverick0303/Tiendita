@@ -69,8 +69,22 @@ export class EditarPAdminPage implements OnInit {
       this.categoriaPValue
     );
     this.db.presentAlertMD("Producto Actualizado");
-    this.router.navigate(['/tienda']);
+  
+    const idRolActual = this.idRol; // Obtener el idRol actual
+    const idRolEnLocalStorage = parseInt(localStorage.getItem('idRol')!); // Obtener el idRol del localStorage
+  
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        idRol: idRolActual,
+        idRolEnLocalStorage: idRolEnLocalStorage // Agregar el idRol del localStorage como parámetro
+      }
+    };
+  
+    this.router.navigate(['/tienda'], navigationExtras);
   }
+  
+  
+  
 
 
 
