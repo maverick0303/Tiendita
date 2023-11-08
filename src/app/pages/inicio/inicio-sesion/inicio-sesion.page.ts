@@ -63,7 +63,7 @@ export class InicioSesionPage {
     localStorage.setItem('rutU', usuario.rutU);
     localStorage.setItem('idRol', usuario.idRol.toString());
     localStorage.setItem('fotoU', usuario.fotoU);
-    localStorage.setItem('idVenta', usuario.idVenta.toString());
+    this.bdService.buscarCarrito(usuario.idUsuario, 'Carrito');
     this.bdService.isDBReady.next(true);
     this.mostrarMensaje('Inicio de sesión exitoso');
     this.router.navigate(['/tienda', { idRol: usuario.idRol }]);

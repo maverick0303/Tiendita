@@ -3,4 +3,8 @@ export class Detalle {
     cantidad = "";
     subtotal = "";
     precio = "";
+    idVenta = "";
+    idProducto = "";
+    foto = "";
+    nombreProducto = "";
 }

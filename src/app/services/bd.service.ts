@@ -81,6 +81,10 @@ export class BdserviceService {
   listaCategoria = new BehaviorSubject([]);
   listaMostrarProducto = new BehaviorSubject([]);
 
+  total: number = 0;
+  carrito = "Carrito";
+  fecha = new Date().toLocaleDateString();
+  idUser: any;
 
   //variable para manipulación del estatus de la BD
   public isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -114,36 +118,78 @@ export class BdserviceService {
   fecthMostrarProducto(): Observable<Producto[]> {
     return this.listaMostrarProducto.asObservable();
   }
-  fetchCarrito(): Observable<Venta[]>{
-    return this.listaVenta.asObservable();
+
+
+  buscarCarrito(idUsuario: any, tipo: any) {
+    this.database.executeSql('SELECT * FROM venta where idUsuario = ? and carritoV = ?', [idUsuario, tipo]).then(res => {
+      if (res.rows.length > 0) {
+        //hay una venta como carrito
+        let items: Venta[] = [];
+        //validar si existen registros
+        if (res.rows.length > 0) {
+          //procedo a recorrer y guardar
+          for (var i = 0; i < res.rows.length; i++) {
+            //agrego los datos a mi variable
+            items.push({
+              idVenta: res.rows.item(i).idVenta,
+              totalV: res.rows.item(i).totalV,
+              carritoV: res.rows.item(i).carritoV,
+              fechaV: res.rows.item(i).fechaV,
+              idUsuario: res.rows.item(i).idUsuario,
+            });
+          }
+          localStorage.setItem("idVentaCarrito", items[0].idVenta);
+          this.buscarDetalle(items[0].idVenta);
+        }
+      }
+      else {
+        //no hay ninguna venta
+        this.total = 0;
+        this.carrito = "Carrito";
+        this.fecha = new Date().toLocaleDateString();
+        this.idUser = localStorage.getItem("idUsuario");
+        this.presentAlert("Usuario logueado: " + this.idUser);
+        this.database.executeSql('INSERT INTO venta (totalV, carritoV, fechaV, idUsuario) VALUES (?, ?, ?, ?)', [this.total,this.carrito,this.fecha,this.idUser]).then(res2=>{
+          this.presentAlert("fsdgdfsgdfgdfgdfg ");
+          localStorage.setItem("idVentaCarrito", res2.rows.item(0).idVenta);
+          this.buscarDetalle(res2.rows.item(0).idVenta);
+        }).catch(e=>{
+          this.presentAlert("Error al crear nuevo carrito: " + JSON.stringify(e));
+        })
+      }
+    }).catch(e => {
+      this.presentAlert("Error al buscar carrito: " + JSON.stringify(e));
+    })
   }
 
-  listaVenta = new BehaviorSubject([]);
 
-  Venta() {
-    return this.database.executeSql('SELECT * FROM Venta', []).then(res => {
+
+  buscarDetalle(idVenta:any) {
+    return this.database.executeSql('SELECT detalle.idDetalle, detalle.cantidadProducto, detalle.subtotalD, detalle.precio, detalle.idVenta, producto.idProducto, producto.foto, producto.nombreProducto FROM detalle inner join producto where detalle.idProducto = producto.idProducto and detalle.idVenta = ?', [idVenta]).then(res => {
       //variable para almacenar la consulta
-      let items: Venta[] = [];
+      let items: Detalle[] = [];
       //validar si existen registros
       if (res.rows.length > 0) {
         //procedo a recorrer y guardar
         for (var i = 0; i < res.rows.length; i++) {
           //agrego los datos a mi variable
           items.push({
+            idDetalle: res.rows.item(i).idDetalle,
+            cantidad: res.rows.item(i).cantidadProducto,
+            subtotal: res.rows.item(i).subtotalD,
+            precio: res.rows.item(i).precio,
             idVenta: res.rows.item(i).idVenta,
-            totalV: res.rows.item(i).totalV,
-            carritoV: res.rows.item(i).carritoV,
-            fechaV: res.rows.item(i).fechaV,
-            idUsuario: res.rows.item(i).idUsuario
+            idProducto: res.rows.item(i).idProducto,
+            foto: res.rows.item(i).foto,
+            nombreProducto: res.rows.item(i).nombreProducto
           })
         }
       }
       //actualizar mi observable
-      this.listaVenta.next(items as any);
+      this.listaDetalle.next(items as any);
 
     })
   }
-
 
   //carrito:
   insertarVenta(totalV: number, carritoV: string, idUsuario: number) {
@@ -171,7 +217,7 @@ export class BdserviceService {
       });
   }
 
-  
+
   obtenerDatosVentas(): Promise<any[]> {
     return this.database.executeSql('SELECT * FROM venta', []).then(res => {
       let ventas: any[] = [];
@@ -272,7 +318,7 @@ export class BdserviceService {
             precio: res.rows.item(i).precio,
             stock: res.rows.item(i).stock,
             foto: res.rows.item(i).foto,
-            idCategoria : res.rows.item(i).idCategoria,
+            idCategoria: res.rows.item(i).idCategoria,
           })
         }
       }
@@ -333,28 +379,7 @@ export class BdserviceService {
     })
   }
 
-  buscarDetalle() {
-    return this.database.executeSql('SELECT * FROM detalle where idVenta = ?', []).then(res => {
-      //variable para almacenar la consulta
-      let items: Detalle[] = [];
-      //validar si existen registros
-      if (res.rows.length > 0) {
-        //procedo a recorrer y guardar
-        for (var i = 0; i < res.rows.length; i++) {
-          //agrego los datos a mi variable
-          items.push({
-            idDetalle: res.rows.item(i).idDetalle,
-            cantidad: res.rows.item(i).cantidadProducto,
-            subtotal: res.rows.item(i).subtotalD,
-            precio: res.rows.item(i).precio
-          })
-        }
-      }
-      //actualizar mi observable
-      this.listaDetalle.next(items as any);
 
-    })
-  }
   //
 
 
@@ -502,7 +527,6 @@ export class BdserviceService {
       this.isDBReady.next(true);
       this.buscarUsuario();
       this.buscarProducto();
-      this.buscarDetalle();
       this.buscarPregunta();
       this.buscarCategoria();
 
@@ -669,5 +693,5 @@ export class BdserviceService {
         throw error;
       });
   }
-  
+
 }
