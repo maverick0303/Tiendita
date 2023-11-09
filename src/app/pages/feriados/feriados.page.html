@@ -1,0 +1,8 @@
+<ion-content>
+  <ion-list *ngIf="holidays">
+    <ion-item *ngFor="let holiday of holidays">
+      <ion-label>{{ holiday.name }}</ion-label>
+      <ion-note slot="end">{{ holiday.date }}</ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

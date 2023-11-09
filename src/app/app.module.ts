@@ -10,13 +10,14 @@ import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Storage } from '@ionic/storage-angular';
 import { BdserviceService } from './services/bd.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), HttpClientModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, SQLite, BdserviceService],
   bootstrap: [AppComponent],
 })
