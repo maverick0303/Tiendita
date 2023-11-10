@@ -124,6 +124,7 @@ export class BdserviceService {
     this.database.executeSql('SELECT * FROM venta where idUsuario = ? and carritoV = ?', [idUsuario, tipo]).then(res => {
       if (res.rows.length > 0) {
         //hay una venta como carrito
+        this.presentAlert("Hay carrito, busco detalles");
         let items: Venta[] = [];
         //validar si existen registros
         if (res.rows.length > 0) {
@@ -148,11 +149,11 @@ export class BdserviceService {
         this.carrito = "Carrito";
         this.fecha = new Date().toLocaleDateString();
         this.idUser = localStorage.getItem("idUsuario");
-        this.presentAlert("Usuario logueado: " + this.idUser);
+        //this.presentAlert("Usuario logueado: " + this.idUser);
         this.database.executeSql('INSERT INTO venta (totalV, carritoV, fechaV, idUsuario) VALUES (?, ?, ?, ?)', [this.total,this.carrito,this.fecha,this.idUser]).then(res2=>{
-          this.presentAlert("fsdgdfsgdfgdfgdfg ");
-          localStorage.setItem("idVentaCarrito", res2.rows.item(0).idVenta);
-          this.buscarDetalle(res2.rows.item(0).idVenta);
+          this.presentAlert("No hay carrito, creo uno nuevo");
+          //localStorage.setItem("idVentaCarrito", res2.rows.item(0).idVenta);
+          this.buscarCarrito(this.idUser,"Carrito");
         }).catch(e=>{
           this.presentAlert("Error al crear nuevo carrito: " + JSON.stringify(e));
         })
@@ -464,7 +465,7 @@ export class BdserviceService {
     this.platform.ready().then(() => {
       //crear la BD
       this.sqlite.create({
-        name: 'bdtiendita9.db',
+        name: 'bdtienditatest.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         //guardamos la conexión en mi variable global

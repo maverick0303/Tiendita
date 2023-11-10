@@ -90,10 +90,12 @@ const routes: Routes = [
   {
     path: 'nuevo-admin',
     loadChildren: () => import('./pages/admin/nuevo-admin/nuevo-admin.module').then( m => m.NuevoAdminPageModule)
-  },  {
+  },
+  {
     path: 'feriados',
     loadChildren: () => import('./pages/feriados/feriados.module').then( m => m.FeriadosPageModule)
   },
+
 
 
 
