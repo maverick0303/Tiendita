@@ -118,7 +118,7 @@ export class RegistroPage implements OnInit {
     }
   }
   
-  async valiEmail(event: KeyboardEvent) {
+  valiEmail(event: KeyboardEvent) {
     const input = event.key;
   
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -127,27 +127,11 @@ export class RegistroPage implements OnInit {
       event.preventDefault(); // No permite caracteres no válidos
     }
   
-    // Si el input es un correo electrónico válido
-    if (regex.test(this.emailValue)) {
-      try {
-        const usuario = await this.bd.verificarCorreoExistente(this.emailValue);
-        if (usuario !== null) {
-          // El correo electrónico ya está registrado
-          this.mostrarAlerta('Correo ya registrado', 'El correo electrónico ya está asociado a una cuenta.');
-          this.formularioValido = false; // Desactivar el formulario
-        } else {
-          this.formularioValido = true; // Habilitar el formulario
-        }
-      } catch (error) {
-        console.error('Error al verificar la base de datos', error);
-        this.mostrarAlerta('Error', 'Ocurrió un error al verificar la base de datos');
-      }
-    } else {
-      this.formularioValido = false; // Desactivar el formulario si el correo no es válido
-    }
-  
+    this.formularioValido = regex.test(this.emailValue); // Habilitar el formulario si el correo es válido
     this.verificarFormulario();
   }
+  
+  
   
   
   
