@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
 import { Producto } from 'src/app/services/producto';
 import { CarritoService } from 'src/app/services/carrito.service';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -36,7 +37,7 @@ export class Ag3Page implements OnInit {
   imagenPValue: any;
   categoriaPValue: string = '';
 
-  constructor(private activedRouter: ActivatedRoute, private router: Router, private bd: BdserviceService, private carritoService: CarritoService) {
+  constructor(private toastController: ToastController,private activedRouter: ActivatedRoute, private router: Router, private bd: BdserviceService, private carritoService: CarritoService) {
     this.idRol = parseInt(localStorage.getItem('idRol')!);
     this.activedRouter.queryParams.subscribe(res => {
       if (this.router.getCurrentNavigation()?.extras.state) {
@@ -77,7 +78,7 @@ agregarAlCarrito() {
   };
 
   this.carritoService.agregarProducto(producto);
-  this.bd.presentAlert("Producto agregado al carrito");
+  this.mostrarMensaje("Producto agregado al carrito");
 }
 
 
@@ -109,6 +110,16 @@ agregarAlCarrito() {
       // Si el término de búsqueda está vacío, muestra todos los productos
       this.arregloProductosResultado = this.arregloProductos;
     }
+  }
+
+  async mostrarMensaje(mensaje: string): Promise<void> {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000, // Duración en milisegundos
+      position: 'middle', // Posición en la pantalla
+      color: 'tertiary'
+    });
+    await toast.present();
   }
 }
 

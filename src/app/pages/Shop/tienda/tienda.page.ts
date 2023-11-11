@@ -4,6 +4,7 @@ import { BdserviceService } from 'src/app/services/bd.service';
 import { NavigationExtras, Router } from '@angular/router';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { Producto } from 'src/app/services/producto';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tienda',
@@ -30,7 +31,7 @@ export class TiendaPage implements OnInit {
   ]
 
   constructor(
-    private activeRoute: ActivatedRoute,private router: Router,private bd: BdserviceService,private carritoService: CarritoService)
+     private toastController: ToastController,private router: Router,private bd: BdserviceService,private carritoService: CarritoService)
     {this.rol = parseInt(localStorage.getItem('idRol')!);}
 
   ngOnInit() {
@@ -80,7 +81,7 @@ export class TiendaPage implements OnInit {
 
   agregarAlCarrito(producto: any) {
     this.carritoService.agregarProducto(producto);
-    this.bd.carritoBien("Producto agregado al carrito");
+    this.mostrarMensaje("Producto agregado al carrito");
   }
 
   eliminar(producto: any) {
@@ -116,6 +117,16 @@ searchProducts() {
   // Función para verificar si no se encontraron resultados en la búsqueda
   noProductFound(): boolean {
     return this.searchTerm.trim() !== '' && this.arregloProductosResultado.length === 0;
+  }
+
+  async mostrarMensaje(mensaje: string): Promise<void> {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000, // Duración en milisegundos
+      position: 'middle', // Posición en la pantalla
+      color: 'tertiary'
+    });
+    await toast.present();
   }
 
   
