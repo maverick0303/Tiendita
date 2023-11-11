@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, retry } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,9 @@ export class ApiserviceService {
 
   constructor(private http: HttpClient) { }
 
-  obtenerUsuario(): Observable<any> {
-    return this.http.get(this.apiurl+"/holidays").pipe(
-      retry(3)
-    );
+  obtenerFeriados(): Observable<any> {
+    return this.http.get(this.apiurl);
   }
 }
+
+

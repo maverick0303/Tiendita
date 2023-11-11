@@ -1,8 +1,27 @@
-<ion-content>
-  <ion-list *ngIf="holidays">
-    <ion-item *ngFor="let holiday of holidays">
-      <ion-label>{{ holiday.name }}</ion-label>
-      <ion-note slot="end">{{ holiday.date }}</ion-note>
-    </ion-item>
-  </ion-list>
-</ion-content>
+<div *ngIf="holidays && holidays.data && holidays.data.length > 0">
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title class="custom-card-title">Feriados del año 2023</ion-card-title>
+      <br>
+      <br>
+      <table>
+        <tbody>
+          <tr *ngFor="let holiday of holidays.data">
+            <td>{{ holiday.date }}</td>
+            <td>{{ holiday.title }}</td>
+            <td>{{ holiday.extra }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-card-content>
+  </ion-card>
+</div>
+
+<div *ngIf="!holidays || holidays.data.length === 0">
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>No hay datos disponibles.</ion-card-title>
+      <p>Verifica la conexión o inténtalo de nuevo más tarde.</p>
+    </ion-card-content>
+  </ion-card>
+</div>
