@@ -121,7 +121,9 @@ export class BdserviceService {
 
 
   buscarCarrito(idUsuario: any, tipo: any) {
+    this.presentAlert("Usuario: " + idUsuario);
     this.database.executeSql('SELECT * FROM venta where idUsuario = ? and carritoV = ?', [idUsuario, tipo]).then(res => {
+      this.presentAlert("Cantidad carrito: " + res.rows.length);
       if (res.rows.length > 0) {
         //hay una venta como carrito
         this.presentAlert("Hay carrito, busco detalles");
@@ -143,7 +145,7 @@ export class BdserviceService {
           this.buscarDetalle(items[0].idVenta);
         }
       }
-      else {
+      if (res.rows.length <= 0) { 
         //no hay ninguna venta
         this.total = 0;
         this.carrito = "Carrito";
@@ -465,7 +467,7 @@ export class BdserviceService {
     this.platform.ready().then(() => {
       //crear la BD
       this.sqlite.create({
-        name: 'bdtienditatest.db',
+        name: 'bdtienditatest3.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         //guardamos la conexión en mi variable global
