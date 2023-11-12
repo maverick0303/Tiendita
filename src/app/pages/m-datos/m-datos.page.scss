@@ -34,6 +34,7 @@ ion-card {
   box-shadow: #3D2652;
   width: 380px;
   margin-top: 35px;
+  --background: #ffffff;
 }
 
 p {
@@ -46,13 +47,14 @@ p {
 
 .foto{
   font-size: 10px;
-  margin-left: 150px;
+  margin-left: 220px;
   margin-top: -50px; 
   font-family: 'Montserrat';
   font-weight: bold;
 }
 
 .sin {
+  --background: #ffffff;
   border: none;
   box-shadow: none;
   height: 170px;
@@ -65,6 +67,7 @@ p {
 ion-card-title {
   color: black;
   text-align: center;
+  font-family: 'Montserrat';
   margin: 5px;
 }
 .x{
@@ -88,6 +91,7 @@ ion-avatar {
   width: 150px;
   height: 150px;
   border: 5px solid #0C909C;
+  margin-left: 120px;
 
   ion-avatar img {
     width: 150px;
@@ -95,6 +99,13 @@ ion-avatar {
 
   }
 }
+
+//BUSQUEDA:
+
+ion-toolbar {
+  --background: #ffffff;
+}
+
 
 /* Ajustes para dispositivos específicos */
 @media ((width: 412px) or (width: 425px) or (width: 384px)) and (height: 857px) {

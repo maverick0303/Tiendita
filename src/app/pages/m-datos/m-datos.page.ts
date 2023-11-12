@@ -10,11 +10,9 @@ import { Producto } from 'src/app/services/producto';
   styleUrls: ['./m-datos.page.scss'],
 })
 export class MDatosPage implements OnInit {
-  
+
   imageData: any;
-
   iduser = "";
-
   nombreEnviado: string = '';
   apellidoEnviado: string = '';
   emailEnviado: string = '';
@@ -26,33 +24,40 @@ export class MDatosPage implements OnInit {
   idVentaEnviada: string = '';
   idUsuario = "";
   fotoUEnviada: any;
+
   //mensaje de error:
+
   errors = {
     nombreEnviado: '',
     apellidoEnviado: '',
+    fotoUEnviada: '',
   };
-  formularioValido: boolean = false;
 
+  formularioValido: boolean = false;
 
   constructor(private router: Router, private activedRouter: ActivatedRoute, public bd: BdserviceService, private cdr: ChangeDetectorRef) {
     this.iduser = localStorage.getItem('idUsuario')!;
   }
+
   editar() {
-    console.log("Datos a actualizar:", this.idUsuario, this.nombreEnviado, this.apellidoEnviado, this.rutEnviado, this.emailEnviado, this.fotoUEnviada);
+    if (this.formularioValido) {
+      console.log("Datos a actualizar:", this.idUsuario, this.nombreEnviado, this.apellidoEnviado, this.rutEnviado, this.emailEnviado, this.fotoUEnviada);
 
-    this.bd.actualizarUsuario(
-      this.idUsuario,
-      this.nombreEnviado,
-      this.apellidoEnviado,
-      this.rutEnviado,
-      this.emailEnviado,
-      this.fotoUEnviada
-    );
+      this.bd.actualizarUsuario(
+        this.idUsuario,
+        this.nombreEnviado,
+        this.apellidoEnviado,
+        this.rutEnviado,
+        this.emailEnviado,
+        this.fotoUEnviada
+      );
 
-    this.bd.presentAlertMD("Usuario actualizado con éxito")
-    this.router.navigate(['/datos-personales']);
+      this.bd.presentAlertMD("Usuario actualizado con éxito")
+      this.router.navigate(['/datos-personales']);
+    } else {
+      this.bd.presentAlertMD("Por favor, complete todos los campos correctamente.");
+    }
   }
-
 
   ngOnInit() {
     this.bd.getUsuarioAutenticadoDesdeBD(this.iduser).then(usuario => {
@@ -66,7 +71,6 @@ export class MDatosPage implements OnInit {
       }
     });
   }
-
 
   onKeyDown(event: KeyboardEvent) {
     if (event.key === ' ') {
@@ -118,10 +122,19 @@ export class MDatosPage implements OnInit {
       this.errors.apellidoEnviado = 'El apellido solo debe contener letras y tener entre 1 y 15 caracteres.';
       hasError = true;
     }
+
+    // Validación de la foto
+    this.errors.fotoUEnviada = '';
+    if (!this.fotoUEnviada) {
+      this.errors.fotoUEnviada = 'Debe seleccionar una foto.';
+      hasError = true;
+    }
+
     // Validación adicional para comprobar si todos los campos requeridos están llenos
     if (
       !this.nombreEnviado ||
-      !this.apellidoEnviado
+      !this.apellidoEnviado ||
+      !this.fotoUEnviada
     ) {
       hasError = true;
     }
@@ -130,17 +143,17 @@ export class MDatosPage implements OnInit {
   }
 
   //ESTO ES DE LA FOTO    
-  async takePicture () {
+  async takePicture() {
     try {
       const image2 = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.DataUrl
-    });
-    this.fotoUEnviada = image2.dataUrl;
-    this.cdr.detectChanges();
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.DataUrl
+      });
+      this.fotoUEnviada = image2.dataUrl;
+      this.cdr.detectChanges();
     } catch (error) {
-      console.error('Error al tomar la foto:', error); 
+      console.error('Error al tomar la foto:', error);
+    }
   }
-}
 }
