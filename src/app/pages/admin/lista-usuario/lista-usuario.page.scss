@@ -35,6 +35,18 @@ ion-avatar {
   }
 }
 
+ion-toolbar {
+  --background: #ffffff;
+}
+
+ion-list {
+  --background: #ffffff;
+
+  ion-item {
+    --background: #ffffff;
+  }
+}
+
 .center-button {
   display: flex;
   justify-content: center;
