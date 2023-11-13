@@ -94,7 +94,11 @@ const routes: Routes = [
   {
     path: 'feriados',
     loadChildren: () => import('./pages/feriados/feriados.module').then( m => m.FeriadosPageModule)
+  },  {
+    path: 'carrito2',
+    loadChildren: () => import('./pages/carrito2/carrito2.module').then( m => m.Carrito2PageModule)
   },
+
 
 
 
