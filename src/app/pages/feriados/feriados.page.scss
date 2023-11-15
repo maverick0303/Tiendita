@@ -1,4 +1,52 @@
-.custom-card-title {
-    text-align: center;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=DM+Serif+Display&family=Montserrat:wght@300&display=swap');
+
+
+ion-searchbar {
+  color: #ffffff;
+  width: 400px;
+  text-align: left;
+}
+
+ion-toolbar {
+  --background: #ffffff;
+}
+.td1{
+  text-align: left;
+  font-family: 'Montserrat';
   
+}
+p{
+  font-family: 'Montserrat';
+  font-size: 15px;
+  text-align: center;
+  margin: 10px;
+}
+
+.td2{
+  text-align: right;
+  margin-right: 15px;
+  font-family: 'Montserrat';
+}
+ion-card{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  box-shadow: none;
+}
+
+ion-title{
+  font-family: 'Montserrat';
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%; /* Ajusta el ancho de la tabla según sea necesario */
+  margin: 0 auto; /* Centrar la tabla en el contenedor */
+
+}
+
+td {
+  border: 1px solid #dddddd; /* Color del borde */
+  padding: 8px; /* Espaciado interno de la celda */
+  text-align: center; /* Centrar el contenido de la celda */
+  font-family: 'Montserrat';
+}
