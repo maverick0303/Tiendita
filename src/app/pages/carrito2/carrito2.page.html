@@ -8,12 +8,13 @@
   <ion-list *ngIf="!carritoVacio">
     <ion-item *ngFor="let detalle of listaDetalle">
       <!-- Muestra los detalles del carrito, puedes personalizar según tus necesidades -->
-      <ion-label>{{ detalle.idProducto }}</ion-label>
+      <!--<ion-label>{{ detalle.idProducto }}</ion-label>-->
       <br>
       <ion-label> {{ detalle.precio }} </ion-label>
       <br>
       <!--<ion-label> {{ detalle.subtotalD }} </ion-label>-->
       <br>
+      <ion-label> {{ detalle.cantidad }} </ion-label>
       <!--<ion-img [src]="detalle.foto" alt="aqui habia una imagen"></ion-img>-->
     </ion-item>
     

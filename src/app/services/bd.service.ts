@@ -242,7 +242,6 @@ export class BdserviceService {
 
 
 
-  // Función para agregar un producto al carrito
   agregarAlCarrito2(idProducto: any, cantidad: number): Promise<any> {
     // Obtener el ID de la venta/carrito actual
     const idVenta = localStorage.getItem("idVentaCarrito");
@@ -250,12 +249,19 @@ export class BdserviceService {
     // Verificar si idVenta es válido antes de usarlo
     if (idVenta !== null && idVenta !== undefined) {
       // Obtener el precio y otros detalles del producto
-      return this.database.executeSql('SELECT producto.precio, detalle.* FROM detalle LEFT JOIN producto ON detalle.idProducto = producto.idProducto WHERE detalle.idProducto = ? AND detalle.idVenta = ?', [idProducto, idVenta])
+      return this.database.executeSql('SELECT producto.precio, producto.stock, detalle.* FROM detalle LEFT JOIN producto ON detalle.idProducto = producto.idProducto WHERE detalle.idProducto = ? AND detalle.idVenta = ?', [idProducto, idVenta])
         .then(res => {
           if (res.rows.length > 0) {
             // Producto ya existe en el carrito, actualiza la cantidad y el total
             const detalleExistente = res.rows.item(0);
             const nuevaCantidad = detalleExistente.cantidadProducto + cantidad;
+  
+            // Verificar si la nueva cantidad supera el stock disponible
+            if (nuevaCantidad > detalleExistente.stock) {
+              this.presentAlert("Error: La cantidad solicitada supera el stock disponible");
+              return Promise.reject("Error: La cantidad solicitada supera el stock disponible");
+            }
+  
             const nuevoTotal = nuevaCantidad * detalleExistente.precio;  // Calcula el nuevo total
   
             return this.database.executeSql('UPDATE detalle SET cantidadProducto = ?, subtotalD = ? WHERE idProducto = ? AND idVenta = ?', [nuevaCantidad, nuevoTotal, idProducto, idVenta])
@@ -268,7 +274,7 @@ export class BdserviceService {
                 return Promise.reject("Error al actualizar la cantidad y el total en el carrito: " + JSON.stringify(error));
               });
           } else {
-            // Producto no existe en el carrito, inserta un nuevo registroZ
+            // Producto no existe en el carrito, inserta un nuevo registro
             return this.database.executeSql('INSERT INTO detalle(cantidadProducto, subtotalD, idProducto, idVenta) VALUES (?, ?, ?, ?)', [cantidad, this.total, idProducto, idVenta])
               .then(() => {
                 // Actualizar el observable
@@ -291,6 +297,7 @@ export class BdserviceService {
       return Promise.reject("ID de venta/carrito no válido");
     }
   }
+  
   
   
 
