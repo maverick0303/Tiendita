@@ -169,7 +169,7 @@ export class BdserviceService {
 
 
   buscarDetalle(idVenta: any) {
-    return this.database.executeSql('SELECT detalle.idDetalle, detalle.cantidadProducto, detalle.subtotalD, detalle.idVenta, producto.idProducto, producto.foto, producto.nombreProducto FROM detalle inner join producto where detalle.idProducto = producto.idProducto and detalle.idVenta = ?', [idVenta]).then(res => {
+    return this.database.executeSql('SELECT detalle.idDetalle, detalle.cantidadProducto, detalle.subtotalD, detalle.idVenta,producto.precio, producto.idProducto, producto.foto, producto.nombreProducto FROM detalle inner join producto where detalle.idProducto = producto.idProducto and detalle.idVenta = ?', [idVenta]).then(res => {
       //variable para almacenar la consulta
       let items: Detalle[] = [];
       //validar si existen registros
@@ -180,9 +180,9 @@ export class BdserviceService {
           items.push({
             idDetalle: res.rows.item(i).idDetalle,
             cantidad: res.rows.item(i).cantidadProducto,
-            subtotal: res.rows.item(i).subtotalD,
-            precio: res.rows.item(i).precio,
+            subtotalD: res.rows.item(i).subtotalD,
             idVenta: res.rows.item(i).idVenta,
+            precio: res.rows.item(i).precio,
             idProducto: res.rows.item(i).idProducto,
             foto: res.rows.item(i).foto,
             nombreProducto: res.rows.item(i).nombreProducto
@@ -250,25 +250,26 @@ export class BdserviceService {
     // Verificar si idVenta es válido antes de usarlo
     if (idVenta !== null && idVenta !== undefined) {
       // Obtener el precio y otros detalles del producto
-      return this.database.executeSql('SELECT * FROM detalle WHERE idProducto = ? AND idVenta = ?', [idProducto, idVenta])
+      return this.database.executeSql('SELECT producto.precio, detalle.* FROM detalle LEFT JOIN producto ON detalle.idProducto = producto.idProducto WHERE detalle.idProducto = ? AND detalle.idVenta = ?', [idProducto, idVenta])
         .then(res => {
           if (res.rows.length > 0) {
-            // Producto ya existe en el carrito, actualiza la cantidad
+            // Producto ya existe en el carrito, actualiza la cantidad y el total
             const detalleExistente = res.rows.item(0);
             const nuevaCantidad = detalleExistente.cantidadProducto + cantidad;
+            const nuevoTotal = nuevaCantidad * detalleExistente.precio;  // Calcula el nuevo total
   
-            return this.database.executeSql('UPDATE detalle SET cantidadProducto = ? WHERE idProducto = ? AND idVenta = ?', [nuevaCantidad, idProducto, idVenta])
+            return this.database.executeSql('UPDATE detalle SET cantidadProducto = ?, subtotalD = ? WHERE idProducto = ? AND idVenta = ?', [nuevaCantidad, nuevoTotal, idProducto, idVenta])
               .then(() => {
                 // Actualizar el observable
                 this.buscarDetalle(idVenta);
               })
               .catch(error => {
-                this.presentAlert("Error al actualizar la cantidad en el carrito: " + JSON.stringify(error));
-                return Promise.reject("Error al actualizar la cantidad en el carrito: " + JSON.stringify(error));
+                this.presentAlert("Error al actualizar la cantidad y el total en el carrito: " + JSON.stringify(error));
+                return Promise.reject("Error al actualizar la cantidad y el total en el carrito: " + JSON.stringify(error));
               });
           } else {
-            // Producto no existe en el carrito, inserta un nuevo registro
-            return this.database.executeSql('INSERT INTO detalle(cantidadProducto, subtotalD, idProducto, idVenta) VALUES (?, ?, ?, ?)', [cantidad, 0, idProducto, idVenta])
+            // Producto no existe en el carrito, inserta un nuevo registroZ
+            return this.database.executeSql('INSERT INTO detalle(cantidadProducto, subtotalD, idProducto, idVenta) VALUES (?, ?, ?, ?)', [cantidad, this.total, idProducto, idVenta])
               .then(() => {
                 // Actualizar el observable
                 this.buscarDetalle(idVenta);
@@ -290,6 +291,7 @@ export class BdserviceService {
       return Promise.reject("ID de venta/carrito no válido");
     }
   }
+  
   
 
 
