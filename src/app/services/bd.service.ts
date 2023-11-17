@@ -190,11 +190,11 @@ export class BdserviceService {
         }
       }
       //actualizar mi observable
-      this.presentAlert("prod: " + items[0].idVenta)
+      //this.presentAlert("prod: " + items[0].idVenta)
       this.listaDetalle.next(items as any);
 
     }).catch(e=>{
-      this.presentAlert("error buscar detalle: " + JSON.stringify(e));
+      //this.presentAlert("error buscar detalle: " + JSON.stringify(e));
     })
   }
 
@@ -246,40 +246,43 @@ export class BdserviceService {
   agregarAlCarrito2(idProducto: any, cantidad: number): Promise<any> {
     // Obtener el ID de la venta/carrito actual
     const idVenta = localStorage.getItem("idVentaCarrito");
-    this.presentAlert("llega idproducto: " + idProducto);
+  
     // Verificar si idVenta es válido antes de usarlo
     if (idVenta !== null && idVenta !== undefined) {
-      this.presentAlert("entra 1 ");
       // Obtener el precio y otros detalles del producto
-      return this.database.executeSql('SELECT * FROM producto WHERE idProducto = ?', [idProducto])
+      return this.database.executeSql('SELECT * FROM detalle WHERE idProducto = ? AND idVenta = ?', [idProducto, idVenta])
         .then(res => {
           if (res.rows.length > 0) {
-            // Producto encontrado
-            const producto = res.rows.item(0);
-
-            // Calcular el subtotal
-            const subtotalD = cantidad * producto.precio;
-
-            // Insertar el detalle en la tabla detalle
-            return this.database.executeSql('insert into detalle(cantidadProducto, subtotalD, idProducto, idVenta) values(?,?,?,?)', [cantidad, subtotalD, idProducto, idVenta])
-            .then(res => {
-             
-                this.presentAlert('Producto ingresado: '+idProducto);
-                //actualizar mi observable
+            // Producto ya existe en el carrito, actualiza la cantidad
+            const detalleExistente = res.rows.item(0);
+            const nuevaCantidad = detalleExistente.cantidadProducto + cantidad;
+  
+            return this.database.executeSql('UPDATE detalle SET cantidadProducto = ? WHERE idProducto = ? AND idVenta = ?', [nuevaCantidad, idProducto, idVenta])
+              .then(() => {
+                // Actualizar el observable
                 this.buscarDetalle(idVenta);
-
               })
-
+              .catch(error => {
+                this.presentAlert("Error al actualizar la cantidad en el carrito: " + JSON.stringify(error));
+                return Promise.reject("Error al actualizar la cantidad en el carrito: " + JSON.stringify(error));
+              });
           } else {
-            // Producto no encontrado
-            console.error("No se encontró el producto con el ID proporcionado");
-            return Promise.reject("No se encontró el producto con el ID proporcionado");
+            // Producto no existe en el carrito, inserta un nuevo registro
+            return this.database.executeSql('INSERT INTO detalle(cantidadProducto, subtotalD, idProducto, idVenta) VALUES (?, ?, ?, ?)', [cantidad, 0, idProducto, idVenta])
+              .then(() => {
+                // Actualizar el observable
+                this.buscarDetalle(idVenta);
+              })
+              .catch(error => {
+                this.presentAlert("Error al insertar en el carrito: " + JSON.stringify(error));
+                return Promise.reject("Error al insertar en el carrito: " + JSON.stringify(error));
+              });
           }
         })
         .catch(e => {
           // Manejar errores
-          this.presentAlert("Error al agregar al carrito: " + JSON.stringify(e));
-          return Promise.reject("Error al agregar al carrito: " + JSON.stringify(e));
+          this.presentAlert("Error al buscar el producto en el carrito: " + JSON.stringify(e));
+          return Promise.reject("Error al buscar el producto en el carrito: " + JSON.stringify(e));
         });
     } else {
       // Manejar el caso en que idVenta no es válido
@@ -287,6 +290,7 @@ export class BdserviceService {
       return Promise.reject("ID de venta/carrito no válido");
     }
   }
+  
 
 
 
