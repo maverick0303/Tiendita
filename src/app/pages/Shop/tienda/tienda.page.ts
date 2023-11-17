@@ -13,9 +13,18 @@ import { ToastController } from '@ionic/angular';
 })
 export class TiendaPage implements OnInit {
   rol: number;
+  idProducto = "";
+  image2: any;
+  nombrePValue: string = '';
+  descripcionPValue: string = '';
+  precioPValue  = "";
+  stockPValue = "";
+  imagenPValue: any;
+  categoriaPValue: string = '';
+  cantidad = "";
+
   searchTerm: string = '';
   arregloProductosResultado: Producto[] = []; // Nueva propiedad
-
   // ARREGLO DE LOS PRODUCTOS
   arregloProductos: any = [
     {
@@ -78,11 +87,18 @@ export class TiendaPage implements OnInit {
     };
     this.router.navigate(['/ag3'], navigationExtras);
   }
+ 
+  
+  
 
-  agregarAlCarrito(producto: any) {
-    this.carritoService.agregarProducto(producto);
-    this.mostrarMensaje("Producto agregado al carrito");
+  agregarAlCarrito(idProducto: any) {
+    this.mostrarMensaje(idProducto)
+    this.bd.agregarAlCarrito2(idProducto,1)
+      .catch(error => {
+        this.mostrarMensaje('Error al agregar al carrito:');
+      });
   }
+  
 
   eliminar(producto: any) {
     this.bd.eliminarProducto(producto.idProducto);

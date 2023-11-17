@@ -9,6 +9,7 @@ import { Producto } from './producto';
 import { Categoria } from './categoria';
 import { Venta } from './venta';
 import { Storage } from '@ionic/storage-angular';
+import { animate } from '@angular/animations';
 
 
 @Injectable({
@@ -145,18 +146,18 @@ export class BdserviceService {
           this.buscarDetalle(items[0].idVenta);
         }
       }
-      if (res.rows.length <= 0) { 
+      if (res.rows.length <= 0) {
         //no hay ninguna venta
         this.total = 0;
         this.carrito = "Carrito";
         this.fecha = new Date().toLocaleDateString();
         this.idUser = localStorage.getItem("idUsuario");
         //this.presentAlert("Usuario logueado: " + this.idUser);
-        this.database.executeSql('INSERT INTO venta (totalV, carritoV, fechaV, idUsuario) VALUES (?, ?, ?, ?)', [this.total,this.carrito,this.fecha,this.idUser]).then(res2=>{
+        this.database.executeSql('INSERT INTO venta (totalV, carritoV, fechaV, idUsuario) VALUES (?, ?, ?, ?)', [this.total, this.carrito, this.fecha, this.idUser]).then(res2 => {
           this.presentAlert("No hay carrito, creo uno nuevo");
           //localStorage.setItem("idVentaCarrito", res2.rows.item(0).idVenta);
-          this.buscarCarrito(this.idUser,"Carrito");
-        }).catch(e=>{
+          this.buscarCarrito(this.idUser, "Carrito");
+        }).catch(e => {
           this.presentAlert("Error al crear nuevo carrito: " + JSON.stringify(e));
         })
       }
@@ -167,8 +168,8 @@ export class BdserviceService {
 
 
 
-  buscarDetalle(idVenta:any) {
-    return this.database.executeSql('SELECT detalle.idDetalle, detalle.cantidadProducto, detalle.subtotalD, detalle.precio, detalle.idVenta, producto.idProducto, producto.foto, producto.nombreProducto FROM detalle inner join producto where detalle.idProducto = producto.idProducto and detalle.idVenta = ?', [idVenta]).then(res => {
+  buscarDetalle(idVenta: any) {
+    return this.database.executeSql('SELECT detalle.idDetalle, detalle.cantidadProducto, detalle.subtotalD, detalle.idVenta, producto.idProducto, producto.foto, producto.nombreProducto FROM detalle inner join producto where detalle.idProducto = producto.idProducto and detalle.idVenta = ?', [idVenta]).then(res => {
       //variable para almacenar la consulta
       let items: Detalle[] = [];
       //validar si existen registros
@@ -189,8 +190,11 @@ export class BdserviceService {
         }
       }
       //actualizar mi observable
+      this.presentAlert("prod: " + items[0].idVenta)
       this.listaDetalle.next(items as any);
 
+    }).catch(e=>{
+      this.presentAlert("error buscar detalle: " + JSON.stringify(e));
     })
   }
 
@@ -210,15 +214,7 @@ export class BdserviceService {
       });
   }
 
-  insertarDetalle(cantidadProducto: number, subtotalD: number, idProducto: number, idVenta: number) {
-    return this.database.executeSql('INSERT INTO detalle (cantidadProducto, subtotalD, idProducto, idVenta) VALUES (?, ?, ?, ?)', [cantidadProducto, subtotalD, idProducto, idVenta])
-      .then(res => {
-        console.log('Detalle insertado: ', res);
-      })
-      .catch(error => {
-        console.error('Error al insertar detalle: ', error);
-      });
-  }
+
 
 
   obtenerDatosVentas(): Promise<any[]> {
@@ -243,6 +239,60 @@ export class BdserviceService {
       return [];
     });
   }
+
+
+
+  // Función para agregar un producto al carrito
+  agregarAlCarrito2(idProducto: any, cantidad: number): Promise<any> {
+    // Obtener el ID de la venta/carrito actual
+    const idVenta = localStorage.getItem("idVentaCarrito");
+    this.presentAlert("llega idproducto: " + idProducto);
+    // Verificar si idVenta es válido antes de usarlo
+    if (idVenta !== null && idVenta !== undefined) {
+      this.presentAlert("entra 1 ");
+      // Obtener el precio y otros detalles del producto
+      return this.database.executeSql('SELECT * FROM producto WHERE idProducto = ?', [idProducto])
+        .then(res => {
+          if (res.rows.length > 0) {
+            // Producto encontrado
+            const producto = res.rows.item(0);
+
+            // Calcular el subtotal
+            const subtotalD = cantidad * producto.precio;
+
+            // Insertar el detalle en la tabla detalle
+            return this.database.executeSql('insert into detalle(cantidadProducto, subtotalD, idProducto, idVenta) values(?,?,?,?)', [cantidad, subtotalD, idProducto, idVenta])
+            .then(res => {
+             
+                this.presentAlert('Producto ingresado: '+idProducto);
+                //actualizar mi observable
+                this.buscarDetalle(idVenta);
+
+              })
+
+          } else {
+            // Producto no encontrado
+            console.error("No se encontró el producto con el ID proporcionado");
+            return Promise.reject("No se encontró el producto con el ID proporcionado");
+          }
+        })
+        .catch(e => {
+          // Manejar errores
+          this.presentAlert("Error al agregar al carrito: " + JSON.stringify(e));
+          return Promise.reject("Error al agregar al carrito: " + JSON.stringify(e));
+        });
+    } else {
+      // Manejar el caso en que idVenta no es válido
+      this.presentAlert("Error: ID de venta/carrito no válido");
+      return Promise.reject("ID de venta/carrito no válido");
+    }
+  }
+
+
+
+
+
+
 
 
   buscarProductoPorNombre(nombre: string): Promise<Producto[]> {

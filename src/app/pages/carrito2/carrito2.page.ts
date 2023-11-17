@@ -9,12 +9,13 @@ import { BdserviceService } from 'src/app/services/bd.service';
 export class Carrito2Page implements OnInit {
   idUsuario = localStorage.getItem("idUsuario");
   carritoVacio: boolean = false;
-  listaDetalle: any;  // Asegúrate de declarar listaDetalle en tu clase
+  listaDetalle: any;  
 
   constructor(private bd: BdserviceService) { }
 
   ngOnInit() {
-    this.bd.listaDetalle.subscribe((detalle) => {
+    this.bd.fetchDetalle().subscribe((detalle) => {
+      this.listaDetalle = detalle;
       // Verificar si el carrito está vacío
       this.carritoVacio = detalle.length === 0;
     });
@@ -22,6 +23,7 @@ export class Carrito2Page implements OnInit {
     // Llamar a la función para buscar el carrito (asegúrate de pasar los parámetros correctos)
     this.bd.buscarCarrito(this.idUsuario, "Carrito");
   }
+
 }
 
 

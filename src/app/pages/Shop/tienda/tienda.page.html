@@ -41,7 +41,7 @@
             <ion-button class="otro" *ngIf="rol === 1" (click)="detalle(producto)">Detalles</ion-button>
             <ion-button *ngIf="rol === 2" (click)="modificar(producto)">Modificar</ion-button>
             <ion-button class="borrar" *ngIf="rol === 2" (click)="eliminar(producto)">Eliminar</ion-button>
-            <ion-button class="otro2" *ngIf="rol === 1" (click)="agregarAlCarrito(producto)">Agregar</ion-button>
+            <ion-button class="otro2" *ngIf="rol === 1" (click)="agregarAlCarrito(producto.idProducto)">Agregar</ion-button>
           </ion-card-content>
         </ion-card-header>
       </ion-card>

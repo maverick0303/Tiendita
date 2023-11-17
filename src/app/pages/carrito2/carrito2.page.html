@@ -4,19 +4,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <!-- carrito.page.html -->
-  <div *ngIf="carritoVacio; else carritoNoVacio">
-    Carrito vacío
-  </div>
-  <ng-template #carritoNoVacio>
-    <!-- Mostrar los detalles del carrito -->
-    <ion-list *ngFor="let detalle of listaDetalle | async">
+<ion-content>
+  <ion-list *ngIf="!carritoVacio">
+    <ion-item *ngFor="let detalle of listaDetalle">
       <!-- Muestra los detalles del carrito, puedes personalizar según tus necesidades -->
-      <ion-item>
-        <ion-label>{{ detalle.nombreProducto }}</ion-label>
-        <ion-note slot="end">{{ detalle.cantidad }}</ion-note>
-      </ion-item>
-    </ion-list>
-  </ng-template>
+      <ion-label>{{ detalle.idProducto }}</ion-label>
+      <ion-label>{{ detalle.nombreProducto }}</ion-label>
+      <ion-note slot="end">{{ detalle.cantidad }}</ion-note>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="carritoVacio">
+    El carrito está vacío.
+  </div>
 </ion-content>
