@@ -12,9 +12,12 @@
           <!-- Muestra la foto del producto -->
           <ion-card-content class="card-content">
             <!-- Ajusta los campos según tu estructura de datos -->
-            <ion-card-title class="titulo">ID Venta: {{ venta.idVenta }}</ion-card-title>
-            <p class="subti">Total: ${{ venta.totalV }}</p>
+            <ion-card-title>
+              <ion-img [src]="venta.foto" alt="aqui habia una imagen"></ion-img>
+            </ion-card-title>
+            <p class="subti">Total: ${{ venta.precio }}</p>
             <p class="subti">Fecha: {{ venta.fechaV }}</p>
+            <p class="subti">Nombre del producto: {{venta.nombreProducto}} </p>
           </ion-card-content>
         </ion-card>
       </ion-col>

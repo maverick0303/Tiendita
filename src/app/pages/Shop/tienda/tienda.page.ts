@@ -92,7 +92,7 @@ export class TiendaPage implements OnInit {
   
 
   agregarAlCarrito(idProducto: any) {
-    this.mostrarMensaje(idProducto)
+    this.mostrarMensaje("Producto agregado :D ")
     this.bd.agregarAlCarrito2(idProducto,1)
       .catch(error => {
         this.mostrarMensaje('Error al agregar al carrito:');

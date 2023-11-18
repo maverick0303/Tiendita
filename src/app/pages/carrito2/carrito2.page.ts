@@ -24,6 +24,10 @@ export class Carrito2Page implements OnInit {
     this.bd.buscarCarrito(this.idUsuario, "Carrito");
   }
 
+  finalizarCompra() {
+    this.bd.finalizarCompra();
+  }
+
 }
 
 

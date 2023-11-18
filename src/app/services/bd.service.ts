@@ -122,12 +122,12 @@ export class BdserviceService {
 
 
   buscarCarrito(idUsuario: any, tipo: any) {
-    this.presentAlert("Usuario: " + idUsuario);
+    //this.presentAlert("Usuario: " + idUsuario);
     this.database.executeSql('SELECT * FROM venta where idUsuario = ? and carritoV = ?', [idUsuario, tipo]).then(res => {
-      this.presentAlert("Cantidad carrito: " + res.rows.length);
+      //this.presentAlert("Cantidad carrito: " + res.rows.length);
       if (res.rows.length > 0) {
         //hay una venta como carrito
-        this.presentAlert("Hay carrito, busco detalles");
+        //this.presentAlert("Hay carrito, busco detalles");
         let items: Venta[] = [];
         //validar si existen registros
         if (res.rows.length > 0) {
@@ -154,15 +154,15 @@ export class BdserviceService {
         this.idUser = localStorage.getItem("idUsuario");
         //this.presentAlert("Usuario logueado: " + this.idUser);
         this.database.executeSql('INSERT INTO venta (totalV, carritoV, fechaV, idUsuario) VALUES (?, ?, ?, ?)', [this.total, this.carrito, this.fecha, this.idUser]).then(res2 => {
-          this.presentAlert("No hay carrito, creo uno nuevo");
+          //this.presentAlert("No hay carrito, creo uno nuevo");
           //localStorage.setItem("idVentaCarrito", res2.rows.item(0).idVenta);
           this.buscarCarrito(this.idUser, "Carrito");
         }).catch(e => {
-          this.presentAlert("Error al crear nuevo carrito: " + JSON.stringify(e));
+          //this.presentAlert("Error al crear nuevo carrito: " + JSON.stringify(e));
         })
       }
     }).catch(e => {
-      this.presentAlert("Error al buscar carrito: " + JSON.stringify(e));
+      //this.presentAlert("Error al buscar carrito: " + JSON.stringify(e));
     })
   }
 
@@ -218,27 +218,39 @@ export class BdserviceService {
 
 
   obtenerDatosVentas(): Promise<any[]> {
-    return this.database.executeSql('SELECT * FROM venta', []).then(res => {
-      let ventas: any[] = [];
-
-      if (res.rows.length > 0) {
-        for (let i = 0; i < res.rows.length; i++) {
-          ventas.push({
-            idVenta: res.rows.item(i).idVenta,
-            totalV: res.rows.item(i).totalV,
-            carritoV: res.rows.item(i).carritoV,
-            fechaV: res.rows.item(i).fechaV,
-            idUsuario: res.rows.item(i).idUsuario,
-          });
+    return this.database.executeSql('SELECT venta.*, detalle.cantidadProducto, detalle.subtotalD, producto.* FROM venta LEFT JOIN detalle ON venta.idVenta = detalle.idVenta LEFT JOIN producto ON detalle.idProducto = producto.idProducto', [])
+      .then(res => {
+        let ventas: any[] = [];
+  
+        if (res.rows.length > 0) {
+          for (let i = 0; i < res.rows.length; i++) {
+            ventas.push({
+              idVenta: res.rows.item(i).idVenta,
+              totalV: res.rows.item(i).totalV,
+              carritoV: res.rows.item(i).carritoV,
+              fechaV: res.rows.item(i).fechaV,
+              idUsuario: res.rows.item(i).idUsuario,
+              cantidadProducto: res.rows.item(i).cantidadProducto,
+              subtotalD: res.rows.item(i).subtotalD,
+              // Otros campos de producto que puedas necesitar
+              idProducto: res.rows.item(i).idProducto,
+              nombreProducto: res.rows.item(i).nombreProducto,
+              precio: res.rows.item(i).precio,
+              stock: res.rows.item(i).stock,
+              foto: res.rows.item(i).foto,
+              // Agrega más campos según sea necesario
+            });
+          }
         }
-      }
-
-      return ventas;
-    }).catch(error => {
-      console.error('Error al obtener datos de ventas: ', error);
-      return [];
-    });
+  
+        return ventas;
+      })
+      .catch(error => {
+        console.error('Error al obtener datos de ventas: ', error);
+        return [];
+      });
   }
+  
 
 
 
@@ -297,17 +309,29 @@ export class BdserviceService {
       return Promise.reject("ID de venta/carrito no válido");
     }
   }
+
+  finalizarCompra() {
+    // Obtener el ID de la venta/carrito actual
+    const idVenta = localStorage.getItem("idVentaCarrito");
+  
+    // Verificar si idVenta es válido antes de usarlo
+    if (idVenta !== null && idVenta !== undefined) {
+      // Actualizar el estado de la venta a "vendido"
+      this.database.executeSql('UPDATE venta SET totalV = ? carritoV = ? WHERE idVenta = ?', [this.total,'vendido', idVenta])
+        .then(() => {
+          this.presentAlert("Compra finalizada con éxito");
+        })
+        .catch(error => {
+          this.presentAlert("Error al finalizar la compra: " + JSON.stringify(error));
+        });
+    } else {
+      // Manejar el caso en que idVenta no es válido
+      this.presentAlert("Error: ID de venta/carrito no válido");
+    }
+  }
   
   
   
-
-
-
-
-
-
-
-
   buscarProductoPorNombre(nombre: string): Promise<Producto[]> {
     return this.database.executeSql('SELECT * FROM producto WHERE nombreProducto LIKE ?', ['%' + nombre + '%']).then(res => {
       // Variable para almacenar la consulta
