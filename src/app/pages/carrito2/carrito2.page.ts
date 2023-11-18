@@ -39,4 +39,5 @@ export class Carrito2Page implements OnInit {
   finalizarCompra() {
     this.bd.realizarCompra(this.idUsuario); // Asegúrate de tener idUsuario disponible
   }
+  
 }

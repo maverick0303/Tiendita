@@ -20,7 +20,7 @@
             <p class="subti">Fecha: {{ venta.fechaV }}</p>
             <br>
             <p class="subti">Articulos: {{ venta.cantidadProducto }}</p>
-            <p class="subti">Total: ${{ venta.subtotalD }}</p>
+            <p class="subti">Total: ${{ venta.precio * venta.cantidadProducto }}</p>
             <p> Sucursal de Retiro: Los Leones, #342, 2°piso, local 23</p>
           </ion-card-content>
         </ion-card>
