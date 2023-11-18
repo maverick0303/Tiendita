@@ -268,7 +268,7 @@ export class BdserviceService {
 
             // Verificar si la nueva cantidad supera el stock disponible
             if (nuevaCantidad > detalleExistente.stock) {
-              this.presentAlert("Error: La cantidad solicitada supera el stock disponible");
+              //this.presentAlert("Error: La cantidad solicitada supera el stock disponible");
               return Promise.reject("Error: La cantidad solicitada supera el stock disponible");
             }
 
@@ -303,7 +303,7 @@ export class BdserviceService {
         })
         .catch(e => {
           // Manejar errores
-          this.presentAlert("Error al buscar el producto en el carrito: " + JSON.stringify(e));
+          //this.presentAlert("Error al buscar el producto en el carrito: " + JSON.stringify(e));
           return Promise.reject("Error al buscar el producto en el carrito: " + JSON.stringify(e));
         });
     } else {
@@ -660,7 +660,7 @@ export class BdserviceService {
 
   async presentAlert(msj: string) {
     const alert = await this.alertController.create({
-      header: 'Error',
+      header: 'exito!!',
       message: msj,
       buttons: ['OK'],
     });

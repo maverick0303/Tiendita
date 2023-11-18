@@ -136,9 +136,9 @@ searchProducts() {
   async mostrarMensaje(mensaje: string): Promise<void> {
     const toast = await this.toastController.create({
       message: mensaje,
-      duration: 2000, // Duración en milisegundos
+      duration: 1500, // Duración en milisegundos
       position: 'middle', // Posición en la pantalla
-      color: 'tertiary'
+      color: '#00FF00'// Verde brillante
     });
     await toast.present();
   }

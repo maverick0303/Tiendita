@@ -7,12 +7,13 @@ import { BdserviceService } from 'src/app/services/bd.service';
   styleUrls: ['./carrito2.page.scss'],
 })
 export class Carrito2Page implements OnInit {
+  rol: number;
   idUsuario = localStorage.getItem("idUsuario");
   carritoVacio: boolean = false;
   listaDetalle: any;
   subtotalTotal: number = 0; // Nueva propiedad para el subtotal total
 
-  constructor(private bd: BdserviceService) { }
+  constructor(private bd: BdserviceService) {this.rol = parseInt(localStorage.getItem('idRol')!);}
 
   ngOnInit() {
     this.bd.fetchDetalle().subscribe((detalle) => {
