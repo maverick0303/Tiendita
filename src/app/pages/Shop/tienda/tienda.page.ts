@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
 import { NavigationExtras, Router } from '@angular/router';
-import { CarritoService } from 'src/app/services/carrito.service';
 import { Producto } from 'src/app/services/producto';
 import { ToastController } from '@ionic/angular';
 
@@ -40,7 +39,7 @@ export class TiendaPage implements OnInit {
   ]
 
   constructor(
-     private toastController: ToastController,private router: Router,private bd: BdserviceService,private carritoService: CarritoService)
+     private toastController: ToastController,private router: Router,private bd: BdserviceService)
     {this.rol = parseInt(localStorage.getItem('idRol')!);}
 
   ngOnInit() {
