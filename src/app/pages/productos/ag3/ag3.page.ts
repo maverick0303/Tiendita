@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BdserviceService } from 'src/app/services/bd.service';
 import { Producto } from 'src/app/services/producto';
-import { CarritoService } from 'src/app/services/carrito.service';
 import { ToastController } from '@ionic/angular';
 
 
@@ -37,7 +36,7 @@ export class Ag3Page implements OnInit {
   imagenPValue: any;
   categoriaPValue: string = '';
 
-  constructor(private toastController: ToastController, private activedRouter: ActivatedRoute, private router: Router, private bd: BdserviceService, private carritoService: CarritoService) {
+  constructor(private toastController: ToastController, private activedRouter: ActivatedRoute, private router: Router, private bd: BdserviceService) {
     this.idRol = parseInt(localStorage.getItem('idRol')!);
     this.activedRouter.queryParams.subscribe(res => {
       if (this.router.getCurrentNavigation()?.extras.state) {
