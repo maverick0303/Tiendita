@@ -1,0 +1,92 @@
+/* Estilos para pantallas grandes */
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  margin-bottom: 5px;
+}
+
+.custom-card {
+  border: 3px solid #050025;
+  background: #050025;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-left: auto;
+}
+
+.card-image {
+  width: 100%;
+  max-width: 500px;
+  object-fit: cover;
+}
+
+.card-content {
+  flex: 10;
+  padding: 20px;
+  text-align: left;
+  align-self: flex-start;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=DM+Serif+Display&family=Montserrat:wght@300&display=swap');
+p {
+  color: white;
+  font-size: 20px;
+  text-align: left;
+  font-family: 'Montserrat';
+}
+
+.subti {
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+}
+
+.titulo {
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 20px;
+  text-align: left;
+  margin: 2px;
+}
+
+.btn {
+  --background: #7CC9CF;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  width: 25%;
+}
+
+ion-content {
+  --background: white;
+
+}
+
+/* Estilos para pantallas pequeñas (por ejemplo, cuando el ancho de la ventana es menor a 768px) */
+@media screen and (max-width: 480px) {
+  .custom-card {
+      flex-direction: column;
+      /* Cambia la dirección de flex para apilar contenido */
+      width: 100%;
+  }
+
+  .card-image {
+      width: 100%;
+      max-width: none;
+      /* Elimina la limitación del ancho máximo */
+  }
+
+  .card-content {
+      padding: 10px;
+      /* Reduce el espacio alrededor del contenido */
+      text-align: center;
+      /* Centra el texto en pantallas más pequeñas */
+  }
+
+  .titulo {
+      font-size: 25px;
+      /* Reduce el tamaño del título */
+  }
+}

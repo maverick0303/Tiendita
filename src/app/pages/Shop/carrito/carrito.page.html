@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-card-title class="titulo">Mi carrito</ion-card-title>
+  </ion-toolbar>
+</ion-header>
+<!--#######################################################################################################-->
+<ion-content class="ion-padding" [fullscreen]="true">
+  <!-- Mostrar los productos en el carrito -->
+  <ion-card class="custom-card" *ngFor="let producto of productosEnCarrito">
+    <!-- Muestra la información del producto aquí -->
+    <img [src]="producto.foto" alt="" class="card-image">
+    <ion-card-content class="card-content">
+      <ion-card-title class="titulo" style="font-size: 25px;">{{ producto.nombreProducto }}</ion-card-title>
+      <br>
+      <p class="subti" style="font-size: 25px;">Precio: {{ producto.precio | currency:'$':true:'4.0-0' }}</p>
+      <!-- Otras propiedades del producto -->
+      <p>Cantidad: {{ cantidad }}</p>
+
+      <br>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Verificar si el carrito está vacío y mostrar mensaje de advertencia -->
+  <ion-toast *ngIf="productosEnCarrito.length === 0" color="warning"
+    message="El carrito está vacío. Agregue productos antes de finalizar la compra." duration="3000"></ion-toast>
+
+  <!--ESTO ES DE LA COMPRA FINAL-->
+  <div class="card-container">
+    <ion-card class="custom-card">
+      <ion-card-content class="card-content">
+        <ion-card-title style="font-size: 25px; color:white; text-align: left;">Total</ion-card-title>
+        
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <br><br><br>
+  <app-componente2></app-componente2>
+</ion-content>

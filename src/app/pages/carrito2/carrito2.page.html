@@ -1,16 +1,10 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-card-title style="text-align: center;">Carrito</ion-card-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
   <ion-list *ngIf="!carritoVacio">
     <ion-item *ngFor="let detalle of listaDetalle">
       <ion-card>
         <!-- Muestra la foto en la parte superior de la tarjeta -->
         <ion-img [src]="detalle.foto" alt="aqui habia una imagen"></ion-img>
-
+        
         <!-- Contenido de la tarjeta con precio y cantidad -->
         <ion-card-content>
           <br>
@@ -20,22 +14,19 @@
           <br>
           <!-- Muestra el Subtotal como la multiplicación de cantidad y precio -->
           <!-- Botón para vaciar el carrito -->
-
+          
         </ion-card-content>
       </ion-card>
-      <ion-item>
-        <ion-label> Subtotal Total: {{ subtotalTotal }} </ion-label>
-        <ion-button (click)="vaciarCarrito()">Vaciar Carrito</ion-button>
-        <ion-button (click)="finalizarCompra()" [routerLink]="['/tienda']">Finalizar Compra</ion-button>
-      </ion-item>
     </ion-item>
   </ion-list>
 
-
-
+  <ion-item>
+    <ion-label> Subtotal Total: {{ subtotalTotal }} </ion-label>
+    <ion-button (click)="vaciarCarrito()">Vaciar Carrito</ion-button>
+    <ion-button (click)="finalizarCompra()" [routerLink]="['/tienda']">Finalizar Compra</ion-button>
+  </ion-item>
+  
   <div *ngIf="carritoVacio">
     El carrito está vacío.
   </div>
-
-  <app-componente2></app-componente2>
 </ion-content>
