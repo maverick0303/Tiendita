@@ -12,24 +12,21 @@
           <br>
           <ion-label> Cantidad: {{ detalle.cantidad }} </ion-label>
           <br>
-          <ion-label> Subtotal: {{ detalle.subtotalD }} </ion-label>
+          <!-- Muestra el Subtotal como la multiplicación de cantidad y precio -->
+          <ion-label> Subtotal: {{ detalle.cantidad * detalle.precio }} </ion-label>
           
           <!-- Botón para vaciar el carrito -->
-          <button (click)="vaciarProductoDelCarrito(detalle.idProducto)">Vaciar Producto</button>
-
-          
         </ion-card-content>
       </ion-card>
     </ion-item>
   </ion-list>
 
   <ion-item>
-    <button (click)="vaciarCarrito()">Vaciar Carrito</button>
-    <button (click)="finalizarCompra()" [routerLink]="['/tienda']">Finalizar Compra</button>
+    <ion-label> Subtotal Total: {{ subtotalTotal }} </ion-label>
+    <ion-button (click)="finalizarCompra()">Finalizar Compra</ion-button>
   </ion-item>
   
   <div *ngIf="carritoVacio">
     El carrito está vacío.
   </div>
 </ion-content>
-

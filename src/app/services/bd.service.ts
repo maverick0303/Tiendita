@@ -314,33 +314,45 @@ export class BdserviceService {
   }
 
 
-  finalizarCompra() {
-    // Obtener el ID de la venta/carrito actual
-    const idVenta = localStorage.getItem("idVentaCarrito");
-
-    // Verificar si idVenta es válido antes de usarlo
-    if (idVenta !== null && idVenta !== undefined) {
-      // Actualizar el estado de la venta a "vendido"
-      this.database.executeSql('UPDATE venta SET totalV = ?, carritoV = ? WHERE idVenta = ?', [this.total, 'vendido', idVenta])
-        .then(() => {
-          this.presentAlert("Compra finalizada con éxito");
-
-          // Recargar la página después de finalizar la compra
-          location.reload();
+  realizarCompra(idUsuario: any) {
+    const idVentaCarrito = localStorage.getItem("idVentaCarrito");
+  
+    if (idVentaCarrito) {
+      // Obtener la fecha actual
+      const fechaCompra = new Date().toLocaleDateString();
+  
+      // Obtener el total del carrito
+      this.database.executeSql('SELECT SUM(subtotalD) as totalCompra FROM detalle WHERE idVenta = ?', [idVentaCarrito])
+        .then(res => {
+          if (res.rows.length > 0) {
+            const totalCompra = res.rows.item(0).totalCompra || 0;
+  
+            // Actualizar el estado del carrito a "vendido"
+            this.database.executeSql('UPDATE venta SET carritoV = ?, fechaV = ?, totalV = ? WHERE idVenta = ?', ['vendido', fechaCompra, totalCompra, idVentaCarrito])
+              .then(() => {
+                // Reiniciar el ID del carrito en el almacenamiento local
+                localStorage.removeItem("idVentaCarrito");
+  
+                // Presentar una alerta o mensaje de éxito
+                this.presentAlert("Compra realizada con éxito");
+  
+                // Puedes realizar otras acciones después de completar la compra, si es necesario
+              })
+              .catch(error => {
+                this.presentAlert("Error al actualizar el estado del carrito: " + JSON.stringify(error));
+              });
+          } else {
+            this.presentAlert("Error: No se pudo obtener el total de la compra");
+          }
         })
+        .catch(error => {
+          this.presentAlert("Error al obtener el total de la compra: " + JSON.stringify(error));
+        });
     } else {
-      // Manejar el caso en que idVenta no es válido
       this.presentAlert("Error: ID de venta/carrito no válido");
     }
   }
-
-  eliminarProductoDelCarrito(idProducto: any): Observable<any> {
-    this.database.executeSql('DELETE FROM detalle WHERE idProducto = ? ', [idProducto]);
-    return new Observable(observer => {
-      observer.next('Producto eliminado con éxito');
-      observer.complete();
-    });
-  }
+  
 
 
   buscarProductoPorNombre(nombre: string): Promise<Producto[]> {
