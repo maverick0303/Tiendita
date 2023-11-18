@@ -37,7 +37,7 @@ export class Ag3Page implements OnInit {
   imagenPValue: any;
   categoriaPValue: string = '';
 
-  constructor(private toastController: ToastController,private activedRouter: ActivatedRoute, private router: Router, private bd: BdserviceService, private carritoService: CarritoService) {
+  constructor(private toastController: ToastController, private activedRouter: ActivatedRoute, private router: Router, private bd: BdserviceService, private carritoService: CarritoService) {
     this.idRol = parseInt(localStorage.getItem('idRol')!);
     this.activedRouter.queryParams.subscribe(res => {
       if (this.router.getCurrentNavigation()?.extras.state) {
@@ -66,20 +66,13 @@ export class Ag3Page implements OnInit {
   }
 
   // En tu componente Ag3Page
-// En tu componente Ag3Page
-agregarAlCarrito() {
-  const producto = {
-    idProducto: this.idProducto,
-    nombreProducto: this.nombrePValue,
-    foto: this.imagenPValue,
-    precio: this.precioPValue,
-    stock: this.stockPValue
-    // Agrega otras propiedades según sea necesario
-  };
-
-  this.carritoService.agregarProducto(producto);
-  this.mostrarMensaje("Producto agregado al carrito");
-}
+  agregarAlCarrito() {
+    this.mostrarMensaje("Producto agregado :D ")
+    this.bd.agregarAlCarrito2(this.idProducto, 1)
+      .catch(error => {
+        this.mostrarMensaje('Error al agregar al carrito:');
+      });
+  }
 
 
 
