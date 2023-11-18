@@ -17,11 +17,15 @@ const routes: Routes = [
   },
   {
     path: 'm-datos',
-    loadChildren: () => import('./pages/inicio/m-datos/m-datos.module').then( m => m.MDatosPageModule)
+    loadChildren: () => import('./pages/m-datos/m-datos.module').then( m => m.MDatosPageModule)
   },
   {
     path: 'registro',
     loadChildren: () => import('./pages/inicio/registro/registro.module').then( m => m.RegistroPageModule)
+  },
+  {
+    path: 'carrito',
+    loadChildren: () => import('./pages/Shop/carrito/carrito.module').then( m => m.CarritoPageModule)
   },
   {
     path: 'tienda',
@@ -89,11 +93,10 @@ const routes: Routes = [
   },
   {
     path: 'feriados',
-    loadChildren: () => import('./pages/productos/feriados/feriados.module').then( m => m.FeriadosPageModule)
-  },
-  {
+    loadChildren: () => import('./pages/feriados/feriados.module').then( m => m.FeriadosPageModule)
+  },  {
     path: 'carrito2',
-    loadChildren: () => import('./pages/Shop/carrito2/carrito2.module').then( m => m.Carrito2PageModule)
+    loadChildren: () => import('./pages/carrito2/carrito2.module').then( m => m.Carrito2PageModule)
   },
 
 

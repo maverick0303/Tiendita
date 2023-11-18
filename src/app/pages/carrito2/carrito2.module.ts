@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { Carrito2PageRoutingModule } from './carrito2-routing.module';
-import { ComponentsModule } from 'src/app/components/components.module';
+
 import { Carrito2Page } from './carrito2.page';
 
 @NgModule({
@@ -13,7 +13,7 @@ import { Carrito2Page } from './carrito2.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    Carrito2PageRoutingModule, ComponentsModule
+    Carrito2PageRoutingModule
   ],
   declarations: [Carrito2Page]
 })
