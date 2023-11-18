@@ -13,16 +13,23 @@
           <ion-label> Cantidad: {{ detalle.cantidad }} </ion-label>
           <br>
           <ion-label> Subtotal: {{ detalle.subtotalD }} </ion-label>
+          
+          <!-- Botón para vaciar el carrito -->
+          <button (click)="vaciarProductoDelCarrito(detalle.idProducto)">Vaciar Producto</button>
+
+          
         </ion-card-content>
       </ion-card>
     </ion-item>
   </ion-list>
 
   <ion-item>
-    <button (click)="finalizarCompra()" [routerLink]="['/tienda']" >Finalizar Compra</button>
+    <button (click)="vaciarCarrito()">Vaciar Carrito</button>
+    <button (click)="finalizarCompra()" [routerLink]="['/tienda']">Finalizar Compra</button>
   </ion-item>
   
   <div *ngIf="carritoVacio">
     El carrito está vacío.
   </div>
 </ion-content>
+

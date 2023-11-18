@@ -15,9 +15,13 @@
             <ion-card-title>
               <ion-img [src]="venta.foto" alt="aqui habia una imagen"></ion-img>
             </ion-card-title>
-            <p class="subti">Total: ${{ venta.precio }}</p>
-            <p class="subti">Fecha: {{ venta.fechaV }}</p>
             <p class="subti">Nombre del producto: {{venta.nombreProducto}} </p>
+            <p class="subti">Codigo de venta: {{ venta.idVenta }}</p>
+            <p class="subti">Fecha: {{ venta.fechaV }}</p>
+            <br>
+            <p class="subti">Articulos: {{ venta.cantidadProducto }}</p>
+            <p class="subti">Total: ${{ venta.subtotalD }}</p>
+            <p> Sucursal de Retiro: Los Leones, #342, 2°piso, local 23</p>
           </ion-card-content>
         </ion-card>
       </ion-col>

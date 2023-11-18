@@ -28,6 +28,22 @@ export class Carrito2Page implements OnInit {
     this.bd.finalizarCompra();
   }
 
+  vaciarCarrito() {
+    this.listaDetalle = [];
+  }
+
+  vaciarProductoDelCarrito(idProducto: any) {
+    // Llama a la función para eliminar solo un producto del carrito
+    this.bd.eliminarProductoDelCarrito(idProducto).subscribe(() => {
+      // Actualiza la lista de detalles después de eliminar el producto
+      this.bd.fetchDetalle().subscribe((detalle) => {
+        this.listaDetalle = detalle;
+        this.carritoVacio = detalle.length === 0;
+      });
+    });
+  }
 }
+
+
 
 

@@ -193,7 +193,7 @@ export class BdserviceService {
       //this.presentAlert("prod: " + items[0].idVenta)
       this.listaDetalle.next(items as any);
 
-    }).catch(e=>{
+    }).catch(e => {
       //this.presentAlert("error buscar detalle: " + JSON.stringify(e));
     })
   }
@@ -221,7 +221,7 @@ export class BdserviceService {
     return this.database.executeSql('SELECT venta.*, detalle.cantidadProducto, detalle.subtotalD, producto.* FROM venta LEFT JOIN detalle ON venta.idVenta = detalle.idVenta LEFT JOIN producto ON detalle.idProducto = producto.idProducto', [])
       .then(res => {
         let ventas: any[] = [];
-  
+
         if (res.rows.length > 0) {
           for (let i = 0; i < res.rows.length; i++) {
             ventas.push({
@@ -242,7 +242,7 @@ export class BdserviceService {
             });
           }
         }
-  
+
         return ventas;
       })
       .catch(error => {
@@ -250,14 +250,12 @@ export class BdserviceService {
         return [];
       });
   }
-  
-
 
 
   agregarAlCarrito2(idProducto: any, cantidad: number): Promise<any> {
     // Obtener el ID de la venta/carrito actual
     const idVenta = localStorage.getItem("idVentaCarrito");
-  
+
     // Verificar si idVenta es válido antes de usarlo
     if (idVenta !== null && idVenta !== undefined) {
       // Obtener el precio y otros detalles del producto
@@ -267,15 +265,20 @@ export class BdserviceService {
             // Producto ya existe en el carrito, actualiza la cantidad y el total
             const detalleExistente = res.rows.item(0);
             const nuevaCantidad = detalleExistente.cantidadProducto + cantidad;
-  
+
             // Verificar si la nueva cantidad supera el stock disponible
             if (nuevaCantidad > detalleExistente.stock) {
               this.presentAlert("Error: La cantidad solicitada supera el stock disponible");
               return Promise.reject("Error: La cantidad solicitada supera el stock disponible");
             }
-  
-            const nuevoTotal = nuevaCantidad * detalleExistente.precio;  // Calcula el nuevo total
-  
+
+            let nuevoTotal;
+            if (cantidad === 1) {
+              nuevoTotal = detalleExistente.precio; 
+            } else {
+              nuevoTotal = detalleExistente.precio + (detalleExistente.precio * nuevaCantidad);
+            }
+
             return this.database.executeSql('UPDATE detalle SET cantidadProducto = ?, subtotalD = ? WHERE idProducto = ? AND idVenta = ?', [nuevaCantidad, nuevoTotal, idProducto, idVenta])
               .then(() => {
                 // Actualizar el observable
@@ -310,28 +313,36 @@ export class BdserviceService {
     }
   }
 
+
   finalizarCompra() {
     // Obtener el ID de la venta/carrito actual
     const idVenta = localStorage.getItem("idVentaCarrito");
-  
+
     // Verificar si idVenta es válido antes de usarlo
     if (idVenta !== null && idVenta !== undefined) {
       // Actualizar el estado de la venta a "vendido"
-      this.database.executeSql('UPDATE venta SET totalV = ? carritoV = ? WHERE idVenta = ?', [this.total,'vendido', idVenta])
+      this.database.executeSql('UPDATE venta SET totalV = ?, carritoV = ? WHERE idVenta = ?', [this.total, 'vendido', idVenta])
         .then(() => {
           this.presentAlert("Compra finalizada con éxito");
+
+          // Recargar la página después de finalizar la compra
+          location.reload();
         })
-        .catch(error => {
-          this.presentAlert("Error al finalizar la compra: " + JSON.stringify(error));
-        });
     } else {
       // Manejar el caso en que idVenta no es válido
       this.presentAlert("Error: ID de venta/carrito no válido");
-    }
+    }
   }
-  
-  
-  
+
+  eliminarProductoDelCarrito(idProducto: any): Observable<any> {
+    this.database.executeSql('DELETE FROM detalle WHERE idProducto = ? ', [idProducto]);
+    return new Observable(observer => {
+      observer.next('Producto eliminado con éxito');
+      observer.complete();
+    });
+  }
+
+
   buscarProductoPorNombre(nombre: string): Promise<Producto[]> {
     return this.database.executeSql('SELECT * FROM producto WHERE nombreProducto LIKE ?', ['%' + nombre + '%']).then(res => {
       // Variable para almacenar la consulta
