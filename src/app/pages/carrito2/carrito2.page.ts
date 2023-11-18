@@ -39,5 +39,13 @@ export class Carrito2Page implements OnInit {
   finalizarCompra() {
     this.bd.realizarCompra(this.idUsuario); // Asegúrate de tener idUsuario disponible
   }
+  vaciarCarrito() {
+    this.bd.eliminarProductosDelCarrito().subscribe(() => {
+      this.listaDetalle = []; // Vacía la lista de detalles localmente
+      this.carritoVacio = true; // Establece que el carrito está vacío
+      this.subtotalTotal = 0; // Reinicia el subtotal total
+    });
+  }
   
+
 }

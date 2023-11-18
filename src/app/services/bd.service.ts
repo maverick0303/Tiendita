@@ -313,6 +313,14 @@ export class BdserviceService {
     }
   }
 
+  eliminarProductosDelCarrito(): Observable<any> {
+    this.database.executeSql('DELETE FROM detalle');
+    return new Observable(observer => {
+      observer.next('Productos eliminados con éxito');
+      observer.complete();
+    });
+  }
+  
 
   realizarCompra(idUsuario: any) {
     const idVentaCarrito = localStorage.getItem("idVentaCarrito");
@@ -335,6 +343,7 @@ export class BdserviceService {
   
                 // Presentar una alerta o mensaje de éxito
                 this.presentAlert("Compra realizada con éxito");
+                location.reload();
   
                 // Puedes realizar otras acciones después de completar la compra, si es necesario
               })

@@ -14,6 +14,7 @@
           <br>
           <!-- Muestra el Subtotal como la multiplicación de cantidad y precio -->
           <!-- Botón para vaciar el carrito -->
+          
         </ion-card-content>
       </ion-card>
     </ion-item>
@@ -21,7 +22,8 @@
 
   <ion-item>
     <ion-label> Subtotal Total: {{ subtotalTotal }} </ion-label>
-    <ion-button (click)="finalizarCompra()">Finalizar Compra</ion-button>
+    <ion-button (click)="vaciarCarrito()">Vaciar Carrito</ion-button>
+    <ion-button (click)="finalizarCompra()" [routerLink]="['/tienda']">Finalizar Compra</ion-button>
   </ion-item>
   
   <div *ngIf="carritoVacio">
