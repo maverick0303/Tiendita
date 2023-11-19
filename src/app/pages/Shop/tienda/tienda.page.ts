@@ -137,11 +137,9 @@ searchProducts() {
     const toast = await this.toastController.create({
       message: mensaje,
       duration: 1500, // Duración en milisegundos
-      position: 'middle', // Posición en la pantalla
-      color: '#00FF00'// Verde brillante
+      position: 'bottom', // Posición en la pantalla
+      color: 'tertiary'
     });
     await toast.present();
   }
-
-  
 }

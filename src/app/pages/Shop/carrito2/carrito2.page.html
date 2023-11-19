@@ -1,33 +1,52 @@
-<ion-content>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title style="text-align: center;">Carrito</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
   <ion-list *ngIf="!carritoVacio">
     <ion-item *ngFor="let detalle of listaDetalle">
       <ion-card>
-        <!-- Muestra la foto en la parte superior de la tarjeta -->
-        <ion-img [src]="detalle.foto" alt="aqui habia una imagen"></ion-img>
-        
-        <!-- Contenido de la tarjeta con precio y cantidad -->
-        <ion-card-content>
-          <br>
-          <ion-label> Precio: {{ detalle.precio }} </ion-label>
-          <br>
-          <ion-label> Cantidad: {{ detalle.cantidad }} </ion-label>
-          <br>
-          <!-- Muestra el Subtotal como la multiplicación de cantidad y precio -->
-          <!-- Botón para vaciar el carrito -->
-          
-        </ion-card-content>
+        <!-- Contenedor flex para la imagen y el contenido -->
+        <div style="display: flex; align-items: center;">
+          <!-- Foto del producto -->
+          <ion-img [src]="detalle.foto" alt="aqui habia una imagen"></ion-img>
+
+          <!-- Datos de la compra -->
+          <ion-card-header>
+            <ion-card-content>
+              <ion-card-title>Precio: {{ detalle.precio | currency:'$':true:'4.0-0' }}</ion-card-title>
+              <ion-card-title>Cantidad: {{ detalle.cantidad }}</ion-card-title>
+            </ion-card-content>
+          </ion-card-header>
+        </div>
+      </ion-card>
+    </ion-item>
+    <br>
+    <!-- Sección de pago -->
+    <ion-item>
+      <ion-card style="margin-left: 50px;">
+        <!-- Contenedor flex para el encabezado de la tarjeta -->
+        <div style="display: flex; align-items: center;">
+          <!-- Encabezado de la tarjeta -->
+            <ion-card-content>
+              <ion-card-title style="font-size: 35px;">Total</ion-card-title>
+              <ion-card-title style="text-align: center; font-size: 30px; margin: 5px;">{{ subtotalTotal | currency:'$':true:'4.0-0' }}</ion-card-title>
+              <ion-button (click)="vaciarCarrito()"><ion-icon name="trash-outline"></ion-icon></ion-button>
+              <ion-button class="otro" (click)="finalizarCompra()" [routerLink]="['/tienda']">Comprar</ion-button>
+            </ion-card-content>
+        </div>
       </ion-card>
     </ion-item>
   </ion-list>
 
-  <ion-item>
-    <ion-label> Subtotal Total: {{ subtotalTotal }} </ion-label>
-    <ion-button (click)="vaciarCarrito()">Vaciar Carrito</ion-button>
-    <ion-button (click)="finalizarCompra()" [routerLink]="['/tienda']">Finalizar Compra</ion-button>
-  </ion-item>
-  
   <div *ngIf="carritoVacio">
-    El carrito está vacío.
-    <ion-button [routerLink]="['/tienda']">Ir a la tienda</ion-button>
+    <ion-img src="assets/lindo-astronauta-confundir-dibujos-animados-vector-icono-ilustracion-ciencia-tecnologia-icono-concepto-aislado_138676-4783-removebg-preview.png" alt="aqui habia una imagen"></ion-img>
+    <p>Tu carrito esta vacio... Pasea por nuestra tienda y chequea nuestro catálogo</p>
+    <ion-button class="otro2" style="margin-left: 100px;" [routerLink]="['/tienda']">Ir a la tienda</ion-button>
   </div>
+
+  <!-- Menu de abajo -->
+  <app-componente2></app-componente2>
 </ion-content>

@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=DM+Serif+Display&family=Montserrat:wght@300&display=swap');
+
+ion-content {
+    --background: white;
+}
+
+/* En tu archivo .scss o .css */
+ion-card {
+    background-color: #050025;
+    border: 3px solid #050025;
+    width: max-content;
+    height: max-content;
+}
+
+/* Contenedor flex para la imagen y el contenido */
+ion-card div {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+
+/* Estilo para la imagen dentro del contenedor flex */
+ion-card ion-img {
+    width: 180px;
+    height: 180px;
+}
+
+ion-card-title {
+    font-size: 17px;
+    color: white;
+    font-family: 'Montserrat';
+    margin-left: 5px;
+}
+
+p {
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Montserrat';
+}
+
+ion-button {
+    --background: red;
+    font-size: 20px;
+}
+
+.otro {
+    --background: #0C909C;
+    font-size: 20px;
+    font-family: 'Montserrat';
+}
+
+.otro2 {
+    --background: #7CC9CF;
+    font-family: 'Montserrat';
+}
+
+ion-title{
+    font-family: 'Montserrat';
+}
