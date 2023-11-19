@@ -1,31 +1,37 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-card-title style="text-align: center;">Mis compras</ion-card-title>
+    <ion-title>Mis compras</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12" size-sm="6" size-md="4" size-lg="3" *ngFor="let venta of arregloProductosResultado">
-        <ion-card class="custom-card">
-          <!-- Muestra la foto del producto -->
-          <ion-card-content class="card-content">
-            <!-- Ajusta los campos según tu estructura de datos -->
-            <ion-card-title>
-              <ion-img [src]="venta.foto" alt="aqui habia una imagen"></ion-img>
-            </ion-card-title>
-            <p class="subti">Nombre del producto: {{venta.nombreProducto}} </p>
-            <p class="subti">Codigo de venta: {{ venta.idVenta }}</p>
-            <p class="subti">Fecha: {{ venta.fechaV }}</p>
-            <br>
-            <p class="subti">Articulos: {{ venta.cantidadProducto }}</p>
-            <p class="subti">Total: ${{ venta.precio * venta.cantidadProducto }}</p>
-            <p> Sucursal de Retiro: Los Leones, #342, 2°piso, local 23</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content [fullscreen]="true">
+  <p ><ion-icon name="alert-circle-outline"></ion-icon> Punto de retiro: Sucursal de Retiro: Los Leones,
+    #342, 2°piso, local 23</p>
+  <br>
+  <ion-list *ngFor="let venta of arregloProductosResultado">
+    <div>
+      <!--fecha y el numero de compra-->
+      <p class="subti" style="text-align: center;">Fecha de compra: {{ venta.fechaV }}</p>
+      <p class="subti">Compra N°: {{ venta.idVenta }}</p>
+    </div>
+    <ion-item>
+      <ion-card>
+        <div style="display: flex; align-items: center;">
+          <!-- Muestra la foto del producto a la izquierda -->
+          <ion-img [src]="venta.foto" alt="aqui habia una imagen"></ion-img>
+          <!-- Datos de la compra -->
+          <ion-card-header>
+            <ion-card-content>
+              <ion-card-title>{{ venta.nombreProducto }}</ion-card-title>
+              <ion-card-title>Precio: {{ venta.precio | currency:'$':true:'4.0-0' }}</ion-card-title>
+              <ion-card-title>Cantidad: {{ venta.cantidadProducto }}</ion-card-title>
+              <ion-card-title>Total pagado: {{ venta.precio * venta.cantidadProducto | currency:'$':true:'4.0-0' }}</ion-card-title>
+            </ion-card-content>
+          </ion-card-header>
+        </div>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  <br><br>
   <app-componente2></app-componente2>
 </ion-content>
