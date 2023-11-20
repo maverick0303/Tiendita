@@ -78,7 +78,7 @@ export class MDatosPage implements OnInit {
     }
   }
 
-  //comienzo de las vallidaciones
+  //comienzo de las validaciones
 
   valiNombre(event: KeyboardEvent) {
     const input = event.key;
@@ -90,7 +90,8 @@ export class MDatosPage implements OnInit {
     } else {
       this.errors.nombreEnviado = '';
     }
-    this.verificarFormulario();
+
+    this.validarFormulario();
   }
 
   ValiApellido(event: KeyboardEvent) {
@@ -103,10 +104,11 @@ export class MDatosPage implements OnInit {
     } else {
       this.errors.apellidoEnviado = '';
     }
-    this.verificarFormulario();
+
+    this.validarFormulario();
   }
-  //verificar si esta todo bien:
-  verificarFormulario() {
+
+  validarFormulario() {
     let hasError = false;
 
     // Validación del nombre
@@ -151,6 +153,7 @@ export class MDatosPage implements OnInit {
         resultType: CameraResultType.DataUrl
       });
       this.fotoUEnviada = image2.dataUrl;
+      this.validarFormulario(); // Validar después de seleccionar la foto
       this.cdr.detectChanges();
     } catch (error) {
       console.error('Error al tomar la foto:', error);

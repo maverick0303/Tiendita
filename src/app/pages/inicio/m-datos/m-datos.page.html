@@ -19,7 +19,7 @@
       <!-- NOMBRE -->
       <div class="input-row" class="con">
         <ion-input label="Nombre:"  type="text" label-placement="floating" fill="outline" placeholder="Mario"
-          name="nombreEnviado" required [(ngModel)]="nombreEnviado" (ionBlur)="verificarFormulario()"
+          name="nombreEnviado" required [(ngModel)]="nombreEnviado" (ionBlur)="validarFormulario()"
           (keydown)="valiNombre($event)">
         </ion-input>
       </div>
@@ -27,7 +27,7 @@
       <div class="error-message" *ngIf="errors.nombreEnviado">{{ errors.nombreEnviado }}</div><br>
       <!-- APELLIDO -->
       <ion-input label="Apellido:" class="con" type="text" label-placement="floating" fill="outline" placeholder="Lopez"
-        name="apellidoEnviado" required [(ngModel)]="apellidoEnviado" (ionBlur)="verificarFormulario()"
+        name="apellidoEnviado" required [(ngModel)]="apellidoEnviado" (ionBlur)="validarFormulario()"
         (keydown)="ValiApellido($event)">
       </ion-input>
       <!-- VALIDACION -->
