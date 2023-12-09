@@ -110,40 +110,41 @@ export class MDatosPage implements OnInit {
 
   validarFormulario() {
     let hasError = false;
-
+  
     // Validación del nombre
     this.errors.nombreEnviado = '';
     if (!/^[A-Za-z]+$/.test(this.nombreEnviado) || this.nombreEnviado.length < 1 || this.nombreEnviado.length > 15) {
       this.errors.nombreEnviado = 'El nombre solo debe contener letras y tener entre 1 y 15 caracteres.';
       hasError = true;
     }
-
+  
     // Validación del apellido
     this.errors.apellidoEnviado = '';
     if (!/^[A-Za-z]+$/.test(this.apellidoEnviado) || this.apellidoEnviado.length < 1 || this.apellidoEnviado.length > 15) {
       this.errors.apellidoEnviado = 'El apellido solo debe contener letras y tener entre 1 y 15 caracteres.';
       hasError = true;
     }
-
-    // Validación de la foto
-    this.errors.fotoUEnviada = '';
-    if (!this.fotoUEnviada) {
-      this.errors.fotoUEnviada = 'Debe seleccionar una foto.';
+  
+    // Validación de la foto (opcional)
+    if (this.fotoUEnviada && !this.isDataUrl(this.fotoUEnviada)) {
+      this.errors.fotoUEnviada = 'La foto seleccionada no es válida.';
       hasError = true;
+    } else {
+      this.errors.fotoUEnviada = '';
     }
-
+  
     // Validación adicional para comprobar si todos los campos requeridos están llenos
-    if (
-      !this.nombreEnviado ||
-      !this.apellidoEnviado ||
-      !this.fotoUEnviada
-    ) {
+    if (!this.nombreEnviado || !this.apellidoEnviado) {
       hasError = true;
     }
-
+  
     this.formularioValido = !hasError;
   }
-
+  
+  private isDataUrl(s: string): boolean {
+    return s.startsWith('data:image/');
+  }
+  
   //ESTO ES DE LA FOTO    
   async takePicture() {
     try {

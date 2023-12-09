@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <!-- LOGO DEL CARRITO -->
-    <div class="demo-section" slot="end">
+    <div class="demo-section" slot="end" *ngIf="idRol === 1">
       <ion-icon style="width: 35px; height: 35px; color: #050025;" name="cart-outline"
         [routerLink]="['/carrito2']"></ion-icon>
     </div>
