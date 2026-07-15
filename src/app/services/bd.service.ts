@@ -21,6 +21,17 @@ export class BdserviceService {
   public database!: SQLiteObject;
   public imageData: any;
 
+  // Array en memoria que simula la tabla "usuario" cuando corres
+  // en navegador (sin SQLite nativo). Vive mientras la pestaña
+  // esté abierta; al recargar vuelve a los 3 usuarios por defecto.
+  usuariosMemoria: any[] = [];
+  productosMemoria: any[] = [];
+  carritoMemoria: any[] = [];
+  ventaCarritoMemoria: any = null;
+  categoriasMemoria: any[] = [];
+  preguntasMemoria: any[] = [];
+  historialComprasMemoria: any[] = [];
+
   //variables para la creación de tablas
   tablaCategoria: string = "CREATE TABLE IF NOT EXISTS categoria (idCategoria integer primary key autoincrement,  nombreCategoria VARCHAR(25) not null);";
 
@@ -122,6 +133,21 @@ export class BdserviceService {
 
 
   buscarCarrito(idUsuario: any, tipo: any) {
+    if (!this.platform.is('hybrid')) {
+      if (!this.ventaCarritoMemoria || this.ventaCarritoMemoria.carritoV !== tipo || this.ventaCarritoMemoria.idUsuario !== idUsuario) {
+        this.ventaCarritoMemoria = {
+          idVenta: 1,
+          totalV: 0,
+          carritoV: tipo,
+          fechaV: new Date().toLocaleDateString(),
+          idUsuario: idUsuario
+        };
+        this.carritoMemoria = [];
+      }
+      localStorage.setItem("idVentaCarrito", this.ventaCarritoMemoria.idVenta);
+      this.buscarDetalle(this.ventaCarritoMemoria.idVenta);
+      return;
+    }
     //this.presentAlert("Usuario: " + idUsuario);
     this.database.executeSql('SELECT * FROM venta where idUsuario = ? and carritoV = ?', [idUsuario, tipo]).then(res => {
       //this.presentAlert("Cantidad carrito: " + res.rows.length);
@@ -169,6 +195,20 @@ export class BdserviceService {
 
 
   buscarDetalle(idVenta: any) {
+    if (!this.platform.is('hybrid')) {
+      const items = this.carritoMemoria.map(d => ({
+        idDetalle: d.idDetalle,
+        cantidad: d.cantidadProducto,
+        subtotalD: d.subtotalD,
+        idVenta: d.idVenta,
+        precio: d.precio,
+        idProducto: d.idProducto,
+        foto: d.foto,
+        nombreProducto: d.nombreProducto
+      }));
+      this.listaDetalle.next(items as any);
+      return Promise.resolve();
+    }
     return this.database.executeSql('SELECT detalle.idDetalle, detalle.cantidadProducto, detalle.subtotalD, detalle.idVenta,producto.precio, producto.idProducto, producto.foto, producto.nombreProducto FROM detalle inner join producto where detalle.idProducto = producto.idProducto and detalle.idVenta = ?', [idVenta]).then(res => {
       //variable para almacenar la consulta
       let items: Detalle[] = [];
@@ -218,6 +258,9 @@ export class BdserviceService {
 
 
   obtenerDatosVentas(): Promise<any[]> {
+    if (!this.platform.is('hybrid')) {
+      return Promise.resolve(this.historialComprasMemoria);
+    }
     return this.database.executeSql('SELECT venta.*, detalle.cantidadProducto, detalle.subtotalD, producto.* FROM venta LEFT JOIN detalle ON venta.idVenta = detalle.idVenta LEFT JOIN producto ON detalle.idProducto = producto.idProducto', [])
       .then(res => {
         let ventas: any[] = [];
@@ -253,6 +296,40 @@ export class BdserviceService {
 
 
   agregarAlCarrito2(idProducto: any, cantidad: number): Promise<any> {
+    if (!this.platform.is('hybrid')) {
+      const idVentaBrowser = localStorage.getItem("idVentaCarrito");
+      if (!idVentaBrowser) {
+        this.presentAlert("Error: ID de venta/carrito no válido");
+        return Promise.reject("ID de venta/carrito no válido");
+      }
+      const producto = this.productosMemoria.find(p => p.idProducto == idProducto);
+      if (!producto) {
+        return Promise.reject("Producto no encontrado");
+      }
+      const existente = this.carritoMemoria.find(d => d.idProducto == idProducto);
+      if (existente) {
+        const nuevaCantidad = existente.cantidadProducto + cantidad;
+        if (nuevaCantidad > producto.stock) {
+          this.presentAlert("Error: La cantidad solicitada supera el stock disponible");
+          return Promise.reject("Error: La cantidad solicitada supera el stock disponible");
+        }
+        existente.cantidadProducto = nuevaCantidad;
+        existente.subtotalD = producto.precio * nuevaCantidad;
+      } else {
+        this.carritoMemoria.push({
+          idDetalle: this.carritoMemoria.length + 1,
+          cantidadProducto: cantidad,
+          subtotalD: producto.precio * cantidad,
+          idProducto: producto.idProducto,
+          idVenta: idVentaBrowser,
+          precio: producto.precio,
+          foto: producto.foto,
+          nombreProducto: producto.nombreProducto
+        });
+      }
+      this.buscarDetalle(idVentaBrowser);
+      return Promise.resolve();
+    }
     // Obtener el ID de la venta/carrito actual
     const idVenta = localStorage.getItem("idVentaCarrito");
 
@@ -314,6 +391,14 @@ export class BdserviceService {
   }
 
   eliminarProductosDelCarrito(): Observable<any> {
+    if (!this.platform.is('hybrid')) {
+      this.carritoMemoria = [];
+      this.listaDetalle.next([]);
+      return new Observable(observer => {
+        observer.next('Productos eliminados con éxito');
+        observer.complete();
+      });
+    }
     this.database.executeSql('DELETE FROM detalle');
     return new Observable(observer => {
       observer.next('Productos eliminados con éxito');
@@ -323,6 +408,36 @@ export class BdserviceService {
   
 
   realizarCompra(idUsuario: any) {
+    if (!this.platform.is('hybrid')) {
+      const idVentaBrowser = localStorage.getItem("idVentaCarrito");
+      if (idVentaBrowser) {
+        const fechaCompra = new Date().toLocaleDateString();
+        const totalCompra = this.carritoMemoria.reduce((sum, d) => sum + (d.subtotalD || 0), 0);
+        this.carritoMemoria.forEach(d => {
+          this.historialComprasMemoria.push({
+            idVenta: idVentaBrowser,
+            totalV: totalCompra,
+            carritoV: 'vendido',
+            fechaV: fechaCompra,
+            idUsuario: idUsuario,
+            cantidadProducto: d.cantidadProducto,
+            subtotalD: d.subtotalD,
+            idProducto: d.idProducto,
+            nombreProducto: d.nombreProducto,
+            precio: d.precio,
+            foto: d.foto,
+          });
+        });
+        this.carritoMemoria = [];
+        this.ventaCarritoMemoria = null;
+        localStorage.removeItem("idVentaCarrito");
+        this.listaDetalle.next([]);
+        this.presentAlert("Compra realizada con éxito");
+      } else {
+        this.presentAlert("Error: ID de venta/carrito no válido");
+      }
+      return;
+    }
     const idVentaCarrito = localStorage.getItem("idVentaCarrito");
   
     if (idVentaCarrito) {
@@ -395,6 +510,10 @@ export class BdserviceService {
 
 
   buscarUsuario() {
+    if (!this.platform.is('hybrid')) {
+      this.listaUsuario.next(this.usuariosMemoria as any);
+      return Promise.resolve();
+    }
     return this.database.executeSql('SELECT * FROM usuario', []).then(res => {
       //variable para almacenar la consulta
       let items: Usuario[] = [];
@@ -425,6 +544,11 @@ export class BdserviceService {
   }
 
   mostrarCategoria(idCategoria: number) {
+    if (!this.platform.is('hybrid')) {
+      const items = this.productosMemoria.filter(p => p.idCategoria === idCategoria);
+      this.listaMostrarProducto.next(items as any);
+      return Promise.resolve();
+    }
     return this.database.executeSql('SELECT * FROM producto WHERE idCategoria = ?', [idCategoria]).then(res => {
       //variable para almacenar la consulta
       let items: Producto[] = [];
@@ -453,6 +577,10 @@ export class BdserviceService {
 
 
   buscarPregunta() {
+    if (!this.platform.is('hybrid')) {
+      this.listaPregunta.next(this.preguntasMemoria as any);
+      return Promise.resolve();
+    }
     return this.database.executeSql('SELECT * FROM pregunta', []).then(res => {
       //variable para almacenar la consulta
       let items: Pregunta[] = [];
@@ -476,6 +604,10 @@ export class BdserviceService {
   }
 
   buscarProducto() {
+    if (!this.platform.is('hybrid')) {
+      this.listaProducto.next(this.productosMemoria as any);
+      return Promise.resolve();
+    }
     return this.database.executeSql('SELECT * FROM producto', []).then(res => {
       //variable para almacenar la consulta
       let items: Producto[] = [];
@@ -507,6 +639,10 @@ export class BdserviceService {
 
   //
   buscarCategoria() {
+    if (!this.platform.is('hybrid')) {
+      this.listaCategoria.next(this.categoriasMemoria as any);
+      return Promise.resolve();
+    }
     return this.database.executeSql('SELECT * FROM categoria', []).then(res => {
       //variable para almacenar la consulta
       let items: Categoria[] = [];
@@ -539,6 +675,17 @@ export class BdserviceService {
   }
 
   insertarUsuario(nombreU: any, apellidoU: any, rutU: any, correoU: any, contrasenaU: any, idRol: any, respuestaU: any, idVenta: any, fotoU: any, usuarioPregunta: any) {
+    if (!this.platform.is('hybrid')) {
+      const nuevoId = this.usuariosMemoria.length > 0
+        ? Math.max(...this.usuariosMemoria.map(u => u.idUsuario)) + 1
+        : 1;
+      this.usuariosMemoria.push({
+        idUsuario: nuevoId, nombreU, apellidoU, rutU, correoU, contrasenaU,
+        idRol, respuestaU, idVenta, fotoU, usuarioPregunta
+      });
+      this.buscarUsuario();
+      return Promise.resolve();
+    }
     return this.database.executeSql('INSERT INTO usuario(nombreU,apellidoU ,rutU , correoU ,contrasenaU, idRol, respuestaU, idVenta, fotoU,usuarioPregunta ) VALUES (?,?,?,?,?,?,?,?,?,?)', [nombreU, apellidoU, rutU, correoU, contrasenaU, idRol, respuestaU, idVenta, fotoU, usuarioPregunta]).then(res => {
       this.buscarUsuario();
     })
@@ -584,7 +731,16 @@ export class BdserviceService {
   crearBD() {
     //verificamos que la plataforma esta lista
     this.platform.ready().then(() => {
-      //crear la BD
+      // Si NO estamos en un dispositivo/emulador real (hybrid),
+      // el plugin nativo de SQLite no existe. Cargamos datos de
+      // respaldo para poder ver la app en el navegador.
+      if (!this.platform.is('hybrid')) {
+        this.cargarDatosDePrueba();
+        this.isDBReady.next(true);
+        return;
+      }
+
+      //crear la BD (solo corre en dispositivo/emulador real)
       this.sqlite.create({
         name: 'bdtienditatest3.db',
         location: 'default'
@@ -598,6 +754,58 @@ export class BdserviceService {
         this.presentAlert("Error en Crear BD: " + e);
       })
     })
+  }
+
+  // Método de respaldo: carga los mismos productos, categorías y
+  // usuarios que ya tenías definidos, pero directamente en los
+  // observables, sin pasar por SQLite. Solo se usa cuando la app
+  // corre en un navegador normal (sin Cordova/Capacitor nativo).
+  cargarDatosDePrueba() {
+    const categorias = [
+      { idCategoria: 1, nombreCategoria: 'Reloj digital' },
+      { idCategoria: 2, nombreCategoria: 'Reloj analógico' },
+      { idCategoria: 3, nombreCategoria: 'Audifono bluetooth' },
+      { idCategoria: 4, nombreCategoria: 'Audifono gamer' },
+      { idCategoria: 5, nombreCategoria: 'Reloj smartwatch' },
+    ];
+
+    const productos = [
+      { idProducto: 1, nombreProducto: 'Audífonos gamers rojos con negro', descripcion: 'Auriculares gamer rojos con diseño llamativo y elegante, brindando sonido inmersivo y comodidad en sus oidos.', precio: 50000, stock: 10, idCategoria: 4, foto: 'assets/AUDIFONOS GAMERS/ag3.webp' },
+      { idProducto: 2, nombreProducto: 'Audífonos gamers negro con naranja', descripcion: 'Auriculares gamer en negro con toques anaranjados que ofrecen sonido envolvente, comodidad ergonómica y estilo llamativo', precio: 75000, stock: 7, idCategoria: 4, foto: 'assets/AUDIFONOS GAMERS/ag4.jpeg' },
+      { idProducto: 3, nombreProducto: 'Audífonos gamers lila con blanco', descripcion: 'Estos audífonos con diseño atractivo, audio inmersivo, comodidad asegurada, son perfectos para quienes buscan rendimiento y estilo en un solo paquete.', precio: 35000, stock: 10, idCategoria: 4, foto: 'assets/AUDIFONOS GAMERS/ag5.jpeg' },
+      { idProducto: 4, nombreProducto: 'Audífonos Bluetooth morados', descripcion: 'Estos audífonos con tono morado, ofrecen conectividad sin cables con estilo. Perfectos para quienes buscan comodidad y libertad en su experiencia auditiva.', precio: 39990, stock: 10, idCategoria: 3, foto: 'assets/AUDIFONOS BLUTU/a1.jpg' },
+      { idProducto: 5, nombreProducto: 'Audífonos Bluetooth azules', descripcion: 'Estos audífonos en tono azul, ofrecen conectividad inalámbrica con un toque de frescura. Ideales para quienes buscan comodidad y estilo en su experiencia auditiva sin necesidad de cables.', precio: 42000, stock: 6, idCategoria: 3, foto: 'assets/AUDIFONOS BLUTU/a4.jpg' },
+      { idProducto: 6, nombreProducto: 'Audífonos Bluetooth verde', descripcion: 'Estos audífonos brindan conectividad inalámbrica con un toque de naturaleza. Perfectos para quienes desean comodidad y un estilo distintivo en sus dispositivos de audio.', precio: 269000, stock: 12, idCategoria: 3, foto: 'assets/AUDIFONOS BLUTU/a6.jpg' },
+      { idProducto: 7, nombreProducto: 'Reloj Analógico Negro con azules', descripcion: 'Este reloj negro con acentos en azul, une elegancia y modernidad. Perfecto para quienes buscan un estilo sofisticado con un toque de color audaz en su reloj de pulsera.', precio: 119000, stock: 12, idCategoria: 2, foto: 'assets/RELOJES ANALOGO/r3.webp' },
+      { idProducto: 8, nombreProducto: 'Reloj Analógico negro fondo azul', descripcion: 'Este reloj con esfera en tono negro y fondo azul, fusiona elegancia y un toque de originalidad. Ideal para aquellos que buscan un reloj clásico pero con un detalle único que resalta su estilo.', precio: 194990, stock: 8, idCategoria: 2, foto: 'assets/RELOJES ANALOGO/r4.jpeg' },
+      { idProducto: 9, nombreProducto: 'Reloj Analógico amarillo con negro', descripcion: 'Reloj analógico en amarillo con fondo negro, aporta un contraste audaz y llamativo. Perfecto para quienes quieran destacar con un toque de color vibrante en su muñeca, sin dejar de ser elegante.', precio: 289000, stock: 10, idCategoria: 2, foto: 'assets/RELOJES ANALOGO/r5.jpg' },
+      { idProducto: 10, nombreProducto: 'Reloj Digital negro con borde azul', descripcion: 'Reloj digital en negro con borde azul, fusiona elegancia con un toque de estilo contemporáneo.', precio: 61990, stock: 5, idCategoria: 1, foto: 'assets/digitales/rd2.jpeg' },
+      { idProducto: 11, nombreProducto: 'Reloj Digital negro', descripcion: 'Reloj digital en negro, brinda una estética moderna y minimalista. Ideal para quienes buscan simplicidad y funcionalidad en la visualización de la hora, manteniendo un estilo elegante.', precio: 54000, stock: 11, idCategoria: 1, foto: 'assets/digitales/rd5.jpg' },
+      { idProducto: 12, nombreProducto: 'Reloj Digital blanco', descripcion: 'Reloj digital blanco, combina estilo y funcionalidad de manera moderna. Perfecto para quienes buscan un reloj que resalte con un toque de color y una pantalla clara.', precio: 194990, stock: 5, idCategoria: 1, foto: 'assets/digitales/rd6.jpeg' },
+      { idProducto: 13, nombreProducto: 'Reloj Smartwatch azul', descripcion: 'Este Smartwatch es un reloj moderno con funciones inteligentes. Con pantalla táctil y conexión al teléfono, muestra notificaciones y rastrea la salud. Diseño atractivo y personalizable.', precio: 139990, stock: 8, idCategoria: 5, foto: 'assets/SMARTWATCH/rs1.webp' },
+      { idProducto: 14, nombreProducto: 'Reloj smartwatch naranja', descripcion: 'Este reloj combina estilo y tecnología, se enlaza con tu teléfono para notificaciones y seguimiento de salud. Su llamativo color naranja y opciones de personalización lo hace muy moderno.', precio: 240000, stock: 10, idCategoria: 5, foto: 'assets/SMARTWATCH/rs2.jpeg' },
+      { idProducto: 15, nombreProducto: 'Reloj Smartwatch morado', descripcion: 'Este reloj fusiona moda y funcionalidad, se conecta a tu teléfono para notificaciones y monitoreo de salud. Su color y sus opciones de personalización lo convierten en un reloj elegante y útil.', precio: 360000, stock: 12, idCategoria: 5, foto: 'assets/SMARTWATCH/rs3.jpeg' },
+    ];
+
+    // Usuarios por defecto (los mismos que tenías en registroUsuario / predeterminado1 / predeterminado2)
+    this.usuariosMemoria = [
+      { idUsuario: 1, nombreU: 'Alfredo', apellidoU: 'Estay', rutU: '21.126.681-3', correoU: 'alfr.estay@duocuc.cl', contrasenaU: 'Alfredo123@', idRol: 1, respuestaU: 'r1', idVenta: 3, fotoU: '', usuarioPregunta: 1 },
+      { idUsuario: 2, nombreU: 'Admin', apellidoU: 'Admin', rutU: '12.345.678-9', correoU: 'admin@gmail.com', contrasenaU: 'Admin123@', idRol: 2, respuestaU: 'r1', idVenta: 1, fotoU: '', usuarioPregunta: 1 },
+      { idUsuario: 3, nombreU: 'Usuario', apellidoU: 'Usuario', rutU: '9.876.543-2', correoU: 'usuario@gmail.com', contrasenaU: 'Usuario123@', idRol: 1, respuestaU: 'r1', idVenta: 2, fotoU: '', usuarioPregunta: 1 },
+    ];
+
+    this.listaCategoria.next(categorias as any);
+    this.listaProducto.next(productos as any);
+    this.listaMostrarProducto.next(productos as any);
+    this.listaUsuario.next(this.usuariosMemoria as any);
+    this.productosMemoria = productos;
+    this.categoriasMemoria = categorias;
+    this.preguntasMemoria = [
+      { idPregunta: 1, nombrePregunta: '¿Cuál es tu pelicula favorita?' },
+      { idPregunta: 2, nombrePregunta: '¿Cuál es el nombre de tu mascota?' },
+      { idPregunta: 3, nombrePregunta: '¿Color favorito?' },
+    ];
+    this.listaPregunta.next(this.preguntasMemoria as any);
   }
 
   async crearTablas() {
@@ -720,6 +928,10 @@ export class BdserviceService {
 
 
   async getUsuarioAutenticadoDesdeBD(id: any): Promise<Usuario | null> {
+    if (!this.platform.is('hybrid')) {
+      const encontrado = this.usuariosMemoria.find(u => u.idUsuario == id);
+      return encontrado ? ({ ...encontrado } as Usuario) : null;
+    }
     return this.database.executeSql('SELECT * FROM usuario WHERE idUsuario = ?', [id]).then(res => {
       if (res.rows.length > 0) {
         return {
@@ -745,6 +957,12 @@ export class BdserviceService {
 
 
   async buscarUsuarioPorCorreoYContrasena(correo: string, contrasena: string): Promise<Usuario | null> {
+    if (!this.platform.is('hybrid')) {
+      const encontrado = this.usuariosMemoria.find(
+        u => u.correoU === correo && u.contrasenaU === contrasena
+      );
+      return encontrado ? ({ ...encontrado } as Usuario) : null;
+    }
     return this.database.executeSql('SELECT * FROM usuario WHERE correoU = ? AND contrasenaU = ?', [correo, contrasena]).then(res => {
       if (res.rows.length > 0) {
         return {
@@ -764,6 +982,10 @@ export class BdserviceService {
 
 
   async buscarCorreo(correoU: string): Promise<Usuario | null> {
+    if (!this.platform.is('hybrid')) {
+      const encontrado = this.usuariosMemoria.find(u => u.correoU === correoU);
+      return encontrado ? ({ ...encontrado } as Usuario) : null;
+    }
     return this.database.executeSql('select * from usuario where correoU = ?', [correoU]).then(res => {
       if (res.rows.length > 0) {
         return {
@@ -794,6 +1016,9 @@ export class BdserviceService {
   }
 
   async verificarCorreoExistente(correo: string): Promise<boolean> {
+    if (!this.platform.is('hybrid')) {
+      return this.usuariosMemoria.some(u => u.correoU === correo);
+    }
     return this.database.executeSql('SELECT COUNT(*) AS count FROM usuario WHERE correoU = ?', [correo]).then(res => {
       return res.rows.item(0).count > 0;
     });
